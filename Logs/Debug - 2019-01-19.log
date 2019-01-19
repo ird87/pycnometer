@@ -1,0 +1,427 @@
+[19-01-2019 17:45]  Main.py  [LINE:118]  #DEBUG  
+The program works in NORMAL mode.
+[19-01-2019 17:45]  Main.py  [LINE:290]  #DEBUG  
+The program setup done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:81]  #DEBUG  
+Thread "Pressure measurement" started in the NORMAL MODE
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:93]  #DEBUG  
+Thread "Pressure measurement" finished in the NORMAL MODE
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:160]  #DEBUG  
+Thread "Measurement" started
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:180]  #DEBUG  
+Interface locked, Current tab = Measurement
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:184]  #DEBUG  
+Sample preparation: Vacuuming.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:188]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:222]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:559]  #DEBUG  
+Calculation volume.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:563]  #DEBUG  
+Division by zero when calculating volume, denominator: (P2=104 - P0=104)=0
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+Calculation volume.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:572]  #DEBUG  
+Calculation density.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:576]  #DEBUG  
+Division by zero when calculating density, denominator: volume=0
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:583]  #DEBUG  
+Calculation volume.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:586]  #DEBUG  
+Add measurements data to the table.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:589]  #DEBUG  
+Add measurements data to the table.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:559]  #DEBUG  
+Calculation volume.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:563]  #DEBUG  
+Division by zero when calculating volume, denominator: (P2=103 - P0=103)=0
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+Calculation volume.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:572]  #DEBUG  
+Calculation density.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:576]  #DEBUG  
+Division by zero when calculating density, denominator: volume=0
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:583]  #DEBUG  
+Calculation volume.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:586]  #DEBUG  
+Add measurements data to the table.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:589]  #DEBUG  
+Add measurements data to the table.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  ModulSPI.py  [LINE:128]  #DEBUG  
+Calculation data.....
+[19-01-2019 17:45]  ModulSPI.py  [LINE:136]  #DEBUG  
+Calculation data..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:850]  #DEBUG  
+Calculation balance.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:858]  #DEBUG  
+Calculation balance.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:559]  #DEBUG  
+Calculation volume.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:563]  #DEBUG  
+Division by zero when calculating volume, denominator: (P2=103 - P0=103)=0
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+Calculation volume.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:572]  #DEBUG  
+Calculation density.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:576]  #DEBUG  
+Division by zero when calculating density, denominator: volume=0
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:583]  #DEBUG  
+Calculation volume.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:586]  #DEBUG  
+Add measurements data to the table.....
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:589]  #DEBUG  
+Add measurements data to the table.....Done
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:231]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:236]  #DEBUG  
+Calculation.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:376]  #DEBUG  
+Calculation medium_volume & medium_density.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:386]  #DEBUG  
+Calculation medium_volume.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:391]  #DEBUG  
+Division by zero when calculating medium_volume, denominator: counter1=0
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:397]  #DEBUG  
+Calculation medium_volume..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:398]  #DEBUG  
+Calculation medium_density.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:403]  #DEBUG  
+Division by zero when calculating medium_density, denominator: counter1=0
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:386]  #DEBUG  
+Calculation medium_volume.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:397]  #DEBUG  
+Calculation medium_volume..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:398]  #DEBUG  
+Calculation medium_density.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:386]  #DEBUG  
+Calculation medium_volume.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:397]  #DEBUG  
+Calculation medium_volume..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:398]  #DEBUG  
+Calculation medium_density.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:409]  #DEBUG  
+Calculation medium_density..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:410]  #DEBUG  
+Calculation medium_volume & medium_density..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:418]  #DEBUG  
+Calculation deviation for ALL.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:420]  #DEBUG  
+Calculation deviation for Measured[0].....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:426]  #DEBUG  
+Division by zero when calculating deviation, denominator: medium_volume=0.0
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:438]  #DEBUG  
+Calculation deviation for Measured[0]..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:420]  #DEBUG  
+Calculation deviation for Measured[1].....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:426]  #DEBUG  
+Division by zero when calculating deviation, denominator: medium_volume=0.0
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:438]  #DEBUG  
+Calculation deviation for Measured[1]..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:420]  #DEBUG  
+Calculation deviation for Measured[2].....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:426]  #DEBUG  
+Division by zero when calculating deviation, denominator: medium_volume=0.0
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:438]  #DEBUG  
+Calculation deviation for Measured[2]..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:445]  #DEBUG  
+Calculation deviation for ALL..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:455]  #DEBUG  
+Calculation SKO & SKO%.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:462]  #DEBUG  
+Calculation SKO.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:472]  #DEBUG  
+Calculation SKO..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:473]  #DEBUG  
+Calculation SKO%.....
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:477]  #DEBUG  
+Division by zero when calculating SKO%, denominator: counter3=0.0
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:483]  #DEBUG  
+Calculation SKO%..... Done.
+[19-01-2019 17:45]  TableMeasurement.py  [LINE:487]  #DEBUG  
+Calculation SKO & SKO%..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:239]  #DEBUG  
+Calculation..... Done.
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:244]  #DEBUG  
+Interface unlocked, Current tab = Measurement
+[19-01-2019 17:45]  MeasurementProcedure.py  [LINE:171]  #DEBUG  
+Thread "Measurement" finished
+[19-01-2019 17:45]  Main.py  [LINE:564]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
