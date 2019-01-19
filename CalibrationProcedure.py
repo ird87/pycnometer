@@ -9,7 +9,7 @@ import threading
 from Calibration import Calibration
 from MeasurementProcedure import Сuvette, Ports, Pressure_Error
 
-"""Проверка и комментари: 08.01.2019"""
+"""Проверка и комментари: 08.01.2019"""ХУЙ
 
 """
 "Класс для обработки процедуры "Калибровка"
