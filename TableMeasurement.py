@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QHeaderView, QMenu
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtCore import Qt
 
-"""Проверака и комментари: 08.01.2019"""
+"""Проверака и комментари: 19.01.2019"""
 
 """
 "Класс реализует интерфейс и работу таблицы "Измерения"
@@ -390,10 +390,10 @@ class UiTableMeasurement(object):
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating medium_volume, '
-                                     'denominator: counter1={0}'.format(str(counter1)))
+                                     'denominator: counter1={0}'.format(counter1))
                 self.m_medium_volume = 0
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Measured : Medium volume = {0}'.format(str(self.m_medium_volume)))
+                                       'Measured : Medium volume = {0}'.format(self.m_medium_volume))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_volume..... Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_density.....')
             try:
@@ -402,10 +402,10 @@ class UiTableMeasurement(object):
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating medium_density, '
-                                     'denominator: counter1={0}'.format(str(counter1)))
+                                     'denominator: counter1={0}'.format(counter1))
                 self.m_medium_density = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measured : Medium volume = {0}'.format(str(self.m_medium_volume)))
+                                   'Measured : Medium volume = {0}'.format(self.m_medium_volume))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_density..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Calculation medium_volume & medium_density..... Done.')
@@ -418,25 +418,25 @@ class UiTableMeasurement(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL.....')
         for m in self.measurements:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 'Calculation deviation for Measured[{0}].....'.format(str(counter2)))
+                                 'Calculation deviation for Measured[{0}].....'.format(counter2))
             try:
                 # Рассчитываем отклонение
                 deviation = round((self.m_medium_volume - m.volume) / self.m_medium_volume * 100, 3)
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating deviation, '
-                                     'denominator: medium_volume={0}'.format(str(self.m_medium_volume)))
+                                     'denominator: medium_volume={0}'.format(self.m_medium_volume))
                 deviation = 0
             if m.active:
                 m.deviation = deviation
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured[{0}] deviation = {1}'.format(str(counter2), str(m.deviation)))
+                                           'Measured[{0}] deviation = {1}'.format(counter2, m.deviation))
             if not m.active:
                 m.deviation = ''
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured[{0}] this measurement is not active'.format(str(counter2)))
+                                           'Measured[{0}] this measurement is not active'.format(counter2))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 'Calculation deviation for Measured[{0}]..... Done.'.format(str(counter2)))
+                                 'Calculation deviation for Measured[{0}]..... Done.'.format(counter2))
             # Добавляем в таблицу в столбец для отклонений
             item = QtWidgets.QTableWidgetItem(str(m.deviation))
             item.setTextAlignment(Qt.AlignHCenter)
@@ -465,10 +465,10 @@ class UiTableMeasurement(object):
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating SKO, denominator: '
-                                 'counter3={0}'.format(str(counter3)))
+                                 'counter3={0}'.format(counter3))
             self.m_SD = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measured : SKO = {0}'.format(str(self.m_SD)))
+                                   'Measured : SKO = {0}'.format(self.m_SD))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO%.....')
         try:
@@ -476,10 +476,10 @@ class UiTableMeasurement(object):
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating SKO%, denominator: '
-                                 'counter3={0}'.format(str(self.m_medium_volume)))
+                                 'counter3={0}'.format(self.m_medium_volume))
             self.m_SD_per = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measured : SKO% = {0}%'.format(str(self.m_SD_per)))
+                                   'Measured : SKO% = {0}%'.format(self.m_SD_per))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO%..... Done.')
 
         # -----------------------------------------------------------------------------------------------------

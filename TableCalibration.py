@@ -8,7 +8,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QHeaderView, QMenu
 
-"""Проверака и комментари: 07.01.2019"""
+"""Проверака и комментари: 19.01.2019"""
 
 """
 "Класс реализует интерфейс и работу таблицы "Калибровка"
@@ -418,10 +418,10 @@ class UiTableCalibration(object):
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating medium_ratio1, '
-                                 'denominator: counter1={0}'.format(str(counter1)))
+                                 'denominator: counter1={0}'.format(counter1))
             medium_ratio1 = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measured {0} : Medium ratio = {1}'.format('P', str(medium_ratio1)))
+                                   'Measured {0} : Medium ratio = {1}'.format('P', medium_ratio1))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_ratio for P.....Done')
 
         # --------------------------------------------------------------------------------------------------------------
@@ -443,10 +443,10 @@ class UiTableCalibration(object):
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating medium_ratio1, '
-                                 'denominator: counter1={0}'.format(str(counter1)))
+                                 'denominator: counter1={0}'.format(counter1))
             medium_ratio2 = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measured {0} : Medium ratio = {1}'.format('P\'', str(medium_ratio2)))
+                                   'Measured {0} : Medium ratio = {1}'.format('P\'', medium_ratio2))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_ratio for P\'.....Done')
 
         # --------------------------------------------------------------------------------------------------------------
@@ -459,25 +459,25 @@ class UiTableCalibration(object):
             # Для P  index = i
             index = i
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P[{0}].....'.format(str(i)))
+                                                                             'for P[{0}].....'.format(i))
             try:
                 # Рассчитываем отклонение для P
                 deviation1 = round((medium_ratio1 - self.calibrations[index].ratio) / medium_ratio1 * 100, 3)
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating deviation1, '
-                                     'denominator: medium_ratio1={0}'.format(str(medium_ratio1)))
+                                     'denominator: medium_ratio1={0}'.format(medium_ratio1))
                 deviation1 = 0
             if self.calibrations[index].active:
                 self.calibrations[index].deviation = deviation1
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : deviation = {2}'.format('P', str(i), str(deviation1)))
+                                           'Measured{0} {1} : deviation = {2}'.format('P', i, deviation1))
             if not self.calibrations[index].active:
                 self.calibrations[index].deviation = ''
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : this calibration is not active'.format('P', str(i)))
+                                           'Measured{0} {1} : this calibration is not active'.format('P', i))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P[{0}].....Done'.format(str(i)))
+                                                                             'for P[{0}].....Done'.format(i))
             # Добавляем в таблицу в столбец для отклонений
             item = QtWidgets.QTableWidgetItem(str(self.calibrations[index].deviation))
             item.setTextAlignment(Qt.AlignHCenter)
@@ -493,25 +493,25 @@ class UiTableCalibration(object):
             # Для P'  index = i + num
             index = i + num
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P\'[{0}].....'.format(str(i)))
+                                                                             'for P\'[{0}].....'.format(i))
             try:
                 # Рассчитываем отклонение для P'
                 deviation2 = round((medium_ratio2 - self.calibrations[index].ratio) / medium_ratio2 * 100, 3)
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating deviation2, '
-                                     'denominator: medium_ratio2={0}'.format(str(medium_ratio2)))
+                                     'denominator: medium_ratio2={0}'.format(medium_ratio2))
                 deviation2 = 0
             if self.calibrations[index].active:
                 self.calibrations[index].deviation = deviation2
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : deviation = {2}'.format('P\'', str(i), str(deviation2)))
+                                           'Measured{0} {1} : deviation = {2}'.format('P\'', i, deviation2))
             if not self.calibrations[index].active:
                 self.calibrations[index].deviation = ''
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : this calibration is not active'.format('P\'', str(i)))
+                                           'Measured{0} {1} : this calibration is not active'.format('P\'', i))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P\'[{0}].....Done'.format(str(i)))
+                                                                             'for P\'[{0}].....Done'.format(i))
             # Добавляем в таблицу в столбец для отклонений
             item = QtWidgets.QTableWidgetItem(str(self.calibrations[index].deviation))
             item.setTextAlignment(Qt.AlignHCenter)
@@ -546,42 +546,41 @@ class UiTableCalibration(object):
                 # -----------------------------------------------------------------------------------------------------
 
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     f"Calculation Vc0 for P[{str(index1)}] & P'[{str(index2)}].....")
+                                     'Calculation Vc0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
                 try:
                     # Рассчитываем Vc0 для текущей комбинации
                     Vc0 = ((P2a - P0a) * self.Vss) / (
                             (P2a - P0a) * (P2 - P0) / (P1 - P2) + (P2a - P0a) - (P1a - P0a) * (P2 - P0) / (P1 - P2))
                 except ArithmeticError:
                     self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                         f"Division by zero when calculating Vc0 for P[{str(index1)}] & "
-                                         f"P'[{str(index2)}], denominator: (P2\'={str(P2a)} - P0\'={str(P0a)}) * "
-                                         f"(P2={str(P2)} - P0={str(P0)}) / (P1={str(P1)} - P2={str(P2)}) + "
-                                         f"(P2\'={str(P2a)} - P0\'={str(P0a)}) - (P1\'={str(P1a)} - P0\'={str(P0a)}) * "
-                                         f"(P2={str(P2)} - P0={str(P0)}) / (P1={str(P1)} - P2={str(P2)}) "
-                                         f"& (P1={str(P1)} - P2={str(P2)})={str(P1 - P2)}")
+                             'Division by zero when calculating Vc0 for P[{0}] & P\'[{1}], '
+                             'denominator: (P2\'={2} - P0\'={3}) * (P2={4} - P0={5}) / (P1={6} - P2={7}) + (P2\'={8} '
+                             '- P0\'={9}) - (P1\'={10} - P0\'={11}) * (P2={12} - P0={13}) / (P1={14} - P2={15}) '
+                             '& (P1={16} - P2={17})={18}'
+                             .format(index1, index2, P2a, P0a, P2, P0, P1, P2, P2a, P0a, P1a, P0a,
+                                     P2, P0, P1, P2, P1, P2, (P1 - P2)))
                     Vc0 = 0
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           f'Measured for P[{str(index1)}] & P\'[{str(index2)}]  : Vc0 = {str(Vc0)}')
+                                           'Measured for P[{0}] & P\'[{1}]  : Vc0 = {2}'.format(index1, index2, Vc0))
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     f"Calculation Vc0 for P[{str(index1)}] & P'[{str(index2)}].....Done")
+                                     'Calculation Vc0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
 
                 # -----------------------------------------------------------------------------------------------------
 
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     f"Calculation Vd0 for P[{str(index1)}] & P'[{str(index2)}].....")
+                                     'Calculation Vd0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
                 try:
                     # Рассчитываем Vd0 для текущей комбинации
                     Vd0 = (P2 - P0) * Vc0 / (P1 - P2)
                 except ArithmeticError:
                     self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                         f"Division by zero when calculating Vd0 for P[{str(index1)}] & "
-                                         f"P'[{str(index2)}], denominator: (P1={str(P1)} - P2={str(P2)})"
-                                         f"={str(P1 - P2)}")
+                            'Division by zero when calculating Vd0 for P[{0}] & P\'[{1}], '
+                            'denominator: (P1={2} - P2={3})={4}'.format(index1, index2, P1, P2, (P1 - P2)))
                     Vd0 = 0
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           f'Measured for P[{str(index1)}] & P\'[{str(index2)}]  : Vd0 = {str(Vd0)}')
+                                           'Measured for P[{0}] & P\'[{1}]  : Vd0 = {2}'.format(index1, index2, Vd0))
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     f"Calculation Vd0 for P[{str(index1)}] & P'[{str(index2)}].....Done")
+                                     'Calculation Vd0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
 
                 # -----------------------------------------------------------------------------------------------------
 
@@ -600,34 +599,34 @@ class UiTableCalibration(object):
         # -----------------------------------------------------------------------------------------------------
 
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                             f"Calculation c_Vc.....")
+                             'Calculation c_Vc.....')
         try:
             # Рассчитываем объем кюветы
             self.c_Vc = round((Vc / divider), 3)
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 f"Division by zero when calculating c_Vc, denominator: divider={str(divider)}")
+                                 'Division by zero when calculating c_Vc, denominator: divider={0}'.format(divider))
             self.c_Vc = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   f'Measured : c_Vc = {str(self.c_Vc)}')
+                                   'Measured : c_Vc = {0}'.format(self.c_Vc))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                             f"Calculation c_Vc.....Done")
+                             'Calculation c_Vc.....Done')
 
         # -----------------------------------------------------------------------------------------------------
 
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                             f"Calculation c_Vd.....")
+                             'Calculation c_Vd.....')
         try:
             # Рассчитываем доп. объем кюветы
             self.c_Vd = round((Vd / divider), 3)
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 f"Division by zero when calculating c_Vd, denominator: divider={str(divider)}")
+                                 'Division by zero when calculating c_Vd, denominator: divider={0}'.format(divider))
             self.c_Vd = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   f'Measured : c_Vd = {str(self.c_Vd)}')
+                                   'Measured : c_Vd = {0}'.format(self.c_Vd))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                             f"Calculation c_Vd.....Done")
+                             'Calculation c_Vd.....Done')
 
         # -----------------------------------------------------------------------------------------------------
 

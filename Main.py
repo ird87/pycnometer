@@ -17,14 +17,14 @@ from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox
 from TableCalibration import UiTableCalibration
 from TableMeasurement import UiTableMeasurement
-"""Проверака и комментари: 13.01.2019"""
+"""Проверака и комментари: 19.01.2019"""
 """
 "Главный класс. Работа с GUI, управление приложением, обработка ввода пользователя и работы процедур измерений и калибровки"
 """
 
 """Функция для отображения нужного количества знаков после '.'"""
 def toFixed(numObj, digits=0):
-    return f"{numObj:.{digits}f}"
+    return '{0:.{1}f}'.format(numObj, digits)
 
 """Функция проверки переменной на тип int"""
 def isint(s):
@@ -268,7 +268,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
             p_Bar = toFixed(self.spi.getBar(data), 2)
             p_kPa = toFixed(self.spi.getkPa(data), 0)
 
-        Pmeas_const = f'[{p_kPa}, {p_Bar}, {p_Psi}]'
+        Pmeas_const = '[{0}, {1}, {2}]'.format(p_kPa, p_Bar, p_Psi)
         self.config.set_ini('Measurement', 'Pmeas', Pmeas_const)
         # А потом вызываем метод, который загружает и применяет все настройки из файла config.ini
         self.setup()

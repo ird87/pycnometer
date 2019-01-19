@@ -9,7 +9,7 @@ import threading
 from Calibration import Calibration
 from MeasurementProcedure import Сuvette, Ports, Pressure_Error
 
-"""Проверка и комментари: 09.01.2019"""
+"""Проверка и комментари: 19.01.2019"""
 
 """
 "Класс для обработки процедуры "Калибровка"
@@ -269,37 +269,37 @@ class CalibrationProcedure(object):
             """
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K1 = {0}'.format(str(self.ports[Ports.K1.value])))
+                                   'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
         self.gpio.port_on(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                   'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K3 = {0}'.format(str(self.ports[Ports.K3.value])))
+                                   'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
         self.time_sleep(10)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Wait {0} sec'.format(str(10)))
+                                   'Wait {0} sec'.format(10))
         self.gpio.port_on(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K4 = {0}'.format(str(self.ports[Ports.K4.value])))
+                                   'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
         self.time_sleep(5)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Wait {0} sec'.format(str(5)))
+                                   'Wait {0} sec'.format(5))
         self.gpio.port_off(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K1 = {0}'.format(str(self.ports[Ports.K1.value])))
+                                   'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
         self.time_sleep(5)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Wait {0} sec'.format(str(5)))
+                                   'Wait {0} sec'.format(5))
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K3 = {0}'.format(str(self.ports[Ports.K3.value])))
+                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
         self.gpio.port_off(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K4 = {0}'.format(str(self.ports[Ports.K4.value])))
+                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
         # Цикл по заданному количеству измерений
         for i in range(self.number_of_measurements):
             # Создаем пустой экземпляр для записей результатов калибровки как новый элемент списка калибровок
@@ -310,110 +310,108 @@ class CalibrationProcedure(object):
             self.calibrations[l].measurement = self.P
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Wait {0} sec'.format(str(2)))
+                                       'Wait {0} sec'.format(2))
             # Замеряем давление P0/P0', ('p0') - нужно только для тестового режима, чтобы имитировать похожее давление.
             self.calibrations[l].p0 = self.spi.get_pressure('p0')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Measured{0} {1} : p0 = {2}'.format(str(i), self.calibrations[l].measurement,
-                                                                           str(self.calibrations[l].p0)))
+                                       'Measured{0} {1} : p0 = {2}'.format(i, self.calibrations[l].measurement,
+                                                                           self.calibrations[l].p0))
             self.gpio.port_on(self.ports[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K1 = {0}'.format(str(self.ports[Ports.K1.value])))
+                                       'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
             self.gpio.port_on(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                       'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We expect a set of pressure')
             p, success, duration = self.gain_Pmeas()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           f'pressure set - fail, P = {str(p)}/{str(self.Pmeas)}, '
-                                           f'time has passed: {str(duration)}')
+                            'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
                 return Pressure_Error.Pressure_Set
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       f'pressure set - success, P = {str(p)}/{str(self.Pmeas)}, '
-                                       f'time has passed: {str(duration)}')
+                            'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
             self.gpio.port_off(self.ports[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K1 = {0}'.format(str(self.ports[Ports.K1.value])))
+                                       'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Wait {0} sec'.format(str(2)))
+                                       'Wait {0} sec'.format(2))
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                       'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Wait {0} sec'.format(str(2)))
+                                       'Wait {0} sec'.format(2))
             # Замеряем давление P1/P1', ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             self.calibrations[l].p1 = self.spi.get_pressure('p1')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Measured{0} {1} : p1 = {2}'.format(str(i), self.calibrations[l].measurement,
-                                                                        str(self.calibrations[l].p1)))
+                                       'Measured{0} {1} : p1 = {2}'.format(i, self.calibrations[l].measurement,
+                                                                        self.calibrations[l].p1))
             # только для большой и средней кюветы
             if not self.cuvette == Сuvette.Small:
                 self.gpio.port_on(self.ports[Ports.K2.value])
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Open K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                           'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K3 = {0}'.format(str(self.ports[Ports.K3.value])))
+                                       'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           f'pressure stops changing - fail, balance = {str(balance)}/{str(0.01)}, '
-                                           f'time has passed: {str(duration)}')
+                            'pressure stops changing - fail, balance = {0}/{1}, time has '
+                            'passed: {2}'.format(balance, 0.01, duration))
                 return Pressure_Error.Get_Balance
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       f'pressure stops changing - success, P = {str(balance)}/{str(0.01)}, '
-                                       f'time has passed: {str(duration)}')
+                            'pressure stops changing - success, P = {0}/{1}, time has '
+                            'passed: {2}'.format(balance, 0.01, duration))
             # только для большой и средней кюветы
             if not self.cuvette == Сuvette.Small:
                 self.gpio.port_off(self.ports[Ports.K2.value])
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Close K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                           'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.gpio.port_off(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K3 = {0}'.format(str(self.ports[Ports.K3.value])))
+                                       'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Wait {0} sec'.format(str(2)))
+                                       'Wait {0} sec'.format(2))
             # Замеряем давление P2/P2', ('p2') - нужно только для тестового режима, чтобы имитировать похожее давление.
             self.calibrations[l].p2 = self.spi.get_pressure('p2')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Measured{0} {1} : p2 = {2}'.format(str(i), self.calibrations[l].measurement,
-                                                                           str(self.calibrations[l].p2)))
+                                       'Measured{0} {1} : p2 = {2}'.format(i, self.calibrations[l].measurement,
+                                                                           self.calibrations[l].p2))
             self.gpio.port_on(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                       'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K3 = {0}'.format(str(self.ports[Ports.K3.value])))
+                                       'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.gpio.port_on(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K4 = {0}'.format(str(self.ports[Ports.K4.value])))
+                                       'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           f'pressure stops changing - fail, balance = {str(balance)}/{str(0.01)}, '
-                                           f'time has passed: {str(duration)}')
+                            'pressure stops changing - fail, balance = {0}/{1}, time has '
+                            'passed: {2}'.format(balance, 0.01, duration))
                 return Pressure_Error.Get_Balance
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       f'pressure stops changing - success, P = {str(balance)}/{str(0.01)}, '
-                                       f'time has passed: {str(duration)}')
+                            'pressure stops changing - success, P = {0}/{1}, time has '
+                            'passed: {2}'.format(balance, 0.01, duration))
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K2 = {0}'.format(str(self.ports[Ports.K2.value])))
+                                       'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.gpio.port_off(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K3 = {0}'.format(str(self.ports[Ports.K3.value])))
+                                       'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.gpio.port_off(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K4 = {0}'.format(str(self.ports[Ports.K4.value])))
+                                       'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
             P0 = self.calibrations[l].p0
             P1 = self.calibrations[l].p1
             P2 = self.calibrations[l].p2
@@ -424,12 +422,12 @@ class CalibrationProcedure(object):
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating ratio, '
-                                     'denominator: (P2={0} - P0={1})={2}'.format(str(P2), str(P0), str(P2-P0)))
+                                     'denominator: (P2={0} - P0={1})={2}'.format(P2, P0, (P2-P0)))
                 ratio = 0
             self.calibrations[l].ratio = ratio
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Measured{0} {1} : ratio = {2}'.format(str(i), self.calibrations[l].measurement,
-                                                                           str(self.calibrations[l].ratio)))
+                                       'Measured{0} {1} : ratio = {2}'.format(i, self.calibrations[l].measurement,
+                                                                           self.calibrations[l].ratio))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation ratio.....Done')
             # deviation мы пока не можем посчитать, так что присваиваем ему None
             self.calibrations[l].deviation = None
@@ -527,8 +525,8 @@ class CalibrationProcedure(object):
                 balance = math.fabs((p_next - p_previous) / p_previous)
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     f'Division by zero when calculating balance, denominator: ((p_next = {p_next} - '
-                                     f'p_previous = {p_previous}) / p_previous = {p_previous}')
+                                     'Division by zero when calculating balance, denominator: ((p_next = {0} - '
+                                     'p_previous = {1}) / p_previous = {2}'.format(p_next, p_previous, p_previous))
                 balance = 0
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation balance.....Done')
             # Если отклонение давлений в пределах погрешности
