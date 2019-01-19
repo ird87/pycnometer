@@ -1,0 +1,3953 @@
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:163]  #DEBUG  
+Calibration started
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:177]  #DEBUG  
+Measure P.....
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P : p0 = 0
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P : p1 = 121
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P : p2 = 57
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P : ratio = 2.123
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P : p0 = 0
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P : p1 = 121
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P : p2 = 58
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P : ratio = 2.086
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:185]  #DEBUG  
+Measure P finished. Waiting for user to put object in cuvette...
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:193]  #DEBUG  
+Done. 
+Measure P'.....
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P' : p0 = 0
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P' : p1 = 121
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P' : p2 = 58
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P' : ratio = 2.086
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P' : p0 = 0
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P' : p1 = 121
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P' : p2 = 58
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P' : ratio = 2.086
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:197]  #DEBUG  
+Measure P'..... Done.
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:199]  #DEBUG  
+Calculation.....
+[11-01-2019 19:38]  TableCalibration.py  [LINE:423]  #DEBUG  
+Measured P : Medium ratio = 2.104
+[11-01-2019 19:38]  TableCalibration.py  [LINE:448]  #DEBUG  
+Measured P' : Medium ratio = 2.086
+[11-01-2019 19:38]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 0 : deviation = -0.903
+[11-01-2019 19:38]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 1 : deviation = 0.856
+[11-01-2019 19:38]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 0 : deviation = 0.0
+[11-01-2019 19:38]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 1 : deviation = 0.0
+[11-01-2019 19:38]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[2]  : Vc0 = 306.77685950413223
+[11-01-2019 19:38]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[2]  : Vd0 = 273.22314049586777
+[11-01-2019 19:38]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[3]  : Vc0 = 306.77685950413223
+[11-01-2019 19:38]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[3]  : Vd0 = 273.22314049586777
+[11-01-2019 19:38]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[2]  : Vc0 = 0
+[11-01-2019 19:38]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[2]  : Vd0 = 0.0
+[11-01-2019 19:38]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[3]  : Vc0 = 0
+[11-01-2019 19:38]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[3]  : Vd0 = 0.0
+[11-01-2019 19:38]  TableCalibration.py  [LINE:611]  #DEBUG  
+Measured : c_Vc = 153.388
+[11-01-2019 19:38]  TableCalibration.py  [LINE:627]  #DEBUG  
+Measured : c_Vd = 136.612
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:203]  #DEBUG  
+Calculation..... Done.
+[11-01-2019 19:38]  CalibrationProcedure.py  [LINE:211]  #DEBUG  
+Calibration finished
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:137]  #DEBUG  
+The following calibration settings are set:
+Cuvette = Ñuvette.Large
+Number of measurements = 2
+Sample volume = 2.0
+VcL = 0
+VcM = 0
+VcS = 0
+VdLM = 0
+VdS = 0
+T1 = 5
+T2 = 5
+T3 = 5
+T4 = 5
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:163]  #DEBUG  
+Calibration started
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:177]  #DEBUG  
+Measure P.....
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P : p0 = 0
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P : p1 = 121
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P : p2 = 58
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P : ratio = 2.086
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P : p0 = 0
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P : p1 = 120
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P : p2 = 58
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P : ratio = 2.069
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:185]  #DEBUG  
+Measure P finished. Waiting for user to put object in cuvette...
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:193]  #DEBUG  
+Done. 
+Measure P'.....
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P' : p0 = 0
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P' : p1 = 121
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P' : p2 = 56
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P' : ratio = 2.161
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P' : p0 = 0
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P' : p1 = 121
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P' : p2 = 58
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P' : ratio = 2.086
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:197]  #DEBUG  
+Measure P'..... Done.
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:199]  #DEBUG  
+Calculation.....
+[11-01-2019 19:54]  TableCalibration.py  [LINE:423]  #DEBUG  
+Measured P : Medium ratio = 2.077
+[11-01-2019 19:54]  TableCalibration.py  [LINE:448]  #DEBUG  
+Measured P' : Medium ratio = 2.123
+[11-01-2019 19:54]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 0 : deviation = -0.433
+[11-01-2019 19:54]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 1 : deviation = 0.385
+[11-01-2019 19:54]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 0 : deviation = -1.79
+[11-01-2019 19:54]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 1 : deviation = 1.743
+[11-01-2019 19:54]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[2]  : Vc0 = -145.7851239669424
+[11-01-2019 19:54]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[2]  : Vd0 = -134.2148760330581
+[11-01-2019 19:54]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[3]  : Vc0 = 0
+[11-01-2019 19:54]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[3]  : Vd0 = 0.0
+[11-01-2019 19:54]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[2]  : Vc0 = -116.51006711409417
+[11-01-2019 19:54]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[2]  : Vd0 = -108.99328859060422
+[11-01-2019 19:54]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[3]  : Vc0 = -619.9999999999987
+[11-01-2019 19:54]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[3]  : Vd0 = -579.9999999999989
+[11-01-2019 19:54]  TableCalibration.py  [LINE:611]  #DEBUG  
+Measured : c_Vc = -220.574
+[11-01-2019 19:54]  TableCalibration.py  [LINE:627]  #DEBUG  
+Measured : c_Vd = -205.802
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:203]  #DEBUG  
+Calculation..... Done.
+[11-01-2019 19:54]  CalibrationProcedure.py  [LINE:211]  #DEBUG  
+Calibration finished
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:137]  #DEBUG  
+The following calibration settings are set:
+Cuvette = Ñuvette.Large
+Number of measurements = 10
+Sample volume = 10.0
+VcL = 0
+VcM = 0
+VcS = 0
+VdLM = 0
+VdS = 0
+T1 = 5
+T2 = 5
+T3 = 5
+T4 = 5
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:163]  #DEBUG  
+Calibration started
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:177]  #DEBUG  
+Measure P.....
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P : p2 = 59
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P : ratio = 2.051
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P : p2 = 55
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P : ratio = 2.2
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured2 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured2 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured2 P : p2 = 59
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured2 P : ratio = 2.051
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured3 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured3 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured3 P : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured3 P : ratio = 2.161
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured4 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured4 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured4 P : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured4 P : ratio = 2.086
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured5 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured5 P : p1 = 122
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured5 P : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured5 P : ratio = 2.103
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured6 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured6 P : p1 = 122
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured6 P : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured6 P : ratio = 2.14
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured7 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured7 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured7 P : p2 = 60
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured7 P : ratio = 2.017
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured8 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured8 P : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured8 P : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured8 P : ratio = 2.105
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured9 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured9 P : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured9 P : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured9 P : ratio = 2.105
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:185]  #DEBUG  
+Measure P finished. Waiting for user to put object in cuvette...
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:193]  #DEBUG  
+Done. 
+Measure P'.....
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P' : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P' : ratio = 2.161
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P' : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P' : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured2 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured2 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured2 P' : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured2 P' : ratio = 2.086
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured3 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured3 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured3 P' : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured3 P' : ratio = 2.086
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured4 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured4 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured4 P' : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured4 P' : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured5 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured5 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured5 P' : p2 = 59
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured5 P' : ratio = 2.051
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured6 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured6 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured6 P' : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured6 P' : ratio = 2.161
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured7 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured7 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured7 P' : p2 = 59
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured7 P' : ratio = 2.051
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured8 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured8 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured8 P' : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured8 P' : ratio = 2.161
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured9 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured9 P' : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured9 P' : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured9 P' : ratio = 2.069
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:197]  #DEBUG  
+Measure P'..... Done.
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:199]  #DEBUG  
+Calculation.....
+[11-01-2019 20:00]  TableCalibration.py  [LINE:423]  #DEBUG  
+Measured P : Medium ratio = 2.102
+[11-01-2019 20:00]  TableCalibration.py  [LINE:448]  #DEBUG  
+Measured P' : Medium ratio = 2.107
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 0 : deviation = 2.426
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 1 : deviation = -4.662
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 2 : deviation = 2.426
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 3 : deviation = -2.807
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 4 : deviation = 0.761
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 5 : deviation = -0.048
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 6 : deviation = -1.808
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 7 : deviation = 4.044
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 8 : deviation = -0.143
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 9 : deviation = -0.143
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 0 : deviation = -2.563
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 1 : deviation = -0.759
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 2 : deviation = 0.997
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 3 : deviation = 0.997
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 4 : deviation = -0.759
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 5 : deviation = 2.658
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 6 : deviation = -2.563
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 7 : deviation = 2.658
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 8 : deviation = -2.563
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 9 : deviation = 1.804
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[10]  : Vc0 = -286.9421487603304
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[10]  : Vd0 = -273.0578512396692
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[11]  : Vc0 = -438.0991735537203
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[11]  : Vd0 = -416.9008264462822
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[12]  : Vc0 = -891.5702479338837
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[12]  : Vd0 = -848.4297520661152
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[13]  : Vc0 = -891.5702479338837
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[13]  : Vd0 = -848.4297520661152
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[14]  : Vc0 = -438.0991735537203
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[14]  : Vd0 = -416.9008264462822
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[15]  : Vc0 = 1.2455267719446528e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[15]  : Vd0 = 1.1852593474957179e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[16]  : Vc0 = -286.9421487603304
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[16]  : Vd0 = -273.0578512396692
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[17]  : Vc0 = 1.2455267719446528e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[17]  : Vd0 = 1.1852593474957179e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[18]  : Vc0 = -286.9421487603304
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[18]  : Vd0 = -273.0578512396692
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[19]  : Vc0 = -1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[19]  : Vd0 = -1655.8064516129032
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[10]  : Vc0 = 916.3636363636388
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[10]  : Vd0 = 763.6363636363657
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[11]  : Vc0 = 466.36363636363575
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[11]  : Vd0 = 388.6363636363631
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[12]  : Vc0 = 316.3636363636355
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[12]  : Vd0 = 263.63636363636294
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[13]  : Vc0 = 316.3636363636355
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[13]  : Vd0 = 263.63636363636294
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[14]  : Vc0 = 466.36363636363575
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[14]  : Vd0 = 388.6363636363631
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[15]  : Vc0 = 241.36363636363652
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[15]  : Vd0 = 201.13636363636377
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[16]  : Vc0 = 916.3636363636388
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[16]  : Vd0 = 763.6363636363657
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[17]  : Vc0 = 241.36363636363652
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[17]  : Vd0 = 201.13636363636377
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[18]  : Vc0 = 916.3636363636388
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[18]  : Vd0 = 763.6363636363657
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[19]  : Vc0 = 274.7368421052627
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[19]  : Vd0 = 228.94736842105226
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[10]  : Vc0 = -286.9421487603304
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[10]  : Vd0 = -273.0578512396692
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[11]  : Vc0 = -438.0991735537203
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[11]  : Vd0 = -416.9008264462822
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[12]  : Vc0 = -891.5702479338837
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[12]  : Vd0 = -848.4297520661152
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[13]  : Vc0 = -891.5702479338837
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[13]  : Vd0 = -848.4297520661152
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[14]  : Vc0 = -438.0991735537203
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[14]  : Vd0 = -416.9008264462822
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[15]  : Vc0 = 1.2455267719446528e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[15]  : Vd0 = 1.1852593474957179e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[16]  : Vc0 = -286.9421487603304
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[16]  : Vd0 = -273.0578512396692
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[17]  : Vc0 = 1.2455267719446528e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[17]  : Vd0 = 1.1852593474957179e+17
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[18]  : Vc0 = -286.9421487603304
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[18]  : Vd0 = -273.0578512396692
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[19]  : Vc0 = -1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[19]  : Vd0 = -1655.8064516129032
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[10]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[10]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[11]  : Vc0 = 918.5950413223155
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[11]  : Vd0 = 791.4049586776872
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[12]  : Vc0 = 467.3553719008272
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[12]  : Vd0 = 402.6446280991742
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[13]  : Vc0 = 467.3553719008272
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[13]  : Vd0 = 402.6446280991742
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[14]  : Vc0 = 918.5950413223155
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[14]  : Vd0 = 791.4049586776872
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[15]  : Vc0 = 316.9421487603311
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[15]  : Vd0 = 273.05785123966984
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[16]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[16]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[17]  : Vc0 = 316.9421487603311
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[17]  : Vd0 = 273.05785123966984
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[18]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[18]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[19]  : Vc0 = 379.5302013422826
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[19]  : Vd0 = 326.97986577181274
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[10]  : Vc0 = -437.3553719008272
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[10]  : Vd0 = -402.6446280991742
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[11]  : Vc0 = -890.3305785124015
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[11]  : Vd0 = -819.6694214876077
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[12]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[12]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[13]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[13]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[14]  : Vc0 = -890.3305785124015
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[14]  : Vd0 = -819.6694214876077
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[15]  : Vc0 = 921.5702479338825
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[15]  : Vd0 = 848.429752066114
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[16]  : Vc0 = -437.3553719008272
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[16]  : Vd0 = -402.6446280991742
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[17]  : Vc0 = 921.5702479338825
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[17]  : Vd0 = 848.429752066114
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[18]  : Vc0 = -437.3553719008272
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[18]  : Vd0 = -402.6446280991742
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[19]  : Vc0 = 1890.0000000000214
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[19]  : Vd0 = 1740.0000000000196
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[10]  : Vc0 = -578.0645161290323
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[10]  : Vd0 = -523.8709677419355
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[11]  : Vc0 = -1710.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[11]  : Vd0 = -1549.6875
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[12]  : Vc0 = 1920.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[12]  : Vd0 = 1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[13]  : Vc0 = 1920.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[13]  : Vd0 = 1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[14]  : Vc0 = -1710.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[14]  : Vd0 = -1549.6875
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[15]  : Vc0 = 629.3333333333334
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[15]  : Vd0 = 570.3333333333334
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[16]  : Vc0 = -578.0645161290323
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[16]  : Vd0 = -523.8709677419355
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[17]  : Vc0 = 629.3333333333334
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[17]  : Vd0 = 570.3333333333334
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[18]  : Vc0 = -578.0645161290323
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[18]  : Vd0 = -523.8709677419355
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[19]  : Vc0 = 960.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[19]  : Vd0 = 870.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[10]  : Vc0 = -1680.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[10]  : Vd0 = -1473.2307692307693
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[11]  : Vc0 = 1949.999999999999
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[11]  : Vd0 = 1709.999999999999
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[12]  : Vc0 = 631.8435754189942
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[12]  : Vd0 = 554.0782122905026
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[13]  : Vc0 = 631.8435754189942
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[13]  : Vd0 = 554.0782122905026
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[14]  : Vc0 = 1949.999999999999
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[14]  : Vd0 = 1709.999999999999
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[15]  : Vc0 = 382.22591362126235
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[15]  : Vd0 = 335.1827242524916
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[16]  : Vc0 = -1680.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[16]  : Vd0 = -1473.2307692307693
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[17]  : Vc0 = 382.22591362126235
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[17]  : Vd0 = 335.1827242524916
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[18]  : Vc0 = -1680.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[18]  : Vd0 = -1473.2307692307693
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[19]  : Vc0 = 479.237288135593
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[19]  : Vd0 = 420.2542372881354
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[10]  : Vc0 = -211.73553719008243
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[10]  : Vd0 = -208.26446280991712
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[11]  : Vc0 = -287.35537190082584
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[11]  : Vd0 = -282.64462809917296
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[12]  : Vc0 = -438.5950413223136
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[12]  : Vd0 = -431.4049586776855
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[13]  : Vc0 = -438.5950413223136
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[13]  : Vd0 = -431.4049586776855
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[14]  : Vc0 = -287.35537190082584
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[14]  : Vd0 = -282.64462809917296
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[15]  : Vc0 = -892.3140495867792
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[15]  : Vd0 = -877.6859504132254
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[16]  : Vc0 = -211.73553719008243
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[16]  : Vd0 = -208.26446280991712
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[17]  : Vc0 = -892.3140495867792
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[17]  : Vd0 = -877.6859504132254
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[18]  : Vc0 = -211.73553719008243
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[18]  : Vd0 = -208.26446280991712
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[19]  : Vc0 = -583.1868131868142
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[19]  : Vd0 = -573.6263736263746
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[10]  : Vc0 = -597.9661016949121
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[10]  : Vd0 = -541.0169491525395
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[11]  : Vc0 = -1889.9999999999845
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[11]  : Vd0 = -1709.999999999986
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[12]  : Vc0 = 1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[12]  : Vd0 = 1574.2857142857142
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[13]  : Vc0 = 1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[13]  : Vd0 = 1574.2857142857142
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[14]  : Vc0 = -1889.9999999999845
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[14]  : Vd0 = -1709.999999999986
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[15]  : Vc0 = 609.3442622950834
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[15]  : Vd0 = 551.3114754098373
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[16]  : Vc0 = -597.9661016949121
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[16]  : Vd0 = -541.0169491525395
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[17]  : Vc0 = 609.3442622950834
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[17]  : Vd0 = 551.3114754098373
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[18]  : Vc0 = -597.9661016949121
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[18]  : Vd0 = -541.0169491525395
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[19]  : Vc0 = 913.4999999999965
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[19]  : Vd0 = 826.4999999999968
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[10]  : Vc0 = -597.9661016949121
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[10]  : Vd0 = -541.0169491525395
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[11]  : Vc0 = -1889.9999999999845
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[11]  : Vd0 = -1709.999999999986
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[12]  : Vc0 = 1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[12]  : Vd0 = 1574.2857142857142
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[13]  : Vc0 = 1740.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[13]  : Vd0 = 1574.2857142857142
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[14]  : Vc0 = -1889.9999999999845
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[14]  : Vd0 = -1709.999999999986
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[15]  : Vc0 = 609.3442622950834
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[15]  : Vd0 = 551.3114754098373
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[16]  : Vc0 = -597.9661016949121
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[16]  : Vd0 = -541.0169491525395
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[17]  : Vc0 = 609.3442622950834
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[17]  : Vd0 = 551.3114754098373
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[18]  : Vc0 = -597.9661016949121
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[18]  : Vd0 = -541.0169491525395
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[19]  : Vc0 = 913.4999999999965
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[19]  : Vd0 = 826.4999999999968
+[11-01-2019 20:00]  TableCalibration.py  [LINE:611]  #DEBUG  
+Measured : c_Vc = 4982107087778581.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:627]  #DEBUG  
+Measured : c_Vd = 4741037389982832.0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:203]  #DEBUG  
+Calculation..... Done.
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:211]  #DEBUG  
+Calibration finished
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:137]  #DEBUG  
+The following calibration settings are set:
+Cuvette = Ñuvette.Large
+Number of measurements = 10
+Sample volume = 10.0
+VcL = 0
+VcM = 0
+VcS = 0
+VdLM = 0
+VdS = 0
+T1 = 5
+T2 = 5
+T3 = 5
+T4 = 5
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:163]  #DEBUG  
+Calibration started
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:177]  #DEBUG  
+Measure P.....
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P : ratio = 2.161
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P : ratio = 2.086
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured2 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured2 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured2 P : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured2 P : ratio = 2.161
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured3 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured3 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured3 P : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured3 P : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured4 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured4 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured4 P : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured4 P : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured5 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured5 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured5 P : p2 = 54
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured5 P : ratio = 2.241
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured6 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured6 P : p1 = 122
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured6 P : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured6 P : ratio = 2.179
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured7 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured7 P : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured7 P : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured7 P : ratio = 2.143
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured8 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured8 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured8 P : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured8 P : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured9 P : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured9 P : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured9 P : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured9 P : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:185]  #DEBUG  
+Measure P finished. Waiting for user to put object in cuvette...
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:193]  #DEBUG  
+Done. 
+Measure P'.....
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P' : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P' : ratio = 2.086
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P' : p2 = 59
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P' : ratio = 2.051
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured2 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured2 P' : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured2 P' : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured2 P' : ratio = 2.105
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured3 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured3 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured3 P' : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured3 P' : ratio = 2.086
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured4 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured4 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured4 P' : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured4 P' : ratio = 2.161
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured5 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured5 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured5 P' : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured5 P' : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured6 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured6 P' : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured6 P' : p2 = 58
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured6 P' : ratio = 2.069
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured7 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured7 P' : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured7 P' : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured7 P' : ratio = 2.143
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured8 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured8 P' : p1 = 121
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured8 P' : p2 = 57
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured8 P' : ratio = 2.123
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured9 P' : p0 = 0
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured9 P' : p1 = 120
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured9 P' : p2 = 56
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured9 P' : ratio = 2.143
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:197]  #DEBUG  
+Measure P'..... Done.
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:199]  #DEBUG  
+Calculation.....
+[11-01-2019 20:00]  TableCalibration.py  [LINE:423]  #DEBUG  
+Measured P : Medium ratio = 2.146
+[11-01-2019 20:00]  TableCalibration.py  [LINE:448]  #DEBUG  
+Measured P' : Medium ratio = 2.109
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 0 : deviation = -0.699
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 1 : deviation = 2.796
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 2 : deviation = -0.699
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 3 : deviation = 1.072
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 4 : deviation = 1.072
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 5 : deviation = -4.427
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 6 : deviation = -1.538
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 7 : deviation = 0.14
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 8 : deviation = 1.072
+[11-01-2019 20:00]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 9 : deviation = 1.072
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 0 : deviation = 1.091
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 1 : deviation = 2.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 2 : deviation = 0.19
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 3 : deviation = 1.091
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 4 : deviation = -2.466
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 5 : deviation = -0.664
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 6 : deviation = 1.897
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 7 : deviation = -1.612
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 8 : deviation = -0.664
+[11-01-2019 20:00]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 9 : deviation = -1.612
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[10]  : Vc0 = 155.7851239669424
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[10]  : Vd0 = 134.21487603305806
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[11]  : Vc0 = 105.64738292011036
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[11]  : Vd0 = 91.01928374655662
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[12]  : Vc0 = 209.32203389830556
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[12]  : Vd0 = 180.33898305084787
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[13]  : Vc0 = 155.7851239669424
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[13]  : Vd0 = 134.21487603305806
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[14]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[14]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[15]  : Vc0 = 306.1983471074385
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[15]  : Vd0 = 263.8016528925624
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[16]  : Vc0 = 126.51006711409421
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[16]  : Vd0 = 108.99328859060424
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[17]  : Vc0 = 650.0000000000023
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[17]  : Vd0 = 560.000000000002
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[18]  : Vc0 = 306.1983471074385
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[18]  : Vd0 = 263.8016528925624
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[19]  : Vc0 = 650.0000000000023
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[19]  : Vd0 = 560.000000000002
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[10]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[10]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[11]  : Vc0 = 307.19008264462747
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[11]  : Vd0 = 282.80991735537134
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[12]  : Vc0 = -570.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[12]  : Vd0 = -524.7619047619048
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[13]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[13]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[14]  : Vc0 = -145.7851239669424
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[14]  : Vd0 = -134.2148760330581
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[15]  : Vc0 = -296.7768595041338
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[15]  : Vd0 = -273.22314049586925
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[16]  : Vc0 = 630.000000000007
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[16]  : Vd0 = 580.0000000000065
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[17]  : Vc0 = -191.73913043478237
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[17]  : Vd0 = -176.52173913043455
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[18]  : Vc0 = -296.7768595041338
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[18]  : Vd0 = -273.22314049586925
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[19]  : Vc0 = -191.73913043478237
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[19]  : Vd0 = -176.52173913043455
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[10]  : Vc0 = 155.7851239669424
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[10]  : Vd0 = 134.21487603305806
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[11]  : Vc0 = 105.64738292011036
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[11]  : Vd0 = 91.01928374655662
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[12]  : Vc0 = 209.32203389830556
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[12]  : Vd0 = 180.33898305084787
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[13]  : Vc0 = 155.7851239669424
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[13]  : Vd0 = 134.21487603305806
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[14]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[14]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[15]  : Vc0 = 306.1983471074385
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[15]  : Vd0 = 263.8016528925624
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[16]  : Vc0 = 126.51006711409421
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[16]  : Vd0 = 108.99328859060424
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[17]  : Vc0 = 650.0000000000023
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[17]  : Vd0 = 560.000000000002
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[18]  : Vc0 = 306.1983471074385
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[18]  : Vd0 = 263.8016528925624
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[2] & P'[19]  : Vc0 = 650.0000000000023
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[2] & P'[19]  : Vd0 = 560.000000000002
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[10]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[10]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[11]  : Vc0 = 156.03305785123968
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[11]  : Vd0 = 138.96694214876032
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[12]  : Vc0 = 640.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[12]  : Vd0 = 570.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[13]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[13]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[14]  : Vc0 = -296.198347107438
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[14]  : Vd0 = -263.80165289256195
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[15]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[15]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[16]  : Vc0 = 208.53932584269663
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[16]  : Vd0 = 185.73033707865167
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[17]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[17]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[18]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[18]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[3] & P'[19]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[3] & P'[19]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[10]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[10]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[11]  : Vc0 = 156.03305785123968
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[11]  : Vd0 = 138.96694214876032
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[12]  : Vc0 = 640.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[12]  : Vd0 = 570.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[13]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[13]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[14]  : Vc0 = -296.198347107438
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[14]  : Vd0 = -263.80165289256195
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[15]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[15]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[16]  : Vc0 = 208.53932584269663
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[16]  : Vd0 = 185.73033707865167
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[17]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[17]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[18]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[18]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[4] & P'[19]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[4] & P'[19]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[10]  : Vc0 = 80.28925619834726
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[10]  : Vd0 = 64.71074380165301
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[11]  : Vc0 = 65.33884297520666
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[11]  : Vd0 = 52.661157024793425
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[12]  : Vc0 = 91.58273381294964
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[12]  : Vd0 = 73.81294964028777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[13]  : Vc0 = 80.28925619834726
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[13]  : Vd0 = 64.71074380165301
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[14]  : Vc0 = 155.04132231404958
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[14]  : Vd0 = 124.95867768595039
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[15]  : Vc0 = 105.20661157024807
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[15]  : Vd0 = 84.79338842975218
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[16]  : Vc0 = 72.23048327137552
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[16]  : Vd0 = 58.21561338289967
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[17]  : Vc0 = 126.75675675675654
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[17]  : Vd0 = 102.16216216216199
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[18]  : Vc0 = 105.20661157024807
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[18]  : Vd0 = 84.79338842975218
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[5] & P'[19]  : Vc0 = 126.75675675675654
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[5] & P'[19]  : Vd0 = 102.16216216216199
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[10]  : Vc0 = 127.59999999999997
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[10]  : Vd0 = 108.26666666666665
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[11]  : Vc0 = 92.27488151658773
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[11]  : Vd0 = 78.29383886255928
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[12]  : Vc0 = 160.76923076923006
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[12]  : Vd0 = 136.4102564102558
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[13]  : Vc0 = 127.59999999999997
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[13]  : Vd0 = 108.26666666666665
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[14]  : Vc0 = 660.0000000000033
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[14]  : Vd0 = 560.0000000000027
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[15]  : Vc0 = 211.34831460674113
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[15]  : Vd0 = 179.32584269662885
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[16]  : Vc0 = 107.52808988764022
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[16]  : Vd0 = 91.23595505617958
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[17]  : Vc0 = 329.9999999999989
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[17]  : Vd0 = 279.9999999999991
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[18]  : Vc0 = 211.34831460674113
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[18]  : Vd0 = 179.32584269662885
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[6] & P'[19]  : Vc0 = 329.9999999999989
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[6] & P'[19]  : Vd0 = 279.9999999999991
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[10]  : Vc0 = 201.7391304347826
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[10]  : Vd0 = 176.52173913043478
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[11]  : Vc0 = 124.21052631578948
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[11]  : Vd0 = 108.6842105263158
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[12]  : Vc0 = 304.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[12]  : Vd0 = 266.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[13]  : Vc0 = 201.7391304347826
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[13]  : Vd0 = 176.52173913043478
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[14]  : Vc0 = -640.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[14]  : Vd0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[15]  : Vc0 = 570.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[15]  : Vd0 = 498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[16]  : Vc0 = 154.66666666666666
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[16]  : Vd0 = 135.33333333333331
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[17]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[17]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[18]  : Vc0 = 570.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[18]  : Vd0 = 498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[7] & P'[19]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[7] & P'[19]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[10]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[10]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[11]  : Vc0 = 156.03305785123968
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[11]  : Vd0 = 138.96694214876032
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[12]  : Vc0 = 640.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[12]  : Vd0 = 570.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[13]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[13]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[14]  : Vc0 = -296.198347107438
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[14]  : Vd0 = -263.80165289256195
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[15]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[15]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[16]  : Vc0 = 208.53932584269663
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[16]  : Vd0 = 185.73033707865167
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[17]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[17]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[18]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[18]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[8] & P'[19]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[8] & P'[19]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[10]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[10]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[11]  : Vc0 = 156.03305785123968
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[11]  : Vd0 = 138.96694214876032
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[12]  : Vc0 = 640.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[12]  : Vd0 = 570.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[13]  : Vc0 = 306.77685950413223
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[13]  : Vd0 = 273.22314049586777
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[14]  : Vc0 = -296.198347107438
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[14]  : Vd0 = -263.80165289256195
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[15]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[15]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[16]  : Vc0 = 208.53932584269663
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[16]  : Vd0 = 185.73033707865167
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[17]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[17]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[18]  : Vc0 = 0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[18]  : Vd0 = 0.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[9] & P'[19]  : Vc0 = -560.0
+[11-01-2019 20:00]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[9] & P'[19]  : Vd0 = -498.75
+[11-01-2019 20:00]  TableCalibration.py  [LINE:611]  #DEBUG  
+Measured : c_Vc = 102.365
+[11-01-2019 20:00]  TableCalibration.py  [LINE:627]  #DEBUG  
+Measured : c_Vd = 87.311
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:203]  #DEBUG  
+Calculation..... Done.
+[11-01-2019 20:00]  CalibrationProcedure.py  [LINE:211]  #DEBUG  
+Calibration finished
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:137]  #DEBUG  
+The following calibration settings are set:
+Cuvette = Ñuvette.Large
+Number of measurements = 2
+Sample volume = 2.0
+VcL = 0
+VcM = 0
+VcS = 0
+VdLM = 0
+VdS = 0
+T1 = 5
+T2 = 5
+T3 = 5
+T4 = 5
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:163]  #DEBUG  
+Calibration started
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:177]  #DEBUG  
+Measure P.....
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P : p0 = 0
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P : p1 = 121
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P : p2 = 59
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P : ratio = 2.051
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P : p0 = 0
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P : p1 = 121
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P : p2 = 55
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P : ratio = 2.2
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:185]  #DEBUG  
+Measure P finished. Waiting for user to put object in cuvette...
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:193]  #DEBUG  
+Done. 
+Measure P'.....
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:248]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:251]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:254]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:257]  #DEBUG  
+Wait 10 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:260]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:263]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:266]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:269]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:272]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:275]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:278]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured0 P' : p0 = 0
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured0 P' : p1 = 121
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured0 P' : p2 = 57
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured0 P' : ratio = 2.123
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:289]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:293]  #DEBUG  
+Measured1 P' : p0 = 0
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:297]  #DEBUG  
+Open K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:300]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:303]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:306]  #DEBUG  
+Close K1 = 13
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:309]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:312]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:315]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:319]  #DEBUG  
+Measured1 P' : p1 = 121
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:325]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:328]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:331]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:336]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:339]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:342]  #DEBUG  
+Wait 2 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:346]  #DEBUG  
+Measured1 P' : p2 = 56
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:350]  #DEBUG  
+Open K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:353]  #DEBUG  
+Open K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:356]  #DEBUG  
+Open K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:359]  #DEBUG  
+Wait 5 sec
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:362]  #DEBUG  
+Close K2 = 15
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:365]  #DEBUG  
+Close K3 = 18
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:368]  #DEBUG  
+Close K4 = 16
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:383]  #DEBUG  
+Measured1 P' : ratio = 2.161
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:197]  #DEBUG  
+Measure P'..... Done.
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:199]  #DEBUG  
+Calculation.....
+[11-01-2019 20:10]  TableCalibration.py  [LINE:423]  #DEBUG  
+Measured P : Medium ratio = 2.126
+[11-01-2019 20:10]  TableCalibration.py  [LINE:448]  #DEBUG  
+Measured P' : Medium ratio = 2.142
+[11-01-2019 20:10]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 0 : deviation = 3.528
+[11-01-2019 20:10]  TableCalibration.py  [LINE:473]  #DEBUG  
+MeasuredP 1 : deviation = -3.481
+[11-01-2019 20:10]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 0 : deviation = 0.887
+[11-01-2019 20:10]  TableCalibration.py  [LINE:507]  #DEBUG  
+MeasuredP' 1 : deviation = -0.887
+[11-01-2019 20:10]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[2]  : Vc0 = -146.0330578512401
+[11-01-2019 20:10]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[2]  : Vd0 = -138.96694214876075
+[11-01-2019 20:10]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[0] & P'[3]  : Vc0 = -95.64738292011013
+[11-01-2019 20:10]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[0] & P'[3]  : Vd0 = -91.01928374655643
+[11-01-2019 20:10]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[2]  : Vc0 = 155.45454545454524
+[11-01-2019 20:10]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[2]  : Vd0 = 129.5454545454544
+[11-01-2019 20:10]  TableCalibration.py  [LINE:563]  #DEBUG  
+Measured for P[1] & P'[3]  : Vc0 = 305.45454545454623
+[11-01-2019 20:10]  TableCalibration.py  [LINE:581]  #DEBUG  
+Measured for P[1] & P'[3]  : Vd0 = 254.54545454545521
+[11-01-2019 20:10]  TableCalibration.py  [LINE:611]  #DEBUG  
+Measured : c_Vc = 54.807
+[11-01-2019 20:10]  TableCalibration.py  [LINE:627]  #DEBUG  
+Measured : c_Vd = 38.526
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:203]  #DEBUG  
+Calculation..... Done.
+[11-01-2019 20:10]  CalibrationProcedure.py  [LINE:211]  #DEBUG  
+Calibration finished

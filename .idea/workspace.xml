@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="731">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
               <folding>
                 <element signature="e#61#75#0" expanded="true" />
               </folding>
@@ -61,7 +61,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8755">
+            <state relative-caret-position="8636">
               <caret line="515" column="44" selection-start-line="515" selection-start-column="44" selection-end-line="515" selection-end-column="44" />
               <folding>
                 <element signature="e#33#48#0" expanded="true" />
@@ -170,7 +170,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="656" />
@@ -346,8 +346,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22708334" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -624,6 +623,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="e#61#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1564">
@@ -644,19 +653,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MeasurementProcedure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14671">
-          <caret line="871" column="29" selection-start-line="871" selection-start-column="29" selection-end-line="871" selection-end-column="29" />
-          <folding>
-            <element signature="e#96#111#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8755">
+        <state relative-caret-position="8636">
           <caret line="515" column="44" selection-start-line="515" selection-start-column="44" selection-end-line="515" selection-end-column="44" />
           <folding>
             <element signature="e#33#48#0" expanded="true" />
@@ -664,12 +663,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
+    <entry file="file://$PROJECT_DIR$/MeasurementProcedure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="14671">
+          <caret line="871" column="29" selection-start-line="871" selection-start-column="29" selection-end-line="871" selection-end-column="29" />
           <folding>
-            <element signature="e#61#75#0" expanded="true" />
+            <element signature="e#96#111#0" expanded="true" />
           </folding>
         </state>
       </provider>

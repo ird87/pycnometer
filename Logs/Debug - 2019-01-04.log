@@ -1,0 +1,30 @@
+[04-01-2019 11:46]  Main.py  [LINE:88]  #DEBUG  
+The program works in NORMAL mode.
+[04-01-2019 11:46]  Main.py  [LINE:408]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[04-01-2019 11:55]  Main.py  [LINE:88]  #DEBUG  
+The program works in NORMAL mode.
+[04-01-2019 11:55]  ModulSPI.py  [LINE:58]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[04-01-2019 11:55]  ModulSPI.py  [LINE:68]  #DEBUG  
+End a flow for performance of the test in the MANUAL MODE
+[04-01-2019 11:55]  Main.py  [LINE:408]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[04-01-2019 11:59]  Main.py  [LINE:88]  #DEBUG  
+The program works in NORMAL mode.
+[04-01-2019 12:00]  Main.py  [LINE:88]  #DEBUG  
+The program works in NORMAL mode.
+[04-01-2019 12:00]  ModulSPI.py  [LINE:58]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[04-01-2019 12:00]  ModulSPI.py  [LINE:68]  #DEBUG  
+End a flow for performance of the test in the MANUAL MODE
+[04-01-2019 12:00]  Main.py  [LINE:408]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[04-01-2019 12:11]  Main.py  [LINE:88]  #DEBUG  
+The program works in NORMAL mode.
+[04-01-2019 12:11]  Main.py  [LINE:408]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------

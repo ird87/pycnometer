@@ -1,0 +1,127 @@
+[06-01-2019 15:49]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 15:49]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:49]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:49]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 15:49]  ModulGPIOtest.py  [LINE:22]  #DEBUG  
+Включаем подачу напряжения на 13 порт
+[06-01-2019 15:49]  ModulGPIOtest.py  [LINE:32]  #DEBUG  
+Отключаем подачу напряжения на 13 порт
+[06-01-2019 15:49]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:49]  Main.py  [LINE:409]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 15:51]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 15:51]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:51]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:51]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 15:53]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 15:53]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:53]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:53]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 15:53]  ModulGPIOtest.py  [LINE:22]  #DEBUG  
+Включаем подачу напряжения на 13 порт
+[06-01-2019 15:53]  ModulGPIOtest.py  [LINE:32]  #DEBUG  
+Отключаем подачу напряжения на 13 порт
+[06-01-2019 15:53]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:53]  Main.py  [LINE:409]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 15:54]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 15:54]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:54]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:54]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 15:54]  ModulGPIOtest.py  [LINE:32]  #DEBUG  
+Отключаем подачу напряжения на 13 порт
+[06-01-2019 15:54]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 15:54]  Main.py  [LINE:409]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 15:56]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 15:56]  ModulGPIOtest.py  [LINE:40]  #DEBUG  
+Отключаем подачу напряжения на все заявленные к использованию порты
+[06-01-2019 16:01]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 16:01]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 16:01]  Main.py  [LINE:409]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 16:03]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 16:03]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 16:03]  Main.py  [LINE:409]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 16:03]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 16:03]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 16:03]  Main.py  [LINE:409]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 16:04]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 16:04]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 16:04]  Main.py  [LINE:409]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 16:04]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 16:04]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 16:05]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 16:05]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 16:05]  ModulSPItest.py  [LINE:111]  #DEBUG  
+End a flow for performance of the test in the MANUAL MODE
+[06-01-2019 16:05]  Main.py  [LINE:408]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
+[06-01-2019 19:34]  Main.py  [LINE:88]  #DEBUG  
+The program works in NORMAL mode.
+[06-01-2019 19:35]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 19:35]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 19:35]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 19:35]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 19:35]  ModulSPItest.py  [LINE:111]  #DEBUG  
+End a flow for performance of the test in the MANUAL MODE
+[06-01-2019 19:37]  Main.py  [LINE:70]  #DEBUG  
+The program works in TEST mode.
+[06-01-2019 19:37]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 19:37]  ModulSPItest.py  [LINE:111]  #DEBUG  
+End a flow for performance of the test in the MANUAL MODE
+[06-01-2019 19:37]  ModulSPItest.py  [LINE:103]  #DEBUG  
+Start a flow for performance of the test in the MANUAL MODE
+[06-01-2019 19:37]  ModulSPItest.py  [LINE:111]  #DEBUG  
+End a flow for performance of the test in the MANUAL MODE
+[06-01-2019 19:37]  Main.py  [LINE:408]  #DEBUG  
+The program has completed
+---------------------------------------------------------------------------
