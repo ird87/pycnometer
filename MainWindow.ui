@@ -75,7 +75,7 @@
      <enum>QTabWidget::South</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -2620,6 +2620,7 @@
     <property name="title">
      <string>menu4</string>
     </property>
+    <addaction name="actionmenu4_command1"/>
    </widget>
    <addaction name="menumenu1"/>
    <addaction name="menumenu2"/>
@@ -2630,6 +2631,14 @@
   <action name="actionmenu1_command1">
    <property name="text">
     <string>menu1_command1</string>
+   </property>
+  </action>
+  <action name="actionmenu4_command1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>actionmenu4_command1</string>
    </property>
   </action>
  </widget>

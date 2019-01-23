@@ -6,18 +6,37 @@ import inspect
 import math
 import os
 import time
+
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
+from reportlab.rl_config import defaultPageSize
+
+pdfmetrics.registerFont(TTFont('Arial-Bold', 'arialbd.ttf'))
+pdfmetrics.registerFont(TTFont('Arial-Regular', 'arial.ttf'))
+pdfmetrics.registerFont(TTFont('Arial-Italic', 'ariali.ttf'))
+pdfmetrics.registerFont(TTFont('Arial-BoldItalic', 'arialbi.ttf'))
+
 from enum import Enum
 import threading
 
 from Measurement import Measurement
 
-"""Проверка и комментари: 19.01.2019"""
+"""Проверка и комментари: 23.01.2019"""
 
 """
 "Класс для обработки процедуры "Измерения"
     1) Получает данные введенные пользователем в форме и указанные в файле config.ini 
     2) Проводит процедуру измерений, соответсвующуюю указанным настройкам
-    3) Формирует таблицу данных и вызывает расчет, основанный на этой таблице.        
+    3) Формирует таблицу данных и вызывает расчет, основанный на этой таблице.  
+        self.measurement_report - список заголовков для отчета.
+        self.operator - Данные оператора
+        self.organization - Организация
+        self.sample - Информация об образце
+        self.batch_series - паспорт и серия     
         self.table - ссылка на таблицу, в которую будут записаны результаты измрений
         self.spi - ссылка на модуль SPI, который получает данные с датчика
         self.gpio - ссылка на модуль GPIO, который открывает и закрывает клапаны прибора
@@ -67,6 +86,11 @@ class MeasurementProcedure(object):
     def __init__(self, table, spi, gpio, ports, block_other_tabs, block_userinterface,
                  unblock_userinterface, unblock_other_tabs, debug_log, measurement_log, is_test_mode,
                  fail_pressure_set, fail_get_balance):
+        self.measurement_report = []
+        self.operator = ''
+        self.organization = ''
+        self.sample = ''
+        self.batch_series = ''
         self.table = table
         self.spi = spi
         self.gpio = gpio
@@ -109,11 +133,16 @@ class MeasurementProcedure(object):
         self.test_on = s
 
     """Загружаем выбранные на вкладке "Измерения" установки."""
-    def set_settings(self, _cuvette, _sample_preparation, _sample_preparation_time_in_minute, _sample_mass,
+    def set_settings(self, measurement_report, operator, organization, sample, batch_series, _cuvette, _sample_preparation, _sample_preparation_time_in_minute, _sample_mass,
                      _number_of_measurements, _take_the_last_measurements, _VcL, _VcM, _VcS, _VdLM, _VdS,
                      _Pmeas, _pulse_length):
         # self.test_on должен быть False перед началом калибровки
         self.test_on = False
+        self.measurement_report = measurement_report
+        self.operator = operator
+        self.organization = organization
+        self.sample = sample
+        self.batch_series = batch_series
         self.cuvette = _cuvette
         self.sample_preparation = _sample_preparation
         # В следующей строке переводим время в секунды
@@ -868,6 +897,148 @@ class MeasurementProcedure(object):
             self.time_sleep(3)
         return balance, success, duration
 
+    """Метод вывода отчета по процедуре "Измерение"."""
+    def create_report(self):
+        # эти переменные нужна, чтобы найти следующий порядковый номер файла.
+        find_name = True
+        number = 0
+
+        # Ветка для программы в тестовом режиме.
+        if self.is_test_mode():
+            # Определяем следующее подходящее имя файла.
+            while find_name:
+                number += 1
+                report_name = os.getcwd() + '\Reports\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+                    number) + '.pdf'
+                find_name = os.path.isfile(report_name)
+            # для тестового режима (Windows) нужны такие команды:
+        # Ветка для программы в нормальном режиме.
+        if not self.is_test_mode():
+            # Определяем следующее подходящее имя файла.
+            while not find_name:
+                number += 1
+                report_name = os.getcwd() + '/Reports/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+                    number) + '.pdf'
+                find_name = os.path.isfile(report_name)
+            # для нормального режима (Linux) нужны такие команды:
+
+        doc = SimpleDocTemplate(report_name, pagesize = letter, encoding = 'WINDOWS-1251')
+
+        # сюда мы будем добавлять созданные таблицы.
+        elements = []
+
+        # Определяем размеры страницы.
+        PAGE_WIDTH = defaultPageSize[0]
+        PAGE_HEIGHT = defaultPageSize[1]
+
+        # Таблица 1 "Общая информация", устанавливаем нужное количество строк, столбцов
+        # и отталкиваясь от этого, считаем ширину ячейки.
+        table_row1 = 5
+        table_column1 = 2
+        x1 = (PAGE_WIDTH - 20) / table_column1 / inch
+        y1 = 0.4
+
+        # Создаем массив данных для добавления в таблицу.
+        data1 = [
+                [self.measurement_report['t1_title']],
+                [self.measurement_report['t1_operator'], self.operator],
+                [self.measurement_report['t1_organization'], self.organization],
+                [self.measurement_report['t1_sample'], self.sample],
+                [self.measurement_report['t1_batch_series'], self.batch_series]]
+
+        # Добавляем данные в таблицу и форматируем ее.
+        t1 = Table(data1, table_column1 * [x1 * inch], table_row1 * [y1 * inch])
+        t1.setStyle(TableStyle([
+            ('SPAN', (0, 0), (1, 0)),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONT', (0, 0), (-1, -1), 'Arial-Regular'),
+            ('FONT', (0, 0), (0, 0), 'Arial-Bold'),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('VALIGN', (0, 0), (0, 0), 'MIDDLE'),
+            ('GRID', (0, 0), (-1, -1), 0.25, colors.black)
+        ]))
+
+        # Таблица 2 "Экспериментальные изменения", устанавливаем нужное количество строк, столбцов
+
+        table_row2 = 2
+        table_column2 = 6
+
+        # Создаем массив данных для добавления в таблицу.
+        data2 = [
+                [self.measurement_report['t2_title']],
+                [self.measurement_report['t2_p0'], self.measurement_report['t2_p1'], self.measurement_report['t2_p2'],
+                 self.measurement_report['t2_volume'], self.measurement_report['t2_density'],
+                 self.measurement_report['t2_deviation']],
+                ]
+
+        # Добавляем в массив данных наши измерения и считаем сколько в итоге будет строк.
+        for m in self.measurements:
+            if m.active:
+                data2.append([str(m.p0), str(m.p1), str(m.p2), str(m.volume), str(m.density), str(m.deviation)])
+                table_row2 += 1
+
+        # и отталкиваясь от этого, считаем ширину ячейки.
+        x2 = (PAGE_WIDTH - 20) / table_column2 / inch
+        y2 = 0.4
+
+        # Добавляем данные в таблицу и форматируем ее.
+        t2 = Table(data2, table_column2 * [x2 * inch], table_row2 * [y2 * inch])
+        t2.setStyle(TableStyle([
+            ('SPAN', (0, 0), (5, 0)),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONT', (0, 0), (-1, -1), 'Arial-Regular'),
+            ('FONT', (0, 0), (5, 1), 'Arial-Bold'),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('GRID', (0, 0), (-1, -1), 0.25, colors.black)
+        ]))
+
+        # Таблица 3 "Результаты измерений", устанавливаем нужное количество строк, столбцов
+        # и отталкиваясь от этого, считаем ширину ячейки.
+        table_row3 = 3
+        table_column3 = 4
+        x3 = (PAGE_WIDTH - 20) / table_column3 / inch
+        y3 = 0.4
+
+        # Создаем массив данных для добавления в таблицу.
+        data3 = [
+                [self.measurement_report['t3_title']],
+                [self.measurement_report['t3_medium_volume'], self.table.m_medium_volume, self.measurement_report['t3_m_sd'], self.table.m_SD],
+                [self.measurement_report['t3_medium_density'], self.table.m_medium_density, self.measurement_report['t3_m_sd_per'], self.table.m_SD_per],
+                ]
+
+        # Добавляем данные в таблицу и форматируем ее.
+        t3 = Table(data3, table_column3 * [x3 * inch], table_row3 * [y3 * inch])
+        t3.setStyle(TableStyle([
+            ('SPAN', (0, 0), (3, 0)),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONT', (0, 0), (-1, -1), 'Arial-Regular'),
+            ('FONT', (0, 0), (0, 0), 'Arial-Bold'),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('VALIGN', (0, 0), (0, 0), 'MIDDLE'),
+            ('GRID', (0, 0), (-1, -1), 0.25, colors.black)
+        ]))
+
+        # Создаем общий массив данных стостоящий из 3-х наших таблиц.
+        data = [
+            [t1],
+            [''],
+            [t2],
+            [''],
+            [t3]
+        ]
+
+        # Добавляем данные в итоговую таблицу
+        shell_table = Table(data)
+
+        # Добавляем итоговую таблицу в наш массив элементов.
+        elements.append(shell_table)
+        doc.build(elements)
+
+    """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
+    def get_today_date(self):
+        logname = datetime.datetime.now().strftime("%Y-%m-%d")
+        return logname
+
 # Enum Размер кюветы
 class Сuvette(Enum):
     Large = 0
@@ -894,3 +1065,40 @@ class Ports(Enum):
     K3 = 2
     K4 = 3
     K5 = 4
+
+    #
+    # для канваса
+    # c = canvas.Canvas(doc)
+    # PAGE_WIDTH = defaultPageSize[0]
+    # PAGE_HEIGHT = defaultPageSize[1]
+    # font_size = 20
+    # tab = 15
+    # c.setFont('Arial', font_size)
+    # # c.setFillColor(black)
+    #
+    # text = "Отчет с результатами измерений плотности на Пикнометре"
+    # text_width = c.stringWidth(text)
+    # x = (PAGE_WIDTH - text_width) / 2.0
+    # y = PAGE_HEIGHT - font_size - tab  # wherever you want your text to appear
+    # c.drawString(x, y, text)
+    # c.showPage()
+    # c.save()
+
+
+    # styles.add(ParagraphStyle(
+    # styles = getSampleStyleSheet()
+    #
+    #     'Arial_Bold',
+    #     parent = styles['Normal'],
+    #     fontName = 'Arial-Bold',
+    #     fontSize = 12,
+    #     alignment = TA_CENTER,
+    #
+    # ))
+    # styles.add(ParagraphStyle(
+    #     'Arial',
+    #     parent = styles['Normal'],
+    #     fontName = 'Arial-Regular',
+    #     fontSize = 12,
+    #     alignment = TA_CENTER,
+    # ))

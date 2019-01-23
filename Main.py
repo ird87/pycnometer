@@ -4,6 +4,8 @@
 import inspect
 import os
 import sys  # sys нужен для передачи argv в QApplication
+from typing import Dict, Any
+
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
 from CalibrationProcedure import CalibrationProcedure
@@ -12,19 +14,23 @@ from Languages import Languages
 from Logger import Logger
 from MeasurementProcedure import MeasurementProcedure, Сuvette, Sample_preparation
 from PyQt5 import QtCore
-from PyQt5.QtCore import QRegExp
+from PyQt5.QtCore import QRegExp, QObject, QEvent
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox
 from TableCalibration import UiTableCalibration
 from TableMeasurement import UiTableMeasurement
-"""Проверака и комментари: 19.01.2019"""
+
+"""Проверака и комментари: 23.01.2019"""
 """
 "Главный класс. Работа с GUI, управление приложением, обработка ввода пользователя и работы процедур измерений и калибровки"
 """
 
 """Функция для отображения нужного количества знаков после '.'"""
+
+
 def toFixed(numObj, digits=0):
     return '{0:.{1}f}'.format(numObj, digits)
+
 
 """Функция проверки переменной на тип int"""
 def isint(s):
@@ -34,6 +40,7 @@ def isint(s):
     except ValueError:
         return False
 
+
 """Функция проверки переменной на тип float"""
 def isfloat(s):
     try:
@@ -42,7 +49,27 @@ def isfloat(s):
     except ValueError:
         return False
 
-class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # название файла с дизайном и название класса в нем.
+def clickable(widget):
+
+    class Filter(QObject):
+        clicked = PyQt5.QtCore.pyqtSignal()
+
+        def eventFilter(self, obj, event):
+            if obj == widget:
+                if event.type() == QEvent.MouseButtonDblClick:
+                    if obj.rect().contains(event.pos()):
+                        self.clicked.emit()
+                        # The developer can opt for .emit(obj) to get the object within the slot.
+                        return True
+            return False
+
+    filter = Filter(widget)
+    widget.installEventFilter(filter)
+    return filter.clicked
+
+
+class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # название файла с дизайном и название класса в нем.
+
     # Это сигналы, они получают команду из других модулей и вызывают методы модуля.
     # Вывод модального окна с просьбой положить в кювету образец
     message = PyQt5.QtCore.pyqtSignal()
@@ -58,6 +85,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
     fail_get_balance = PyQt5.QtCore.pyqtSignal()
 
     """Конструктор класса. Поля класса"""
+
     def __init__(self):
 
         # Это здесь нужно для доступа к переменным, методам
@@ -80,12 +108,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         self.measurement_log.setup()
 
         # Загружаем таблицу для вкладки "Измерения"
-        self.t1_tableMeasurement = UiTableMeasurement(self.measurement_results_message, self.debug_log, self.measurement_log)
+        self.t1_tableMeasurement = UiTableMeasurement(self.measurement_results_message, self.debug_log,
+                                                      self.measurement_log)
         self.t1_tableMeasurement.setupUi(self)
         self.t1_tableMeasurement.retranslateUi(self)
 
         # Загружаем таблицу для вкладки "Калибровка"
-        self.t2_tableCalibration = UiTableCalibration(self.calibration_results_message, self.debug_log, self.measurement_log)
+        self.t2_tableCalibration = UiTableCalibration(self.calibration_results_message, self.debug_log,
+                                                      self.measurement_log)
         self.t2_tableCalibration.setupUi(self)
         self.t2_tableCalibration.retranslateUi(self)
 
@@ -148,7 +178,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
                                                           self.block_other_tabs, self.block_userinterface_measurement,
                                                           self.unblock_userinterface_measurement,
                                                           self.unblock_other_tabs, self.debug_log, self.measurement_log,
-                                                          self.config.is_test_mode, self.fail_pressure_set, self.fail_get_balance)
+                                                          self.config.is_test_mode, self.fail_pressure_set,
+                                                          self.fail_get_balance)
 
         # создаем модуль Измерение и передаем туда ссылки на все модули, методы и сигналы с которыми он работает.
         self.calibration_procedure = CalibrationProcedure(self.t2_tableCalibration, self.spi, self.gpio, self.ports,
@@ -161,27 +192,38 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         # Нам нужны два Validator'а для установки ограничений на ввод в поля форм.
         # Для int подойдет штатный QIntValidator
         self.onlyInt = QIntValidator()
-                                # self.onlyFloat = QDoubleValidator()
-                                # переключение на английскую локаль заменяет ',' вместо '.'
-                                # local = QtCore.QLocale("en")
-                                # self.onlyFloat.setLocale(local)
+        # self.onlyFloat = QDoubleValidator()
+        # переключение на английскую локаль заменяет ',' вместо '.'
+        # local = QtCore.QLocale("en")
+        # self.onlyFloat.setLocale(local)
         # Для float штатный QDoubleValidator не годиться так как принимает ',' вместо '.' и проверяет еще ряд вещей
         # так что делаем свой через регулярные выражения
         rx = QRegExp(r'^[0-9][.]{0,1}[0-9]*$')
         self.onlyFloat = QRegExpValidator(rx, self)
 
         # Теперь устанавливаем ограничения на ввод
-        self.t1_gSP_Edit1.setValidator(self.onlyInt)    # Измерения.    Время подготовки образца.
-        self.t1_gM_Edit1.setValidator(self.onlyFloat)   # Измерения.    Масса образца.
-        self.t1_gM_Edit2.setValidator(self.onlyInt)     # Измерения.    Количество измерений.
-        self.t1_gM_Edit3.setValidator(self.onlyInt)     # Измерения.    Взять последних.
-        self.t2_gID_Edit1.setValidator(self.onlyInt)    # Калибровка.   Количество измерений.
+        self.t1_gSP_Edit1.setValidator(self.onlyInt)  # Измерения.    Время подготовки образца.
+        self.t1_gM_Edit1.setValidator(self.onlyFloat)  # Измерения.    Масса образца.
+        self.t1_gM_Edit2.setValidator(self.onlyInt)  # Измерения.    Количество измерений.
+        self.t1_gM_Edit3.setValidator(self.onlyInt)  # Измерения.    Взять последних.
+        self.t2_gID_Edit1.setValidator(self.onlyInt)  # Калибровка.   Количество измерений.
         self.t2_gID_Edit2.setValidator(self.onlyFloat)  # Калибровка.   Объем стандартного образца.
-        self.t4_MS_Edit1.setValidator(self.onlyInt)     # Настройка.    Длинна импульса.
+        self.t4_MS_Edit1.setValidator(self.onlyInt)  # Настройка.    Длинна импульса.
 
         # Подключаем к объектам интерфейса методы их обработки.
         self.t1_gM_button1.clicked.connect(self.measurement_procedure_start)    # Измерение.    Начало измерений.
         self.t1_gM_button2.clicked.connect(self.measurement_clear)              # Измерение.    Очистка измерений.
+        self.t1_gMI_Edit1.textChanged.connect(self.t1_gMI_Edit1_text_changed)   # Измерение.    Ввод Оператор.
+        self.t1_gMI_Edit2.textChanged.connect(self.t1_gMI_Edit2_text_changed)   # Измерение.    Ввод Организация.
+        self.t1_gMI_Edit3.textChanged.connect(self.t1_gMI_Edit3_text_changed)   # Измерение.    Ввод Образец.
+        self.t1_gMI_Edit4.textChanged.connect(self.t1_gMI_Edit4_text_changed)   # Измерение.    Ввод Партия/Серия.
+        # ------------------------------------------------------------------------------------------------------------
+        # Хочу по двойному клику автозаполнение
+        clickable(self.t1_gMI_Edit1).connect(self.t1_gMI_Edit1_clicked)          # Измерение.    Ввод Оператор.
+        clickable(self.t1_gMI_Edit2).connect(self.t1_gMI_Edit2_clicked)            # Измерение.    Ввод Организация.
+        clickable(self.t1_gMI_Edit3).connect(self.t1_gMI_Edit3_clicked)            # Измерение.    Ввод Образец.
+        clickable(self.t1_gMI_Edit4).connect(self.t1_gMI_Edit4_clicked)            # Измерение.    Ввод Партия/Серия.
+        # ------------------------------------------------------------------------------------------------------------
         self.t1_gSP_Edit1.textChanged.connect(self.t1_gSP_Edit1_text_changed)   # Измерение.    Ввод времени подготовки.
         self.t1_gM_Edit1.textChanged.connect(self.t1_gM_Edit1_text_changed)     # Измерение.    Ввод массы образца.
         self.t1_gM_Edit2.textChanged.connect(self.t1_gM_Edit2_text_changed)     # Измерение.    Ввод количество измер.
@@ -202,7 +244,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         self.t4_button_2.clicked.connect(self.show_current_settings)            # Настройка.    Отмена изменений.
         self.t4_gMS_cmd1.currentIndexChanged.connect(self.setPressurePmeas)     # Настройка.    изменение ед.изм. давл.
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
-
+        self.actionmenu4_command1.triggered.connect(self.report_measurment)
     # Отслеживаем активацию окон приложения
     def tab_change(self):
         # Обработка открытия / закрытия вкладки "Ручное управление"
@@ -227,6 +269,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
             if self.tabPycnometer.currentIndex() == 3:
                 # Загружаем текущие настройки в форму программы.
                 self.show_current_settings()
+
         # Вызов внутренних функций метода, расписанных выше.
         manual_control_check()
         options_check()
@@ -347,8 +390,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         # Проверяем активна ли кнопка "Применить"
         self.set_t4_button_1_enabled()
 
-
-
     # Блок методов для включения/выключения портов
     # K1
     def on_off_port1(self):
@@ -388,6 +429,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
     # Здесь мы считываем и возвращаем все, что ввел пользователь для проведения Измерений.
     def measurement_procedure_get_setting(self):
 
+        operator = self.t1_gMI_Edit1.text()
+        organization = self.t1_gMI_Edit2.text()
+        sample = self.t1_gMI_Edit3.text()
+        batch_series = self.t1_gMI_Edit4.text()
+
         # Определяем выбранную Кювету
         if self.t1_gM_cmd1.currentIndex() == Сuvette.Large.value:
             cuvette = Сuvette.Large
@@ -416,14 +462,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         # Получаем сколько последних измерений надо будет учесть в рассчете (вводиться пользователем)
         take_the_last_measurements = int(self.t1_gM_Edit3.text())
 
-        return cuvette, sample_preparation, sample_preparation_time_in_minute, sample_mass, \
+        return operator, organization, sample, batch_series, cuvette, sample_preparation, sample_preparation_time_in_minute, sample_mass, \
                number_of_measurements, take_the_last_measurements
 
     # Передаем данные в класс проводящий измерения, и запускаем измерения.
     def measurement_procedure_start(self):
         self.measurement_clear()
         # Получаем данные введенные пользователем
-        cuvette, sample_preparation, sample_preparation_time_in_minute, sample_mass, number_of_measurements, \
+        operator, organization, sample, batch_series, cuvette, sample_preparation, sample_preparation_time_in_minute, sample_mass, number_of_measurements, \
         take_the_last_measurements = self.measurement_procedure_get_setting()
 
         # Данные о кювете получаем из файла конфигурации
@@ -436,7 +482,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         pulse_length = self.config.pulse_length
 
         # Устанавливаем настройки Измерений
-        self.measurement_procedure.set_settings(cuvette, sample_preparation, sample_preparation_time_in_minute,
+        self.measurement_procedure.set_settings(self.measurement_report, operator, organization, sample, batch_series, cuvette, sample_preparation, sample_preparation_time_in_minute,
                                                 sample_mass, number_of_measurements, take_the_last_measurements,
                                                 VcL, VcM, VcS, VdLM, VdS, Pmeas, pulse_length)
 
@@ -444,6 +490,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         self.gpio.all_port_off()
         # Запускаем измерения.
         self.measurement_procedure.start_measurements()
+        # Делаем вывод отчета доступным.
+        self.actionmenu4_command1.setEnabled(True)
 
     # Здесь мы считываем и возвращаем все, что ввел пользователь для проведения Калибровки.
     def calibration_procedure_get_setting(self):
@@ -496,8 +544,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         self.t1_gMI_Edit2.setEnabled(False)
         self.t1_gMI_Edit3.setEnabled(False)
         self.t1_gMI_Edit4.setEnabled(False)
-        self.t1_tableMeasurement.popup_menu_enable=False
-
+        self.t1_tableMeasurement.popup_menu_enable = False
 
     # Разблокируем кнопки на вкладке измерений
     def unblock_userinterface_measurement(self):
@@ -561,7 +608,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         self.measurement_procedure.close_measurements()
         # Выключаем процедуру калибровки
         self.calibration_procedure.close_calibrations()
-        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program has completed\n'+'-'*75)
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program has completed\n' + '-' * 75)
 
     # Применяем данные языкового модуля, для удобства указанны разделы.
     def set_languages(self):
@@ -589,7 +636,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
             table_measurement_header.append(i)
         self.t1_tableMeasurement.Languages(table_measurement_header, self.languages.t1_tableMeasurement_popup_Exclude,
                                            self.languages.t1_tableMeasurement_popup_Include,
-                                           self.languages.t1_tableMeasurement_popup_Add, self.languages.t1_tableMeasurement_popup_Recount)
+                                           self.languages.t1_tableMeasurement_popup_Add,
+                                           self.languages.t1_tableMeasurement_popup_Recount)
 
         self.t1_groupGeneralInformation.setTitle(self.languages.t1_groupGeneralInformation)
         self.t1_gMI_lbl1.setText(self.languages.t1_gMI_lbl1)
@@ -652,7 +700,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
             table_calibration_header.append(i)
         self.t2_tableCalibration.Languages(table_calibration_header, self.languages.t2_tableCalibration_popup_Exclude,
                                            self.languages.t2_tableCalibration_popup_Include,
-                                           self.languages.t2_tableCalibration_popup_Add, self.languages.t2_tableCalibration_popup_Recount)
+                                           self.languages.t2_tableCalibration_popup_Add,
+                                           self.languages.t2_tableCalibration_popup_Recount)
 
         self.t2_groupCalibratonResult.setTitle(self.languages.t2_groupCalibratonResult)
         self.t2_gCR_lbl1.setText(self.languages.t2_gCR_lbl1)
@@ -707,6 +756,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         self.menumenu2.setTitle(self.languages.menu2)
         self.menumenu3.setTitle(self.languages.menu3)
         self.menumenu4.setTitle(self.languages.menu4)
+        self.actionmenu4_command1.setText(self.languages.menu4_command1)
 
         # [Message]
         self.message_headline1 = self.languages.message_headline1
@@ -714,12 +764,29 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
         self.message_txt2 = self.languages.message_txt2
         self.message_txt3 = self.languages.message_txt3
 
+        # [MeasurementReport]
+        self.measurement_report=self.languages.measurement_report
+
+
     # Вывод двнных теста давления, вызывается через сигнал.
     def set_pressure(self, s):
         self.t3_lblPressure2.setText(str(s[self.config.pressure.value]))
 
     # При любом вводе данных на форму Измерения или форму Калибровки мы проверяем можно ли сделать кнопки для начала
     # процедур активными (для этого должны быть заполнены все поля и заполненны корректно)
+
+    def t1_gMI_Edit1_text_changed(self):
+        self.set_t1_gM_button1_enabled()
+
+    def t1_gMI_Edit2_text_changed(self):
+        self.set_t1_gM_button1_enabled()
+
+    def t1_gMI_Edit3_text_changed(self):
+        self.set_t1_gM_button1_enabled()
+
+    def t1_gMI_Edit4_text_changed(self):
+        self.set_t1_gM_button1_enabled()
+
     def t1_gSP_Edit1_text_changed(self):
         self.set_t1_gM_button1_enabled()
 
@@ -877,7 +944,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
                 b = int(self.t1_gM_Edit3.text())
         # Если значение текстового поля "Взять последних" больше знаяения текстового поля "Количество измерений",
         # и при этом каждое больше или равно 0 ->
-        if a>=0 and b>=0 and b > a:
+        if a >= 0 and b >= 0 and b > a:
             # -> кнопка выключена
             enabled = False
             # -> оба поля выделяем красным
@@ -890,26 +957,65 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
             self.t1_gM_Edit3.setStyleSheet(self.ss)
             # ...Если текстовое поле "Количество измерений" непустое и введенные данные можно привести к типу int...
             if len(self.t1_gM_Edit2.text()) > 0 and isint(self.t1_gM_Edit2.text()):
-                    # ...но его значение меньше или равно 0 ->
-                    if a <= 0:
-                        # -> кнопка выключена
-                        enabled = False
-                        # -> поле выделяем красным
-                        self.t1_gM_Edit2.setStyleSheet("border: 1px solid red;")
-                    # ...и при этом значение больше 0 -> данные поля корректны, сбрасываем выделение поля.
-                    else:
-                        self.t1_gM_Edit2.setStyleSheet(self.ss)
+                # ...но его значение меньше или равно 0 ->
+                if a <= 0:
+                    # -> кнопка выключена
+                    enabled = False
+                    # -> поле выделяем красным
+                    self.t1_gM_Edit2.setStyleSheet("border: 1px solid red;")
+                # ...и при этом значение больше 0 -> данные поля корректны, сбрасываем выделение поля.
+                else:
+                    self.t1_gM_Edit2.setStyleSheet(self.ss)
             # ...Если текстовое поле "Взять последних" непустое и введенные данные можно привести к типу int...
             if len(self.t1_gM_Edit3.text()) > 0 and isint(self.t1_gM_Edit3.text()):
-                    # ...но его значение меньше или равно 0 ->
-                    if b <= 0:
-                        # -> кнопка выключена
-                        enabled = False
-                        # -> поле выделяем красным
-                        self.t1_gM_Edit3.setStyleSheet("border: 1px solid red;")
-                    # ...и при этом значение больше 0 -> данные поля корректны, сбрасываем выделение поля.
-                    else:
-                        self.t1_gM_Edit3.setStyleSheet(self.ss)
+                # ...но его значение меньше или равно 0 ->
+                if b <= 0:
+                    # -> кнопка выключена
+                    enabled = False
+                    # -> поле выделяем красным
+                    self.t1_gM_Edit3.setStyleSheet("border: 1px solid red;")
+                # ...и при этом значение больше 0 -> данные поля корректны, сбрасываем выделение поля.
+                else:
+                    self.t1_gM_Edit3.setStyleSheet(self.ss)
+
+        # Если все, что касается измерений заполнено, давайте проверим поля "Общей информации"
+        if enabled:
+            # Итак если текстовое поле "Оператор :" пустое ->
+            if len(self.t1_gMI_Edit1.text()) <= 0:
+                # -> кнопка выключена
+                enabled = False
+                # -> поле выделяем красным
+                self.t1_gMI_Edit1.setStyleSheet("border: 1px solid red;")
+            # иначе ->
+            else:
+                self.t1_gMI_Edit1.setStyleSheet(self.ss)
+            # Если текстовое поле "Организация :" пустое ->
+            if len(self.t1_gMI_Edit2.text()) <= 0:
+                # -> кнопка выключена
+                enabled = False
+                # -> поле выделяем красным
+                self.t1_gMI_Edit2.setStyleSheet("border: 1px solid red;")
+                # иначе ->
+            else:
+                self.t1_gMI_Edit2.setStyleSheet(self.ss)
+            # Если текстовое поле "Образец :" пустое ->
+            if len(self.t1_gMI_Edit3.text()) <= 0:
+                # -> кнопка выключена
+                enabled = False
+                # -> поле выделяем красным
+                self.t1_gMI_Edit3.setStyleSheet("border: 1px solid red;")
+                # иначе ->
+            else:
+                self.t1_gMI_Edit3.setStyleSheet(self.ss)
+            # Если текстовое поле "Партия/Серия :" пустое ->
+            if len(self.t1_gMI_Edit4.text()) <= 0:
+                # -> кнопка выключена
+                enabled = False
+                # -> поле выделяем красным
+                self.t1_gMI_Edit4.setStyleSheet("border: 1px solid red;")
+                # иначе ->
+            else:
+                self.t1_gMI_Edit4.setStyleSheet(self.ss)
 
         # Педаем кнопке логическое значение в качестве статуса
         self.t1_gM_button1.setEnabled(enabled)
@@ -971,6 +1077,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
     def measurement_clear(self):
         self.t1_tableMeasurement.measurements.clear()
         self.t1_tableMeasurement.clear_table()
+        self.actionmenu4_command1.setEnabled(False)
 
     # очищаем таблицу и базу данных калибровки
     def calibration_clear(self):
@@ -992,8 +1099,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
             self.config.set_ini('Measurement', 'VcS', str(Vc))
             self.config.set_ini('Measurement', 'VdS', str(Vd))
 
-
-    # Вывод двнных Измерений, вызывается через сигнал.
+    # Вывод данных Измерений, вызывается через сигнал.
     def set_measurement_results(self):
         # получаем средний объем
         medium_volume = self.t1_tableMeasurement.m_medium_volume
@@ -1035,6 +1141,21 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow ):  # назв�
     def on_message_fail_get_balance(self):
         self.get_messagebox(self.message_headline1, self.message_txt3)
 
+    # Просто по клику заполняем поля
+    def t1_gMI_Edit1_clicked(self):
+        self.t1_gMI_Edit1.setText("default")
+
+    def t1_gMI_Edit2_clicked(self):
+        self.t1_gMI_Edit2.setText("default")
+
+    def t1_gMI_Edit3_clicked(self):
+        self.t1_gMI_Edit3.setText("default")
+
+    def t1_gMI_Edit4_clicked(self):
+        self.t1_gMI_Edit4.setText("default")
+
+    def report_measurment(self):
+        self.measurement_procedure.create_report()
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

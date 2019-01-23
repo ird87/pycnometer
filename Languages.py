@@ -4,7 +4,7 @@ import configparser
 import json
 import os
 
-"""Проверака и комментари: 13.01.2019"""
+"""Проверака и комментари: 23.01.2019"""
 
 """
 "Класс загружает все наименования, используемые в программе из файла в соответствии с выбранным языком.
@@ -114,12 +114,16 @@ class Languages(object):
         self.menu2 = ''
         self.menu3 = ''
         self.menu4 = ''
+        self.menu4_command1 = ''
 
         # [Message]
         self.message_headline1 = ''
         self.message_txt1 = ''
         self.message_txt2 = ''
         self.message_txt3 = ''
+
+        # [MeasurementReport]
+        self.measurement_report = []
 
 
 
@@ -133,16 +137,26 @@ class Languages(object):
         if config.is_test_mode():
             # для тестового режима (Windows) нужны такие команды:
             self.languages.read(os.getcwd() + '\Language\\' + config.get_language() + '.ini')
-            print(os.getcwd() + '\Language\\' + config.get_language() + '.ini')
         if not config.is_test_mode():
             # для нормального режима (Linux) нужны такие команды:
             self.languages.read(os.getcwd() + '/Language/' + config.get_language() + '.ini', encoding='WINDOWS-1251')
 
-    """Метод необходимый для загрузки из файлов символа '%', в файлах он заменен на 'U+0025', при загрузке из файла 
-    любое значение проходит этот метод и преобразует данную строку в '%' """
+    """Метод необходимый для загрузки СТРОКОЙ из файлов символа '%', в файлах он заменен на 'U+0025', и надстрочной "3" - 'U+00B3'"""
     def get_string(self, section, variable):
         retVal = self.languages.get(section, variable)
         retVal = retVal.replace('U+0025', '%')
+        retVal = retVal.replace('U+00B3', u'\u00B3')
+        return retVal
+
+    """Метод необходимый для загрузки СПИСКОМ из файлов символа '%', в файлах он заменен на 'U+0025', и надстрочной "3" - 'U+00B3'"""
+    def get_item(self, section):
+        items = self.languages.items(section)
+        retVal = {}
+        for i in range(len(items)):
+            s = items[i][1]
+            s = s.replace('U+0025', '%')
+            s = s.replace('U+00B3', u'\u00B3')
+            retVal[items[i][0]] = s
         return retVal
 
     """Метод загрузки всех данных из файла. Метод разбит на разделы в соответствии с файлами, содержащими данные"""
@@ -282,6 +296,7 @@ class Languages(object):
         self.menu2 = self.get_string('Menu', 'menu2')
         self.menu3 = self.get_string('Menu', 'menu3')
         self.menu4 = self.get_string('Menu', 'menu4')
+        self.menu4_command1 = self.get_string('Menu', 'menu4_command1')
 
         # [Message]
         self.message_headline1 = self.get_string('Message', 'message_headline1')
@@ -289,4 +304,5 @@ class Languages(object):
         self.message_txt2 = self.get_string('Message', 'message_txt2')
         self.message_txt3 = self.get_string('Message', 'message_txt3')
 
-
+        # [MeasurementReport]
+        self.measurement_report = self.get_item("MeasurementReport")

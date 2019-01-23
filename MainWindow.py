@@ -392,9 +392,9 @@ class Ui_MainWindow(object):
         self.t2_gID_cmd1.setGeometry(QtCore.QRect(200, 20, 240, 25))
         self.t2_gID_cmd1.setObjectName("t2_gID_cmd1")
         self.t2_gID_button3 = QtWidgets.QPushButton(self.t2_groupInitialData)
+        self.t2_gID_button3.setEnabled(False)
         self.t2_gID_button3.setGeometry(QtCore.QRect(155, 130, 141, 25))
         self.t2_gID_button3.setObjectName("t2_gID_button3")
-        self.t2_gID_button3.setEnabled(False)
         self.tabPycnometer.addTab(self.t2, "")
         self.t3 = QtWidgets.QWidget()
         self.t3.setObjectName("t3")
@@ -924,7 +924,11 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.actionmenu1_command1 = QtWidgets.QAction(MainWindow)
         self.actionmenu1_command1.setObjectName("actionmenu1_command1")
+        self.actionmenu4_command1 = QtWidgets.QAction(MainWindow)
+        self.actionmenu4_command1.setEnabled(False)
+        self.actionmenu4_command1.setObjectName("actionmenu4_command1")
         self.menumenu1.addAction(self.actionmenu1_command1)
+        self.menumenu4.addAction(self.actionmenu4_command1)
         self.menubar.addAction(self.menumenu1.menuAction())
         self.menubar.addAction(self.menumenu2.menuAction())
         self.menubar.addAction(self.menumenu3.menuAction())
@@ -1015,6 +1019,7 @@ class Ui_MainWindow(object):
         self.menumenu3.setTitle(_translate("MainWindow", "menu3"))
         self.menumenu4.setTitle(_translate("MainWindow", "menu4"))
         self.actionmenu1_command1.setText(_translate("MainWindow", "menu1_command1"))
+        self.actionmenu4_command1.setText(_translate("MainWindow", "actionmenu4_command1"))
 
 
 if __name__ == "__main__":
