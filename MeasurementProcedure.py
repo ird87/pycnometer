@@ -23,6 +23,7 @@ pdfmetrics.registerFont(TTFont('Arial-BoldItalic', 'arialbi.ttf'))
 from enum import Enum
 import threading
 
+
 from Measurement import Measurement
 
 """Проверка и комментари: 23.01.2019"""
@@ -902,25 +903,26 @@ class MeasurementProcedure(object):
         # эти переменные нужна, чтобы найти следующий порядковый номер файла.
         find_name = True
         number = 0
-
+        report_name=''
         # Ветка для программы в тестовом режиме.
         if self.is_test_mode():
             # Определяем следующее подходящее имя файла.
             while find_name:
                 number += 1
+                # для тестового режима (Windows) нужны такие команды:
                 report_name = os.getcwd() + '\Reports\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
                     number) + '.pdf'
                 find_name = os.path.isfile(report_name)
-            # для тестового режима (Windows) нужны такие команды:
+
         # Ветка для программы в нормальном режиме.
         if not self.is_test_mode():
             # Определяем следующее подходящее имя файла.
-            while not find_name:
+            while find_name:
                 number += 1
+                # для нормального режима (Linux) нужны такие команды:
                 report_name = os.getcwd() + '/Reports/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
                     number) + '.pdf'
                 find_name = os.path.isfile(report_name)
-            # для нормального режима (Linux) нужны такие команды:
 
         doc = SimpleDocTemplate(report_name, pagesize = letter, encoding = 'WINDOWS-1251')
 

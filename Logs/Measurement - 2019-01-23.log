@@ -1,0 +1,2566 @@
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:178]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 3
+Take the last measurements = 2
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:204]  #DEBUG  
+Measurement started
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:212]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:310]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:313]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:316]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:319]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:322]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:325]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:328]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:331]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:334]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:337]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:340]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:343]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:346]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:215]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:249]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:479]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:482]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:485]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:488]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:491]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:498]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:502]  #DEBUG  
+Measured P[0] : p0 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:505]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:508]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:510]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:517]  #DEBUG  
+pressure set - success, P = 101/90.0, time has passed: 0.5
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:520]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:522]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:530]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.4
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:535]  #DEBUG  
+Measured P[0] : p1 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:538]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:540]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:548]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.6
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:553]  #DEBUG  
+Measured P[0] : p2 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:556]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:559]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:561]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:569]  #DEBUG  
+pressure stops changing - success, P = 0.00980392156862745/0.01, time has passed: 6.4
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:573]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:597]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:610]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:498]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:502]  #DEBUG  
+Measured P[1] : p0 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:505]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:508]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:510]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:517]  #DEBUG  
+pressure set - success, P = 101/90.0, time has passed: 0.6
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:520]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:522]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:530]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.7
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:535]  #DEBUG  
+Measured P[1] : p1 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:538]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:540]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:548]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:553]  #DEBUG  
+Measured P[1] : p2 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:556]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:559]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:561]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:569]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:573]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:597]  #DEBUG  
+Measured P[1] : volume = 0
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:610]  #DEBUG  
+Measured P[1] : density = 0
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:498]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:502]  #DEBUG  
+Measured P[2] : p0 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:505]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:508]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:510]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:517]  #DEBUG  
+pressure set - success, P = 101/90.0, time has passed: 0.5
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:520]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:522]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:530]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.5
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:535]  #DEBUG  
+Measured P[2] : p1 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:538]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:540]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:548]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:553]  #DEBUG  
+Measured P[2] : p2 = 101
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:556]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:559]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:561]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:569]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:573]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:597]  #DEBUG  
+Measured P[2] : volume = 0
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:610]  #DEBUG  
+Measured P[2] : density = 0
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:621]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:624]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:258]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:264]  #DEBUG  
+Calculation.....
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:436]  #DEBUG  
+Measured[0] this measurement is not active
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[1] deviation = 0
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[2] deviation = 0
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:09]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:267]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:09]  MeasurementProcedure.py  [LINE:275]  #DEBUG  
+Measurement finished
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 3
+Take the last measurements = 2
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 100
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 99
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 99
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 90.0
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0.111
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[1] : p0 = 100
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[1] : p1 = 99
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[1] : p2 = 99
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[1] : volume = 90.0
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[1] : density = 0.111
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[2] : p0 = 99
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[2] : p1 = 99
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[2] : p2 = 99
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[2] : volume = 0
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[2] : density = 0
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 90.0
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 45.0
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 45.0
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:436]  #DEBUG  
+Measured[0] this measurement is not active
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[1] deviation = -100.0
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[2] deviation = 100.0
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 45.0
+[23-01-2019 22:25]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 100.0%
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:25]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 3
+Take the last measurements = 2
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 100
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 99
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 99
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 90.0
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0.111
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[1] : p0 = 100
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[1] : p1 = 99
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[1] : p2 = 99
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[1] : volume = 90.0
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[1] : density = 0.111
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[2] : p0 = 99
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[2] : p1 = 99
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[2] : p2 = 99
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[2] : volume = 0
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[2] : density = 0
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 90.0
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 45.0
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 45.0
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:436]  #DEBUG  
+Measured[0] this measurement is not active
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[1] deviation = -100.0
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[2] deviation = 100.0
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 45.0
+[23-01-2019 22:28]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 100.0%
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:28]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 2
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 99
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 99
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 99
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[1] : p0 = 99
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[1] : p1 = 99
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[1] : p2 = 99
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[1] : volume = 0
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[1] : density = 0
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:32]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0
+[23-01-2019 22:32]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:32]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:32]  TableMeasurement.py  [LINE:436]  #DEBUG  
+Measured[0] this measurement is not active
+[23-01-2019 22:32]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[1] deviation = 0
+[23-01-2019 22:32]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:32]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:32]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 99
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 99
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 99
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:34]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:34]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:34]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:34]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:34]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:34]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 99
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.5
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 99
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 99
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:38]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:38]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:38]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:38]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:38]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:38]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 99
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 99
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 99
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:42]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:42]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:42]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:42]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:42]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:42]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 99
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 99/90.0, time has passed: 0.4
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 98
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 99
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:44]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:44]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:44]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:44]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:44]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:44]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 98
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 98/90.0, time has passed: 0.4
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 98
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 98
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:47]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:47]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:47]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:47]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:47]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:47]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 98
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 98/90.0, time has passed: 0.4
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 98
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 98
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:49]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:49]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:49]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:49]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:49]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:49]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 98
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 98/90.0, time has passed: 0.5
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 98
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 98
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:50]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:50]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:50]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:50]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:50]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:50]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 98
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 98/90.0, time has passed: 0.5
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 98
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 98
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 22:51]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:51]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 22:51]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 22:51]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 22:51]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 22:51]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 98
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 98/90.0, time has passed: 0.4
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.3
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 98
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 98
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 23:01]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:01]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:01]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 23:01]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 23:01]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 23:01]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 10.0
+Number of measurements = 1
+Take the last measurements = 1
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 98
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 98/90.0, time has passed: 0.5
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 1.4
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 98
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 98
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 1.3
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 23:02]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:02]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:02]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 23:02]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 23:02]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 23:02]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:179]  #DEBUG  
+The following measurement settings are set:
+Cuvette = Ñuvette.Large
+Sample preparation = Sample_preparation.Vacuuming
+Sample preparation time = 0
+Sample mass = 15.0
+Number of measurements = 10
+Take the last measurements = 10
+VcL = 90.0
+VcM = 90.0
+VcS = 90.0
+VdLM = 80.0
+VdS = 80.0
+Pmeas = 90.0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:205]  #DEBUG  
+Measurement started
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:213]  #DEBUG  
+Sample preparation: Vacuuming.....
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:311]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:314]  #DEBUG  
+Open K2 = 15
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:317]  #DEBUG  
+Open K5 = 7
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:320]  #DEBUG  
+Wait 0 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:323]  #DEBUG  
+Close K5 = 7
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:326]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:329]  #DEBUG  
+Wait 15 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:332]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:335]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:338]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:341]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:344]  #DEBUG  
+Close K2 = 15
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:347]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:216]  #DEBUG  
+Sample preparation: Vacuuming.....Done.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:250]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:480]  #DEBUG  
+Open K2 = 15
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:483]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:486]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:489]  #DEBUG  
+Wait 5 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:492]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[0] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[0] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[0] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[0] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[0] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[1] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[1] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[1] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[1] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[1] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[2] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[2] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[2] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[2] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[2] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[3] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[3] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[3] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[3] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[3] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[4] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[4] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.7
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[4] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[4] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[4] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[5] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[5] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[5] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[5] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[5] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[6] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[6] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[6] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[6] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[6] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[7] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.6
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[7] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[7] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[7] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[7] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[8] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[8] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[8] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[8] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[8] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:499]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:503]  #DEBUG  
+Measured P[9] : p0 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:506]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:509]  #DEBUG  
+Open K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:511]  #DEBUG  
+We expect a set of pressure
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:518]  #DEBUG  
+pressure set - success, P = 97/90.0, time has passed: 0.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:521]  #DEBUG  
+Close K1 = 13
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:523]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:531]  #DEBUG  
+pressure stops changing - success, balance = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:536]  #DEBUG  
+Measured P[9] : p1 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:539]  #DEBUG  
+Open K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:541]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:549]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.4
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:554]  #DEBUG  
+Measured P[9] : p2 = 97
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:557]  #DEBUG  
+Wait 2 sec
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:560]  #DEBUG  
+Open K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:562]  #DEBUG  
+We wait until the pressure stops changing.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:570]  #DEBUG  
+pressure stops changing - success, P = 0.0/0.01, time has passed: 6.5
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:574]  #DEBUG  
+Close K4 = 16
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:598]  #DEBUG  
+Measured P[9] : volume = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:611]  #DEBUG  
+Measured P[9] : density = 0
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:622]  #DEBUG  
+Close K3 = 18
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:625]  #DEBUG  
+Close K2 = 15
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:259]  #DEBUG  
+Measurement for Ñuvette.Large or Cuvette.Medium.....Done.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:265]  #DEBUG  
+Calculation.....
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:395]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:407]  #DEBUG  
+Measured : Medium volume = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[0] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[1] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[2] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[3] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[4] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[5] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[6] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[7] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[8] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:432]  #DEBUG  
+Measured[9] deviation = 0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:470]  #DEBUG  
+Measured : SKO = 0.0
+[23-01-2019 23:05]  TableMeasurement.py  [LINE:481]  #DEBUG  
+Measured : SKO% = 0%
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:268]  #DEBUG  
+Calculation..... Done.
+[23-01-2019 23:05]  MeasurementProcedure.py  [LINE:276]  #DEBUG  
+Measurement finished
