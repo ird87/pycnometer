@@ -4,10 +4,6 @@
 import inspect
 import os
 import sys  # sys нужен для передачи argv в QApplication
-from typing import Dict, Any
-
-from Tools.scripts.fixcid import fix
-
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
 from CalibrationProcedure import CalibrationProcedure
