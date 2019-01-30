@@ -6,6 +6,8 @@ import os
 import sys  # sys нужен для передачи argv в QApplication
 from typing import Dict, Any
 
+from Tools.scripts.fixcid import fix
+
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
 from CalibrationProcedure import CalibrationProcedure
@@ -783,7 +785,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     # Вывод двнных теста давления, вызывается через сигнал.
     def set_pressure(self, s):
-        self.t3_lblPressure2.setText(str(s[self.config.pressure.value]))
+        self.t3_lblPressure2.setText(toFixed(s[self.config.pressure.value], self.config.round))
 
     # При любом вводе данных на форму Измерения или форму Калибровки мы проверяем можно ли сделать кнопки для начала
     # процедур активными (для этого должны быть заполнены все поля и заполненны корректно)
