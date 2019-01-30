@@ -8,6 +8,9 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QHeaderView, QMenu
 
+from Config import Pressure
+
+
 """Проверака и комментари: 19.01.2019"""
 
 """
@@ -40,8 +43,10 @@ from PyQt5.QtWidgets import QHeaderView, QMenu
 
 class UiTableCalibration(object):
     """Конструктор класса. Поля класса"""
-    def __init__(self, calibration_results_message, debug_log, measurement_log):
+    def __init__(self, config, calibration_results_message, debug_log, measurement_log):
 
+        self.config = config
+        self.round = self.config.round
         self.set_calibration_results = calibration_results_message
         self.file = os.path.basename(__file__)
         self.debug_log = debug_log
@@ -69,23 +74,31 @@ class UiTableCalibration(object):
         item1 = QtWidgets.QTableWidgetItem(self.calibrations[rowPosition].measurement)
         # Указать им ориентацию по центру
         item1.setTextAlignment(QtCore.Qt.AlignCenter)
+        # Указать, что ячейку нельзя редактировать
+        item1.setFlags(QtCore.Qt.ItemIsEnabled)
         # и, наконец, разместить в нужной ячейке по координатом строки и столбца
         self.t2_tableCalibration.setItem(rowPosition, 0, item1)
         # повторить для каждой ячейки, куда надо внести данные.
-        item2 = QtWidgets.QTableWidgetItem(str(self.calibrations[rowPosition].p0))
+        from Main import toFixed
+        item2 = QtWidgets.QTableWidgetItem(toFixed(self.calibrations[rowPosition].p0, self.round))
         item2.setTextAlignment(QtCore.Qt.AlignCenter)
+        item2.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 1, item2)
-        item3 = QtWidgets.QTableWidgetItem(str(self.calibrations[rowPosition].p1))
+        item3 = QtWidgets.QTableWidgetItem(toFixed(self.calibrations[rowPosition].p1, self.round))
         item3.setTextAlignment(QtCore.Qt.AlignCenter)
+        item3.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 2, item3)
-        item4 = QtWidgets.QTableWidgetItem(str(self.calibrations[rowPosition].p2))
+        item4 = QtWidgets.QTableWidgetItem(toFixed(self.calibrations[rowPosition].p2, self.round))
         item4.setTextAlignment(QtCore.Qt.AlignCenter)
+        item4.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 3, item4)
-        item5 = QtWidgets.QTableWidgetItem(str(self.calibrations[rowPosition].ratio))
+        item5 = QtWidgets.QTableWidgetItem(toFixed(self.calibrations[rowPosition].ratio, self.round))
         item5.setTextAlignment(QtCore.Qt.AlignCenter)
+        item5.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 4, item5)
-        item6 = QtWidgets.QTableWidgetItem(str(self.calibrations[rowPosition].deviation))
+        item6 = QtWidgets.QTableWidgetItem(toFixed(self.calibrations[rowPosition].deviation, self.round))
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
+        item6.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 5, item6)
         # Устанавливаем ориентацию по центру по вертикали.
         header = self.t2_tableCalibration.verticalHeader()
@@ -336,14 +349,10 @@ class UiTableCalibration(object):
         # self.t2_tableCalibration.verticalHeader().setMinimumSectionSize(25)
         self.t2_tableCalibration.verticalHeader().setSortIndicatorShown(False)
         self.t2_tableCalibration.verticalHeader().setStretchLastSection(False)
-        self.t2_tableCalibration.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.t2_tableCalibration.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.t2_tableCalibration.verticalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        self.t2_tableCalibration.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
-        self.t2_tableCalibration.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
-        self.t2_tableCalibration.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
         self.t2_tableCalibration.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
         self.t2_tableCalibration.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
-        self.t2_tableCalibration.resizeColumnsToContents()
         self.t2_tableCalibration.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.t2_tableCalibration.customContextMenuRequested.connect(self.popup)
 
@@ -414,7 +423,7 @@ class UiTableCalibration(object):
                 counter1 += 1
         try:
             # Рассчитываем среднее отношение для P0, P1 и P2
-            medium_ratio1 = round(ratio_sum1 / counter1, 3)
+            medium_ratio1 = ratio_sum1 / counter1
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating medium_ratio1, '
@@ -439,7 +448,7 @@ class UiTableCalibration(object):
                 counter1 += 1
         try:
             # Рассчитываем среднее отношение для P0', P1' и P2'
-            medium_ratio2 = round(ratio_sum2 / counter1, 3)
+            medium_ratio2 = ratio_sum2 / counter1
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating medium_ratio1, '
@@ -462,7 +471,7 @@ class UiTableCalibration(object):
                                                                              'for P[{0}].....'.format(i))
             try:
                 # Рассчитываем отклонение для P
-                deviation1 = round((medium_ratio1 - self.calibrations[index].ratio) / medium_ratio1 * 100, 3)
+                deviation1 = (medium_ratio1 - self.calibrations[index].ratio) / medium_ratio1 * 100
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating deviation1, '
@@ -479,8 +488,10 @@ class UiTableCalibration(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
                                                                              'for P[{0}].....Done'.format(i))
             # Добавляем в таблицу в столбец для отклонений
-            item = QtWidgets.QTableWidgetItem(str(self.calibrations[index].deviation))
+            from Main import toFixed
+            item = QtWidgets.QTableWidgetItem(toFixed(self.calibrations[index].deviation, self.round))
             item.setTextAlignment(Qt.AlignHCenter)
+            item.setFlags(QtCore.Qt.ItemIsEnabled)
             self.t2_tableCalibration.setItem(counter2, 5, item)
             counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P.....Done')
@@ -496,7 +507,7 @@ class UiTableCalibration(object):
                                                                              'for P\'[{0}].....'.format(i))
             try:
                 # Рассчитываем отклонение для P'
-                deviation2 = round((medium_ratio2 - self.calibrations[index].ratio) / medium_ratio2 * 100, 3)
+                deviation2 = (medium_ratio2 - self.calibrations[index].ratio) / medium_ratio2 * 100
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating deviation2, '
@@ -513,8 +524,9 @@ class UiTableCalibration(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
                                                                              'for P\'[{0}].....Done'.format(i))
             # Добавляем в таблицу в столбец для отклонений
-            item = QtWidgets.QTableWidgetItem(str(self.calibrations[index].deviation))
+            item = QtWidgets.QTableWidgetItem(toFixed(self.calibrations[index].deviation, self.round))
             item.setTextAlignment(Qt.AlignHCenter)
+            item.setFlags(QtCore.Qt.ItemIsEnabled)
             self.t2_tableCalibration.setItem(counter2, 5, item)
             counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P\'.....Done')
@@ -602,7 +614,7 @@ class UiTableCalibration(object):
                              'Calculation c_Vc.....')
         try:
             # Рассчитываем объем кюветы
-            self.c_Vc = round((Vc / divider), 3)
+            self.c_Vc = Vc / divider
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating c_Vc, denominator: divider={0}'.format(divider))
@@ -618,7 +630,7 @@ class UiTableCalibration(object):
                              'Calculation c_Vd.....')
         try:
             # Рассчитываем доп. объем кюветы
-            self.c_Vd = round((Vd / divider), 3)
+            self.c_Vd = Vd / divider
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating c_Vd, denominator: divider={0}'.format(divider))

@@ -25,11 +25,18 @@ from TableMeasurement import UiTableMeasurement
 "Главный класс. Работа с GUI, управление приложением, обработка ввода пользователя и работы процедур измерений и калибровки"
 """
 
-"""Функция для отображения нужного количества знаков после '.'"""
+"""Функция для отображенияtoFixed нужного количества знаков после '.'"""
 
 
 def toFixed(numObj, digits=0):
-    return '{0:.{1}f}'.format(numObj, digits)
+    if numObj!= None:
+        if isfloat(numObj):
+            retVal = '{0:.{1}f}'.format(numObj, digits)
+            return retVal
+        else:
+            return 'Not float'
+    else:
+        return 'None'
 
 
 """Функция проверки переменной на тип int"""
@@ -108,19 +115,21 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.measurement_log.setup()
 
         # Загружаем таблицу для вкладки "Измерения"
-        self.t1_tableMeasurement = UiTableMeasurement(self.measurement_results_message, self.debug_log,
+        self.t1_tableMeasurement = UiTableMeasurement(self.config, self.measurement_results_message, self.debug_log,
                                                       self.measurement_log)
         self.t1_tableMeasurement.setupUi(self)
         self.t1_tableMeasurement.retranslateUi(self)
 
         # Загружаем таблицу для вкладки "Калибровка"
-        self.t2_tableCalibration = UiTableCalibration(self.calibration_results_message, self.debug_log,
+        self.t2_tableCalibration = UiTableCalibration(self.config, self.calibration_results_message, self.debug_log,
                                                       self.measurement_log)
         self.t2_tableCalibration.setupUi(self)
         self.t2_tableCalibration.retranslateUi(self)
 
         # Загружаем языковой модуль
         self.languages = Languages()
+        # очищаем поля для ввода данных.
+        self.initial_field_clearing()
 
         # Включаем GPIO и SPI модули, в зависимости от активного/неактивного Тестового режима
         if self.config.is_test_mode():
@@ -610,6 +619,32 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.calibration_procedure.close_calibrations()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program has completed\n' + '-' * 75)
 
+    # Поля для ввода данных очищаем только при запуске программы.
+    def initial_field_clearing(self):
+
+        # [TAB1]
+        self.t1_gMI_Edit1.setText('')
+        self.t1_gMI_Edit2.setText('')
+        self.t1_gMI_Edit3.setText('')
+        self.t1_gMI_Edit4.setText('')
+        self.t1_gSP_Edit1.setText('')
+        self.t1_gMR_Edit1.setText('')
+        self.t1_gMR_Edit2.setText('')
+        self.t1_gMR_Edit3.setText('')
+        self.t1_gMR_Edit4.setText('')
+        self.t1_gM_Edit1.setText('')
+        self.t1_gM_Edit2.setText('')
+        self.t1_gM_Edit3.setText('')
+
+        # [TAB2]
+        self.t2_gCR_Edit1.setText('')
+        self.t2_gCR_Edit2.setText('')
+        self.t2_gID_Edit1.setText('')
+        self.t2_gID_Edit2.setText('')
+
+
+
+
     # Применяем данные языкового модуля, для удобства указанны разделы.
     def set_languages(self):
         # [MAIN]
@@ -645,18 +680,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gMI_lbl3.setText(self.languages.t1_gMI_lbl3)
         self.t1_gMI_lbl4.setText(self.languages.t1_gMI_lbl4)
 
-        self.t1_gMI_Edit1.setText('')
-        self.t1_gMI_Edit2.setText('')
-        self.t1_gMI_Edit3.setText('')
-        self.t1_gMI_Edit4.setText('')
-
         self.t1_groupSamplePreparation.setTitle(self.languages.t1_groupSamplePreparation)
         self.t1_gSP_gRB_rb1.setText(self.languages.t1_gSP_gRB_rb1)
         self.t1_gSP_gRB_rb2.setText(self.languages.t1_gSP_gRB_rb2)
         self.t1_gSP_gRB_rb3.setText(self.languages.t1_gSP_gRB_rb3)
         self.t1_gSP_lbl1.setText(self.languages.t1_gSP_lbl1)
-
-        self.t1_gSP_Edit1.setText('')
 
         self.t1_groupMeasurementResults.setTitle(self.languages.t1_groupMeasurementResults)
         self.t1_gMR_lbl1.setText(self.languages.t1_gMR_lbl1)
@@ -664,20 +692,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gMR_lbl3.setText(self.languages.t1_gMR_lbl3)
         self.t1_gMR_lbl4.setText(self.languages.t1_gMR_lbl4)
 
-        self.t1_gMR_Edit1.setText('')
-        self.t1_gMR_Edit2.setText('')
-        self.t1_gMR_Edit3.setText('')
-        self.t1_gMR_Edit4.setText('')
-
         self.t1_groupMeasurement.setTitle(self.languages.t1_groupMeasurement)
         self.t1_gM_lbl1.setText(self.languages.t1_gM_lbl1)
         self.t1_gM_lbl2.setText(self.languages.t1_gM_lbl2)
         self.t1_gM_lbl3.setText(self.languages.t1_gM_lbl3)
         self.t1_gM_lbl4.setText(self.languages.t1_gM_lbl4)
-
-        self.t1_gM_Edit1.setText('')
-        self.t1_gM_Edit2.setText('')
-        self.t1_gM_Edit3.setText('')
 
         self.t1_gM_cmd1.clear()
         self.t1_gM_cmd1.addItems(
@@ -707,16 +726,10 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gCR_lbl1.setText(self.languages.t2_gCR_lbl1)
         self.t2_gCR_lbl2.setText(self.languages.t2_gCR_lbl2)
 
-        self.t2_gCR_Edit1.setText('')
-        self.t2_gCR_Edit2.setText('')
-
         self.t2_groupInitialData.setTitle(self.languages.t2_groupInitialData)
         self.t2_gID_lbl1.setText(self.languages.t2_gID_lbl1)
         self.t2_gID_lbl2.setText(self.languages.t2_gID_lbl2)
         self.t2_gID_lbl3.setText(self.languages.t2_gID_lbl3)
-
-        self.t2_gID_Edit1.setText('')
-        self.t2_gID_Edit2.setText('')
 
         self.t2_gID_cmd1.clear()
         self.t2_gID_cmd1.addItems(
@@ -1090,14 +1103,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         Vc = self.t2_tableCalibration.c_Vc
         Vd = self.t2_tableCalibration.c_Vd
         if self.t2_gID_cmd1.currentIndex() == Сuvette.Large.value:
-            self.config.set_ini('Measurement', 'VcL', str(Vc))
-            self.config.set_ini('Measurement', 'VdLM', str(Vd))
+            self.config.set_ini('Measurement', 'VcL', toFixed(Vc, self.config.round))
+            self.config.set_ini('Measurement', 'VdLM', toFixed(Vd, self.config.round))
         if self.t2_gID_cmd1.currentIndex() == Сuvette.Medium.value:
-            self.config.set_ini('Measurement', 'VcM', str(Vc))
-            self.config.set_ini('Measurement', 'VdLM', str(Vd))
+            self.config.set_ini('Measurement', 'VcM', toFixed(Vc, self.config.round))
+            self.config.set_ini('Measurement', 'VdLM', toFixed(Vd, self.config.round))
         if self.t2_gID_cmd1.currentIndex() == Сuvette.Small.value:
-            self.config.set_ini('Measurement', 'VcS', str(Vc))
-            self.config.set_ini('Measurement', 'VdS', str(Vd))
+            self.config.set_ini('Measurement', 'VcS', toFixed(Vc, self.config.round))
+            self.config.set_ini('Measurement', 'VdS', toFixed(Vd, self.config.round))
 
     # Вывод данных Измерений, вызывается через сигнал.
     def set_measurement_results(self):
@@ -1110,17 +1123,17 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # получаем СКО %
         SD_per = self.t1_tableMeasurement.m_SD_per
         # выводим в текстовые поля формы "Измерение"
-        self.t1_gMR_Edit1.setText(str(medium_volume))
-        self.t1_gMR_Edit2.setText(str(medium_density))
-        self.t1_gMR_Edit3.setText(str(SD))
-        self.t1_gMR_Edit4.setText(str(SD_per))
+        self.t1_gMR_Edit1.setText(toFixed(medium_volume, self.config.round))
+        self.t1_gMR_Edit2.setText(toFixed(medium_density, self.config.round))
+        self.t1_gMR_Edit3.setText(toFixed(SD, self.config.round))
+        self.t1_gMR_Edit4.setText(toFixed(SD_per, self.config.round))
 
     # Вывод двнных Калибровки, вызывается через сигнал.
     def set_calibration_results(self):
         Vc = self.t2_tableCalibration.c_Vc
         Vd = self.t2_tableCalibration.c_Vd
-        self.t2_gCR_Edit1.setText(str(Vc))
-        self.t2_gCR_Edit2.setText(str(Vd))
+        self.t2_gCR_Edit1.setText(toFixed(Vc, self.config.round))
+        self.t2_gCR_Edit2.setText(toFixed(Vd, self.config.round))
 
     # метод дя создания модального окна для подтверждения пользователя
     def get_messagebox(self, title, message):

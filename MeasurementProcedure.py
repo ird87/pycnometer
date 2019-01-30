@@ -93,6 +93,7 @@ class MeasurementProcedure(object):
         self.sample = ''
         self.batch_series = ''
         self.table = table
+        self.round = self.table.round
         self.spi = spi
         self.gpio = gpio
         self.ports = ports
@@ -588,7 +589,7 @@ class MeasurementProcedure(object):
             # Считаем объем.
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation volume.....')
             try:
-                volume = round(((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0), 3)
+                volume = ((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0)
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating volume, '
@@ -601,7 +602,7 @@ class MeasurementProcedure(object):
             # Считаем плотность.
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation density.....')
             try:
-                density = round(mass / volume, 3)
+                density = mass / volume
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating density, '
@@ -754,7 +755,7 @@ class MeasurementProcedure(object):
             # Считаем объем.
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation volume.....')
             try:
-                volume = round(((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0), 3)
+                volume = ((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0)
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating volume, '
@@ -767,7 +768,7 @@ class MeasurementProcedure(object):
             # Считаем плотность.
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation density.....')
             try:
-                density = round(mass / volume, 3)
+                density = mass / volume
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating density, '
@@ -974,9 +975,12 @@ class MeasurementProcedure(object):
                 ]
 
         # Добавляем в массив данных наши измерения и считаем сколько в итоге будет строк.
+        from Main import toFixed
         for m in self.measurements:
             if m.active:
-                data2.append([str(m.p0), str(m.p1), str(m.p2), str(m.volume), str(m.density), str(m.deviation)])
+                data2.append([toFixed(m.p0, self.round), toFixed(m.p1, self.round), toFixed(m.p2, self.round),
+                              toFixed(m.volume, self.round), toFixed(m.density, self.round),
+                              toFixed(m.deviation, self.round)])
                 table_row2 += 1
 
         # и отталкиваясь от этого, считаем ширину ячейки.
@@ -1004,8 +1008,10 @@ class MeasurementProcedure(object):
         # Создаем массив данных для добавления в таблицу.
         data3 = [
                 [self.measurement_report['t3_title']],
-                [self.measurement_report['t3_medium_volume'], self.table.m_medium_volume, self.measurement_report['t3_m_sd'], self.table.m_SD],
-                [self.measurement_report['t3_medium_density'], self.table.m_medium_density, self.measurement_report['t3_m_sd_per'], self.table.m_SD_per],
+                [self.measurement_report['t3_medium_volume'], toFixed(self.table.m_medium_volume, self.round),
+                 self.measurement_report['t3_m_sd'], toFixed(self.table.m_SD, self.round)],
+                [self.measurement_report['t3_medium_density'], toFixed(self.table.m_medium_density, self.round),
+                 self.measurement_report['t3_m_sd_per'], toFixed(self.table.m_SD_per, self.round)],
                 ]
 
         # Добавляем данные в таблицу и форматируем ее.

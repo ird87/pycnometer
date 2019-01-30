@@ -12,6 +12,7 @@ from enum import Enum
     self.p - Массив, в который будут загруженны технические данные по используемым портам.
     self.config - экземпляр модуля, который позволяет работать с ini файлами
     self.language - переменная, в которую будет загружена ссылка на файл с используемым языком
+    self.round - количество знаков после запятой у измерений
     self.pressure - переменная для хранения используемой единицы измерения давления
     self.smq_now - переменная, для хранения текущего количества измерений датчика
     self.smq_list - список всех возможных значений для self.smq_now
@@ -43,6 +44,7 @@ class Configure(object):
         self.config = configparser.ConfigParser()   # Создаем экземпляр configparser
         self.config.read('Configure.ini')           # Указываем файл для считывания данных
         self.language = ''
+        self.round = 3
         self.pressure = Pressure.kPa
         self.smq_now = 0
         self.smq_list = []

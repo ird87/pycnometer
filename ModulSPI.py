@@ -157,31 +157,31 @@ class SPI(object):
 
     """Метод, который на основание измерения высчитывает давление в кПа"""
     def getkPa(self, data):
-        p = round(data / 1023 * 130)  # кПа
+        p = data / 1023 * 130 # кПа
         return p
 
     """Метод, который на основание измерения высчитывает давление в Бар"""
     def getBar(self, data):
-        p = round(data / 1023 * 1.3, 2)  # Бар
+        p = data / 1023 * 1.3  # Бар
         return p
 
     """Метод, который на основание измерения высчитывает давление в psi"""
     def getPsi(self, data):
-        p = round(data / 1023 * 130 * 0.14503773773, 1)  # psi
+        p = data / 1023 * 130 * 0.14503773773  # psi
         return p
 
     """Метод, который возвращает из давление в кПа значение измерения"""
     def getDataFromkPa(self, p):
-        data = round(p * 1023 / 130)  # кПа
+        data = p * 1023 / 130  # кПа
         return data
 
     """Метод, который возвращает из давление в Бар значение измерения"""
     def getDataFromBar(self, p):
-        data = round(p * 1023 / 1.3)  # кПа
+        data = p * 1023 / 1.3  # кПа
         return data
 
     """Метод, который возвращает из давление в psi значение измерения"""
     def getDataFromPsi(self, p):
-        data = round(p * 1023 / 130 / 0.14503773773)  # кПа
+        data = p * 1023 / 130 / 0.14503773773  # кПа
         return data
 

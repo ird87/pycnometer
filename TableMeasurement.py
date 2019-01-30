@@ -10,6 +10,9 @@ from PyQt5.QtWidgets import QHeaderView, QMenu
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtCore import Qt
 
+from Config import Pressure
+
+
 """Проверака и комментари: 19.01.2019"""
 
 """
@@ -44,8 +47,10 @@ from PyQt5.QtCore import Qt
 class UiTableMeasurement(object):
 
     """Конструктор класса. Поля класса"""
-    def __init__(self, measurement_results_message, debug_log, measurement_log):
+    def __init__(self, config, measurement_results_message, debug_log, measurement_log):
 
+        self.config = config
+        self.round = self.config.round
         self.set_measurement_results = measurement_results_message
         self.file = os.path.basename(__file__)
         self.debug_log = debug_log
@@ -72,26 +77,34 @@ class UiTableMeasurement(object):
         # добавляем новую строку
         self.t1_tableMeasurement.insertRow(rowPosition)
         # для размещения данных в ячейке таблицы, надо убедиться, что они string и разместить их в QTableWidgetItem
-        item1 = QtWidgets.QTableWidgetItem(str(self.measurements[rowPosition].p0))
+        from Main import toFixed
+        item1 = QtWidgets.QTableWidgetItem(toFixed(self.measurements[rowPosition].p0, self.round))
         # Указать им ориентацию по центру
         item1.setTextAlignment(QtCore.Qt.AlignCenter)
+        # Указать, что ячейку нельзя редактировать
+        item1.setFlags(QtCore.Qt.ItemIsEnabled)
         # и, наконец, разместить в нужной ячейке по координатом строки и столбца
         self.t1_tableMeasurement.setItem(rowPosition, 0, item1)
         # повторить для каждой ячейки, куда надо внести данные.
-        item2 = QtWidgets.QTableWidgetItem(str(self.measurements[rowPosition].p1))
+        item2 = QtWidgets.QTableWidgetItem(toFixed(self.measurements[rowPosition].p1, self.round))
         item2.setTextAlignment(QtCore.Qt.AlignCenter)
+        item2.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 1, item2)
-        item3 = QtWidgets.QTableWidgetItem(str(self.measurements[rowPosition].p2))
+        item3 = QtWidgets.QTableWidgetItem(toFixed(self.measurements[rowPosition].p2, self.round))
         item3.setTextAlignment(QtCore.Qt.AlignCenter)
+        item3.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 2, item3)
-        item4 = QtWidgets.QTableWidgetItem(str(self.measurements[rowPosition].volume))
+        item4 = QtWidgets.QTableWidgetItem(toFixed(self.measurements[rowPosition].volume, self.round))
         item4.setTextAlignment(QtCore.Qt.AlignCenter)
+        item4.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 3, item4)
-        item5 = QtWidgets.QTableWidgetItem(str(self.measurements[rowPosition].density))
+        item5 = QtWidgets.QTableWidgetItem(toFixed(self.measurements[rowPosition].density, self.round))
         item5.setTextAlignment(QtCore.Qt.AlignCenter)
+        item5.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 4, item5)
-        item6 = QtWidgets.QTableWidgetItem(str(self.measurements[rowPosition].deviation))
+        item6 = QtWidgets.QTableWidgetItem(toFixed(self.measurements[rowPosition].deviation, self.round))
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
+        item6.setFlags(QtCore.Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 5, item6)
         # Устанавливаем ориентацию по центру по вертикали.
         header = self.t1_tableMeasurement.verticalHeader()
@@ -302,12 +315,11 @@ class UiTableMeasurement(object):
         # self.t1_tableMeasurement.verticalHeader().setMinimumSectionSize(25)
         self.t1_tableMeasurement.verticalHeader().setSortIndicatorShown(False)
         self.t1_tableMeasurement.verticalHeader().setStretchLastSection(False)
-        self.t1_tableMeasurement.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.t1_tableMeasurement.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.t1_tableMeasurement.verticalHeader().setSectionResizeMode(QHeaderView.Fixed)
         self.t1_tableMeasurement.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
         self.t1_tableMeasurement.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
         self.t1_tableMeasurement.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
-        self.t1_tableMeasurement.resizeColumnsToContents()
         self.t1_tableMeasurement.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.t1_tableMeasurement.customContextMenuRequested.connect(self.popup)
 
@@ -355,13 +367,13 @@ class UiTableMeasurement(object):
         while self.t1_tableMeasurement.rowCount() > 0:
                 self.t1_tableMeasurement.removeRow(0)
 
-    """Метод для выключения из расчета данных в соответствие с перменной с выбором пользователя перед началом изменений"""
+    """Метод для выключения из расчета данных в соответствие с переменной с выбором пользователя перед началом изменений"""
     def last_numbers_result(self, take_the_last_measurements):
         for i in range(len(self.measurements) - take_the_last_measurements):
             self.measurements[i].set_active_off()
             self.set_color_to_row(i, Qt.gray)
 
-    """Метод для пересчета даннвх в таблице. Вызывается как из таблицы так и в процессе калибровки"""
+    """Метод для пересчета данных в таблице. Вызывается как из таблицы так и в процессе измерений"""
     def recalculation_results(self):
 
         volume_sum = 0
@@ -386,7 +398,7 @@ class UiTableMeasurement(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_volume.....')
             try:
                 # Рассчитываем средний объем
-                self.m_medium_volume = round(volume_sum / counter1, 3)
+                self.m_medium_volume = volume_sum / counter1
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating medium_volume, '
@@ -398,7 +410,7 @@ class UiTableMeasurement(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_density.....')
             try:
                 # Рассчитываем средн.. плотность
-                self.m_medium_density = round(density_sum / counter1, 3)
+                self.m_medium_density = density_sum / counter1
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating medium_density, '
@@ -421,7 +433,7 @@ class UiTableMeasurement(object):
                                  'Calculation deviation for Measured[{0}].....'.format(counter2))
             try:
                 # Рассчитываем отклонение
-                deviation = round((self.m_medium_volume - m.volume) / self.m_medium_volume * 100, 3)
+                deviation = (self.m_medium_volume - m.volume) / self.m_medium_volume * 100
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating deviation, '
@@ -438,8 +450,10 @@ class UiTableMeasurement(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Calculation deviation for Measured[{0}]..... Done.'.format(counter2))
             # Добавляем в таблицу в столбец для отклонений
-            item = QtWidgets.QTableWidgetItem(str(m.deviation))
+            from Main import toFixed
+            item = QtWidgets.QTableWidgetItem(toFixed(m.deviation, self.round))
             item.setTextAlignment(Qt.AlignHCenter)
+            item.setFlags(QtCore.Qt.ItemIsEnabled)
             self.t1_tableMeasurement.setItem(counter2, 5, item)
             counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL..... Done.')
@@ -461,7 +475,7 @@ class UiTableMeasurement(object):
         # Считаем СКО:
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO.....')
         try:
-            self.m_SD = round(math.sqrt(squared_of_density_deviations_sum / counter3), 3)
+            self.m_SD = math.sqrt(squared_of_density_deviations_sum / counter3)
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating SKO, denominator: '
@@ -472,7 +486,7 @@ class UiTableMeasurement(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO%.....')
         try:
-            self.m_SD_per = round((self.m_SD / self.m_medium_volume) * 100, 3)
+            self.m_SD_per = (self.m_SD / self.m_medium_volume) * 100
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating SKO%, denominator: '

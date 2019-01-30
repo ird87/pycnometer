@@ -418,7 +418,7 @@ class CalibrationProcedure(object):
             # Считаем отношение давлений.
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation ratio.....')
             try:
-                ratio = round((P1 - P0) / (P2 - P0), 3)
+                ratio = (P1 - P0) / (P2 - P0)
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating ratio, '
