@@ -4,6 +4,7 @@
 import inspect
 import os
 import sys  # sys нужен для передачи argv в QApplication
+
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
 from CalibrationProcedure import CalibrationProcedure
@@ -12,11 +13,12 @@ from Languages import Languages
 from Logger import Logger
 from MeasurementProcedure import MeasurementProcedure, Сuvette, Sample_preparation
 from PyQt5 import QtCore
-from PyQt5.QtCore import QRegExp, QObject, QEvent
+from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox
 from TableCalibration import UiTableCalibration
 from TableMeasurement import UiTableMeasurement
+from Controller import Controller
 
 """Проверака и комментари: 23.01.2019"""
 """
@@ -27,7 +29,7 @@ from TableMeasurement import UiTableMeasurement
 
 
 def toFixed(numObj, digits=0):
-    if numObj!= None:
+    if numObj!= None and numObj != '':
         if isfloat(numObj):
             retVal = '{0:.{1}f}'.format(numObj, digits)
             return retVal
@@ -97,14 +99,19 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # и т.д. в файле design.py
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
+        self.setWindowState(Qt.WindowMaximized)
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.t3_checkValve1.setStyleSheet("QCheckBox::indicator { width:50px; height: 50px; }")
+        self.t3_checkValve1.show()
 
+        self.controller = Controller
         # Загружаем модуль настройки
         self.config = Configure()
 
         # Это имя нашего модуля
         self.file = os.path.basename(__file__)
 
-        # Загружаем модуль записи логов программы и сразу устанавливаем настройки
+        # Загружаем модуль записиt1_gM_cmd1 логов программы и сразу устанавливаем настройки
         self.debug_log = Logger('Debug', self.config)
         self.debug_log.setup()
 
@@ -113,14 +120,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.measurement_log.setup()
 
         # Загружаем таблицу для вкладки "Измерения"
-        self.t1_tableMeasurement = UiTableMeasurement(self.config, self.measurement_results_message, self.debug_log,
-                                                      self.measurement_log)
+        self.t1_tableMeasurement = UiTableMeasurement(self)
         self.t1_tableMeasurement.setupUi(self)
         self.t1_tableMeasurement.retranslateUi(self)
 
         # Загружаем таблицу для вкладки "Калибровка"
-        self.t2_tableCalibration = UiTableCalibration(self.config, self.calibration_results_message, self.debug_log,
-                                                      self.measurement_log)
+        self.t2_tableCalibration = UiTableCalibration(self)
         self.t2_tableCalibration.setupUi(self)
         self.t2_tableCalibration.retranslateUi(self)
 
@@ -180,21 +185,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Вывод на вкладку "Измерение" или "Калибровка" сообщение о слишком долгом ожидание баланса
         self.fail_get_balance.connect(self.on_message_fail_get_balance, PyQt5.QtCore.Qt.QueuedConnection)
 
-        # создаем модуль Измерение и передаем туда ссылки на все модули, методы и сигналы с которыми он работает.
-        self.measurement_procedure = MeasurementProcedure(self.t1_tableMeasurement, self.spi, self.gpio, self.ports,
-                                                          self.block_other_tabs, self.block_userinterface_measurement,
-                                                          self.unblock_userinterface_measurement,
-                                                          self.unblock_other_tabs, self.debug_log, self.measurement_log,
-                                                          self.config.is_test_mode, self.fail_pressure_set,
-                                                          self.fail_get_balance)
+        # создаем модуль Измерение и передаем туда ссылку на main.
+        self.measurement_procedure = MeasurementProcedure(self)
 
-        # создаем модуль Измерение и передаем туда ссылки на все модули, методы и сигналы с которыми он работает.
-        self.calibration_procedure = CalibrationProcedure(self.t2_tableCalibration, self.spi, self.gpio, self.ports,
-                                                          self.block_other_tabs, self.block_userinterface_calibration,
-                                                          self.unblock_userinterface_calibration,
-                                                          self.unblock_other_tabs, self.message, self.debug_log,
-                                                          self.measurement_log, self.config.is_test_mode,
-                                                          self.fail_pressure_set, self.fail_get_balance)
+        # создаем модуль Калибровка и передаем туда ссылку на main.
+        self.calibration_procedure = CalibrationProcedure(self)
 
         # Нам нужны два Validator'а для установки ограничений на ввод в поля форм.
         # Для int подойдет штатный QIntValidator
@@ -698,7 +693,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         self.t1_gM_cmd1.clear()
         self.t1_gM_cmd1.addItems(
-            [self.languages.t1_gM_cmd1_1, self.languages.t1_gM_cmd1_2, self.languages.t1_gM_cmd1_3])
+            [self.languages.t1_gM_cmd1_1, self.languages.t1_gM_cmd1_2])
+        if self.config.small_cuvette:
+            self.t1_gM_cmd1.addItem(self.languages.t1_gM_cmd1_3)
 
         self.t1_gM_button1.setText(self.languages.t1_gM_button1)
         self.t1_gM_button2.setText(self.languages.t1_gM_button2)
@@ -731,7 +728,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         self.t2_gID_cmd1.clear()
         self.t2_gID_cmd1.addItems(
-            [self.languages.t2_gID_cmd1_1, self.languages.t2_gID_cmd1_2, self.languages.t2_gID_cmd1_3])
+            [self.languages.t2_gID_cmd1_1, self.languages.t2_gID_cmd1_2])
+        if self.config.small_cuvette:
+            self.t2_gID_cmd1.addItem(self.languages.t2_gID_cmd1_3)
 
         self.t2_gID_button1.setText(self.languages.t2_gID_button1)
         self.t2_gID_button2.setText(self.languages.t2_gID_button2)
@@ -816,7 +815,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Тут мы сразу должны передать в таблицу калибровки данные. Так надо;)
     def t2_gID_Edit2_text_changed(self):
         self.set_t2_gID_button1_enabled()
-        self.t2_tableCalibration.Vss = float(self.t2_gID_Edit2.text())
+        self.calibration_procedure.Vss = float(self.t2_gID_Edit2.text())
 
     def t4_MS_Edit1_text_changed(self):
         self.set_t4_button_1_enabled()
@@ -1086,20 +1085,20 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     # очищаем таблицу и базу данных измерений
     def measurement_clear(self):
-        self.t1_tableMeasurement.measurements.clear()
+        self.measurement_procedure.measurements.clear()
         self.t1_tableMeasurement.clear_table()
         self.actionmenu4_command1.setEnabled(False)
 
     # очищаем таблицу и базу данных калибровки
     def calibration_clear(self):
         self.t2_gID_button3.setEnabled(False)
-        self.t2_tableCalibration.calibrations.clear()
+        self.calibration_procedure.calibrations.clear()
         self.t2_tableCalibration.clear_table()
 
     # Тут происходит сохранение в config.ini результатов калибровки
     def calibration_save(self):
-        Vc = self.t2_tableCalibration.c_Vc
-        Vd = self.t2_tableCalibration.c_Vd
+        Vc = self.calibration_procedure.c_Vc
+        Vd = self.calibration_procedure.c_Vd
         if self.t2_gID_cmd1.currentIndex() == Сuvette.Large.value:
             self.config.set_ini('Measurement', 'VcL', toFixed(Vc, self.config.round))
             self.config.set_ini('Measurement', 'VdLM', toFixed(Vd, self.config.round))
@@ -1113,13 +1112,13 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Вывод данных Измерений, вызывается через сигнал.
     def set_measurement_results(self):
         # получаем средний объем
-        medium_volume = self.t1_tableMeasurement.m_medium_volume
+        medium_volume = self.measurement_procedure.m_medium_volume
         # получаем среднюю плотность
-        medium_density = self.t1_tableMeasurement.m_medium_density
+        medium_density = self.measurement_procedure.m_medium_density
         # получаем СКО
-        SD = self.t1_tableMeasurement.m_SD
+        SD = self.measurement_procedure.m_SD
         # получаем СКО %
-        SD_per = self.t1_tableMeasurement.m_SD_per
+        SD_per = self.measurement_procedure.m_SD_per
         # выводим в текстовые поля формы "Измерение"
         self.t1_gMR_Edit1.setText(toFixed(medium_volume, self.config.round))
         self.t1_gMR_Edit2.setText(toFixed(medium_density, self.config.round))
@@ -1128,8 +1127,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     # Вывод двнных Калибровки, вызывается через сигнал.
     def set_calibration_results(self):
-        Vc = self.t2_tableCalibration.c_Vc
-        Vd = self.t2_tableCalibration.c_Vd
+        Vc = self.calibration_procedure.c_Vc
+        Vd = self.calibration_procedure.c_Vd
         self.t2_gCR_Edit1.setText(toFixed(Vc, self.config.round))
         self.t2_gCR_Edit2.setText(toFixed(Vd, self.config.round))
 
@@ -1167,6 +1166,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     def report_measurment(self):
         self.measurement_procedure.create_report()
+
+    def get_measurements(self):
+        return self.measurement_procedure.measurements
+
+    def get_calibrations(self):
+        return self.calibration_procedure.calibrations
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

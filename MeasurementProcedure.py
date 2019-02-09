@@ -68,6 +68,10 @@ from Measurement import Measurement
         self.Pmeas - float, давление необходимое для измерений
         self.pulse_length - int, длинна импульса в сек. Указывается в настройках.
         self.measurements - список экземляров класса "измерение", куда будут сохранятся все данные для вывода в таблицу
+        self.m_medium_volume - float, сюда записывается рассчитанное в результате калибровки среднее значение объема.
+        self.m_medium_density - float, сюда записывается рассчитанное в результате калибровки среднее значение плотности.
+        self.m_SD - float, сюда записывается рассчитанное в результате калибровки значение СКО, г/см3.
+        self.m_SD_per - float, сюда записывается рассчитанное в результате калибровки значение СКО, %.
         self.is_test_mode - ссылка на метод, проверяющий работает программа в тестовом режиме или запущена
         self.test_on - bool, переключатель, показывает выполняется ли в данный момент измерение или нет.   
         self.fail_pressure_set - ссылка на СИГНАЛ, для вывода сообщения о неудачном наборе давления
@@ -84,26 +88,25 @@ class MeasurementProcedure(object):
     """docstring"""
 
     """Конструктор класса. Поля класса"""
-    def __init__(self, table, spi, gpio, ports, block_other_tabs, block_userinterface,
-                 unblock_userinterface, unblock_other_tabs, debug_log, measurement_log, is_test_mode,
-                 fail_pressure_set, fail_get_balance):
+    def __init__(self, main):
+        self.main = main
         self.measurement_report = []
         self.operator = ''
         self.organization = ''
         self.sample = ''
         self.batch_series = ''
-        self.table = table
+        self.table = self.main.t1_tableMeasurement
         self.round = self.table.round
-        self.spi = spi
-        self.gpio = gpio
-        self.ports = ports
-        self.block_other_tabs = block_other_tabs
-        self.block_userinterface = block_userinterface
-        self.unblock_userinterface = unblock_userinterface
-        self.unblock_other_tabs = unblock_other_tabs
+        self.spi = self.main.spi
+        self.gpio = self.main.gpio
+        self.ports = self.main.ports
+        self.block_other_tabs = self.main.block_other_tabs
+        self.block_userinterface = self.main.block_userinterface_measurement
+        self.unblock_userinterface = self.main.unblock_userinterface_measurement
+        self.unblock_other_tabs = self.main.unblock_other_tabs
         self.file = os.path.basename(__file__)
-        self.debug_log = debug_log
-        self.measurement_log = measurement_log
+        self.debug_log = self.main.debug_log
+        self.measurement_log = self.main.measurement_log
         self.cuvette = Сuvette.Large
         self.sample_preparation = Sample_preparation.Vacuuming
         self.sample_preparation_time = 0                        # время в секундах
@@ -118,10 +121,19 @@ class MeasurementProcedure(object):
         self.Pmeas = 0
         self.pulse_length = 0
         self.measurements = []
-        self.is_test_mode = is_test_mode
+        self.m_medium_volume = 0.0
+        self.m_medium_density = 0.0
+        self.m_SD = 0.0
+        self.m_SD_per = 0.0
+        self.is_test_mode = self.main.config.is_test_mode
         self.test_on = False
-        self.fail_pressure_set = fail_pressure_set
-        self.fail_get_balance = fail_get_balance
+        self.set_measurement_results = self.main.measurement_results_message
+        self.fail_pressure_set = self.main.fail_pressure_set
+        self.fail_get_balance = self.main.fail_get_balance
+
+    """Метод для проверки включено ли измерение в рассчеты"""
+    def get_measurement_active(self, i):
+        return self.measurements[i].active
 
     """Метод для проверки. Возвращает True, если измерение запущено иначе False"""
     def is_test_on(self):
@@ -265,7 +277,8 @@ class MeasurementProcedure(object):
         # Этап 3. Вычисления.
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation.....')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation.....')
-        self.density_calculation()
+        self.last_numbers_result()
+        self.calculation()
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         # Разлокируем остальные вкладки для пользователя.
@@ -795,11 +808,128 @@ class MeasurementProcedure(object):
 
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
-    def density_calculation(self):
-        # Передаем в таблицу информацию о том, сколько последних вычислений надо учитывать в рассчете.
-        self.table.last_numbers_result(self.take_the_last_measurements)
-        # и вызываем пересчет
-        self.table.recalculation_results()
+    def calculation(self):
+        volume_sum = 0
+        density_sum = 0
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # заведем переменную для подсчета количества данных списка, включенных в рассчет
+        counter1 = 0
+
+        # Считаем средний объем и среднюю плотность
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                             'Calculation medium_volume & medium_density.....')
+        for m in self.measurements:
+            if m.active:
+                # для включенных в рассчет данных суммируем значение объема
+                volume_sum += m.volume
+                # и плотности
+                density_sum += m.density
+                # и само количество включенных измерений
+                counter1 += 1
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_volume.....')
+        try:
+            # Рассчитываем средний объем
+            self.m_medium_volume = volume_sum / counter1
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating medium_volume, '
+                                 'denominator: counter1={0}'.format(counter1))
+            self.m_medium_volume = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured : Medium volume = {0}'.format(self.m_medium_volume))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_volume..... Done.')
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_density.....')
+        try:
+            # Рассчитываем средн.. плотность
+            self.m_medium_density = density_sum / counter1
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating medium_density, '
+                                 'denominator: counter1={0}'.format(counter1))
+            self.m_medium_density = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured : Medium volume = {0}'.format(self.m_medium_volume))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_density..... Done.')
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                             'Calculation medium_volume & medium_density..... Done.')
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # заведем переменную для подсчета количества данных списка, включенных в рассчет
+        counter2 = 0
+        # Теперь считаем отклонения для каждой строки
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL.....')
+        for m in self.measurements:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Calculation deviation for Measured[{0}].....'.format(counter2))
+            try:
+                # Рассчитываем отклонение
+                deviation = (self.m_medium_volume - m.volume) / self.m_medium_volume * 100
+            except ArithmeticError:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Division by zero when calculating deviation, '
+                                     'denominator: medium_volume={0}'.format(self.m_medium_volume))
+                deviation = 0
+            if m.active:
+                m.deviation = deviation
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured[{0}] deviation = {1}'.format(counter2, m.deviation))
+            if not m.active:
+                m.deviation = ''
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured[{0}] this measurement is not active'.format(counter2))
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Calculation deviation for Measured[{0}]..... Done.'.format(counter2))
+            # Добавляем в таблицу в столбец для отклонений
+            self.table.add_item(m.deviation, counter2, 5, m.active)
+            counter2 += 1
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL..... Done.')
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # заведем переменную для подсчета количества данных списка, включенных в рассчет
+        counter3 = 0
+        # заведем переменную для суммы квадратов всех отклонений
+        squared_of_density_deviations_sum = 0
+
+        # Считаем СКО и СКО%:
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO & SKO%.....')
+        for m in self.measurements:
+            if m.active:
+                # для всех активных измерений считаем сумму квадратов их отклонений
+                squared_of_density_deviations_sum += (self.m_medium_volume - m.volume) ** 2
+                counter3 += 1
+        # Считаем СКО:
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO.....')
+        try:
+            self.m_SD = math.sqrt(squared_of_density_deviations_sum / counter3)
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating SKO, denominator: '
+                                 'counter3={0}'.format(counter3))
+            self.m_SD = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured : SKO = {0}'.format(self.m_SD))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO..... Done.')
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO%.....')
+        try:
+            self.m_SD_per = (self.m_SD / self.m_medium_volume) * 100
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating SKO%, denominator: '
+                                 'counter3={0}'.format(self.m_medium_volume))
+            self.m_SD_per = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured : SKO% = {0}%'.format(self.m_SD_per))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO%..... Done.')
+
+        # -----------------------------------------------------------------------------------------------------
+
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO & SKO%..... Done.')
+        # Вызываем вывод результатов на форму.
+        self.set_measurement_results.emit()
 
     """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
     def time_sleep(self, t):
@@ -1046,6 +1176,12 @@ class MeasurementProcedure(object):
     def get_today_date(self):
         logname = datetime.datetime.now().strftime("%Y-%m-%d")
         return logname
+
+    """Метод для выключения из расчета данных в соответствие с переменной с выбором пользователя перед началом изменений"""
+    def last_numbers_result(self):
+        for i in range(len(self.measurements) - self.take_the_last_measurements):
+            self.measurements[i].set_active_off()
+            self.table.set_color_to_row_unactive(i)
 
 # Enum Размер кюветы
 class Сuvette(Enum):

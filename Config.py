@@ -43,6 +43,7 @@ class Configure(object):
         self.p = [0, 0, 0, 0, 0]                    # Массив для записи номеров портов
         self.config = configparser.ConfigParser()   # Создаем экземпляр configparser
         self.config.read('Configure.ini')           # Указываем файл для считывания данных
+        self.small_cuvette = False
         self.language = ''
         self.round = 3
         self.pressure = Pressure.kPa
@@ -91,6 +92,7 @@ class Configure(object):
     def set_measurement(self):
         self.config.read('Configure.ini')
         self.pressure = Pressure(self.config.getint('Measurement', 'pressure'))
+        self.small_cuvette = self.config.getboolean('Pycnometer', 'small_cuvette')
         self.smq_now = self.config.getint('Measurement', 'smq_now')
         self.smq_list.clear()
         self.smq_list = json.loads(self.config.get('Measurement', 'smq_list'))

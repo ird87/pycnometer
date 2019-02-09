@@ -42,6 +42,7 @@ from MeasurementProcedure import Сuvette, Ports, Pressure_Error
         self.VdLM - float, дополнительный объем для большой и средней кюветы
         self.VdS - float, дополнительный объем для малой кюветы
         self.Pmeas - float, давление необходимое для измерений
+        self.set_calibration_results - ссылка на СИГНАЛ, для вывода результатов калибровки на форму программы
         self.calibrations = [] - список экземляров класса "калибровка", куда будут сохранятся все данные для 
                                                                                                         вывода в таблицу
         self.is_test_mode - ссылка на метод, проверяющий работает программа в тестовом режиме или запущена 
@@ -52,6 +53,11 @@ from MeasurementProcedure import Сuvette, Ports, Pressure_Error
         self.test_on - bool, переключатель, показывает выполняется ли в данный момент калибровка или нет.
         self.fail_pressure_set - ссылка на СИГНАЛ, для вывода сообщения о неудачном наборе давления
         self.fail_get_balance - ссылка на СИГНАЛ, для вывода сообщения о неудачном ожидании баланса
+        self.Vss - float, сюда записываются данные стандартного образца, введенные пользователем. Это происходит в Main.py 
+        непосредственно в момент ввода данных, так как процедура пересчета вызывается и вне калибровки и в нее нельзя 
+                                                                                    передавать переменные из калибровки.
+        self.c_Vc - float, сюда записывается рассчитанное в результате калибровки значение объема кюветы.
+        self.c_Vd - float, сюда записывается рассчитанное в результате калибровки значение дополнительного объема кюветы.
 """
 
 """Функция для перевода минут, вводимых пользователем, в секунды, используемые программой"""
@@ -64,21 +70,20 @@ class CalibrationProcedure(object):
     """docstring"""
 
     """Конструктор класса. Поля класса"""
-    def __init__(self, table, spi, gpio, ports, block_other_tabs, block_userinterface,
-                 unblock_userinterface, unblock_other_tabs, message, debug_log, measurement_log, is_test_mode,
-                 fail_pressure_set, fail_get_balance):
-        self.table = table
-        self.spi = spi
-        self.gpio = gpio
-        self.ports = ports
-        self.block_other_tabs = block_other_tabs
-        self.block_userinterface = block_userinterface
-        self.unblock_userinterface = unblock_userinterface
-        self.unblock_other_tabs = unblock_other_tabs
-        self.message = message
+    def __init__(self, main):
+        self.main = main
+        self.table = self.main.t2_tableCalibration
+        self.spi = self.main.spi
+        self.gpio = self.main.gpio
+        self.ports = self.main.ports
+        self.block_other_tabs = self.main.block_other_tabs
+        self.block_userinterface = self.main.block_userinterface_calibration
+        self.unblock_userinterface = self.main.unblock_userinterface_calibration
+        self.unblock_other_tabs = self.main.unblock_other_tabs
+        self.message = self.main.message
         self.file = os.path.basename(__file__)
-        self.debug_log = debug_log
-        self.measurement_log = measurement_log
+        self.debug_log = self.main.debug_log
+        self.measurement_log = self.main.measurement_log
         self.cuvette = Сuvette.Large
         self.number_of_measurements = 0
         self.sample_volume = 0
@@ -89,12 +94,16 @@ class CalibrationProcedure(object):
         self.VdS = 0
         self.Pmeas = 0
         self.calibrations = []
-        self.is_test_mode = is_test_mode
+        self.is_test_mode = self.main.config.is_test_mode
         self.P = ''
         self.lock = True
         self.test_on = False
-        self.fail_pressure_set = fail_pressure_set
-        self.fail_get_balance = fail_get_balance
+        self.fail_pressure_set = self.main.fail_pressure_set
+        self.fail_get_balance = self.main.fail_get_balance
+        self.set_calibration_results = main.calibration_results_message
+        self.Vss = 0
+        self.c_Vc = 0.0
+        self.c_Vd = 0.0
 
     """Метод для проверки. Возвращает True, если калибровка запущена иначе False"""
     def is_test_on(self):
@@ -446,7 +455,242 @@ class CalibrationProcedure(object):
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
     def calculation(self):
-        self.table.recalculation_results()
+        ratio_sum1 = 0
+        ratio_sum2 = 0
+        # нам нужно знать сколько в списке калибровок данных на P и P'. Причем нам надо явно получить int,
+        # чтобы использовать в качестве счетчика
+        num = int(len(self.calibrations) / 2)
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # заведем переменную для подсчета количества данных списка, включенных в рассчет
+        counter1 = 0
+        # Считаем среднее отношение для P0, P1 и P2
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_ratio for P.....')
+        for i in range(num):
+            index = i
+            if self.calibrations[index].active:
+                # для включенных в рассчет данных суммируем значение отношений
+                # и само количество данных включенных в рассчет
+                ratio_sum1 += self.calibrations[index].ratio
+                counter1 += 1
+        try:
+            # Рассчитываем среднее отношение для P0, P1 и P2
+            medium_ratio1 = ratio_sum1 / counter1
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating medium_ratio1, '
+                                 'denominator: counter1={0}'.format(counter1))
+            medium_ratio1 = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured {0} : Medium ratio = {1}'.format('P', medium_ratio1))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_ratio for P.....Done')
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # заведем переменную для подсчета количества данных списка, включенных в рассчет
+        counter1 = 0
+        # Считаем среднее отношение для P0', P1' и P2'
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_ratio for P\'.....')
+        for i in range(num):
+            index = i + num
+            if self.calibrations[index].active:
+                # для включенных в рассчет данных суммируем значение отношений
+                # и само количество данных включенных в рассчет
+                ratio_sum2 += self.calibrations[index].ratio
+                counter1 += 1
+        try:
+            # Рассчитываем среднее отношение для P0', P1' и P2'
+            medium_ratio2 = ratio_sum2 / counter1
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating medium_ratio1, '
+                                 'denominator: counter1={0}'.format(counter1))
+            medium_ratio2 = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured {0} : Medium ratio = {1}'.format('P\'', medium_ratio2))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation medium_ratio for P\'.....Done')
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # заведем переменную для подсчета количества данных списка, включенных в рассчет
+        counter2 = 0
+        # Теперь считаем отклонения для каждой строки для P0, P1 и P2
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P.....')
+        for i in range(num):
+            # Для P  index = i
+            index = i
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                             'for P[{0}].....'.format(i))
+            try:
+                # Рассчитываем отклонение для P
+                deviation1 = (medium_ratio1 - self.calibrations[index].ratio) / medium_ratio1 * 100
+            except ArithmeticError:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Division by zero when calculating deviation1, '
+                                     'denominator: medium_ratio1={0}'.format(medium_ratio1))
+                deviation1 = 0
+            if self.calibrations[index].active:
+                self.calibrations[index].deviation = deviation1
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured{0} {1} : deviation = {2}'.format('P', i, deviation1))
+            if not self.calibrations[index].active:
+                self.calibrations[index].deviation = ''
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured{0} {1} : this calibration is not active'.format('P', i))
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                             'for P[{0}].....Done'.format(i))
+            # Добавляем в таблицу в столбец для отклонений
+            self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
+            counter2 += 1
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P.....Done')
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # Теперь считаем отклонения для каждой строки для P0', P1' и P2'
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P\'.....')
+        for i in range(num):
+            # Для P'  index = i + num
+            index = i + num
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                             'for P\'[{0}].....'.format(i))
+            try:
+                # Рассчитываем отклонение для P'
+                deviation2 = (medium_ratio2 - self.calibrations[index].ratio) / medium_ratio2 * 100
+            except ArithmeticError:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Division by zero when calculating deviation2, '
+                                     'denominator: medium_ratio2={0}'.format(medium_ratio2))
+                deviation2 = 0
+            if self.calibrations[index].active:
+                self.calibrations[index].deviation = deviation2
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured{0} {1} : deviation = {2}'.format('P\'', i, deviation2))
+            if not self.calibrations[index].active:
+                self.calibrations[index].deviation = ''
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured{0} {1} : this calibration is not active'.format('P\'', i))
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                             'for P\'[{0}].....Done'.format(i))
+            # Добавляем в таблицу в столбец для отклонений
+            self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
+            counter2 += 1
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P\'.....Done')
+
+        # --------------------------------------------------------------------------------------------------------------
+        # Инициализируем переменные, куда запишем итоги рассчетов
+        Vc = 0
+        Vd = 0
+        # Нам надо рассчитать Vc и Vd, для всех Р со всеми Р’. Т.е. сначала первый набор Р со всеми по очереди Р’,
+        # потом второе и так далее. В итоге количество вычислений равно количество измерений в квадрате.
+        # В качестве итоговых результатов нам нужны средние значения.
+        # Создадим списки для хранения расчетов по всем комбинациям.
+        VcTest = []
+        VdTest = []
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation Vc & Vd.....')
+        for i in range(num):
+            for j in range(num):
+                index1 = i
+                index2 = j + num
+                # P
+                P0 = self.calibrations[index1].p0
+                P1 = self.calibrations[index1].p1
+                P2 = self.calibrations[index1].p2
+                # P'
+                P0a = self.calibrations[index2].p0
+                P1a = self.calibrations[index2].p1
+                P2a = self.calibrations[index2].p2
+
+                # -----------------------------------------------------------------------------------------------------
+
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Calculation Vc0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
+                try:
+                    # Рассчитываем Vc0 для текущей комбинации
+                    Vc0 = ((P2a - P0a) * self.Vss) / (
+                            (P2a - P0a) * (P2 - P0) / (P1 - P2) + (P2a - P0a) - (P1a - P0a) * (P2 - P0) / (P1 - P2))
+                except ArithmeticError:
+                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                             'Division by zero when calculating Vc0 for P[{0}] & P\'[{1}], '
+                             'denominator: (P2\'={2} - P0\'={3}) * (P2={4} - P0={5}) / (P1={6} - P2={7}) + (P2\'={8} '
+                             '- P0\'={9}) - (P1\'={10} - P0\'={11}) * (P2={12} - P0={13}) / (P1={14} - P2={15}) '
+                             '& (P1={16} - P2={17})={18}'
+                             .format(index1, index2, P2a, P0a, P2, P0, P1, P2, P2a, P0a, P1a, P0a,
+                                     P2, P0, P1, P2, P1, P2, (P1 - P2)))
+                    Vc0 = 0
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured for P[{0}] & P\'[{1}]  : Vc0 = {2}'.format(index1, index2, Vc0))
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Calculation Vc0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
+
+                # -----------------------------------------------------------------------------------------------------
+
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Calculation Vd0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
+                try:
+                    # Рассчитываем Vd0 для текущей комбинации
+                    Vd0 = (P2 - P0) * Vc0 / (P1 - P2)
+                except ArithmeticError:
+                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                            'Division by zero when calculating Vd0 for P[{0}] & P\'[{1}], '
+                            'denominator: (P1={2} - P2={3})={4}'.format(index1, index2, P1, P2, (P1 - P2)))
+                    Vd0 = 0
+                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                           'Measured for P[{0}] & P\'[{1}]  : Vd0 = {2}'.format(index1, index2, Vd0))
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Calculation Vd0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
+
+                # -----------------------------------------------------------------------------------------------------
+
+                # Добавлем Vc0 и Vd0 в списки.
+                VcTest.append(Vc0)
+                VdTest.append(Vd0)
+                # считаем сумму всех Vc0 и Vd0, для посследующего рассчета средних значений.
+                Vc = Vc + Vc0
+                Vd = Vd + Vd0
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        # Считаем количество комбинаций
+        divider = num ** 2
+
+        # -----------------------------------------------------------------------------------------------------
+
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                             'Calculation c_Vc.....')
+        try:
+            # Рассчитываем объем кюветы
+            self.c_Vc = Vc / divider
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating c_Vc, denominator: divider={0}'.format(divider))
+            self.c_Vc = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured : c_Vc = {0}'.format(self.c_Vc))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                             'Calculation c_Vc.....Done')
+
+        # -----------------------------------------------------------------------------------------------------
+
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                             'Calculation c_Vd.....')
+        try:
+            # Рассчитываем доп. объем кюветы
+            self.c_Vd = Vd / divider
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating c_Vd, denominator: divider={0}'.format(divider))
+            self.c_Vd = 0
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Measured : c_Vd = {0}'.format(self.c_Vd))
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                             'Calculation c_Vd.....Done')
+
+        # -----------------------------------------------------------------------------------------------------
+
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation Vc & Vd.....Done')
+        # Вызываем вывод результатов на форму.
+        self.set_calibration_results.emit()
 
     """Метод набора требуемого давления"""
     def gain_Pmeas(self):

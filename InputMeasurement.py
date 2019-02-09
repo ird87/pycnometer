@@ -18,6 +18,26 @@ class UiInputMeasurement(QWidget):
         self.parent = parent
         self.init_ui()
 
+    def activate(self):
+        # Устанавливаем заголовок
+        self.setWindowTitle('InputMeasurement')
+        # Устанавливаем размеры
+        self.setGeometry(300, 300, 400, 260)
+        # Загружаем языковые настройки
+        self.languages(self.parent.inputMeasurementHeader)
+        # Отображаем форму
+        self.show()
+        # Размещаем по центру
+        base_pos_x = self.parent.window.pos().x()
+        base_pos_y = self.parent.window.pos().y()
+        width_parent = self.parent.window.frameGeometry().width()
+        height_parent = self.parent.window.frameGeometry().height()
+        width_child = self.frameGeometry().width()
+        height_child = self.frameGeometry().height()
+        a = base_pos_x + width_parent / 2 - width_child / 2
+        b = base_pos_y + height_parent / 2 - height_child / 2
+        self.move(a, b)
+
     """Метод для установки заголовков в соответствии с языком."""
     def languages(self, title):
         self.lbl_InputMeasurement1.setText(title[0])
