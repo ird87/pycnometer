@@ -1,0 +1,16 @@
+[GeneralInformation]
+operator = default
+organization = default
+sample = default
+batch_series = default
+
+[SamplePreparation]
+sample_preparation = Vacuuming
+sample_preparation_time = 0
+
+[Measurement]
+sample_mass = 10.0
+cuvette = Large
+number_of_measurements = 10
+take_the_last_measurements = 10
+

@@ -56,9 +56,13 @@ class Logger(object):
         # create the logging file handler уже через полное имя файла
         if self.config.is_test_mode():
             # для тестового режима (Windows) нужны такие команды:
+            if not os.path.isdir(os.getcwd() + '\Logs'):
+                os.makedirs(os.getcwd() + '\Logs')
             self.fh = logging.FileHandler(os.getcwd() + '\Logs\\' + self.logname + '.log')
         if not self.config.is_test_mode():
             # для нормального режима (Linux) нужны такие команды:
+            if not os.path.isdir(os.getcwd() + '/Logs'):
+                os.makedirs(os.getcwd() + '/Logs')
             self.fh = logging.FileHandler(os.getcwd() + '/Logs/' + self.logname + '.log', encoding='WINDOWS-1251')
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""

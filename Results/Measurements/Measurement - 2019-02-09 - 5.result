@@ -1,0 +1,106 @@
+[GeneralInformation]
+operator = default
+organization = default
+sample = default
+batch_series = default
+
+[SamplePreparation]
+sample_preparation = Vacuuming
+sample_preparation_time = 0
+
+[Measurement]
+sample_mass = 10.0
+cuvette = Large
+number_of_measurements = 10
+take_the_last_measurements = 10
+
+[Measurement-0]
+p0 = 0.0
+p1 = 121.02072336265884
+p2 = 56.20752688172043
+volume = -2.248423051705827
+density = -4.44756158873804
+deviation = None
+active = True
+
+[Measurement-1]
+p0 = 0.0
+p1 = 120.88729227761485
+p2 = 56.39687194525904
+volume = -1.4808472284812735
+density = -6.7528910529520285
+deviation = None
+active = True
+
+[Measurement-2]
+p0 = 0.0
+p1 = 120.94320625610948
+p2 = 57.93704789833822
+volume = 3.0005264081417815
+density = 3.3327485380116935
+deviation = None
+active = True
+
+[Measurement-3]
+p0 = 0.0
+p1 = 121.14017595307917
+p2 = 56.33206256109482
+volume = -2.0372668005143075
+density = -4.908537260547074
+deviation = None
+active = True
+
+[Measurement-4]
+p0 = 0.0
+p1 = 121.64213098729228
+p2 = 57.81251221896383
+volume = 1.6736272915109567
+density = 5.975045967953811
+deviation = None
+active = True
+
+[Measurement-5]
+p0 = 0.0
+p1 = 120.27732160312804
+p2 = 58.54828934506354
+volume = 5.6538536670067066
+density = 1.7687051326346501
+deviation = None
+active = True
+
+[Measurement-6]
+p0 = 0.0
+p1 = 120.59120234604106
+p2 = 57.06148582600195
+volume = 0.9315635926329746
+density = 10.734640210375725
+deviation = None
+active = True
+
+[Measurement-7]
+p0 = 0.0
+p1 = 120.34848484848483
+p2 = 56.781915933528836
+volume = 0.4411073562652776
+density = 22.67021816336724
+deviation = None
+active = True
+
+[Measurement-8]
+p0 = 0.0
+p1 = 120.44125122189638
+p2 = 57.424926686217006
+volume = 2.210493704220023
+density = 4.523876263890342
+deviation = None
+active = True
+
+[Measurement-9]
+p0 = 0.0
+p1 = 120.96480938416421
+p2 = 56.118572825024444
+volume = -2.4417472430424705
+density = -4.0954279885004725
+deviation = None
+active = True
+

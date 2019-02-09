@@ -9,6 +9,7 @@ import MainWindow  # Это наш конвертированный файл д�
 import PyQt5
 from CalibrationProcedure import CalibrationProcedure
 from Config import Configure, Pressure
+from FileManager import UiFileManager
 from Languages import Languages
 from Logger import Logger
 from MeasurementProcedure import MeasurementProcedure, Сuvette, Sample_preparation
@@ -103,7 +104,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.t3_checkValve1.setStyleSheet("QCheckBox::indicator { width:50px; height: 50px; }")
         self.t3_checkValve1.show()
-
         self.controller = Controller
         # Загружаем модуль настройки
         self.config = Configure()
@@ -215,6 +215,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Подключаем к объектам интерфейса методы их обработки.
         self.t1_gM_button1.clicked.connect(self.measurement_procedure_start)    # Измерение.    Начало измерений.
         self.t1_gM_button2.clicked.connect(self.measurement_clear)              # Измерение.    Очистка измерений.
+        self.t1_gM_button3.clicked.connect(self.measurement_file_manager_open)              # Измерение.    Окно загрузки файлов.
         self.t1_gMI_Edit1.textChanged.connect(self.t1_gMI_Edit1_text_changed)   # Измерение.    Ввод Оператор.
         self.t1_gMI_Edit2.textChanged.connect(self.t1_gMI_Edit2_text_changed)   # Измерение.    Ввод Организация.
         self.t1_gMI_Edit3.textChanged.connect(self.t1_gMI_Edit3_text_changed)   # Измерение.    Ввод Образец.
@@ -542,6 +543,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_cmd1.setEnabled(False)
         self.t1_gM_button1.setEnabled(False)
         self.t1_gM_button2.setEnabled(False)
+        self.t1_gM_button3.setEnabled(False)
         self.t1_gMI_Edit1.setEnabled(False)
         self.t1_gMI_Edit2.setEnabled(False)
         self.t1_gMI_Edit3.setEnabled(False)
@@ -560,6 +562,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_cmd1.setEnabled(True)
         self.t1_gM_button1.setEnabled(True)
         self.t1_gM_button2.setEnabled(True)
+        self.t1_gM_button3.setEnabled(True)
         self.t1_gMI_Edit1.setEnabled(True)
         self.t1_gMI_Edit2.setEnabled(True)
         self.t1_gMI_Edit3.setEnabled(True)
@@ -699,6 +702,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         self.t1_gM_button1.setText(self.languages.t1_gM_button1)
         self.t1_gM_button2.setText(self.languages.t1_gM_button2)
+        self.t1_gM_button3.setText(self.languages.t1_gM_button3)
 
         # [InputCalibration]
         input_calibration_header = []
@@ -1172,6 +1176,18 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     def get_calibrations(self):
         return self.calibration_procedure.calibrations
+
+    def measurement_file_manager_open(self):
+        files = self.measurement_procedure.get_files_list()
+        self.file_manager = UiFileManager(self)
+        self.file_manager.add_files(files)
+        self.file_manager.activate()
+
+    def calibration_file_manager_open(self):
+        files = self.calibration_procedure.get_files_list()
+        self.file_manager = UiFileManager(self)
+        self.file_manager.add_files(files)
+        self.file_manager.activate()
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

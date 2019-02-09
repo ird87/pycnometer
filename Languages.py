@@ -54,6 +54,7 @@ class Languages(object):
         self.t1_gM_cmd1_3 = ''
         self.t1_gM_button1 = ''
         self.t1_gM_button2 = ''
+        self.t1_gM_button3 = ''
         self.t1_tableMeasurement_popup_Exclude = ''
         self.t1_tableMeasurement_popup_Include = ''
         self.t1_tableMeasurement_popup_Add = ''
@@ -212,6 +213,7 @@ class Languages(object):
         self.t1_gM_cmd1_3 = self.get_string('TAB1', 't1_gM_cmd1_3')
         self.t1_gM_button1 = self.get_string('TAB1', 't1_gM_button1')
         self.t1_gM_button2 = self.get_string('TAB1', 't1_gM_button2')
+        self.t1_gM_button3 = self.get_string('TAB1', 't1_gM_button3')
         self.t1_tableMeasurement_popup_Exclude = self.get_string('TAB1', 't1_tableMeasurement_popup_Exclude')
         self.t1_tableMeasurement_popup_Include = self.get_string('TAB1', 't1_tableMeasurement_popup_Include')
         self.t1_tableMeasurement_popup_Add = self.get_string('TAB1', 't1_tableMeasurement_popup_Add')

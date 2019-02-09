@@ -110,7 +110,6 @@ class UiInputMeasurement(QWidget):
             m.set_measurement(float(self.Edit_InputMeasurement1.text()), float(self.Edit_InputMeasurement2.text()),
                               float(self.Edit_InputMeasurement3.text()), float(self.Edit_InputMeasurement4.text()),
                               float(self.Edit_InputMeasurement5.text()), float(self.Edit_InputMeasurement6.text()))
-            self.parent.add_measurement(m)
             self.hide()
 
     """Это UI"""

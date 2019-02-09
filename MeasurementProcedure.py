@@ -6,6 +6,7 @@ import inspect
 import math
 import os
 import time
+import configparser
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
@@ -130,6 +131,8 @@ class MeasurementProcedure(object):
         self.set_measurement_results = self.main.measurement_results_message
         self.fail_pressure_set = self.main.fail_pressure_set
         self.fail_get_balance = self.main.fail_get_balance
+        self.measurement_file = ''
+        self.save_result = configparser.ConfigParser()
 
     """Метод для проверки включено ли измерение в рассчеты"""
     def get_measurement_active(self, i):
@@ -172,6 +175,19 @@ class MeasurementProcedure(object):
         self.VdS = _VdS
         self.Pmeas = _Pmeas
         self.pulse_length = _pulse_length
+        # Откроем новый файл для записи результатов
+        self.new_measurement_file()
+        self.set_result('GeneralInformation', 'operator', self.operator)
+        self.set_result('GeneralInformation', 'organization', self.organization)
+        self.set_result('GeneralInformation', 'sample', self.sample)
+        self.set_result('GeneralInformation', 'batch_series', self.batch_series)
+        self.set_result('SamplePreparation', 'sample_preparation', self.sample_preparation.name)
+        self.set_result('SamplePreparation', 'sample_preparation_time', str(self.sample_preparation_time))
+        self.set_result('Measurement', 'sample_mass', str(self.sample_mass))
+        self.set_result('Measurement', 'cuvette', self.cuvette.name)
+        self.set_result('Measurement', 'number_of_measurements', str(self.number_of_measurements))
+        self.set_result('Measurement', 'take_the_last_measurements', str(self.take_the_last_measurements))
+
         # self.measurements должен быть очищен перед началом новых калибровок
         self.measurements.clear()
         txt = 'The following measurement settings are set:' \
@@ -628,7 +644,14 @@ class MeasurementProcedure(object):
             # deviation мы пока не можем посчитать, так что присваиваем ему None
             self.measurements[i].deviation = None
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....')
-            # Добавляем полученные измерения калибровки в таблицу
+            # Добавляем полученные измерения в таблицу
+            self.set_result('Measurement-' + str(i), 'p0', str(self.measurements[i].p0))
+            self.set_result('Measurement-' + str(i), 'p1', str(self.measurements[i].p1))
+            self.set_result('Measurement-' + str(i), 'p2', str(self.measurements[i].p2))
+            self.set_result('Measurement-' + str(i), 'volume', str(self.measurements[i].volume))
+            self.set_result('Measurement-' + str(i), 'density', str(self.measurements[i].density))
+            self.set_result('Measurement-' + str(i), 'deviation', str(self.measurements[i].deviation))
+            self.set_result('Measurement-' + str(i), 'active', str(self.measurements[i].active))
             self.table.add_measurement(self.measurements[i])
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....'
                                                                              'Done')
@@ -795,6 +818,7 @@ class MeasurementProcedure(object):
             self.measurements[i].deviation = None
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....')
             # Добавляем полученные измерения калибровки в таблицу
+            self.set_result('Measurement-' + str(i), 'm', self.measurements[i])
             self.table.add_measurement(self.measurements[i])
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....'
                                                                              'Done')
@@ -883,6 +907,7 @@ class MeasurementProcedure(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Calculation deviation for Measured[{0}]..... Done.'.format(counter2))
             # Добавляем в таблицу в столбец для отклонений
+            self.set_result('Measurement-' + str(counter2), 'deviation', str(self.measurements[counter2].deviation))
             self.table.add_item(m.deviation, counter2, 5, m.active)
             counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL..... Done.')
@@ -929,6 +954,11 @@ class MeasurementProcedure(object):
 
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO & SKO%..... Done.')
         # Вызываем вывод результатов на форму.
+        self.set_result('MeasurementResult', 'medium_volume', str(self.m_medium_volume))
+        self.set_result('MeasurementResult', 'medium_density', str(self.m_medium_density))
+        self.set_result('MeasurementResult', 'SD', str(self.m_SD))
+        self.set_result('MeasurementResult', 'SD_per', str(self.m_SD_per))
+
         self.set_measurement_results.emit()
 
     """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
@@ -1037,6 +1067,8 @@ class MeasurementProcedure(object):
         report_name=''
         # Ветка для программы в тестовом режиме.
         if self.is_test_mode():
+            if not os.path.isdir(os.getcwd() + '\Reports'):
+                os.makedirs(os.getcwd() + '\Reports')
             # Определяем следующее подходящее имя файла.
             while find_name:
                 number += 1
@@ -1047,6 +1079,8 @@ class MeasurementProcedure(object):
 
         # Ветка для программы в нормальном режиме.
         if not self.is_test_mode():
+            if not os.path.isdir(os.getcwd() + '/Reports'):
+                os.makedirs(os.getcwd() + '/Reports')
             # Определяем следующее подходящее имя файла.
             while find_name:
                 number += 1
@@ -1182,6 +1216,77 @@ class MeasurementProcedure(object):
         for i in range(len(self.measurements) - self.take_the_last_measurements):
             self.measurements[i].set_active_off()
             self.table.set_color_to_row_unactive(i)
+
+    def set_measurement_file(self, file_name):
+        self.measurement_file = file_name
+
+    def new_measurement_file(self):
+        # проверим наличие каталога, если его нет - создадим.
+        self.check_result_dir()
+        find_name = True
+        number = 0
+        # Ветка для программы в тестовом режиме.
+        if self.is_test_mode():
+            # Определяем следующее подходящее имя файла.
+            while find_name:
+                number += 1
+                # для тестового режима (Windows) нужны такие команды:
+                self.measurement_file = os.getcwd() + '\Results\Measurements\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+                    number) + '.result'
+                find_name = os.path.isfile(self.measurement_file)
+            self.save_result.read(self.measurement_file)
+
+        # Ветка для программы в нормальном режиме.
+        if not self.is_test_mode():
+            # Определяем следующее подходящее имя файла.
+            while find_name:
+                number += 1
+                # для нормального режима (Linux) нужны такие команды:
+                self.measurement_file = os.getcwd() + '/Results/Measurements/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+                    number) + '.result'
+                find_name = os.path.isfile(self.measurement_file)
+            self.save_result.read(self.measurement_file, encoding = 'WINDOWS-1251')
+        with open(self.measurement_file, "w") as fh:
+            self.save_result.write(fh)
+
+
+    """Проверим наличие каталога, если его нет - создадим."""
+    def check_result_dir(self):
+        if self.is_test_mode():
+            if not os.path.isdir(os.getcwd() + '\Results\Measurements'):
+                os.makedirs(os.getcwd() + '\Results\Measurements')
+        if not self.is_test_mode():
+            if not os.path.isdir(os.getcwd() + '/Results/Measurements'):
+                os.makedirs(os.getcwd() + '/Results/Measurements')
+
+    """Метод для сохранения измененных настроек в файл"""
+    def set_result(self, section, val, s):
+        self.save_result.read(self.measurement_file)
+        if not self.save_result.has_section(section):
+            self.save_result.add_section(section)
+        self.save_result.set(section, val, s)
+        with open(self.measurement_file + ".new", "w") as fh:
+            self.save_result.write(fh)
+        os.rename(self.measurement_file, self.measurement_file + "~")
+        os.rename(self.measurement_file + ".new", self.measurement_file)
+        os.remove(self.measurement_file + "~")
+
+    def get_files_list(self):
+        # проверим наличие каталога, если его нет - создадим.
+        self.check_result_dir()
+        dir = ''
+        if self.is_test_mode():
+            dir = os.getcwd() + '\Results\Measurements\\'
+        if not self.is_test_mode():
+            dir = os.getcwd() + '/Results/Measurements/'
+        files = [f for f in os.listdir(dir) if f.endswith('.result')]
+        ret_files = {}
+        for f in files:
+            file = dir + f
+            data_changed = time.strftime('%m/%d/%Y-%H.%M.%S', time.gmtime(os.path.getmtime(file)))
+            ret_files.update({f: data_changed})
+        return ret_files
+
 
 # Enum Размер кюветы
 class Сuvette(Enum):

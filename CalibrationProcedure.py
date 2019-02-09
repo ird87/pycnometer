@@ -5,6 +5,8 @@ import inspect
 import math
 import os
 import time
+import time
+import configparser
 import threading
 from Calibration import Calibration
 from MeasurementProcedure import Сuvette, Ports, Pressure_Error
@@ -104,6 +106,9 @@ class CalibrationProcedure(object):
         self.Vss = 0
         self.c_Vc = 0.0
         self.c_Vd = 0.0
+        self.calibration_file = ''
+        self.save_result = configparser.ConfigParser()
+
 
     """Метод для проверки. Возвращает True, если калибровка запущена иначе False"""
     def is_test_on(self):
@@ -133,6 +138,13 @@ class CalibrationProcedure(object):
         self.number_of_measurements = _number_of_measurements
         self.sample_volume = _sample_volume
         self.Pmeas = _Pmeas
+
+        # Откроем новый файл для записи результатов
+        self.new_calibration_file()
+        self.set_result('SourceData', 'cuvette', self.cuvette.name)
+        self.set_result('SourceData', 'number_of_measurements', str(self.number_of_measurements))
+        self.set_result('SourceData', 'sample', str(self.sample_volume))
+
         # self.calibrations должен быть очищен перед началом новых калибровок
         self.calibrations.clear()
         txt = 'The following calibration settings are set:\nCuvette = ' + str(self.cuvette) + '\nNumber of measurements = ' + \
@@ -440,6 +452,14 @@ class CalibrationProcedure(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation ratio.....Done')
             # deviation мы пока не можем посчитать, так что присваиваем ему None
             self.calibrations[l].deviation = None
+            # Добавляем полученные калибровки в таблицу
+            self.set_result('Calibration-' + str(l), 'P', self.calibrations[l].measurement)
+            self.set_result('Calibration-' + str(l), 'p0', str(self.calibrations[l].p0))
+            self.set_result('Calibration-' + str(l), 'p1', str(self.calibrations[l].p1))
+            self.set_result('Calibration-' + str(l), 'p2', str(self.calibrations[l].p2))
+            self.set_result('Calibration-' + str(l), 'ratio', str(self.calibrations[l].ratio))
+            self.set_result('Calibration-' + str(l), 'deviation', str(self.calibrations[l].deviation))
+            self.set_result('Calibration-' + str(l), 'active', str(self.calibrations[l].active))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add calibration data to the table.....')
             # Добавляем полученные измерения калибровки в таблицу
             self.table.add_calibration(self.calibrations[l])
@@ -540,6 +560,7 @@ class CalibrationProcedure(object):
                                            'Measured{0} {1} : this calibration is not active'.format('P', i))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
                                                                              'for P[{0}].....Done'.format(i))
+            self.set_result('Calibration-' + str(index), 'deviation', str(self.calibrations[index].deviation))
             # Добавляем в таблицу в столбец для отклонений
             self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
             counter2 += 1
@@ -572,6 +593,7 @@ class CalibrationProcedure(object):
                                            'Measured{0} {1} : this calibration is not active'.format('P\'', i))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
                                                                              'for P\'[{0}].....Done'.format(i))
+            self.set_result('Calibration-' + str(index), 'deviation', str(self.calibrations[index].deviation))
             # Добавляем в таблицу в столбец для отклонений
             self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
             counter2 += 1
@@ -689,6 +711,8 @@ class CalibrationProcedure(object):
         # -----------------------------------------------------------------------------------------------------
 
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation Vc & Vd.....Done')
+        self.set_result('CalibrationResult', 'Vc', str(self.c_Vc))
+        self.set_result('CalibrationResult', 'Vd', str(self.c_Vd))
         # Вызываем вывод результатов на форму.
         self.set_calibration_results.emit()
 
@@ -785,3 +809,78 @@ class CalibrationProcedure(object):
             self.time_sleep(3)
         return balance, success, duration
 
+    """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
+    def get_today_date(self):
+        logname = datetime.datetime.now().strftime("%Y-%m-%d")
+        return logname
+
+    def set_calibration_file(self, file_name):
+        self.calibration_file = file_name
+
+    def new_calibration_file(self):
+        # проверим наличие каталога, если его нет - создадим.
+        self.check_result_dir()
+        find_name = True
+        number = 0
+        # Ветка для программы в тестовом режиме.
+        if self.is_test_mode():
+            # Определяем следующее подходящее имя файла.
+            while find_name:
+                number += 1
+                # для тестового режима (Windows) нужны такие команды:
+                self.calibration_file = os.getcwd() + '\Results\Calibrations\Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
+                    number) + '.result'
+                find_name = os.path.isfile(self.calibration_file)
+            self.save_result.read(self.calibration_file)
+
+        # Ветка для программы в нормальном режиме.
+        if not self.is_test_mode():
+            # Определяем следующее подходящее имя файла.
+            while find_name:
+                number += 1
+                # для нормального режима (Linux) нужны такие команды:
+                self.calibration_file = os.getcwd() + '/Results/Calibrations/Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
+                    number) + '.result'
+                find_name = os.path.isfile(self.calibration_file)
+            self.save_result.read(self.calibration_file, encoding = 'WINDOWS-1251')
+        with open(self.calibration_file, "w") as fh:
+            self.save_result.write(fh)
+
+    """Проверим наличие каталога, если его нет - создадим."""
+
+    def check_result_dir(self):
+        if self.is_test_mode():
+            if not os.path.isdir(os.getcwd() + '\Results\Calibrations'):
+                os.makedirs(os.getcwd() + '\Results\Calibrations')
+        if not self.is_test_mode():
+            if not os.path.isdir(os.getcwd() + '/Results/Calibrations'):
+                os.makedirs(os.getcwd() + '/Results/Calibrations')
+
+    """Метод для сохранения измененных настроек в файл"""
+
+    def set_result(self, section, val, s):
+        self.save_result.read(self.calibration_file)
+        if not self.save_result.has_section(section):
+            self.save_result.add_section(section)
+        self.save_result.set(section, val, s)
+        with open(self.calibration_file + ".new", "w") as fh:
+            self.save_result.write(fh)
+        os.rename(self.calibration_file, self.calibration_file + "~")
+        os.rename(self.calibration_file + ".new", self.calibration_file)
+        os.remove(self.calibration_file + "~")
+
+    def get_files_list(self):
+        # проверим наличие каталога, если его нет - создадим.
+        self.check_result_dir()
+        dir = ''
+        if self.is_test_mode():
+            dir = os.getcwd() + '\Results\Calibrations\\'
+        if not self.is_test_mode():
+            dir = os.getcwd() + '/Results/Calibrations/'
+        files = [f for f in os.listdir(dir) if f.endswith('.result')]
+        ret_files = {}
+        for f in files:
+            file = dir + f
+            data_changed = time.strftime('%m/%d/%Y-%H.%M.%S', time.gmtime(os.path.getmtime(file)))
+            ret_files.update({f: data_changed})
+        return ret_files

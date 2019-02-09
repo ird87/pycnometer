@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FileManager</class>
+ <widget class="QDialog" name="FileManager">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>260</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>260</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>260</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog_InputMeasurement</string>
+  </property>
+  <property name="windowFilePath">
+   <string/>
+  </property>
+  <widget class="QPushButton" name="Button_FM_OK">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>220</y>
+     <width>150</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Button_FM_OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Button_FM_Cancel">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>220</y>
+     <width>150</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Button_FM_Cancel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

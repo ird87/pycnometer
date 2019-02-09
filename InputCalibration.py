@@ -111,7 +111,6 @@ class UiInputCalibration(QWidget):
             calibration.set_calibration(self.Edit_InputCalibration1.text(), float(self.Edit_InputCalibration2.text()),
                             float(self.Edit_InputCalibration3.text()), float(self.Edit_InputCalibration4.text()),
                             float(self.Edit_InputCalibration5.text()), float(self.Edit_InputCalibration6.text()))
-            self.parent.add_calibration(calibration)
             self.hide()
 
     """Это UI"""

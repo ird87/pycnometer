@@ -95,19 +95,19 @@
        <rect>
         <x>760</x>
         <y>10</y>
-        <width>490</width>
+        <width>500</width>
         <height>180</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>180</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>180</height>
        </size>
       </property>
@@ -278,19 +278,19 @@
        <rect>
         <x>760</x>
         <y>200</y>
-        <width>490</width>
+        <width>500</width>
         <height>160</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>160</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>160</height>
        </size>
       </property>
@@ -385,7 +385,7 @@
       <widget class="QLineEdit" name="t1_gSP_Edit1">
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>300</x>
          <y>90</y>
          <width>170</width>
          <height>25</height>
@@ -407,7 +407,7 @@
       <widget class="QLabel" name="t1_gSP_lbl1">
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>300</x>
          <y>45</y>
          <width>170</width>
          <height>25</height>
@@ -432,19 +432,19 @@
        <rect>
         <x>760</x>
         <y>370</y>
-        <width>490</width>
+        <width>500</width>
         <height>260</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>260</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>260</height>
        </size>
       </property>
@@ -456,7 +456,7 @@
         <rect>
          <x>220</x>
          <y>40</y>
-         <width>240</width>
+         <width>260</width>
          <height>25</height>
         </rect>
        </property>
@@ -554,7 +554,7 @@
         <rect>
          <x>220</x>
          <y>120</y>
-         <width>240</width>
+         <width>260</width>
          <height>25</height>
         </rect>
        </property>
@@ -576,7 +576,7 @@
         <rect>
          <x>220</x>
          <y>160</y>
-         <width>240</width>
+         <width>260</width>
          <height>25</height>
         </rect>
        </property>
@@ -598,7 +598,7 @@
         <rect>
          <x>220</x>
          <y>80</y>
-         <width>240</width>
+         <width>260</width>
          <height>25</height>
         </rect>
        </property>
@@ -609,9 +609,9 @@
        </property>
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>15</x>
          <y>210</y>
-         <width>200</width>
+         <width>150</width>
          <height>25</height>
         </rect>
        </property>
@@ -622,14 +622,27 @@
       <widget class="QPushButton" name="t1_gM_button2">
        <property name="geometry">
         <rect>
-         <x>250</x>
+         <x>175</x>
          <y>210</y>
-         <width>200</width>
+         <width>150</width>
          <height>25</height>
         </rect>
        </property>
        <property name="text">
         <string>t1_gM_button2</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t1_gM_button3">
+       <property name="geometry">
+        <rect>
+         <x>335</x>
+         <y>210</y>
+         <width>150</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>t1_gM_button3</string>
        </property>
       </widget>
      </widget>
@@ -957,19 +970,19 @@
        <rect>
         <x>760</x>
         <y>10</y>
-        <width>490</width>
+        <width>500</width>
         <height>220</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>220</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>490</width>
+        <width>500</width>
         <height>220</height>
        </size>
       </property>
