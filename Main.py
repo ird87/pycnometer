@@ -150,17 +150,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.gpio = GPIO(self.ports)
             self.gpio.all_port_off()
             self.spi = SPI(self.config, self.debug_log, self.measurement_log, self.set_pressure_message)
-            # Это стартовое заполнение таблиц для тестового режима
-            # for i in range(10):
-            #     m = self.spi.generate_data(i)
-            #     measurement = Measurement()
-            #     measurement.set_measurement(m[0], m[1], m[2], m[3], m[4], m[5])
-            #     self.t1_tableMeasurement.add_measurement(measurement)
-            # for i in range(6):
-            #     c = self.spi.generate_data(i)
-            #     calibration = Calibration()
-            #     calibration.set_calibration(c[0], c[1], c[2], c[3], c[4], c[5])
-            #     self.t2_tableCalibration.add_calibration(calibration)
         if not self.config.is_test_mode():
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in NORMAL mode.')
             from ModulGPIO import GPIO
@@ -258,6 +247,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gMS_cmd1.currentIndexChanged.connect(self.setPressurePmeas)     # Настройка.    изменение ед.изм. давл.
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
+        self.actionmenu1_command1.triggered.connect(self.closeEvent)
     # Отслеживаем активацию окон приложения
     def tab_change(self):
         # Обработка открытия / закрытия вкладки "Ручное управление"
@@ -631,6 +621,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Выключаем процедуру калибровки
         self.calibration_procedure.close_calibrations()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program has completed\n' + '-' * 75)
+        sys.exit()
 
     # Поля для ввода данных очищаем только при запуске программы.
     def initial_field_clearing(self):

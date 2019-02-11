@@ -101,7 +101,7 @@ class Configure(object):
         self.VcS = self.config.getfloat('Measurement', 'VcS')
         self.VdLM = self.config.getfloat('Measurement', 'VdLM')
         self.VdS = self.config.getfloat('Measurement', 'VdS')
-        self.spi_t = self.config.getint('Measurement', 'spi_t')
+        self.spi_t = self.config.getfloat('Measurement', 'spi_t')
         self.spi_max_speed_hz = self.config.getint('Measurement', 'spi_max_speed_hz')
         self.pulse_length = self.config.getint('Measurement', 'pulse_length')
         self.Pmeas.clear()
