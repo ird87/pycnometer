@@ -1,0 +1,112 @@
+[GeneralInformation]
+operator = default
+organization = default
+sample = default
+batch_series = default
+
+[SamplePreparation]
+sample_preparation = 0
+sample_preparation_time = 0
+
+[Measurement]
+sample_mass = 10.0
+cuvette = 0
+number_of_measurements = 10
+take_the_last_measurements = 10
+
+[MeasurementResult]
+medium_volume = 1.2829689169240592
+medium_density = 3.570529191461425
+sd = 3.7905666052912417
+sd_per = 295.45272338937036
+
+[Measurement-0]
+p0 = 0.0
+p1 = 120.52893450635386
+p2 = 57.44652981427175
+volume = 2.151484316241213
+density = 4.647953937898403
+deviation = -67.69574756334978
+active = True
+
+[Measurement-1]
+p0 = 0.0
+p1 = 121.34349951124143
+p2 = 56.910263929618765
+volume = -0.575205430510885
+density = -17.38509316770222
+deviation = 144.8339334588051
+active = True
+
+[Measurement-2]
+p0 = 0.0
+p1 = 119.9774193548387
+p2 = 58.82023460410557
+volume = 6.821569771210055
+density = 1.4659382422802858
+deviation = -431.7018737729741
+active = True
+
+[Measurement-3]
+p0 = 0.0
+p1 = 120.34340175953078
+p2 = 58.557184750733136
+volume = 5.5885416666666785
+density = 1.789375582479027
+deviation = -335.5944709919635
+active = True
+
+[Measurement-4]
+p0 = 0.0
+p1 = 121.23548387096773
+p2 = 55.799608993157385
+volume = -3.815531769528566
+density = -2.6208666587083784
+deviation = 397.3986134189729
+active = True
+
+[Measurement-5]
+p0 = 0.0
+p1 = 120.74242424242424
+p2 = 58.383088954056696
+volume = 4.551509479137212
+density = 2.197073310697709
+deviation = -254.76381532683868
+active = True
+
+[Measurement-6]
+p0 = 0.0
+p1 = 120.49843597262952
+p2 = 55.58739002932551
+volume = -3.4183755115104293
+density = -2.925366147261405
+deviation = 366.442582233874
+active = True
+
+[Measurement-7]
+p0 = 0.0
+p1 = 120.72844574780058
+p2 = 56.881036168132944
+volume = 0.20218493778068125
+density = 49.459668508281425
+deviation = 84.24085454342703
+active = True
+
+[Measurement-8]
+p0 = 0.0
+p1 = 120.25317693059627
+p2 = 58.13020527859237
+volume = 4.5050717033928285
+density = 2.2197204968943933
+deviation = -251.14425953465948
+active = True
+
+[Measurement-9]
+p0 = 0.0
+p1 = 121.07663734115346
+p2 = 55.93049853372434
+volume = -3.1815599936381953
+density = -3.1431121902449948
+deviation = 347.9841835347065
+active = True
+

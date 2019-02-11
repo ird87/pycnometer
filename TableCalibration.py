@@ -62,29 +62,32 @@ class UiTableCalibration(object):
         self.t2_tableCalibration.setItem(rowPosition, 0, item1)
         # повторить для каждой ячейки, куда надо внести данные.
         from Main import toFixed
-        item2 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_calibrations()[rowPosition].p0, self.round))
+        item2 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.p0, self.round))
         item2.setTextAlignment(QtCore.Qt.AlignCenter)
         item2.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 1, item2)
-        item3 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_calibrations()[rowPosition].p1, self.round))
+        item3 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.p1, self.round))
         item3.setTextAlignment(QtCore.Qt.AlignCenter)
         item3.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 2, item3)
-        item4 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_calibrations()[rowPosition].p2, self.round))
+        item4 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.p2, self.round))
         item4.setTextAlignment(QtCore.Qt.AlignCenter)
         item4.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 3, item4)
-        item5 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_calibrations()[rowPosition].ratio, self.round))
+        item5 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.ratio, self.round))
         item5.setTextAlignment(QtCore.Qt.AlignCenter)
         item5.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 4, item5)
-        item6 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_calibrations()[rowPosition].deviation, self.round))
+        item6 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.deviation, self.round))
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
         item6.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 5, item6)
         # Устанавливаем ориентацию по центру по вертикали.
         header = self.t2_tableCalibration.verticalHeader()
         header.setDefaultAlignment(Qt.AlignHCenter)
+        if not _calibrations.active:
+            self.set_color_to_row_unactive(rowPosition)
+        self.t2_tableCalibration.reset()
 
     """Метод добавляет контекстное меню"""
     def popup(self):
@@ -386,3 +389,4 @@ class UiTableCalibration(object):
         self.t2_tableCalibration.setItem(row, column, item)
         if not active:
             self.set_color_to_row_unactive(row)
+        self.t2_tableCalibration.reset()

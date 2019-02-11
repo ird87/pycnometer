@@ -1,0 +1,23 @@
+[SourceData]
+cuvette = 0
+number_of_measurements = 5
+sample = 5.0
+
+[Calibration-0]
+p = P
+p0 = 0.0
+p1 = 120.61026392961877
+p2 = 56.21642228739003
+ratio = 2.1454631764546317
+deviation = None
+active = True
+
+[Calibration-1]
+p = P
+p0 = 0.0
+p1 = 121.23040078201367
+p2 = 55.81612903225807
+ratio = 2.1719600209457455
+deviation = None
+active = True
+

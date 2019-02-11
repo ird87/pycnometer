@@ -1,5 +1,5 @@
 [SourceData]
-cuvette = Large
+cuvette = 0
 number_of_measurements = 5
 sample = 5.0
 

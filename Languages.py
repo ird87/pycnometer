@@ -27,6 +27,12 @@ class Languages(object):
         self.Button_InputMeasurement_OK = ''
         self.Button_InputMeasurement_Cancel = ''
 
+        # [FileManager]
+        self.Button_FM_OK = ''
+        self.Button_FM_Cancel = ''
+        self.Table_Files_Column1 = ''
+        self.Table_Files_Column2 = ''
+
         # [TAB1]
         self.t1_tableMeasurement_Column = []
         self.t1_groupGeneralInformation = ''
@@ -55,6 +61,7 @@ class Languages(object):
         self.t1_gM_button1 = ''
         self.t1_gM_button2 = ''
         self.t1_gM_button3 = ''
+        self.t1_gM_button4 = ''
         self.t1_tableMeasurement_popup_Exclude = ''
         self.t1_tableMeasurement_popup_Include = ''
         self.t1_tableMeasurement_popup_Add = ''
@@ -68,8 +75,10 @@ class Languages(object):
         # [TAB2]
         self.t2_tableCalibration_Column = []
         self.t2_groupCalibratonResult = ''
+        self.t2_gCR_button1 = ''
         self.t2_gCR_lbl1 = ''
         self.t2_gCR_lbl2 = ''
+        self.t2_gCR_lbl3 = ''
         self.t2_groupInitialData = ''
         self.t2_gID_lbl1 = ''
         self.t2_gID_lbl2 = ''
@@ -79,6 +88,8 @@ class Languages(object):
         self.t2_gID_cmd1_3 = ''
         self.t2_gID_button1 = ''
         self.t2_gID_button2 = ''
+        self.t2_gID_button3 = ''
+        self.t2_gID_button4 = ''
         self.t2_tableCalibration_popup_Exclude = ''
         self.t2_tableCalibration_popup_Include = ''
         self.t2_tableCalibration_popup_Add = ''
@@ -161,7 +172,7 @@ class Languages(object):
         return retVal
 
     """Метод загрузки всех данных из файла. Метод разбит на разделы в соответствии с файлами, содержащими данные"""
-    def load(self,config):
+    def load(self, config):
         # [MAIN]
         self.mainWindow = self.get_string('MAIN', 'MainWindow')
         self.t1 = self.get_string('MAIN', 't1')
@@ -179,6 +190,12 @@ class Languages(object):
         self.Edit_InputMeasurement.append(self.get_string('InputMeasurement', 'Edit_InputMeasurement6'))
         self.Button_InputMeasurement_OK = self.get_string('InputMeasurement', 'Button_InputMeasurement_OK')
         self.Button_InputMeasurement_Cancel = self.get_string('InputMeasurement', 'Button_InputMeasurement_Cancel')
+
+        # [FileManager]
+        self.Button_FM_OK = self.get_string('FileManager', 'Button_FM_OK')
+        self.Button_FM_Cancel = self.get_string('FileManager', 'Button_FM_Cancel')
+        self.Table_Files_Column1 = self.get_string('FileManager', 'Table_Files_Column1')
+        self.Table_Files_Column2 = self.get_string('FileManager', 'Table_Files_Column2')
 
         # [TAB1]
         self.t1_tableMeasurement_Column.clear()
@@ -214,6 +231,7 @@ class Languages(object):
         self.t1_gM_button1 = self.get_string('TAB1', 't1_gM_button1')
         self.t1_gM_button2 = self.get_string('TAB1', 't1_gM_button2')
         self.t1_gM_button3 = self.get_string('TAB1', 't1_gM_button3')
+        self.t1_gM_button4 = self.get_string('TAB1', 't1_gM_button4')
         self.t1_tableMeasurement_popup_Exclude = self.get_string('TAB1', 't1_tableMeasurement_popup_Exclude')
         self.t1_tableMeasurement_popup_Include = self.get_string('TAB1', 't1_tableMeasurement_popup_Include')
         self.t1_tableMeasurement_popup_Add = self.get_string('TAB1', 't1_tableMeasurement_popup_Add')
@@ -239,8 +257,10 @@ class Languages(object):
         self.t2_tableCalibration_Column.append(self.get_string('TAB2', 't2_tableCalibration_Column5'))
         self.t2_tableCalibration_Column.append(self.get_string('TAB2', 't2_tableCalibration_Column6'))
         self.t2_groupCalibratonResult  = self.get_string('TAB2', 't2_groupCalibratonResult')
+        self.t2_gCR_button1 = self.get_string('TAB2', 't2_gCR_button1')
         self.t2_gCR_lbl1 = self.get_string('TAB2', 't2_gCR_lbl1')
         self.t2_gCR_lbl2 = self.get_string('TAB2', 't2_gCR_lbl2')
+        self.t2_gCR_lbl3 = self.get_string('TAB2', 't2_gCR_lbl3')
         self.t2_groupInitialData = self.get_string('TAB2', 't2_groupInitialData')
         self.t2_gID_lbl1 = self.get_string('TAB2', 't2_gID_lbl1')
         self.t2_gID_lbl2 = self.get_string('TAB2', 't2_gID_lbl2')
@@ -251,6 +271,7 @@ class Languages(object):
         self.t2_gID_button1 = self.get_string('TAB2', 't2_gID_button1')
         self.t2_gID_button2 = self.get_string('TAB2', 't2_gID_button2')
         self.t2_gID_button3 = self.get_string('TAB2', 't2_gID_button3')
+        self.t2_gID_button4 = self.get_string('TAB2', 't2_gID_button4')
         self.t2_tableCalibration_popup_Exclude = self.get_string('TAB2', 't2_tableCalibration_popup_Exclude')
         self.t2_tableCalibration_popup_Include = self.get_string('TAB2', 't2_tableCalibration_popup_Include')
         self.t2_tableCalibration_popup_Add = self.get_string('TAB2', 't2_tableCalibration_popup_Add')
@@ -305,6 +326,12 @@ class Languages(object):
         self.message_txt1 = self.get_string('Message', 'message_txt1')
         self.message_txt2 = self.get_string('Message', 'message_txt2')
         self.message_txt3 = self.get_string('Message', 'message_txt3')
+        self.message_txt4 = self.get_string('Message', 'message_txt4')
 
         # [MeasurementReport]
         self.measurement_report = self.get_item("MeasurementReport")
+
+    """Метод для получения заголовков файлового менеджера """
+    def get_file_manager_title(self):
+        result = [self.Button_FM_OK, self.Button_FM_Cancel, self.Table_Files_Column1, self.Table_Files_Column2]
+        return result

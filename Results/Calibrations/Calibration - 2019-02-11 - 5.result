@@ -1,0 +1,9 @@
+[SourceData]
+cuvette = 0
+number_of_measurements = 5
+sample = 5.0
+
+[CalibrationResult]
+vc = 0.0
+vd = 0.0
+

@@ -9,7 +9,7 @@ import time
 import configparser
 import threading
 from Calibration import Calibration
-from MeasurementProcedure import Сuvette, Ports, Pressure_Error
+from MeasurementProcedure import Сuvette, Ports, Abort_Type
 
 """Проверка и комментари: 19.01.2019"""
 
@@ -107,8 +107,9 @@ class CalibrationProcedure(object):
         self.c_Vc = 0.0
         self.c_Vd = 0.0
         self.calibration_file = ''
-        self.save_result = configparser.ConfigParser()
-
+        self.result_file_reader = configparser.ConfigParser()
+        self.abort_procedure = self.main.abort_procedure
+        self.abort_procedure_on = False
 
     """Метод для проверки. Возвращает True, если калибровка запущена иначе False"""
     def is_test_on(self):
@@ -121,6 +122,17 @@ class CalibrationProcedure(object):
     def set_test_on(self, state):
         self.test_on = state
 
+    """Метод для установки состояния переключателя прерывающего процедуру"""
+    def set_abort_procedure(self, s):
+        self.abort_procedure_on = s
+
+    """Метод для проверки. Возвращает True, если запущено прерывание процедуры"""
+    def is_abort_procedure(self):
+        result = False
+        if self.abort_procedure_on:
+            result = True
+        return result
+
     """Метод для приостановки процедуры калибровки, чтобы пользователь мог положить образец в кювету"""
     def set_lock(self):
         self.lock = True
@@ -132,8 +144,9 @@ class CalibrationProcedure(object):
     """Загружаем выбранные на вкладке "Калибровка" установки."""
     def set_settings(self, _cuvette, _number_of_measurements, _sample_volume, _Pmeas):
 
-        # self.test_on должен быть False перед началом калибровки
+        # self.test_on и abort_procedure_on должены быть False перед началом калибровки
         self.test_on = False
+        self.abort_procedure_on = False
         self.cuvette = _cuvette
         self.number_of_measurements = _number_of_measurements
         self.sample_volume = _sample_volume
@@ -141,9 +154,7 @@ class CalibrationProcedure(object):
 
         # Откроем новый файл для записи результатов
         self.new_calibration_file()
-        self.set_result('SourceData', 'cuvette', self.cuvette.name)
-        self.set_result('SourceData', 'number_of_measurements', str(self.number_of_measurements))
-        self.set_result('SourceData', 'sample', str(self.sample_volume))
+        self.save_calibration_result()
 
         # self.calibrations должен быть очищен перед началом новых калибровок
         self.calibrations.clear()
@@ -178,13 +189,6 @@ class CalibrationProcedure(object):
     """Метод, где расположена процедура обработки калибровки в отдельном потоке"""
     def calibrations_procedure(self):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration started')
-        # Этот код юольше не нужен, мы выводим в лог работы прибора настройки перед началом калибровки.
-        # if self.cuvette == Сuvette.Small:
-        #     print('Малая кювета')
-        # if self.cuvette == Сuvette.Medium:
-        #     print('Средняя кювета')
-        # if self.cuvette == Сuvette.Large:
-        #     print('Большая кювета')
         # Блокируем остальные вкладки для пользователя.
         self.block_other_tabs()
         # Блокируем кнопки, поля и работу с таблицей на текущей вкладке.
@@ -194,10 +198,10 @@ class CalibrationProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measure P.....')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measure P.....')
         # Вызываем процедуру калибровки для P
-        calibration = self.calibration_all_cuvette()
-        # обрабатываем проблему набора давления
-        if not calibration == Pressure_Error.No_Error:
-            self.calibration_fail(calibration)
+        try:
+            self.calibration_all_cuvette()
+        except Exception as e:
+            self.interrupt_procedure(e.args[0])
             return
         # отправляем сообщение о том, что пользователь должен положить образец в кювету.
         self.message.emit()
@@ -214,17 +218,21 @@ class CalibrationProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Done. \nMeasure P\'.....')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Done. Measure \nP\'.....')
         # Вызываем процедуру калибровки для P'
-        calibration = self.calibration_all_cuvette()
-        # обрабатываем проблему набора давления
-        if not calibration == Pressure_Error.No_Error:
-            self.calibration_fail(calibration)
+        try:
+            self.calibration_all_cuvette()
+        except Exception as e:
+            self.interrupt_procedure(e.args[0])
             return
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measure P\'..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measure P\'..... Done')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation.....')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation.....')
         # Вызываем процедуру обсчета данных.
-        self.calculation()
+        try:
+            self.calculation()
+        except Exception as e:
+            self.interrupt_procedure(e.args[0])
+            return
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         # Разлокируем остальные вкладки для пользователя.
@@ -236,10 +244,10 @@ class CalibrationProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration finished')
 
     """Метод обработки прерывания калибровки из-за низкого давления"""
-    def calibration_fail(self, calibration):
+    def interrupt_procedure(self, calibration):
         self.set_test_on(False)
-        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... Fail.')
-        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... Fail.')
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
         # выключаем все порты
         self.gpio.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
@@ -249,10 +257,12 @@ class CalibrationProcedure(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Calibration')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration interrupted')
-        if calibration == Pressure_Error.Pressure_Set:
+        if calibration == Abort_Type.Pressure_below_required:
             self.fail_pressure_set.emit()
-        if calibration == Pressure_Error.Get_Balance:
+        if calibration == Abort_Type.Could_not_balance:
             self.fail_get_balance.emit()
+        if calibration == Abort_Type.Interrupted_by_user:
+            self.abort_procedure.emit()
 
     """Метод калибровки для кюветы любого размера"""
     def calibration_all_cuvette(self):
@@ -288,40 +298,52 @@ class CalibrationProcedure(object):
         -Закрыть К2, К3, К4
         Next i
             """
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
         self.time_sleep(10)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(10))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.time_sleep(5)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(5))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.time_sleep(5)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(5))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
         # Цикл по заданному количеству измерений
+        self.check_for_interruption()
         for i in range(self.number_of_measurements):
             # Создаем пустой экземпляр для записей результатов калибровки как новый элемент списка калибровок
             self.calibrations.append(Calibration())
@@ -329,107 +351,131 @@ class CalibrationProcedure(object):
             l = len(self.calibrations) - 1
             # Сразу вносим информацию по тому какое давление мы измеряем P или P'
             self.calibrations[l].measurement = self.P
+            self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
             # Замеряем давление P0/P0', ('p0') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.calibrations[l].p0 = self.spi.get_pressure('p0')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured{0} {1} : p0 = {2}'.format(i, self.calibrations[l].measurement,
                                                                            self.calibrations[l].p0))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We expect a set of pressure')
+            self.check_for_interruption()
             p, success, duration = self.gain_Pmeas()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
-                return Pressure_Error.Pressure_Set
+                raise Exception(Abort_Type.Pressure_below_required)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+            self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+            self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
             # Замеряем давление P1/P1', ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.calibrations[l].p1 = self.spi.get_pressure('p1')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured{0} {1} : p1 = {2}'.format(i, self.calibrations[l].measurement,
                                                                         self.calibrations[l].p1))
             # только для большой и средней кюветы
             if not self.cuvette == Сuvette.Small:
+                self.check_for_interruption()
                 self.gpio.port_on(self.ports[Ports.K2.value])
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
-            self.gpio.port_on(self.ports[Ports.K3.value])
+                self.check_for_interruption()
+                self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time has '
                             'passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time has '
                             'passed: {2}'.format(balance, 0.01, duration))
             # только для большой и средней кюветы
             if not self.cuvette == Сuvette.Small:
+                self.check_for_interruption()
                 self.gpio.port_off(self.ports[Ports.K2.value])
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+            self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
             # Замеряем давление P2/P2', ('p2') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.calibrations[l].p2 = self.spi.get_pressure('p2')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured{0} {1} : p2 = {2}'.format(i, self.calibrations[l].measurement,
                                                                            self.calibrations[l].p2))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time has '
                             'passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time has '
                             'passed: {2}'.format(balance, 0.01, duration))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
@@ -453,24 +499,18 @@ class CalibrationProcedure(object):
             # deviation мы пока не можем посчитать, так что присваиваем ему None
             self.calibrations[l].deviation = None
             # Добавляем полученные калибровки в таблицу
-            self.set_result('Calibration-' + str(l), 'P', self.calibrations[l].measurement)
-            self.set_result('Calibration-' + str(l), 'p0', str(self.calibrations[l].p0))
-            self.set_result('Calibration-' + str(l), 'p1', str(self.calibrations[l].p1))
-            self.set_result('Calibration-' + str(l), 'p2', str(self.calibrations[l].p2))
-            self.set_result('Calibration-' + str(l), 'ratio', str(self.calibrations[l].ratio))
-            self.set_result('Calibration-' + str(l), 'deviation', str(self.calibrations[l].deviation))
-            self.set_result('Calibration-' + str(l), 'active', str(self.calibrations[l].active))
+            self.save_calibration_result()
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add calibration data to the table.....')
             # Добавляем полученные измерения калибровки в таблицу
             self.table.add_calibration(self.calibrations[l])
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add calibration data to the table.....'
-                                                                             'Done')
-        return Pressure_Error.No_Error
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add calibration data to the table.....')
 
     """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
     def time_sleep(self, t):
         if not self.is_test_mode():
-            time.sleep(t)
+            for i in range(t):
+                self.check_for_interruption()
+                time.sleep(1)
 
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
@@ -560,7 +600,6 @@ class CalibrationProcedure(object):
                                            'Measured{0} {1} : this calibration is not active'.format('P', i))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
                                                                              'for P[{0}].....Done'.format(i))
-            self.set_result('Calibration-' + str(index), 'deviation', str(self.calibrations[index].deviation))
             # Добавляем в таблицу в столбец для отклонений
             self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
             counter2 += 1
@@ -593,7 +632,6 @@ class CalibrationProcedure(object):
                                            'Measured{0} {1} : this calibration is not active'.format('P\'', i))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
                                                                              'for P\'[{0}].....Done'.format(i))
-            self.set_result('Calibration-' + str(index), 'deviation', str(self.calibrations[index].deviation))
             # Добавляем в таблицу в столбец для отклонений
             self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
             counter2 += 1
@@ -711,8 +749,7 @@ class CalibrationProcedure(object):
         # -----------------------------------------------------------------------------------------------------
 
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation Vc & Vd.....Done')
-        self.set_result('CalibrationResult', 'Vc', str(self.c_Vc))
-        self.set_result('CalibrationResult', 'Vd', str(self.c_Vd))
+        self.save_calibration_result()
         # Вызываем вывод результатов на форму.
         self.set_calibration_results.emit()
 
@@ -731,6 +768,7 @@ class CalibrationProcedure(object):
         p = 0
         duration = 0
         while not p_test:
+            self.check_for_interruption()
             self.time_sleep(0.1)
             # Замеряем давление p, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p = self.spi.get_pressure('p1')
@@ -781,6 +819,7 @@ class CalibrationProcedure(object):
         # Замеряем давление p_next, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
         p_next = self.spi.get_pressure('p1')
         while not p_test:
+            self.check_for_interruption()
             self.time_sleep(1)
             # p_next становиться p_previous
             p_previous = p_next
@@ -814,9 +853,11 @@ class CalibrationProcedure(object):
         logname = datetime.datetime.now().strftime("%Y-%m-%d")
         return logname
 
+    """Метод устанавливает текущий файл калибровки. В него можно записать данные и из него можно загрузить их"""
     def set_calibration_file(self, file_name):
         self.calibration_file = file_name
 
+    """Метод создает новый текущий файл калибровки. В него можно записать данные и из него можно загрузить их"""
     def new_calibration_file(self):
         # проверим наличие каталога, если его нет - создадим.
         self.check_result_dir()
@@ -831,7 +872,7 @@ class CalibrationProcedure(object):
                 self.calibration_file = os.getcwd() + '\Results\Calibrations\Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
                     number) + '.result'
                 find_name = os.path.isfile(self.calibration_file)
-            self.save_result.read(self.calibration_file)
+            self.result_file_reader.read(self.calibration_file)
 
         # Ветка для программы в нормальном режиме.
         if not self.is_test_mode():
@@ -842,12 +883,11 @@ class CalibrationProcedure(object):
                 self.calibration_file = os.getcwd() + '/Results/Calibrations/Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
                     number) + '.result'
                 find_name = os.path.isfile(self.calibration_file)
-            self.save_result.read(self.calibration_file, encoding = 'WINDOWS-1251')
+            self.result_file_reader.read(self.calibration_file, encoding = 'WINDOWS-1251')
         with open(self.calibration_file, "w") as fh:
-            self.save_result.write(fh)
+            self.result_file_reader.write(fh)
 
     """Проверим наличие каталога, если его нет - создадим."""
-
     def check_result_dir(self):
         if self.is_test_mode():
             if not os.path.isdir(os.getcwd() + '\Results\Calibrations'):
@@ -856,18 +896,85 @@ class CalibrationProcedure(object):
             if not os.path.isdir(os.getcwd() + '/Results/Calibrations'):
                 os.makedirs(os.getcwd() + '/Results/Calibrations')
 
-    """Метод для сохранения измененных настроек в файл"""
-
-    def set_result(self, section, val, s):
-        self.save_result.read(self.calibration_file)
-        if not self.save_result.has_section(section):
-            self.save_result.add_section(section)
-        self.save_result.set(section, val, s)
-        with open(self.calibration_file + ".new", "w") as fh:
-            self.save_result.write(fh)
+    """Метод для сохранения калибровки в файл"""
+    def save_calibration_result(self):
+        self.result_file_reader.read(self.calibration_file)
+        self.update_calibration_file('SourceData', 'cuvette', str(self.cuvette.value))
+        self.update_calibration_file('SourceData', 'number_of_measurements', str(self.number_of_measurements))
+        self.update_calibration_file('SourceData', 'sample', str(self.sample_volume))
+        for i in range(len(self.calibrations)):
+            self.update_calibration_file('Calibration-' + str(i), 'P', self.calibrations[i].measurement)
+            self.update_calibration_file('Calibration-' + str(i), 'p0', str(self.calibrations[i].p0))
+            self.update_calibration_file('Calibration-' + str(i), 'p1', str(self.calibrations[i].p1))
+            self.update_calibration_file('Calibration-' + str(i), 'p2', str(self.calibrations[i].p2))
+            self.update_calibration_file('Calibration-' + str(i), 'ratio', str(self.calibrations[i].ratio))
+            self.update_calibration_file('Calibration-' + str(i), 'deviation', str(self.calibrations[i].deviation))
+            self.update_calibration_file('Calibration-' + str(i), 'active', str(self.calibrations[i].active))
+        self.update_calibration_file('CalibrationResult', 'Vc', str(self.c_Vc))
+        self.update_calibration_file('CalibrationResult', 'Vd', str(self.c_Vd))
         os.rename(self.calibration_file, self.calibration_file + "~")
         os.rename(self.calibration_file + ".new", self.calibration_file)
         os.remove(self.calibration_file + "~")
+
+    def update_calibration_file(self, section, val, s):
+        if not self.result_file_reader.has_section(section):
+            self.result_file_reader.add_section(section)
+        self.result_file_reader.set(section, val, s)
+        with open(self.calibration_file + ".new", "w") as fh:
+            self.result_file_reader.write(fh)
+
+    """Метод для загрузки калибровки из файла"""
+    def load_calibration_result(self):
+        if self.is_test_mode():
+            # для тестового режима (Windows) нужны такие команды:
+            self.result_file_reader.read(self.calibration_file)
+        if not self.is_test_mode():
+            # для нормального режима (Linux) нужны такие команды:
+            self.result_file_reader.read(self.calibration_file, encoding='WINDOWS-1251')
+
+        # [SourceData]
+        cuvette_type = self.try_load_int('SourceData', 'cuvette')
+        if cuvette_type is None:
+            self.cuvette = Сuvette.Large
+        else:
+            self.cuvette = Сuvette(cuvette_type)
+        self.number_of_measurements = self.try_load_int('SourceData', 'number_of_measurements')
+        self.sample_volume = self.try_load_float('SourceData', 'sample')
+        source_data = {
+            'cuvette': self.cuvette,
+            'number_of_measurements': self.number_of_measurements,
+            'sample': self.sample_volume
+        }
+
+        calibrations = []
+        # [Calibration-0] - [Calibration-(number_of_measurements-1)]
+        for i in range(self.number_of_measurements*2):
+            p = self.try_load_string('Calibration-' + str(i), 'p')
+            p0 = self.try_load_float('Calibration-' + str(i), 'p0')
+            p1 = self.try_load_float('Calibration-' + str(i), 'p1')
+            p2 = self.try_load_float('Calibration-' + str(i), 'p2')
+            ratio = self.try_load_float('Calibration-' + str(i), 'ratio')
+            deviation = self.try_load_float('Calibration-' + str(i), 'deviation')
+            active = self.try_load_boolean('Calibration-' + str(i), 'active')
+            calibrations.append({
+                'p': p,
+                'p0': p0,
+                'p1': p1,
+                'p2': p2,
+                'ratio': ratio,
+                'deviation': deviation,
+                'active': active
+            })
+
+        # [CalibrationResult]
+            self.vc = self.try_load_float('CalibrationResult', 'vc')
+            self.vd = self.try_load_float('CalibrationResult', 'vd')
+        calibration_result = {
+            'vc': self.vc,
+            'vd': self.vd
+        }
+        result = [source_data, calibrations, calibration_result]
+        return result
 
     def get_files_list(self):
         # проверим наличие каталога, если его нет - создадим.
@@ -881,6 +988,42 @@ class CalibrationProcedure(object):
         ret_files = {}
         for f in files:
             file = dir + f
-            data_changed = time.strftime('%m/%d/%Y-%H.%M.%S', time.gmtime(os.path.getmtime(file)))
+            data_changed = time.gmtime(os.path.getmtime(file))
             ret_files.update({f: data_changed})
-        return ret_files
+        return ret_files, dir
+
+    def check_for_interruption(self):
+        if self.is_abort_procedure():
+            raise Exception(Abort_Type.Interrupted_by_user)
+
+    def try_load_string(self, section, variable):
+        result = ''
+        try:
+            result = self.result_file_reader.get(section, variable)
+        except:
+            result = None
+        return result
+
+    def try_load_int(self, section, variable):
+        result = 0
+        try:
+            result = self.result_file_reader.getint(section, variable)
+        except:
+            result = None
+        return result
+
+    def try_load_float(self, section, variable):
+        result = 0
+        try:
+            result = self.result_file_reader.getfloat(section, variable)
+        except:
+            result = None
+        return result
+
+    def try_load_boolean(self, section, variable):
+        result = False
+        try:
+            result = self.result_file_reader.getboolean(section, variable)
+        except:
+            result = None
+        return result

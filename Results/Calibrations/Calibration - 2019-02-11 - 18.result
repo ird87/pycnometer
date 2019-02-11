@@ -1,0 +1,108 @@
+[SourceData]
+cuvette = 0
+number_of_measurements = 20
+sample = 20.0
+
+[CalibrationResult]
+vc = -55.70190503789393
+vd = -54.13887190035433
+
+[Calibration-0]
+p = P
+p0 = 0.0
+p1 = 120.92922776148582
+p2 = 56.27996089931574
+ratio = 2.148708453757225
+deviation = None
+active = True
+
+[Calibration-1]
+p = P
+p0 = 0.0
+p1 = 120.78563049853372
+p2 = 58.2217008797654
+ratio = 2.0745809324253535
+deviation = None
+active = True
+
+[Calibration-2]
+p = P
+p0 = 0.0
+p1 = 120.49843597262952
+p2 = 56.69296187683285
+ratio = 2.125456705444601
+deviation = None
+active = True
+
+[Calibration-3]
+p = P
+p0 = 0.0
+p1 = 120.40821114369501
+p2 = 57.08817204301075
+ratio = 2.1091621405039622
+deviation = None
+active = True
+
+[Calibration-4]
+p = P
+p0 = 0.0
+p1 = 120.95337243401758
+p2 = 55.49843597262952
+ratio = 2.179401460856822
+deviation = None
+active = True
+
+[Calibration-5]
+p = P
+p0 = 0.0
+p1 = 120.47174975562072
+p2 = 55.72336265884653
+ratio = 2.1619612314709236
+deviation = None
+active = True
+
+[Calibration-6]
+p = P
+p0 = 0.0
+p1 = 120.40058651026393
+p2 = 56.00039100684262
+ratio = 2.149995461559408
+deviation = None
+active = True
+
+[Calibration-7]
+p = P
+p0 = 0.0
+p1 = 120.96862170087975
+p2 = 58.28142717497556
+ratio = 2.0755947059721342
+deviation = None
+active = True
+
+[Calibration-8]
+p = P
+p0 = 0.0
+p1 = 121.30156402737046
+p2 = 56.71837732160313
+ratio = 2.138664217059126
+deviation = None
+active = True
+
+[Calibration-9]
+p = P
+p0 = 0.0
+p1 = 120.16041055718475
+p2 = 59.55219941348973
+ratio = 2.0177325395301198
+deviation = None
+active = True
+
+[Calibration-10]
+p = P
+p0 = 0.0
+p1 = 120.62932551319648
+p2 = 56.98778103616813
+ratio = 2.116757721039135
+deviation = None
+active = True
+

@@ -61,7 +61,7 @@ class UiTableMeasurement(object):
         self.t1_tableMeasurement.insertRow(rowPosition)
         # для размещения данных в ячейке таблицы, надо убедиться, что они string и разместить их в QTableWidgetItem
         from Main import toFixed
-        item1 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_measurements()[rowPosition].p0, self.round))
+        item1 = QtWidgets.QTableWidgetItem(toFixed(_measurements.p0, self.round))
         # Указать им ориентацию по центру
         item1.setTextAlignment(QtCore.Qt.AlignCenter)
         # Указать, что ячейку нельзя редактировать
@@ -69,29 +69,32 @@ class UiTableMeasurement(object):
         # и, наконец, разместить в нужной ячейке по координатом строки и столбца
         self.t1_tableMeasurement.setItem(rowPosition, 0, item1)
         # повторить для каждой ячейки, куда надо внести данные.
-        item2 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_measurements()[rowPosition].p1, self.round))
+        item2 = QtWidgets.QTableWidgetItem(toFixed(_measurements.p1, self.round))
         item2.setTextAlignment(QtCore.Qt.AlignCenter)
         item2.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 1, item2)
-        item3 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_measurements()[rowPosition].p2, self.round))
+        item3 = QtWidgets.QTableWidgetItem(toFixed(_measurements.p2, self.round))
         item3.setTextAlignment(QtCore.Qt.AlignCenter)
         item3.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 2, item3)
-        item4 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_measurements()[rowPosition].volume, self.round))
+        item4 = QtWidgets.QTableWidgetItem(toFixed(_measurements.volume, self.round))
         item4.setTextAlignment(QtCore.Qt.AlignCenter)
         item4.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 3, item4)
-        item5 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_measurements()[rowPosition].density, self.round))
+        item5 = QtWidgets.QTableWidgetItem(toFixed(_measurements.density, self.round))
         item5.setTextAlignment(QtCore.Qt.AlignCenter)
         item5.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 4, item5)
-        item6 = QtWidgets.QTableWidgetItem(toFixed(self.main.get_measurements()[rowPosition].deviation, self.round))
+        item6 = QtWidgets.QTableWidgetItem(toFixed(_measurements.deviation, self.round))
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
         item6.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 5, item6)
         # Устанавливаем ориентацию по центру по вертикали.
         header = self.t1_tableMeasurement.verticalHeader()
         header.setDefaultAlignment(Qt.AlignHCenter)
+        if not _measurements.active:
+            self.set_color_to_row_unactive(rowPosition)
+        self.t1_tableMeasurement.reset()
 
     """Метод добавляет контекстное меню"""
     def popup(self):
@@ -355,7 +358,7 @@ class UiTableMeasurement(object):
         self.t1_tableMeasurement.setItem(row, column, item)
         if not active:
             self.set_color_to_row_unactive(row)
-
+        self.t1_tableMeasurement.reset()
 
 
 

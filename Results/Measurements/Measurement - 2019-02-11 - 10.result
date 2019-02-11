@@ -5,12 +5,18 @@ sample = default
 batch_series = default
 
 [SamplePreparation]
-sample_preparation = Vacuuming
+sample_preparation = 0
 sample_preparation_time = 0
 
 [Measurement]
 sample_mass = 10.0
-cuvette = Large
+cuvette = 0
 number_of_measurements = 10
 take_the_last_measurements = 10
+
+[MeasurementResult]
+medium_volume = 0.0
+medium_density = 0.0
+sd = 0.0
+sd_per = 0.0
 

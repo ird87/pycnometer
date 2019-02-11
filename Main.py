@@ -7,11 +7,14 @@ import sys  # sys нужен для передачи argv в QApplication
 
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
+
+from Calibration import Calibration
 from CalibrationProcedure import CalibrationProcedure
 from Config import Configure, Pressure
 from FileManager import UiFileManager
 from Languages import Languages
 from Logger import Logger
+from Measurement import Measurement
 from MeasurementProcedure import MeasurementProcedure, Сuvette, Sample_preparation
 from PyQt5 import QtCore
 from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
@@ -91,6 +94,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     fail_pressure_set = PyQt5.QtCore.pyqtSignal()
     # Вывод на вкладку "Измерение" или "Калибровка" сообщение о слишком долгом ожидание баланса
     fail_get_balance = PyQt5.QtCore.pyqtSignal()
+    # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры пользователем
+    abort_procedure = PyQt5.QtCore.pyqtSignal()
 
     """Конструктор класса. Поля класса"""
 
@@ -184,6 +189,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.fail_pressure_set.connect(self.on_message_fail_pressure_set, PyQt5.QtCore.Qt.QueuedConnection)
         # Вывод на вкладку "Измерение" или "Калибровка" сообщение о слишком долгом ожидание баланса
         self.fail_get_balance.connect(self.on_message_fail_get_balance, PyQt5.QtCore.Qt.QueuedConnection)
+        # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры пользователем
+        self.abort_procedure.connect(self.on_message_abort_procedure, PyQt5.QtCore.Qt.QueuedConnection)
 
         # создаем модуль Измерение и передаем туда ссылку на main.
         self.measurement_procedure = MeasurementProcedure(self)
@@ -215,25 +222,28 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Подключаем к объектам интерфейса методы их обработки.
         self.t1_gM_button1.clicked.connect(self.measurement_procedure_start)    # Измерение.    Начало измерений.
         self.t1_gM_button2.clicked.connect(self.measurement_clear)              # Измерение.    Очистка измерений.
-        self.t1_gM_button3.clicked.connect(self.measurement_file_manager_open)              # Измерение.    Окно загрузки файлов.
+        self.t1_gM_button3.clicked.connect(self.measurement_file_manager_open)  # Измерение.    Окно загрузки файлов.
+        self.t1_gM_button4.clicked.connect(self.measurement_stop)               # Измерение.   Прервать измерение.
         self.t1_gMI_Edit1.textChanged.connect(self.t1_gMI_Edit1_text_changed)   # Измерение.    Ввод Оператор.
         self.t1_gMI_Edit2.textChanged.connect(self.t1_gMI_Edit2_text_changed)   # Измерение.    Ввод Организация.
         self.t1_gMI_Edit3.textChanged.connect(self.t1_gMI_Edit3_text_changed)   # Измерение.    Ввод Образец.
         self.t1_gMI_Edit4.textChanged.connect(self.t1_gMI_Edit4_text_changed)   # Измерение.    Ввод Партия/Серия.
         # ------------------------------------------------------------------------------------------------------------
         # Хочу по двойному клику автозаполнение
-        clickable(self.t1_gMI_Edit1).connect(self.t1_gMI_Edit1_clicked)          # Измерение.    Ввод Оператор.
+        clickable(self.t1_gMI_Edit1).connect(self.t1_gMI_Edit1_clicked)            # Измерение.    Ввод Оператор.
         clickable(self.t1_gMI_Edit2).connect(self.t1_gMI_Edit2_clicked)            # Измерение.    Ввод Организация.
         clickable(self.t1_gMI_Edit3).connect(self.t1_gMI_Edit3_clicked)            # Измерение.    Ввод Образец.
         clickable(self.t1_gMI_Edit4).connect(self.t1_gMI_Edit4_clicked)            # Измерение.    Ввод Партия/Серия.
         # ------------------------------------------------------------------------------------------------------------
+        self.t2_gCR_button1.clicked.connect(self.calibration_save)              # Калибровка.   Сохранить результат.
         self.t1_gSP_Edit1.textChanged.connect(self.t1_gSP_Edit1_text_changed)   # Измерение.    Ввод времени подготовки.
         self.t1_gM_Edit1.textChanged.connect(self.t1_gM_Edit1_text_changed)     # Измерение.    Ввод массы образца.
         self.t1_gM_Edit2.textChanged.connect(self.t1_gM_Edit2_text_changed)     # Измерение.    Ввод количество измер.
         self.t1_gM_Edit3.textChanged.connect(self.t1_gM_Edit3_text_changed)     # Измерение.    Ввод взять последних.
         self.t2_gID_button1.clicked.connect(self.calibration_procedure_start)   # Калибровка.   Начало Калибровки.
         self.t2_gID_button2.clicked.connect(self.calibration_clear)             # Калибровка.   Очистка калибровки.
-        self.t2_gID_button3.clicked.connect(self.calibration_save)              # Калибровка.   Сохранить результат.
+        self.t2_gID_button3.clicked.connect(self.calibration_file_manager_open) # Калибровка.   Окно загрузки файлов.
+        self.t2_gID_button4.clicked.connect(self.calibration_stop)              # Калибровка.   Прервать калибровку.
         self.t2_gID_Edit1.textChanged.connect(self.t2_gID_Edit1_text_changed)   # Калибровка.   Ввод количество измер.
         self.t2_gID_Edit2.textChanged.connect(self.t2_gID_Edit2_text_changed)   # Калибровка.   Ввод объема ст. образца.
         self.t3_checkValve1.stateChanged.connect(self.on_off_port1)             # Ручное упр.   Изменение состояние К1.
@@ -544,6 +554,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_button1.setEnabled(False)
         self.t1_gM_button2.setEnabled(False)
         self.t1_gM_button3.setEnabled(False)
+        self.t1_gM_button4.setEnabled(True)
         self.t1_gMI_Edit1.setEnabled(False)
         self.t1_gMI_Edit2.setEnabled(False)
         self.t1_gMI_Edit3.setEnabled(False)
@@ -563,6 +574,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_button1.setEnabled(True)
         self.t1_gM_button2.setEnabled(True)
         self.t1_gM_button3.setEnabled(True)
+        self.t1_gM_button4.setEnabled(False)
         self.t1_gMI_Edit1.setEnabled(True)
         self.t1_gMI_Edit2.setEnabled(True)
         self.t1_gMI_Edit3.setEnabled(True)
@@ -571,20 +583,25 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     # Блокируем кнопки на вкладке измерений
     def block_userinterface_calibration(self):
+        self.t2_gCR_button1.setEnabled(False)
         self.t2_gID_cmd1.setEnabled(False)
         self.t2_gID_Edit1.setEnabled(False)
         self.t2_gID_Edit2.setEnabled(False)
         self.t2_gID_button1.setEnabled(False)
         self.t2_gID_button2.setEnabled(False)
+        self.t2_gID_button3.setEnabled(False)
+        self.t2_gID_button4.setEnabled(True)
         self.t2_tableCalibration.popup_menu_enable = False
 
     def unblock_userinterface_calibration(self):
+        self.t2_gCR_button1.setEnabled(True)
         self.t2_gID_cmd1.setEnabled(True)
         self.t2_gID_Edit1.setEnabled(True)
         self.t2_gID_Edit2.setEnabled(True)
         self.t2_gID_button1.setEnabled(True)
         self.t2_gID_button2.setEnabled(True)
         self.t2_gID_button3.setEnabled(True)
+        self.t2_gID_button4.setEnabled(False)
         self.t2_tableCalibration.popup_menu_enable = True
 
     # Блокируем остальные вкладки
@@ -703,6 +720,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_button1.setText(self.languages.t1_gM_button1)
         self.t1_gM_button2.setText(self.languages.t1_gM_button2)
         self.t1_gM_button3.setText(self.languages.t1_gM_button3)
+        self.t1_gM_button4.setText(self.languages.t1_gM_button4)
 
         # [InputCalibration]
         input_calibration_header = []
@@ -722,8 +740,10 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                                            self.languages.t2_tableCalibration_popup_Recount)
 
         self.t2_groupCalibratonResult.setTitle(self.languages.t2_groupCalibratonResult)
+        self.t2_gCR_button1.setText(self.languages.t2_gCR_button1)
         self.t2_gCR_lbl1.setText(self.languages.t2_gCR_lbl1)
         self.t2_gCR_lbl2.setText(self.languages.t2_gCR_lbl2)
+        self.t2_gCR_lbl3.setText(self.languages.t2_gCR_lbl3)
 
         self.t2_groupInitialData.setTitle(self.languages.t2_groupInitialData)
         self.t2_gID_lbl1.setText(self.languages.t2_gID_lbl1)
@@ -739,6 +759,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gID_button1.setText(self.languages.t2_gID_button1)
         self.t2_gID_button2.setText(self.languages.t2_gID_button2)
         self.t2_gID_button3.setText(self.languages.t2_gID_button3)
+        self.t2_gID_button4.setText(self.languages.t2_gID_button4)
 
         # [TAB3]
         self.t3_lblPressure1.setText(self.languages.t3_lblPressure1)
@@ -777,6 +798,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.message_txt1 = self.languages.message_txt1
         self.message_txt2 = self.languages.message_txt2
         self.message_txt3 = self.languages.message_txt3
+        self.message_txt4 = self.languages.message_txt4
 
         # [MeasurementReport]
         self.measurement_report=self.languages.measurement_report
@@ -1095,7 +1117,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     # очищаем таблицу и базу данных калибровки
     def calibration_clear(self):
-        self.t2_gID_button3.setEnabled(False)
+        self.t2_gCR_button1.setEnabled(False)
         self.calibration_procedure.calibrations.clear()
         self.t2_tableCalibration.clear_table()
 
@@ -1155,6 +1177,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     def on_message_fail_get_balance(self):
         self.get_messagebox(self.message_headline1, self.message_txt3)
 
+    def on_message_abort_procedure(self):
+        self.get_messagebox(self.message_headline1, self.message_txt4)
+
     # Просто по клику заполняем поля
     def t1_gMI_Edit1_clicked(self):
         self.t1_gMI_Edit1.setText("default")
@@ -1168,26 +1193,118 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     def t1_gMI_Edit4_clicked(self):
         self.t1_gMI_Edit4.setText("default")
 
+    # Создаем отчет по измерению
     def report_measurment(self):
         self.measurement_procedure.create_report()
 
+    # Метод для получения измерений
     def get_measurements(self):
         return self.measurement_procedure.measurements
 
+    # Метод для получения калибровки
     def get_calibrations(self):
         return self.calibration_procedure.calibrations
 
+    # Открываем файловый менеджер для загрузки измерения
     def measurement_file_manager_open(self):
-        files = self.measurement_procedure.get_files_list()
-        self.file_manager = UiFileManager(self)
+        files, dir = self.measurement_procedure.get_files_list()
+        self.file_manager = UiFileManager(self, dir)
         self.file_manager.add_files(files)
         self.file_manager.activate()
+        if self.file_manager.exec_():
+            self.measurement_clear()
+            self.measurement_procedure.set_measurement_file(self.file_manager.get_file())
+            measurement_load = self.measurement_procedure.load_measurement_result()
 
+            # [GeneralInformation]
+            self.t1_gMI_Edit1.setText(measurement_load[0]['operator'])
+            self.t1_gMI_Edit2.setText(measurement_load[0]['organization'])
+            self.t1_gMI_Edit3.setText(measurement_load[0]['sample'])
+            self.t1_gMI_Edit4.setText(measurement_load[0]['batch_series'])
+
+            # [SamplePreparation]
+            if measurement_load[1]['sample_preparation'] == Sample_preparation.Vacuuming:
+                self.t1_gSP_gRB_rb1.setChecked(True)
+            if measurement_load[1]['sample_preparation'] == Sample_preparation.Blow:
+                self.t1_gSP_gRB_rb2.setChecked(True)
+            if measurement_load[1]['sample_preparation'] == Sample_preparation.Impulsive_blowing:
+                self.t1_gSP_gRB_rb3.setChecked(True)
+            self.t1_gSP_Edit1.setText(str(measurement_load[1]['sample_preparation_time']))
+
+            # [Measurement]
+            self.t1_gM_Edit1.setText(str(measurement_load[2]['sample_mass']))
+            self.t1_gM_cmd1.setCurrentIndex(measurement_load[2]['cuvette'].value)
+            self.t1_gM_Edit2.setText(str(measurement_load[2]['number_of_measurements']))
+            self.t1_gM_Edit3.setText(str(measurement_load[2]['take_the_last_measurements']))
+
+            # [Measurement-0] - [Measurement-(number_of_measurements-1)]
+            for i in range(measurement_load[2]['number_of_measurements']):
+                m = Measurement()
+                m.set_measurement(
+                    measurement_load[3][i]['p0'],
+                    measurement_load[3][i]['p1'],
+                    measurement_load[3][i]['p2'],
+                    measurement_load[3][i]['volume'],
+                    measurement_load[3][i]['density'],
+                    measurement_load[3][i]['deviation']
+                )
+                if not measurement_load[3][i]['active']:
+                    m.set_active_off()
+                self.measurement_procedure.measurements.append(m)
+                self.t1_tableMeasurement.add_measurement(m)
+
+            # [MeasurementResult]
+            self.t1_gMR_Edit1.setText(str(measurement_load[4]['medium_volume']))
+            self.t1_gMR_Edit2.setText(str(measurement_load[4]['medium_density']))
+            self.t1_gMR_Edit3.setText(str(measurement_load[4]['sd']))
+            self.t1_gMR_Edit4.setText(str(measurement_load[4]['sd_per']))
+
+
+    # Открываем файловый менеджер для загрузки калибровки
     def calibration_file_manager_open(self):
-        files = self.calibration_procedure.get_files_list()
-        self.file_manager = UiFileManager(self)
+        files, dir = self.calibration_procedure.get_files_list()
+        self.file_manager = UiFileManager(self, dir)
         self.file_manager.add_files(files)
         self.file_manager.activate()
+        if self.file_manager.exec_():
+            self.calibration_clear()
+            self.calibration_procedure.set_calibration_file(self.file_manager.get_file())
+            calibration_load = self.calibration_procedure.load_calibration_result()
+
+            # [SourceData]
+            self.t2_gID_cmd1.setCurrentIndex(calibration_load[0]['cuvette'].value)
+            self.t2_gID_Edit1.setText(str(calibration_load[0]['number_of_measurements']))
+            self.t2_gID_Edit2.setText(str(calibration_load[0]['sample']))
+
+            # [Calibration-0] - [Calibration-(number_of_measurements-1)]
+            for i in range(calibration_load[0]['number_of_measurements']*2):
+                c = Calibration()
+                c.set_calibration(
+                    calibration_load[1][i]['p'],
+                    calibration_load[1][i]['p0'],
+                    calibration_load[1][i]['p1'],
+                    calibration_load[1][i]['p2'],
+                    calibration_load[1][i]['ratio'],
+                    calibration_load[1][i]['deviation']
+                )
+                if not calibration_load[1][i]['active']:
+                    c.set_active_off()
+                self.calibration_procedure.calibrations.append(c)
+                self.t2_tableCalibration.add_calibration(c)
+
+            # [CalibrationResult]
+            self.t2_gCR_Edit1.setText(str(calibration_load[2]['vc']))
+            self.t2_gCR_Edit2.setText(str(calibration_load[2]['vd']))
+            self.t2_gCR_button1.setEnabled(True)
+
+
+    # Прерываем процедуру измерения
+    def measurement_stop(self):
+        self.measurement_procedure.set_abort_procedure(True)
+
+    # Прерываем процедуру калибровки
+    def calibration_stop(self):
+        self.calibration_procedure.set_abort_procedure(True)
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

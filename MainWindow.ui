@@ -361,6 +361,9 @@
         <property name="text">
          <string>t1_gSP_gRB_rb2</string>
         </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
        </widget>
        <widget class="QRadioButton" name="t1_gSP_gRB_rb3">
         <property name="geometry">
@@ -455,7 +458,7 @@
        <property name="geometry">
         <rect>
          <x>220</x>
-         <y>40</y>
+         <y>30</y>
          <width>260</width>
          <height>25</height>
         </rect>
@@ -477,7 +480,7 @@
        <property name="geometry">
         <rect>
          <x>40</x>
-         <y>40</y>
+         <y>30</y>
          <width>170</width>
          <height>25</height>
         </rect>
@@ -496,7 +499,7 @@
        <property name="geometry">
         <rect>
          <x>40</x>
-         <y>80</y>
+         <y>60</y>
          <width>170</width>
          <height>25</height>
         </rect>
@@ -515,7 +518,7 @@
        <property name="geometry">
         <rect>
          <x>40</x>
-         <y>120</y>
+         <y>90</y>
          <width>170</width>
          <height>25</height>
         </rect>
@@ -534,7 +537,7 @@
        <property name="geometry">
         <rect>
          <x>40</x>
-         <y>160</y>
+         <y>120</y>
          <width>170</width>
          <height>25</height>
         </rect>
@@ -553,7 +556,7 @@
        <property name="geometry">
         <rect>
          <x>220</x>
-         <y>120</y>
+         <y>90</y>
          <width>260</width>
          <height>25</height>
         </rect>
@@ -575,7 +578,7 @@
        <property name="geometry">
         <rect>
          <x>220</x>
-         <y>160</y>
+         <y>120</y>
          <width>260</width>
          <height>25</height>
         </rect>
@@ -597,7 +600,7 @@
        <property name="geometry">
         <rect>
          <x>220</x>
-         <y>80</y>
+         <y>60</y>
          <width>260</width>
          <height>25</height>
         </rect>
@@ -609,10 +612,10 @@
        </property>
        <property name="geometry">
         <rect>
-         <x>15</x>
+         <x>30</x>
          <y>210</y>
-         <width>150</width>
-         <height>25</height>
+         <width>200</width>
+         <height>32</height>
         </rect>
        </property>
        <property name="text">
@@ -622,10 +625,10 @@
       <widget class="QPushButton" name="t1_gM_button2">
        <property name="geometry">
         <rect>
-         <x>175</x>
-         <y>210</y>
-         <width>150</width>
-         <height>25</height>
+         <x>270</x>
+         <y>160</y>
+         <width>200</width>
+         <height>32</height>
         </rect>
        </property>
        <property name="text">
@@ -635,14 +638,30 @@
       <widget class="QPushButton" name="t1_gM_button3">
        <property name="geometry">
         <rect>
-         <x>335</x>
-         <y>210</y>
-         <width>150</width>
-         <height>25</height>
+         <x>30</x>
+         <y>160</y>
+         <width>200</width>
+         <height>32</height>
         </rect>
        </property>
        <property name="text">
         <string>t1_gM_button3</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t1_gM_button4">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>210</y>
+         <width>200</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>t1_gM_button4</string>
        </property>
       </widget>
      </widget>
@@ -879,9 +898,9 @@
       <widget class="QLineEdit" name="t2_gCR_Edit2">
        <property name="geometry">
         <rect>
-         <x>340</x>
+         <x>300</x>
          <y>70</y>
-         <width>371</width>
+         <width>210</width>
          <height>20</height>
         </rect>
        </property>
@@ -904,9 +923,9 @@
       <widget class="QLineEdit" name="t2_gCR_Edit1">
        <property name="geometry">
         <rect>
-         <x>340</x>
+         <x>300</x>
          <y>30</y>
-         <width>371</width>
+         <width>210</width>
          <height>20</height>
         </rect>
        </property>
@@ -931,7 +950,7 @@
         <rect>
          <x>10</x>
          <y>70</y>
-         <width>311</width>
+         <width>280</width>
          <height>20</height>
         </rect>
        </property>
@@ -950,7 +969,7 @@
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>311</width>
+         <width>280</width>
          <height>20</height>
         </rect>
        </property>
@@ -964,6 +983,44 @@
         <string>t2_gCR_lbl1</string>
        </property>
       </widget>
+      <widget class="QLabel" name="t2_gCR_lbl3">
+       <property name="geometry">
+        <rect>
+         <x>519</x>
+         <y>30</y>
+         <width>201</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>t2_gCR_lbl3</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t2_gCR_button1">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>520</x>
+         <y>60</y>
+         <width>201</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>t2_gCR_button1</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="t2_groupInitialData">
       <property name="geometry">
@@ -971,19 +1028,19 @@
         <x>760</x>
         <y>10</y>
         <width>500</width>
-        <height>220</height>
+        <height>260</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
         <width>500</width>
-        <height>220</height>
+        <height>260</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>500</width>
-        <height>220</height>
+        <height>260</height>
        </size>
       </property>
       <property name="font">
@@ -1044,7 +1101,7 @@
         <rect>
          <x>31</x>
          <y>80</y>
-         <width>281</width>
+         <width>280</width>
          <height>25</height>
         </rect>
        </property>
@@ -1063,7 +1120,7 @@
         <rect>
          <x>31</x>
          <y>125</y>
-         <width>281</width>
+         <width>280</width>
          <height>25</height>
         </rect>
        </property>
@@ -1083,10 +1140,10 @@
        </property>
        <property name="geometry">
         <rect>
-         <x>31</x>
-         <y>164</y>
-         <width>135</width>
-         <height>31</height>
+         <x>30</x>
+         <y>220</y>
+         <width>200</width>
+         <height>32</height>
         </rect>
        </property>
        <property name="text">
@@ -1096,10 +1153,10 @@
       <widget class="QPushButton" name="t2_gID_button2">
        <property name="geometry">
         <rect>
-         <x>325</x>
-         <y>164</y>
-         <width>141</width>
-         <height>31</height>
+         <x>270</x>
+         <y>175</y>
+         <width>200</width>
+         <height>32</height>
         </rect>
        </property>
        <property name="text">
@@ -1136,19 +1193,32 @@
        </property>
       </widget>
       <widget class="QPushButton" name="t2_gID_button3">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>175</y>
+         <width>200</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>t2_gID_button3</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t2_gID_button4">
        <property name="enabled">
         <bool>false</bool>
        </property>
        <property name="geometry">
         <rect>
-         <x>176</x>
-         <y>164</y>
-         <width>141</width>
-         <height>31</height>
+         <x>270</x>
+         <y>220</y>
+         <width>200</width>
+         <height>32</height>
         </rect>
        </property>
        <property name="text">
-        <string>t2_gID_button3</string>
+        <string>t2_gID_button4</string>
        </property>
       </widget>
      </widget>

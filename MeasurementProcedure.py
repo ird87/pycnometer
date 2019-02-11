@@ -132,7 +132,9 @@ class MeasurementProcedure(object):
         self.fail_pressure_set = self.main.fail_pressure_set
         self.fail_get_balance = self.main.fail_get_balance
         self.measurement_file = ''
-        self.save_result = configparser.ConfigParser()
+        self.result_file_reader = configparser.ConfigParser()
+        self.abort_procedure = self.main.abort_procedure
+        self.abort_procedure_on = False
 
     """Метод для проверки включено ли измерение в рассчеты"""
     def get_measurement_active(self, i):
@@ -149,12 +151,24 @@ class MeasurementProcedure(object):
     def set_test_on(self, s):
         self.test_on = s
 
+    """Метод для установки состояния переключателя прерывающего процедуру"""
+    def set_abort_procedure(self, s):
+        self.abort_procedure_on = s
+
+    """Метод для проверки. Возвращает True, если запущено прерывание процедуры"""
+    def is_abort_procedure(self):
+        result = False
+        if self.abort_procedure_on:
+            result = True
+        return result
+
     """Загружаем выбранные на вкладке "Измерения" установки."""
     def set_settings(self, measurement_report, operator, organization, sample, batch_series, _cuvette, _sample_preparation, _sample_preparation_time_in_minute, _sample_mass,
                      _number_of_measurements, _take_the_last_measurements, _VcL, _VcM, _VcS, _VdLM, _VdS,
                      _Pmeas, _pulse_length):
-        # self.test_on должен быть False перед началом калибровки
+        # self.test_on и abort_procedure_on должены быть False перед началом калибровки
         self.test_on = False
+        self.abort_procedure_on = False
         self.measurement_report = measurement_report
         self.operator = operator
         self.organization = organization
@@ -177,17 +191,8 @@ class MeasurementProcedure(object):
         self.pulse_length = _pulse_length
         # Откроем новый файл для записи результатов
         self.new_measurement_file()
-        self.set_result('GeneralInformation', 'operator', self.operator)
-        self.set_result('GeneralInformation', 'organization', self.organization)
-        self.set_result('GeneralInformation', 'sample', self.sample)
-        self.set_result('GeneralInformation', 'batch_series', self.batch_series)
-        self.set_result('SamplePreparation', 'sample_preparation', self.sample_preparation.name)
-        self.set_result('SamplePreparation', 'sample_preparation_time', str(self.sample_preparation_time))
-        self.set_result('Measurement', 'sample_mass', str(self.sample_mass))
-        self.set_result('Measurement', 'cuvette', self.cuvette.name)
-        self.set_result('Measurement', 'number_of_measurements', str(self.number_of_measurements))
-        self.set_result('Measurement', 'take_the_last_measurements', str(self.take_the_last_measurements))
-
+        # Запишем данные.
+        self.save_measurement_result()
         # self.measurements должен быть очищен перед началом новых калибровок
         self.measurements.clear()
         txt = 'The following measurement settings are set:' \
@@ -229,7 +234,7 @@ class MeasurementProcedure(object):
             self.my_thread.join()
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Thread "Measurement" finished')
 
-    """Метод, где расположена процедура обработки измрения в отдельном потоке"""
+    """Метод, где расположена процедура обработки измерения в отдельном потоке"""
     def measurements_procedure(self):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement started')
         # Блокируем остальные вкладки для пользователя.
@@ -241,14 +246,22 @@ class MeasurementProcedure(object):
         if self.sample_preparation == Sample_preparation.Vacuuming:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....')
-            self.sample_preparation_vacuuming()
+            try:
+                self.sample_preparation_vacuuming()
+            except Exception as e:
+                self.interrupt_procedure(e.args[0])
+                return
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....'
                                                                                    'Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....Done.')
         if self.sample_preparation == Sample_preparation.Blow:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Blow.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Blow.....')
-            self.sample_preparation_blow()
+            try:
+                self.sample_preparation_blow()
+            except Exception as e:
+                self.interrupt_procedure(e.args[0])
+                return
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                                                             'Sample preparation: Blow.....Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Blow.....Done.')
@@ -256,8 +269,12 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Impulsive '
                                                                                    'blowing.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Impulsive '
-                                                                             'blowing.....')
-            self.sample_preparation_impulsive_blowing()
+                                                                          'blowing.....')
+            try:
+                self.sample_preparation_impulsive_blowing()
+            except Exception as e:
+                self.interrupt_procedure(e.args[0])
+                return
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                                                     'Sample preparation: Impulsive blowing.....Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Impulsive '
@@ -267,10 +284,10 @@ class MeasurementProcedure(object):
         if self.cuvette == Сuvette.Small:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Small.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Small.....')
-            measurement = self.measurement_cuvette_small()
-            # обрабатываем проблему набора давления
-            if not measurement == Pressure_Error.No_Error:
-                self.measurement_fail(measurement)
+            try:
+                self.measurement_cuvette_small()
+            except Exception as e:
+                self.interrupt_procedure(e.args[0])
                 return
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                                                             'Measurement for Сuvette.Small.....Done.')
@@ -280,10 +297,10 @@ class MeasurementProcedure(object):
                                                                                    'or Cuvette.Medium.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Large '
                                                                              'or Cuvette.Medium.....')
-            measurement = self.measurement_cuvette_large_or_medium()
-            # обрабатываем проблему набора давления
-            if not measurement == Pressure_Error.No_Error:
-                self.measurement_fail(measurement)
+            try:
+                self.measurement_cuvette_large_or_medium()
+            except Exception as e:
+                self.interrupt_procedure(e.args[0])
                 return
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Large '
                                                                                   'or Cuvette.Medium.....Done.')
@@ -294,7 +311,11 @@ class MeasurementProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation.....')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation.....')
         self.last_numbers_result()
-        self.calculation()
+        try:
+            self.calculation()
+        except Exception as e:
+            self.interrupt_procedure(e.args[0])
+            return
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         # Разлокируем остальные вкладки для пользователя.
@@ -306,10 +327,10 @@ class MeasurementProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement finished')
 
     """Метод обработки прерывания измерения из-за низкого давления"""
-    def measurement_fail(self, measurement):
+    def interrupt_procedure(self, measurement):
         self.set_test_on(False)
-        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... Fail.')
-        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... Fail.')
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... ' + measurement.name + '.')
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... ' + measurement.name + '.')
         # выключаем все порты
         self.gpio.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
@@ -319,10 +340,12 @@ class MeasurementProcedure(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Measurement')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement interrupted')
-        if measurement == Pressure_Error.Pressure_Set:
+        if measurement == Abort_Type.Pressure_below_required:
             self.fail_pressure_set.emit()
-        if measurement == Pressure_Error.Get_Balance:
+        if measurement == Abort_Type.Could_not_balance:
             self.fail_get_balance.emit()
+        if measurement == Abort_Type.Interrupted_by_user:
+            self.abort_procedure.emit()
 
     """Метод, подготовки образца с помощью Вакууминга"""
     def sample_preparation_vacuuming(self):
@@ -337,42 +360,55 @@ class MeasurementProcedure(object):
         -ждать 2 секунды
         -закрыть К4, К2, К3
         """
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K5.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K5 = {0}'.format(self.ports[Ports.K5.value]))
+        self.check_for_interruption()
         self.time_sleep(self.sample_preparation_time)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(self.sample_preparation_time))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K5.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K5 = {0}'.format(self.ports[Ports.K5.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.time_sleep(15)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(15))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.time_sleep(2)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(2))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
@@ -386,33 +422,43 @@ class MeasurementProcedure(object):
         -ждать 2 секунды
         -закрыть К4, К2, К3
         """
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.time_sleep(self.sample_preparation_time)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(self.sample_preparation_time))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.time_sleep(2)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(2))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
@@ -430,18 +476,23 @@ class MeasurementProcedure(object):
                     Next i
         Закрыть К1, К2, К3, К4
         """
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.time_sleep(3)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(3))
@@ -452,29 +503,37 @@ class MeasurementProcedure(object):
                                  'Division by zero when calculating t, '
                                  'denominator: self.pulse_length={0}'.format(self.pulse_length))
             t = 0
-
+        self.check_for_interruption()
         for i in range(t):
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+            self.check_for_interruption()
             self.time_sleep(1)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(1))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+            self.check_for_interruption()
             self.time_sleep(self.pulse_length)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(self.pulse_length))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
@@ -506,83 +565,101 @@ class MeasurementProcedure(object):
         Next i        
         Закрыть К3, К2
         """
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
         self.time_sleep(5)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(5))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
         # Запускаем цикл по количству измерений.
+        self.check_for_interruption()
         for i in range(self.number_of_measurements):
             # Создаем пустой экземпляр для записей результатов измерений как новый элемент списка измерений
             self.measurements.append(Measurement())
+            self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
             # Замеряем давление P0, ('p0') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.measurements[i].p0 = self.spi.get_pressure('p0')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p0 = {1}'.format(i, self.measurements[i].p0))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We expect a set of pressure')
+            self.check_for_interruption()
             p, success, duration = self.gain_Pmeas()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
-                return Pressure_Error.Pressure_Set
+                raise Exception(Abort_Type.Pressure_below_required)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Abort_Type.Could_not_balance
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
             # Замеряем давление P1, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.measurements[i].p1 = self.spi.get_pressure('p1')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p1 = {1}'.format(i, self.measurements[i].p1))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
             # Замеряем давление P2, ('p2') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.measurements[i].p2 = self.spi.get_pressure('p2')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p2 = {1}'.format(i, self.measurements[i].p2))
+            self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
@@ -591,15 +668,17 @@ class MeasurementProcedure(object):
                                        'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
@@ -645,23 +724,19 @@ class MeasurementProcedure(object):
             self.measurements[i].deviation = None
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....')
             # Добавляем полученные измерения в таблицу
-            self.set_result('Measurement-' + str(i), 'p0', str(self.measurements[i].p0))
-            self.set_result('Measurement-' + str(i), 'p1', str(self.measurements[i].p1))
-            self.set_result('Measurement-' + str(i), 'p2', str(self.measurements[i].p2))
-            self.set_result('Measurement-' + str(i), 'volume', str(self.measurements[i].volume))
-            self.set_result('Measurement-' + str(i), 'density', str(self.measurements[i].density))
-            self.set_result('Measurement-' + str(i), 'deviation', str(self.measurements[i].deviation))
-            self.set_result('Measurement-' + str(i), 'active', str(self.measurements[i].active))
+            self.save_measurement_result()
             self.table.add_measurement(self.measurements[i])
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....'
                                                                              'Done')
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
-        return Pressure_Error.No_Error
 
     """Метод, Измерения для кюветы малой"""
     def measurement_cuvette_small(self):
@@ -689,20 +764,25 @@ class MeasurementProcedure(object):
         
         Закрыть К3, К2
         """
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
         # Запускаем цикл по количству измерений.
+        self.check_for_interruption()
         for i in range(self.number_of_measurements):
             # Создаем пустой экземпляр для записей результатов измерений как новый элемент списка измерений
             self.measurements.append(Measurement())
+            self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
             # Замеряем давление P0, ('p0') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.measurements[i].p0 = self.spi.get_pressure('p0')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p0 = {1}'.format(i, self.measurements[i].p0))
@@ -714,69 +794,81 @@ class MeasurementProcedure(object):
                                        'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We expect a set of pressure')
+            self.check_for_interruption()
             p, success, duration = self.gain_Pmeas()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
-                return False
+                raise Exception(Abort_Type.Pressure_below_required)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
             # Замеряем давление P1, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.measurements[i].p1 = self.spi.get_pressure('p1')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p1 = {1}'.format(i, self.measurements[i].p1))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
             # Замеряем давление P2, ('p2') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            self.check_for_interruption()
             self.measurements[i].p2 = self.spi.get_pressure('p2')
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p2 = {1}'.format(i, self.measurements[i].p2))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+            self.check_for_interruption()
             self.gpio.port_on(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
+            self.check_for_interruption()
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
-                return Pressure_Error.Get_Balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
@@ -818,17 +910,18 @@ class MeasurementProcedure(object):
             self.measurements[i].deviation = None
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....')
             # Добавляем полученные измерения калибровки в таблицу
-            self.set_result('Measurement-' + str(i), 'm', self.measurements[i])
+            self.save_measurement_result()
             self.table.add_measurement(self.measurements[i])
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....'
                                                                              'Done')
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
-        return True
 
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
@@ -907,7 +1000,6 @@ class MeasurementProcedure(object):
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Calculation deviation for Measured[{0}]..... Done.'.format(counter2))
             # Добавляем в таблицу в столбец для отклонений
-            self.set_result('Measurement-' + str(counter2), 'deviation', str(self.measurements[counter2].deviation))
             self.table.add_item(m.deviation, counter2, 5, m.active)
             counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL..... Done.')
@@ -953,18 +1045,17 @@ class MeasurementProcedure(object):
         # -----------------------------------------------------------------------------------------------------
 
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation SKO & SKO%..... Done.')
+        # Сохраняем результаты
+        self.save_measurement_result()
         # Вызываем вывод результатов на форму.
-        self.set_result('MeasurementResult', 'medium_volume', str(self.m_medium_volume))
-        self.set_result('MeasurementResult', 'medium_density', str(self.m_medium_density))
-        self.set_result('MeasurementResult', 'SD', str(self.m_SD))
-        self.set_result('MeasurementResult', 'SD_per', str(self.m_SD_per))
-
         self.set_measurement_results.emit()
 
     """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
     def time_sleep(self, t):
         if not self.is_test_mode():
-            time.sleep(t)
+            for i in range(t):
+                self.check_for_interruption()
+                time.sleep(1)
 
     """Метод набора требуемого давления"""
     def gain_Pmeas(self):
@@ -981,6 +1072,7 @@ class MeasurementProcedure(object):
         p = 0
         duration = 0
         while not p_test:
+            self.check_for_interruption()
             self.time_sleep(0.1)
             # Замеряем давление p, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p = self.spi.get_pressure('p1')
@@ -1031,6 +1123,7 @@ class MeasurementProcedure(object):
         # Замеряем давление p_next, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
         p_next = self.spi.get_pressure('p1')
         while not p_test:
+            self.check_for_interruption()
             self.time_sleep(1)
             # p_next становиться p_previous
             p_previous = p_next
@@ -1217,9 +1310,11 @@ class MeasurementProcedure(object):
             self.measurements[i].set_active_off()
             self.table.set_color_to_row_unactive(i)
 
+    """Метод устанавливает текущий файл измерений. В него можно записать данные и из него можно загрузить их"""
     def set_measurement_file(self, file_name):
         self.measurement_file = file_name
 
+    """Метод создает новый текущий файл измерений. В него можно записать данные и из него можно загрузить их"""
     def new_measurement_file(self):
         # проверим наличие каталога, если его нет - создадим.
         self.check_result_dir()
@@ -1234,7 +1329,7 @@ class MeasurementProcedure(object):
                 self.measurement_file = os.getcwd() + '\Results\Measurements\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
                     number) + '.result'
                 find_name = os.path.isfile(self.measurement_file)
-            self.save_result.read(self.measurement_file)
+            self.result_file_reader.read(self.measurement_file)
 
         # Ветка для программы в нормальном режиме.
         if not self.is_test_mode():
@@ -1245,10 +1340,9 @@ class MeasurementProcedure(object):
                 self.measurement_file = os.getcwd() + '/Results/Measurements/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
                     number) + '.result'
                 find_name = os.path.isfile(self.measurement_file)
-            self.save_result.read(self.measurement_file, encoding = 'WINDOWS-1251')
+            self.result_file_reader.read(self.measurement_file, encoding = 'WINDOWS-1251')
         with open(self.measurement_file, "w") as fh:
-            self.save_result.write(fh)
-
+            self.result_file_reader.write(fh)
 
     """Проверим наличие каталога, если его нет - создадим."""
     def check_result_dir(self):
@@ -1259,17 +1353,125 @@ class MeasurementProcedure(object):
             if not os.path.isdir(os.getcwd() + '/Results/Measurements'):
                 os.makedirs(os.getcwd() + '/Results/Measurements')
 
-    """Метод для сохранения измененных настроек в файл"""
-    def set_result(self, section, val, s):
-        self.save_result.read(self.measurement_file)
-        if not self.save_result.has_section(section):
-            self.save_result.add_section(section)
-        self.save_result.set(section, val, s)
-        with open(self.measurement_file + ".new", "w") as fh:
-            self.save_result.write(fh)
+    """Метод для сохранения измерений в файл"""
+    def save_measurement_result(self):
+        self.result_file_reader.read(self.measurement_file)
+        self.update_measurement_file('GeneralInformation', 'operator', self.operator)
+        self.update_measurement_file('GeneralInformation', 'organization', self.organization)
+        self.update_measurement_file('GeneralInformation', 'sample', self.sample)
+        self.update_measurement_file('GeneralInformation', 'batch_series', self.batch_series)
+        self.update_measurement_file('SamplePreparation', 'sample_preparation', str(self.sample_preparation.value))
+        self.update_measurement_file('SamplePreparation', 'sample_preparation_time', str(self.sample_preparation_time))
+        self.update_measurement_file('Measurement', 'sample_mass', str(self.sample_mass))
+        self.update_measurement_file('Measurement', 'cuvette', str(self.cuvette.value))
+        self.update_measurement_file('Measurement', 'number_of_measurements', str(self.number_of_measurements))
+        self.update_measurement_file('Measurement', 'take_the_last_measurements', str(self.take_the_last_measurements))
+        for i in range(len(self.measurements)):
+            self.update_measurement_file('Measurement-' + str(i), 'p0', str(self.measurements[i].p0))
+            self.update_measurement_file('Measurement-' + str(i), 'p1', str(self.measurements[i].p1))
+            self.update_measurement_file('Measurement-' + str(i), 'p2', str(self.measurements[i].p2))
+            self.update_measurement_file('Measurement-' + str(i), 'volume', str(self.measurements[i].volume))
+            self.update_measurement_file('Measurement-' + str(i), 'density', str(self.measurements[i].density))
+            self.update_measurement_file('Measurement-' + str(i), 'deviation', str(self.measurements[i].deviation))
+            self.update_measurement_file('Measurement-' + str(i), 'active', str(self.measurements[i].active))
+        self.update_measurement_file('MeasurementResult', 'medium_volume', str(self.m_medium_volume))
+        self.update_measurement_file('MeasurementResult', 'medium_density', str(self.m_medium_density))
+        self.update_measurement_file('MeasurementResult', 'SD', str(self.m_SD))
+        self.update_measurement_file('MeasurementResult', 'SD_per', str(self.m_SD_per))
         os.rename(self.measurement_file, self.measurement_file + "~")
         os.rename(self.measurement_file + ".new", self.measurement_file)
         os.remove(self.measurement_file + "~")
+
+    """Метод обновления данных в файле"""
+    def update_measurement_file(self, section, val, s):
+        if not self.result_file_reader.has_section(section):
+            self.result_file_reader.add_section(section)
+        self.result_file_reader.set(section, val, s)
+        with open(self.measurement_file + ".new", "w") as fh:
+            self.result_file_reader.write(fh)
+
+
+    """Метод для загрузки измерений из файла"""
+    def load_measurement_result(self):
+        if self.is_test_mode():
+            # для тестового режима (Windows) нужны такие команды:
+            self.result_file_reader.read(self.measurement_file)
+        if not self.is_test_mode():
+            # для нормального режима (Linux) нужны такие команды:
+            self.result_file_reader.read(self.measurement_file, encoding='WINDOWS-1251')
+
+        # [GeneralInformation]
+        self.operator = self.try_load_string('GeneralInformation', 'operator')
+        self.organization = self.try_load_string('GeneralInformation', 'organization')
+        self.sample = self.try_load_string('GeneralInformation', 'sample')
+        self.batch_series = self.try_load_string('GeneralInformation', 'batch_series')
+        general_information = {
+            'operator': self.operator,
+            'organization': self.organization,
+            'sample': self.sample,
+            'batch_series': self.batch_series
+        }
+
+        # [SamplePreparation]
+        sample_preparation_type = self.try_load_int('SamplePreparation', 'sample_preparation')
+        if sample_preparation_type is None:
+            self.sample_preparation = Sample_preparation.Vacuuming
+        else:
+            self.sample_preparation = Sample_preparation(sample_preparation_type)
+        self.sample_preparation_time = self.try_load_int('SamplePreparation', 'sample_preparation_time')
+        sample_preparation = {
+            'sample_preparation': self.sample_preparation,
+            'sample_preparation_time': self.sample_preparation_time
+        }
+
+        # [Measurement]
+        self.sample_mass = self.try_load_float('Measurement', 'sample_mass')
+        cuvette_type = self.try_load_int('Measurement', 'cuvette')
+        if cuvette_type is None:
+            self.cuvette = Сuvette.Large
+        else:
+            self.cuvette = Сuvette(cuvette_type)
+        self.number_of_measurements = self.try_load_int('Measurement', 'number_of_measurements')
+        self.take_the_last_measurements = self.try_load_int('Measurement', 'take_the_last_measurements')
+        measurement = {
+            'sample_mass': self.sample_mass,
+            'cuvette': self.cuvette,
+            'number_of_measurements': self.number_of_measurements,
+            'take_the_last_measurements': self.take_the_last_measurements
+        }
+        measurements = []
+        # [Measurement-0] - [Measurement-(number_of_measurements-1)]
+        for i in range(self.number_of_measurements):
+            p0 = self.try_load_float('Measurement-' + str(i), 'p0')
+            p1 = self.try_load_float('Measurement-' + str(i), 'p1')
+            p2 = self.try_load_float('Measurement-' + str(i), 'p2')
+            volume = self.try_load_float('Measurement-' + str(i), 'volume')
+            density = self.try_load_float('Measurement-' + str(i), 'density')
+            deviation = self.try_load_float('Measurement-' + str(i), 'deviation')
+            active = self.try_load_boolean('Measurement-' + str(i), 'active')
+            measurements.append({
+                'p0': p0,
+                'p1': p1,
+                'p2': p2,
+                'volume': volume,
+                'density': density,
+                'deviation': deviation,
+                'active': active
+            })
+
+        # [MeasurementResult]
+        self.medium_volume = self.try_load_float('MeasurementResult', 'medium_volume')
+        self.medium_density = self.try_load_float('MeasurementResult', 'medium_density')
+        self.sd = self.try_load_float('MeasurementResult', 'sd')
+        self.sd_per = self.try_load_float('MeasurementResult', 'sd_per')
+        measurement_result = {
+            'medium_volume': self.medium_volume,
+            'medium_density': self.medium_density,
+            'sd': self.sd,
+            'sd_per': self.sd_per
+        }
+        result = [general_information, sample_preparation, measurement, measurements, measurement_result]
+        return result
 
     def get_files_list(self):
         # проверим наличие каталога, если его нет - создадим.
@@ -1283,9 +1485,45 @@ class MeasurementProcedure(object):
         ret_files = {}
         for f in files:
             file = dir + f
-            data_changed = time.strftime('%m/%d/%Y-%H.%M.%S', time.gmtime(os.path.getmtime(file)))
+            data_changed = time.gmtime(os.path.getmtime(file))
             ret_files.update({f: data_changed})
-        return ret_files
+        return ret_files, dir
+
+    def check_for_interruption(self):
+        if self.is_abort_procedure():
+            raise Exception(Abort_Type.Interrupted_by_user)
+
+    def try_load_string(self, section, variable):
+        result = ''
+        try:
+            result = self.result_file_reader.get(section, variable)
+        except:
+            result = None
+        return result
+
+    def try_load_int(self, section, variable):
+        result = 0
+        try:
+            result = self.result_file_reader.getint(section, variable)
+        except:
+            result = None
+        return result
+
+    def try_load_float(self, section, variable):
+        result = 0
+        try:
+            result = self.result_file_reader.getfloat(section, variable)
+        except:
+            result = None
+        return result
+
+    def try_load_boolean(self, section, variable):
+        result = False
+        try:
+            result = self.result_file_reader.getboolean(section, variable)
+        except:
+            result = None
+        return result
 
 
 # Enum Размер кюветы
@@ -1301,10 +1539,11 @@ class Sample_preparation(Enum):
     Impulsive_blowing = 2
 
 # Enum тип ошибки при наборе газа
-class Pressure_Error(Enum):
-    No_Error = 0
-    Pressure_Set = 1
-    Get_Balance = 2
+class Abort_Type(Enum):
+    No_Abort = 0
+    Pressure_below_required = 1
+    Could_not_balance = 2
+    Interrupted_by_user = 3
 
 
 # Enum для наглядного вызова портов
