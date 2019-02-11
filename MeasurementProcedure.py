@@ -1053,9 +1053,7 @@ class MeasurementProcedure(object):
     """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
     def time_sleep(self, t):
         if not self.is_test_mode():
-            for i in range(t):
-                self.check_for_interruption()
-                time.sleep(1)
+            time.sleep(t)
 
     """Метод набора требуемого давления"""
     def gain_Pmeas(self):
