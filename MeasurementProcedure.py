@@ -629,7 +629,7 @@ class MeasurementProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
-                raise Abort_Type.Could_not_balance
+                raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, balance = {0}/{1}, time '
                             'has passed: {2}'.format(balance, 0.01, duration))
