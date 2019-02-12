@@ -107,8 +107,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
         self.setWindowState(Qt.WindowMaximized)
         self.setWindowFlags(Qt.FramelessWindowHint)
-        self.t3_checkValve1.setStyleSheet("QCheckBox::indicator { width:50px; height: 50px; }")
-        self.t3_checkValve1.show()
         self.controller = Controller
         # Загружаем модуль настройки
         self.config = Configure()

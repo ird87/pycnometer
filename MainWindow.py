@@ -134,6 +134,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.t1_gSP_gRB_rb2.sizePolicy().hasHeightForWidth())
         self.t1_gSP_gRB_rb2.setSizePolicy(sizePolicy)
+        self.t1_gSP_gRB_rb2.setChecked(False)
         self.t1_gSP_gRB_rb2.setObjectName("t1_gSP_gRB_rb2")
         self.t1_gSP_gRB_rb3 = QtWidgets.QRadioButton(self.t1_gSP_groupRB)
         self.t1_gSP_gRB_rb3.setGeometry(QtCore.QRect(10, 80, 210, 25))
