@@ -194,7 +194,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # self.onlyFloat.setLocale(local)
         # Для float штатный QDoubleValidator не годиться так как принимает ',' вместо '.' и проверяет еще ряд вещей
         # так что делаем свой через регулярные выражения
-        rx = QRegExp(r'^[0-9][.]{0,1}[0-9]*$')
+        rx = QRegExp(r'^[0-9]*[.]{0,1}[0-9]*$')
         self.onlyFloat = QRegExpValidator(rx, self)
 
         # Теперь устанавливаем ограничения на ввод
@@ -830,7 +830,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Тут мы сразу должны передать в таблицу калибровки данные. Так надо;)
     def t2_gID_Edit2_text_changed(self):
         self.set_t2_gID_button1_enabled()
-        self.calibration_procedure.Vss = float(self.t2_gID_Edit2.text())
+        if isfloat(self.t2_gID_Edit2.text()):
+            self.calibration_procedure.Vss = float(self.t2_gID_Edit2.text())
 
     def t4_MS_Edit1_text_changed(self):
         self.set_t4_button_1_enabled()
