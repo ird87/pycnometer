@@ -483,7 +483,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         pulse_length = self.config.pulse_length
 
         # Устанавливаем настройки Измерений
-        self.measurement_procedure.set_settings(self.measurement_report, operator, organization, sample, batch_series, cuvette, sample_preparation, sample_preparation_time_in_minute,
+        self.measurement_procedure.set_settings(operator, organization, sample, batch_series, cuvette, sample_preparation, sample_preparation_time_in_minute,
                                                 sample_mass, number_of_measurements, take_the_last_measurements,
                                                 VcL, VcM, VcS, VdLM, VdS, Pmeas, pulse_length)
 
@@ -1247,6 +1247,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.t1_gMR_Edit2.setText(str(measurement_load[4]['medium_density']))
             self.t1_gMR_Edit3.setText(str(measurement_load[4]['sd']))
             self.t1_gMR_Edit4.setText(str(measurement_load[4]['sd_per']))
+            self.actionmenu4_command1.setEnabled(True)
+
 
 
     # Открываем файловый менеджер для загрузки калибровки

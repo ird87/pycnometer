@@ -163,13 +163,12 @@ class MeasurementProcedure(object):
         return result
 
     """Загружаем выбранные на вкладке "Измерения" установки."""
-    def set_settings(self, measurement_report, operator, organization, sample, batch_series, _cuvette, _sample_preparation, _sample_preparation_time_in_minute, _sample_mass,
+    def set_settings(self, operator, organization, sample, batch_series, _cuvette, _sample_preparation, _sample_preparation_time_in_minute, _sample_mass,
                      _number_of_measurements, _take_the_last_measurements, _VcL, _VcM, _VcS, _VdLM, _VdS,
                      _Pmeas, _pulse_length):
         # self.test_on и abort_procedure_on должены быть False перед началом калибровки
         self.test_on = False
         self.abort_procedure_on = False
-        self.measurement_report = measurement_report
         self.operator = operator
         self.organization = organization
         self.sample = sample
@@ -697,7 +696,11 @@ class MeasurementProcedure(object):
             # Считаем объем.
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation volume.....')
             try:
+                print("\n((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0)")
+                print("(({0} - {1}) * ({2} + {3}) - ({4} - {5}) * {6}) / ({7} - {8})".format(P2, P0, Vd, Vc, P1, P0, Vd, P2, P0))
+                print("VcL = {0}\nVcM = {1}\nVcS = {2}\nVdLM = {3}\nVdS = {4}".format(self.VcL, self.VcM, self.VcS, self.VdLM, self.VdS ))
                 volume = ((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0)
+                print("volume = {0}".format(volume))
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating volume, '
@@ -1156,6 +1159,7 @@ class MeasurementProcedure(object):
         find_name = True
         number = 0
         report_name=''
+        self.measurement_report = self.main.measurement_report
         # Ветка для программы в тестовом режиме.
         if self.is_test_mode():
             if not os.path.isdir(os.getcwd() + '\Reports'):
@@ -1263,10 +1267,10 @@ class MeasurementProcedure(object):
         # Создаем массив данных для добавления в таблицу.
         data3 = [
                 [self.measurement_report['t3_title']],
-                [self.measurement_report['t3_medium_volume'], toFixed(self.table.m_medium_volume, self.round),
-                 self.measurement_report['t3_m_sd'], toFixed(self.table.m_SD, self.round)],
-                [self.measurement_report['t3_medium_density'], toFixed(self.table.m_medium_density, self.round),
-                 self.measurement_report['t3_m_sd_per'], toFixed(self.table.m_SD_per, self.round)],
+                [self.measurement_report['t3_medium_volume'], toFixed(self.m_medium_volume, self.round),
+                 self.measurement_report['t3_m_sd'], toFixed(self.m_SD, self.round)],
+                [self.measurement_report['t3_medium_density'], toFixed(self.m_medium_density, self.round),
+                 self.measurement_report['t3_m_sd_per'], toFixed(self.m_SD_per, self.round)],
                 ]
 
         # Добавляем данные в таблицу и форматируем ее.
