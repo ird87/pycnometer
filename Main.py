@@ -246,6 +246,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
+        print("Вова, получилось! Работает!")
+
     # Отслеживаем активацию окон приложения
     def tab_change(self):
         # Обработка открытия / закрытия вкладки "Ручное управление"
