@@ -644,75 +644,75 @@ class CalibrationProcedure(object):
         # Создадим списки для хранения расчетов по всем комбинациям.
         VcTest = []
         VdTest = []
+        # переменная для учета количества комбинаций.
+        divider = 0
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation Vc & Vd.....')
         for i in range(num):
-            for j in range(num):
-                index1 = i
-                index2 = j + num
-                # P
-                P0 = self.calibrations[index1].p0
-                P1 = self.calibrations[index1].p1
-                P2 = self.calibrations[index1].p2
-                # P'
-                P0a = self.calibrations[index2].p0
-                P1a = self.calibrations[index2].p1
-                P2a = self.calibrations[index2].p2
+            index1 = i
+            if self.calibrations[index1].active:
+                for j in range(num):
+                    index2 = j + num
+                    if self.calibrations[index2].active:
+                        # P
+                        P0 = self.calibrations[index1].p0
+                        P1 = self.calibrations[index1].p1
+                        P2 = self.calibrations[index1].p2
+                        # P'
+                        P0a = self.calibrations[index2].p0
+                        P1a = self.calibrations[index2].p1
+                        P2a = self.calibrations[index2].p2
 
-                # -----------------------------------------------------------------------------------------------------
+                        # -----------------------------------------------------------------------------------------------------
 
-                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     'Calculation Vc0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
-                try:
-                    # Рассчитываем Vc0 для текущей комбинации
-                    Vc0 = ((P2a - P0a) * self.Vss) / (
-                            (P2a - P0a) * (P2 - P0) / (P1 - P2) + (P2a - P0a) - (P1a - P0a) * (P2 - P0) / (P1 - P2))
-                except ArithmeticError:
-                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                             'Division by zero when calculating Vc0 for P[{0}] & P\'[{1}], '
-                             'denominator: (P2\'={2} - P0\'={3}) * (P2={4} - P0={5}) / (P1={6} - P2={7}) + (P2\'={8} '
-                             '- P0\'={9}) - (P1\'={10} - P0\'={11}) * (P2={12} - P0={13}) / (P1={14} - P2={15}) '
-                             '& (P1={16} - P2={17})={18}'
-                             .format(index1, index2, P2a, P0a, P2, P0, P1, P2, P2a, P0a, P1a, P0a,
-                                     P2, P0, P1, P2, P1, P2, (P1 - P2)))
-                    Vc0 = 0
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured for P[{0}] & P\'[{1}]  : Vc0 = {2}'.format(index1, index2, Vc0))
-                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     'Calculation Vc0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
+                        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                             'Calculation Vc0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
+                        try:
+                            # Рассчитываем Vc0 для текущей комбинации
+                            Vc0 = ((P2a - P0a) * self.Vss) / (
+                                    (P2a - P0a) * (P2 - P0) / (P1 - P2) + (P2a - P0a) - (P1a - P0a) * (P2 - P0) / (P1 - P2))
+                        except ArithmeticError:
+                            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Division by zero when calculating Vc0 for P[{0}] & P\'[{1}], '
+                                     'denominator: (P2\'={2} - P0\'={3}) * (P2={4} - P0={5}) / (P1={6} - P2={7}) + (P2\'={8} '
+                                     '- P0\'={9}) - (P1\'={10} - P0\'={11}) * (P2={12} - P0={13}) / (P1={14} - P2={15}) '
+                                     '& (P1={16} - P2={17})={18}'
+                                     .format(index1, index2, P2a, P0a, P2, P0, P1, P2, P2a, P0a, P1a, P0a,
+                                             P2, P0, P1, P2, P1, P2, (P1 - P2)))
+                            Vc0 = 0
+                        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                                   'Measured for P[{0}] & P\'[{1}]  : Vc0 = {2}'.format(index1, index2, Vc0))
+                        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                             'Calculation Vc0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
 
-                # -----------------------------------------------------------------------------------------------------
+                        # -----------------------------------------------------------------------------------------------------
 
-                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     'Calculation Vd0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
-                try:
-                    # Рассчитываем Vd0 для текущей комбинации
-                    Vd0 = (P2 - P0) * Vc0 / (P1 - P2)
-                except ArithmeticError:
-                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'Division by zero when calculating Vd0 for P[{0}] & P\'[{1}], '
-                            'denominator: (P1={2} - P2={3})={4}'.format(index1, index2, P1, P2, (P1 - P2)))
-                    Vd0 = 0
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured for P[{0}] & P\'[{1}]  : Vd0 = {2}'.format(index1, index2, Vd0))
-                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     'Calculation Vd0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
+                        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                             'Calculation Vd0 for P[{0}] & P\'[{1}].....'.format(index1, index2))
+                        try:
+                            # Рассчитываем Vd0 для текущей комбинации
+                            Vd0 = (P2 - P0) * Vc0 / (P1 - P2)
+                        except ArithmeticError:
+                            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                    'Division by zero when calculating Vd0 for P[{0}] & P\'[{1}], '
+                                    'denominator: (P1={2} - P2={3})={4}'.format(index1, index2, P1, P2, (P1 - P2)))
+                            Vd0 = 0
+                        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                                   'Measured for P[{0}] & P\'[{1}]  : Vd0 = {2}'.format(index1, index2, Vd0))
+                        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                             'Calculation Vd0 for P[{0}] & P\'[{1}].....Done'.format(index1, index2))
 
-                # -----------------------------------------------------------------------------------------------------
+                        # -----------------------------------------------------------------------------------------------------
 
-                # Добавлем Vc0 и Vd0 в списки.
-                VcTest.append(Vc0)
-                VdTest.append(Vd0)
-                # считаем сумму всех Vc0 и Vd0, для посследующего рассчета средних значений.
-                Vc = Vc + Vc0
-                Vd = Vd + Vd0
+                        # Добавлем Vc0 и Vd0 в списки.
+                        VcTest.append(Vc0)
+                        VdTest.append(Vd0)
+                        # считаем сумму всех Vc0 и Vd0, для посследующего рассчета средних значений.
+                        Vc = Vc + Vc0
+                        Vd = Vd + Vd0
+                        # увеличиваем кол-во комбинаций.
+                        divider += 1
 
         # --------------------------------------------------------------------------------------------------------------
-
-        # Считаем количество комбинаций
-        divider = num ** 2
-
-        # -----------------------------------------------------------------------------------------------------
-
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Calculation c_Vc.....')
         try:
@@ -964,11 +964,11 @@ class CalibrationProcedure(object):
             })
 
         # [CalibrationResult]
-            self.vc = self.try_load_float('CalibrationResult', 'vc')
-            self.vd = self.try_load_float('CalibrationResult', 'vd')
+            self.c_Vc = self.try_load_float('CalibrationResult', 'vc')
+            self.c_Vd = self.try_load_float('CalibrationResult', 'vd')
         calibration_result = {
-            'vc': self.vc,
-            'vd': self.vd
+            'vc': self.c_Vc,
+            'vd': self.c_Vd
         }
         result = [source_data, calibrations, calibration_result]
         return result

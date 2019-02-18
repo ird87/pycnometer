@@ -1462,15 +1462,15 @@ class MeasurementProcedure(object):
             })
 
         # [MeasurementResult]
-        self.medium_volume = self.try_load_float('MeasurementResult', 'medium_volume')
-        self.medium_density = self.try_load_float('MeasurementResult', 'medium_density')
-        self.sd = self.try_load_float('MeasurementResult', 'sd')
-        self.sd_per = self.try_load_float('MeasurementResult', 'sd_per')
+        self.m_medium_volume = self.try_load_float('MeasurementResult', 'medium_volume')
+        self.m_medium_density = self.try_load_float('MeasurementResult', 'medium_density')
+        self.m_SD = self.try_load_float('MeasurementResult', 'sd')
+        self.m_SD_per = self.try_load_float('MeasurementResult', 'sd_per')
         measurement_result = {
-            'medium_volume': self.medium_volume,
-            'medium_density': self.medium_density,
-            'sd': self.sd,
-            'sd_per': self.sd_per
+            'medium_volume': self.m_medium_volume,
+            'medium_density': self.m_medium_density,
+            'sd': self.m_SD,
+            'sd_per': self.m_SD_per
         }
         result = [general_information, sample_preparation, measurement, measurements, measurement_result]
         return result

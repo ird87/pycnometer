@@ -247,6 +247,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
         print("Вова, получилось! Работает!")
+        b = 2020
+        print(str(b))
 
     # Отслеживаем активацию окон приложения
     def tab_change(self):
@@ -1246,10 +1248,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                 self.t1_tableMeasurement.add_measurement(m)
 
             # [MeasurementResult]
-            self.t1_gMR_Edit1.setText(str(measurement_load[4]['medium_volume']))
-            self.t1_gMR_Edit2.setText(str(measurement_load[4]['medium_density']))
-            self.t1_gMR_Edit3.setText(str(measurement_load[4]['sd']))
-            self.t1_gMR_Edit4.setText(str(measurement_load[4]['sd_per']))
+            self.measurement_results_message.emit()
             self.actionmenu4_command1.setEnabled(True)
 
 
@@ -1287,8 +1286,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                 self.t2_tableCalibration.add_calibration(c)
 
             # [CalibrationResult]
-            self.t2_gCR_Edit1.setText(str(calibration_load[2]['vc']))
-            self.t2_gCR_Edit2.setText(str(calibration_load[2]['vd']))
+            self.calibration_results_message.emit()
             self.t2_gCR_button1.setEnabled(True)
 
 
