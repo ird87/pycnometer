@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 *.log
+Configure.ini
 Reports/*.pdf
 Results/Measurements/*.result
 Results/Calibrations/*.result
-=======
->>>>>>> 3cfb9909bc9190157c818434083c7f0c0c512ed4
 Configure.ini

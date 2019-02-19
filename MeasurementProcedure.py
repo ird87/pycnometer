@@ -1400,7 +1400,7 @@ class MeasurementProcedure(object):
             self.result_file_reader.read(self.measurement_file)
         if not self.is_test_mode():
             # для нормального режима (Linux) нужны такие команды:
-            self.result_file_reader.read(self.measurement_file, encoding='WINDOWS-1251')
+            self.result_file_reader.read(self.measurement_file, encoding='utf-8')
 
         # [GeneralInformation]
         self.operator = self.try_load_string('GeneralInformation', 'operator')

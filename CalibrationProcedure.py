@@ -927,7 +927,7 @@ class CalibrationProcedure(object):
             self.result_file_reader.read(self.calibration_file)
         if not self.is_test_mode():
             # для нормального режима (Linux) нужны такие команды:
-            self.result_file_reader.read(self.calibration_file, encoding='WINDOWS-1251')
+            self.result_file_reader.read(self.calibration_file, encoding='utf-8')
 
         # [SourceData]
         cuvette_type = self.try_load_int('SourceData', 'cuvette')
