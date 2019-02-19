@@ -83,6 +83,8 @@ class Languages(object):
         self.t2_gID_lbl1 = ''
         self.t2_gID_lbl2 = ''
         self.t2_gID_lbl3 = ''
+        self.t2_gID_lbl4 = ''
+        self.t2_gID_lbl5 = ''
         self.t2_gID_cmd1_1 = ''
         self.t2_gID_cmd1_2 = ''
         self.t2_gID_cmd1_3 = ''
@@ -261,6 +263,8 @@ class Languages(object):
         self.t2_gCR_lbl1 = self.get_string('TAB2', 't2_gCR_lbl1')
         self.t2_gCR_lbl2 = self.get_string('TAB2', 't2_gCR_lbl2')
         self.t2_gCR_lbl3 = self.get_string('TAB2', 't2_gCR_lbl3')
+        self.t2_gCR_lbl4 = self.get_string('TAB2', 't2_gCR_lbl4')
+        self.t2_gCR_lbl5 = self.get_string('TAB2', 't2_gCR_lbl5')
         self.t2_groupInitialData = self.get_string('TAB2', 't2_groupInitialData')
         self.t2_gID_lbl1 = self.get_string('TAB2', 't2_gID_lbl1')
         self.t2_gID_lbl2 = self.get_string('TAB2', 't2_gID_lbl2')

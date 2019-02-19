@@ -227,6 +227,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_Edit1.textChanged.connect(self.t1_gM_Edit1_text_changed)     # Измерение.    Ввод массы образца.
         self.t1_gM_Edit2.textChanged.connect(self.t1_gM_Edit2_text_changed)     # Измерение.    Ввод количество измер.
         self.t1_gM_Edit3.textChanged.connect(self.t1_gM_Edit3_text_changed)     # Измерение.    Ввод взять последних.
+        self.t2_gID_cmd1.currentIndexChanged.connect(self.t2_gID_cmd1_changed)  # Калибровка.   Выбор кюветы.
         self.t2_gID_button1.clicked.connect(self.calibration_procedure_start)   # Калибровка.   Начало Калибровки.
         self.t2_gID_button2.clicked.connect(self.calibration_clear)             # Калибровка.   Очистка калибровки.
         self.t2_gID_button3.clicked.connect(self.calibration_file_manager_open) # Калибровка.   Окно загрузки файлов.
@@ -246,9 +247,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
-        print("Вова, получилось! Работает!")
-        b = 2020
-        print(str(b))
 
     # Отслеживаем активацию окон приложения
     def tab_change(self):
@@ -267,17 +265,33 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                 self.gpio.all_port_off()
                 # Включаем замер давления
                 self.spi.start_test()
-
         # Обработка открытия вкладки "Настройка"
         def options_check():
-            # Если мы перешли на вкладку измерений
+            # Если мы перешли на вкладку настроек
             if self.tabPycnometer.currentIndex() == 3:
                 # Загружаем текущие настройки в форму программы.
                 self.show_current_settings()
-
+        # Обработка открытия вкладки "Калибровка"
+        def calibration_check():
+            # Если мы открыли вкладку Калибровка
+            if self.tabPycnometer.currentIndex() == 1:
+                self.VcVd_download_and_display()
         # Вызов внутренних функций метода, расписанных выше.
         manual_control_check()
         options_check()
+        calibration_check()
+
+    # Загрузить и отобразить Vc и Vd из конфига.
+    def VcVd_download_and_display(self):
+        if self.t2_gID_cmd1.currentIndex() == Сuvette.Small.value:
+            self.t2_gCR_Edit3.setText(str(self.config.VcS))
+            self.t2_gCR_Edit4.setText(str(self.config.VdS))
+        if self.t2_gID_cmd1.currentIndex() == Сuvette.Medium.value:
+            self.t2_gCR_Edit3.setText(str(self.config.VcM))
+            self.t2_gCR_Edit4.setText(str(self.config.VdLM))
+        if self.t2_gID_cmd1.currentIndex() == Сuvette.Large.value:
+            self.t2_gCR_Edit3.setText(str(self.config.VcL))
+            self.t2_gCR_Edit4.setText(str(self.config.VdLM))
 
     # Применяем изменения в настройках программы.
     def option_appy(self):
@@ -645,6 +659,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # [TAB2]
         self.t2_gCR_Edit1.setText('')
         self.t2_gCR_Edit2.setText('')
+        self.t2_gCR_Edit3.setText('')
+        self.t2_gCR_Edit4.setText('')
         self.t2_gID_Edit1.setText('')
         self.t2_gID_Edit2.setText('')
 
@@ -737,6 +753,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gCR_lbl1.setText(self.languages.t2_gCR_lbl1)
         self.t2_gCR_lbl2.setText(self.languages.t2_gCR_lbl2)
         self.t2_gCR_lbl3.setText(self.languages.t2_gCR_lbl3)
+        self.t2_gCR_lbl4.setText(self.languages.t2_gCR_lbl4)
+        self.t2_gCR_lbl5.setText(self.languages.t2_gCR_lbl5)
 
         self.t2_groupInitialData.setTitle(self.languages.t2_groupInitialData)
         self.t2_gID_lbl1.setText(self.languages.t2_gID_lbl1)
@@ -1128,6 +1146,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         if self.t2_gID_cmd1.currentIndex() == Сuvette.Small.value:
             self.config.set_ini('Measurement', 'VcS', toFixed(Vc, self.config.round))
             self.config.set_ini('Measurement', 'VdS', toFixed(Vd, self.config.round))
+        self.setup()
+        self.VcVd_download_and_display()
+
 
     # Вывод данных Измерений, вызывается через сигнал.
     def set_measurement_results(self):
@@ -1198,6 +1219,10 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Метод для получения калибровки
     def get_calibrations(self):
         return self.calibration_procedure.calibrations
+
+    # Выбор кюветы на вкладке измерений
+    def t2_gID_cmd1_changed(self):
+        self.VcVd_download_and_display()
 
     # Открываем файловый менеджер для загрузки измерения
     def measurement_file_manager_open(self):
