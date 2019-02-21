@@ -969,7 +969,7 @@ class MeasurementProcedure(object):
             self.gpio.port_off(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
-									               self.check_for_interruption()
+            self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
