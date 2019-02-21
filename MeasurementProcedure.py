@@ -1017,7 +1017,7 @@ class MeasurementProcedure(object):
 
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
-    def calculation(self):
+	def calculation(self):
         volume_sum = 0
         density_sum = 0
 
