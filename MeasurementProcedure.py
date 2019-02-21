@@ -1013,7 +1013,7 @@ class MeasurementProcedure(object):
             # Добавляем полученные измерения калибровки в таблицу
             self.save_measurement_result()
             self.table.add_measurement(self.measurements[i])
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....'
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add measurements data to the table.....')
 
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
