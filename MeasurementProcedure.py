@@ -84,6 +84,10 @@ def set_time_min_to_sec(min):
     sec = min*60
     return sec
 
+def set_time_sec_to_min(sec):
+    min = int(sec/60)
+    return min
+
 
 class MeasurementProcedure(object):
     """docstring"""
@@ -1452,7 +1456,7 @@ class MeasurementProcedure(object):
         self.update_measurement_file('GeneralInformation', 'sample', self.sample)
         self.update_measurement_file('GeneralInformation', 'batch_series', self.batch_series)
         self.update_measurement_file('SamplePreparation', 'sample_preparation', str(self.sample_preparation.value))
-        self.update_measurement_file('SamplePreparation', 'sample_preparation_time', str(self.sample_preparation_time))
+        self.update_measurement_file('SamplePreparation', 'sample_preparation_time', str(set_time_sec_to_min(self.sample_preparation_time)))
         self.update_measurement_file('Measurement', 'sample_mass', str(self.sample_mass))
         self.update_measurement_file('Measurement', 'cuvette', str(self.cuvette.value))
         self.update_measurement_file('Measurement', 'number_of_measurements', str(self.number_of_measurements))
