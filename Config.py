@@ -71,47 +71,45 @@ class Configure(object):
         self.set_ports()
 
         # [[TestMode]]
-        self.testMode = self.config.getint('TestMode', 'testMode')
+        self.testMode = self.try_getint_user_config('TestMode', 'testMode')
 
     """Метод для назначения портам указанных в ini файле значений"""
     def set_ports(self):
         # [Ports]
-        self.p[0] = self.config.getint('Ports', 'p1')
-        self.p[1] = self.config.getint('Ports', 'p2')
-        self.p[2] = self.config.getint('Ports', 'p3')
-        self.p[3] = self.config.getint('Ports', 'p4')
-        self.p[4] = self.config.getint('Ports', 'p5')
+        self.p[0] = self.try_getint_user_config('Ports', 'p1')
+        self.p[1] = self.try_getint_user_config('Ports', 'p2')
+        self.p[2] = self.try_getint_user_config('Ports', 'p3')
+        self.p[3] = self.try_getint_user_config('Ports', 'p4')
+        self.p[4] = self.try_getint_user_config('Ports', 'p5')
 
     """Метод для назначения языка программы согласно ini файлу"""
     def set_language(self):
         # [[Language]]
-        self.config.read('Configure.ini')
-        self.language = self.config.get('Language', 'language')
+        self.language = self.try_get_user_config('Language', 'language')
 
     """Метод для загрузки данных из ini файла"""
     def set_measurement(self):
-        self.config.read('Configure.ini')
-        self.pressure = Pressure(self.config.getint('Measurement', 'pressure'))
-        self.small_cuvette = self.config.getboolean('Pycnometer', 'small_cuvette')
-        self.smq_now = self.config.getint('Measurement', 'smq_now')
+        self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure'))
+        self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette')
+        self.smq_now = self.try_getint_user_config('Measurement', 'smq_now')
         self.smq_list.clear()
-        self.smq_list = json.loads(self.config.get('Measurement', 'smq_list'))
-        self.VcL = self.config.getfloat('Measurement', 'VcL')
-        self.VcM = self.config.getfloat('Measurement', 'VcM')
-        self.VcS = self.config.getfloat('Measurement', 'VcS')
-        self.VdLM = self.config.getfloat('Measurement', 'VdLM')
-        self.VdS = self.config.getfloat('Measurement', 'VdS')
-        self.spi_t = self.config.getfloat('Measurement', 'spi_t')
-        self.spi_max_speed_hz = self.config.getint('Measurement', 'spi_max_speed_hz')
-        self.pulse_length = self.config.getint('Measurement', 'pulse_length')
+        self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list'))
+        self.VcL = self.try_getfloat_user_config('Measurement', 'VcL')
+        self.VcM = self.try_getfloat_user_config('Measurement', 'VcM')
+        self.VcS = self.try_getfloat_user_config('Measurement', 'VcS')
+        self.VdLM = self.try_getfloat_user_config('Measurement', 'VdLM')
+        self.VdS = self.try_getfloat_user_config('Measurement', 'VdS')
+        self.spi_t = self.try_getfloat_user_config('Measurement', 'spi_t')
+        self.spi_max_speed_hz = self.try_getint_user_config('Measurement', 'spi_max_speed_hz')
+        self.pulse_length = self.try_getint_user_config('Measurement', 'pulse_length')
         self.Pmeas.clear()
-        self.Pmeas = json.loads(self.config.get('Measurement', 'Pmeas'))
-        self.pmeas_kPa_min = self.config.getfloat('Measurement', 'pmeas_kPa_min')
-        self.pmeas_kPa_max = self.config.getfloat('Measurement', 'pmeas_kPa_max')
-        self.pmeas_Bar_min = self.config.getfloat('Measurement', 'pmeas_Bar_min')
-        self.pmeas_Bar_max = self.config.getfloat('Measurement', 'pmeas_Bar_max')
-        self.pmeas_Psi_min = self.config.getfloat('Measurement', 'pmeas_Psi_min')
-        self.pmeas_Psi_max = self.config.getfloat('Measurement', 'pmeas_Psi_max')
+        self.Pmeas = json.loads(self.try_get_user_config('Measurement', 'Pmeas'))
+        self.pmeas_kPa_min = self.try_getfloat_user_config('Measurement', 'pmeas_kPa_min')
+        self.pmeas_kPa_max = self.try_getfloat_user_config('Measurement', 'pmeas_kPa_max')
+        self.pmeas_Bar_min = self.try_getfloat_user_config('Measurement', 'pmeas_Bar_min')
+        self.pmeas_Bar_max = self.try_getfloat_user_config('Measurement', 'pmeas_Bar_max')
+        self.pmeas_Psi_min = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_min')
+        self.pmeas_Psi_max = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_max')
         self.Pmeas_now = float(self.Pmeas[self.pressure.value])
 
 
@@ -132,13 +130,16 @@ class Configure(object):
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini(self, section, val, s):
-        self.config.read('Configure.ini')
+        self.config.read('Configure_user.ini.new')
         self.config.set(section, val, s)
-        with open("Configure.ini.new", "w") as fh:
+        with open("Configure_user.ini.new", "w") as fh:
             self.config.write(fh)
-        os.rename("Configure.ini", "Configure.ini~")
-        os.rename("Configure.ini.new", "Configure.ini")
-        os.remove("Configure.ini~")
+        if os.path.isfile('Configure_user.ini'):
+            os.rename("Configure_user.ini", "Configure_user.ini~")
+            os.rename("Configure_user.ini.new", "Configure_user.ini")
+            os.remove("Configure_user.ini~")
+        else:
+            os.rename("Configure_user.ini.new", "Configure_user.ini")
 
     """Метод для обновления списка всех доступных языков"""
     def reload_languages_list(self):
@@ -147,6 +148,46 @@ class Configure(object):
             self.languages = os.listdir(os.getcwd() + '\Language\\')
         if not self.is_test_mode():
             self.languages = os.listdir(os.getcwd() + '/Language/')
+            
+    def try_get_user_config(self, section, option):
+        self.config.read('Configure.ini')
+        result = self.config.get(section, option)
+        if os.path.isfile('Configure_user.ini'):
+            self.config.read('Configure_user.ini')
+            if self.config.has_section(section):
+                if self.config.has_option(section, option):
+                    result = self.config.get(section, option)
+        return result
+
+    def try_getint_user_config(self, section, option):
+        self.config.read('Configure.ini')
+        result = self.config.getint(section, option)
+        if os.path.isfile('Configure_user.ini'):
+            self.config.read('Configure_user.ini')
+            if self.config.has_section(section):
+                if self.config.has_option(section, option):
+                    result = self.config.getint(section, option)
+        return result
+
+    def try_getfloat_user_config(self, section, option):
+        self.config.read('Configure.ini')
+        result = self.config.getfloat(section, option)
+        if os.path.isfile('Configure_user.ini'):
+            self.config.read('Configure_user.ini')
+            if self.config.has_section(section):
+                if self.config.has_option(section, option):
+                    result = self.config.getfloat(section, option)
+        return result
+
+    def try_getboolean_user_config(self, section, option):
+        self.config.read('Configure.ini')
+        result = self.config.getboolean(section, option)
+        if os.path.isfile('Configure_user.ini'):
+            self.config.read('Configure_user.ini')
+            if self.config.has_section(section):
+                if self.config.has_option(section, option):
+                    result = self.config.getboolean(section, option)
+        return result
 
 
 """Enum допустимых единиц измерений Давления"""
