@@ -33,6 +33,9 @@ class Languages(object):
         self.Table_Files_Column1 = ''
         self.Table_Files_Column2 = ''
 
+        # [SamplePreparation]
+        self.Title_SP = ''
+
         # [TAB1]
         self.t1_tableMeasurement_Column = []
         self.t1_groupGeneralInformation = ''
@@ -135,6 +138,8 @@ class Languages(object):
         self.message_txt1 = ''
         self.message_txt2 = ''
         self.message_txt3 = ''
+        self.message_txt4 = ''
+        self.message_txt5 = ''
 
         # [MeasurementReport]
         self.measurement_report = []
@@ -198,6 +203,9 @@ class Languages(object):
         self.Button_FM_Cancel = self.get_string('FileManager', 'Button_FM_Cancel')
         self.Table_Files_Column1 = self.get_string('FileManager', 'Table_Files_Column1')
         self.Table_Files_Column2 = self.get_string('FileManager', 'Table_Files_Column2')
+
+        # [SamplePreparation]
+        self.Title_SP = self.get_string('SamplePreparation', 'Title_SP')
 
         # [TAB1]
         self.t1_tableMeasurement_Column.clear()
@@ -331,6 +339,7 @@ class Languages(object):
         self.message_txt2 = self.get_string('Message', 'message_txt2')
         self.message_txt3 = self.get_string('Message', 'message_txt3')
         self.message_txt4 = self.get_string('Message', 'message_txt4')
+        self.message_txt5 = self.get_string('Message', 'message_txt5')
 
         # [MeasurementReport]
         self.measurement_report = self.get_item("MeasurementReport")
@@ -339,3 +348,7 @@ class Languages(object):
     def get_file_manager_title(self):
         result = [self.Button_FM_OK, self.Button_FM_Cancel, self.Table_Files_Column1, self.Table_Files_Column2]
         return result
+
+    """Метод для получения заголовков окна подготовки образца """
+    def get_sample_preparation_title(self):
+        return self.Title_SP

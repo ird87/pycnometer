@@ -20,6 +20,8 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox
+
+from SamplePreparation import UiSamplePreparation
 from TableCalibration import UiTableCalibration
 from TableMeasurement import UiTableMeasurement
 from Controller import Controller
@@ -96,6 +98,10 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     fail_get_balance = PyQt5.QtCore.pyqtSignal()
     # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры пользователем
     abort_procedure = PyQt5.QtCore.pyqtSignal()
+    # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры из-за проблем со спуском давления.
+    fail_let_out_pressure = PyQt5.QtCore.pyqtSignal()
+    # Вывод прогрессбара для подготовки образца.
+    sample_preparation_progressbar = PyQt5.QtCore.pyqtSignal()
 
     """Конструктор класса. Поля класса"""
 
@@ -178,6 +184,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.fail_get_balance.connect(self.on_message_fail_get_balance, PyQt5.QtCore.Qt.QueuedConnection)
         # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры пользователем
         self.abort_procedure.connect(self.on_message_abort_procedure, PyQt5.QtCore.Qt.QueuedConnection)
+        # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры из-за проблем со спуском давления.
+        self.fail_let_out_pressure.connect(self.on_message_fail_let_out_pressure, PyQt5.QtCore.Qt.QueuedConnection)
+        # Вывод прогрессбара для подготовки образца.
+        self.sample_preparation_progressbar.connect(self.start_sample_preparation_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
+
 
         # создаем модуль Измерение и передаем туда ссылку на main.
         self.measurement_procedure = MeasurementProcedure(self)
@@ -247,6 +258,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
+
+    def start_sample_preparation_progressbar(self):
+        if not self.config.is_test_mode():
+            sample_preparation_progressbar = UiSamplePreparation(self, self.measurement_procedure.sample_preparation.name, self.measurement_procedure.sample_preparation_time + 17)
+            sample_preparation_progressbar.activate()
+
 
     # Отслеживаем активацию окон приложения
     def tab_change(self):
@@ -547,6 +564,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Запускаем измерения.
         self.calibration_procedure.start_calibrations()
 
+    def block_t1_gM_button4(self):
+        self.t1_gM_button4.setEnabled(False)
+
+    def unblock_t1_gM_button4(self):
+        self.t1_gM_button4.setEnabled(True)
+
     # Блокируем кнопки на вкладке измерений
     def block_userinterface_measurement(self):
         self.t1_gSP_Edit1.setEnabled(False)
@@ -560,11 +583,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_button1.setEnabled(False)
         self.t1_gM_button2.setEnabled(False)
         self.t1_gM_button3.setEnabled(False)
-        self.t1_gM_button4.setEnabled(True)
         self.t1_gMI_Edit1.setEnabled(False)
         self.t1_gMI_Edit2.setEnabled(False)
         self.t1_gMI_Edit3.setEnabled(False)
         self.t1_gMI_Edit4.setEnabled(False)
+        self.actionmenu4_command1.setEnabled(False)
+        self.actionmenu1_command1.setEnabled(False)
         self.t1_tableMeasurement.popup_menu_enable = False
 
     # Разблокируем кнопки на вкладке измерений
@@ -580,11 +604,13 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gM_button1.setEnabled(True)
         self.t1_gM_button2.setEnabled(True)
         self.t1_gM_button3.setEnabled(True)
-        self.t1_gM_button4.setEnabled(False)
+        self.block_t1_gM_button4()
         self.t1_gMI_Edit1.setEnabled(True)
         self.t1_gMI_Edit2.setEnabled(True)
         self.t1_gMI_Edit3.setEnabled(True)
         self.t1_gMI_Edit4.setEnabled(True)
+        self.actionmenu4_command1.setEnabled(True)
+        self.actionmenu1_command1.setEnabled(True)
         self.t1_tableMeasurement.popup_menu_enable = True
 
     # Блокируем кнопки на вкладке измерений
@@ -597,6 +623,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gID_button2.setEnabled(False)
         self.t2_gID_button3.setEnabled(False)
         self.t2_gID_button4.setEnabled(True)
+        self.actionmenu1_command1.setEnabled(False)
         self.t2_tableCalibration.popup_menu_enable = False
 
     def unblock_userinterface_calibration(self):
@@ -608,6 +635,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gID_button2.setEnabled(True)
         self.t2_gID_button3.setEnabled(True)
         self.t2_gID_button4.setEnabled(False)
+        self.actionmenu1_command1.setEnabled(True)
         self.t2_tableCalibration.popup_menu_enable = True
 
     # Блокируем остальные вкладки
@@ -810,6 +838,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.message_txt2 = self.languages.message_txt2
         self.message_txt3 = self.languages.message_txt3
         self.message_txt4 = self.languages.message_txt4
+        self.message_txt5 = self.languages.message_txt5
 
         # [MeasurementReport]
         self.measurement_report=self.languages.measurement_report
@@ -1194,6 +1223,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     def on_message_abort_procedure(self):
         self.get_messagebox(self.message_headline1, self.message_txt4)
+
+    def on_message_fail_let_out_pressure(self):
+        self.get_messagebox(self.message_headline1, self.message_txt5)
 
     # Просто по клику заполняем поля
     def t1_gMI_Edit1_clicked(self):

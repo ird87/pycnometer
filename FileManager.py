@@ -58,6 +58,8 @@ class UiFileManager(QDialog):
         self.setGeometry(300, 300, 500, 300)
         # Загружаем языковые настройки
         self.languages(self.parent.languages.get_file_manager_title())
+
+        self.setWindowModality(Qt.ApplicationModal)
         # Отображаем форму
         self.show()
         # Размещаем по центру
@@ -72,6 +74,7 @@ class UiFileManager(QDialog):
         a = base_pos_x + width_parent / 2 - width_child / 2
         b = base_pos_y + height_parent / 2 - height_child / 2
         self.move(a, b)
+
 
     """Метод для установки заголовков в соответствии с языком."""
     def languages(self, title):
@@ -192,10 +195,10 @@ class UiFileManager(QDialog):
 
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = UiFileManager()
-    sys.exit(app.exec_())
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     ex = UiFileManager()
+#     sys.exit(app.exec_())
 
 
 

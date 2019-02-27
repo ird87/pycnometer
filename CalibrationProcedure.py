@@ -101,6 +101,7 @@ class CalibrationProcedure(object):
         self.test_on = False
         self.fail_pressure_set = self.main.fail_pressure_set
         self.fail_get_balance = self.main.fail_get_balance
+        self.fail_let_out_pressure = self.main.fail_let_out_pressure
         self.set_calibration_results = main.calibration_results_message
         self.Vss = 0
         self.c_Vc = 0.0
@@ -262,6 +263,8 @@ class CalibrationProcedure(object):
             self.fail_get_balance.emit()
         if calibration == Abort_Type.Interrupted_by_user:
             self.abort_procedure.emit()
+        if calibration == Abort_Type.Let_out_pressure_fail:
+            self.fail_let_out_pressure.emit()
 
     """Метод калибровки для кюветы любого размера"""
     def calibration_all_cuvette(self):
@@ -457,15 +460,15 @@ class CalibrationProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
-            balance, success, duration = self.get_balance()
+            success, duration = self.let_out_pressure(self.calibrations[i].p0)
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - fail, balance = {0}/{1}, time has '
-                            'passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                            'pressure let_out - fail, time '
+                            'has passed: {0}'.format(duration))
+                raise Exception(Abort_Type.Let_out_pressure_fail)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - success, P = {0}/{1}, time has '
-                            'passed: {2}'.format(balance, 0.01, duration))
+                            'pressure let_out - success, time '
+                            'has passed: {0}'.format(duration))
             self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -844,6 +847,28 @@ class CalibrationProcedure(object):
                 p_test = True
             self.time_sleep(3)
         return balance, success, duration
+
+    def let_out_pressure(self, p0):
+        time_start = datetime.datetime.now()
+        p_test = False
+        success = False
+        duration = 0
+        while not p_test:
+            self.check_for_interruption()
+            self.time_sleep(0.1)
+            # Замеряем новое p_let_out_pressure, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            p_let_out_pressure = self.spi.get_pressure('p1')
+            # Проверяем достаточно ли низкое давление.
+            if p_let_out_pressure < p0*2 or self.is_test_mode():
+                p_test = True
+                success = True
+            time_now = datetime.datetime.now()
+            duration = round((time_now - time_start).total_seconds(), 1)
+            # Если время выпуска давления достигло 2 минут, то завершаем процедуру давления, неуспех.
+            if duration >= 120:
+                p_test = True
+            self.time_sleep(2)
+        return success, duration
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
     def get_today_date(self):

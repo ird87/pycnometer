@@ -16,6 +16,8 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 from reportlab.rl_config import defaultPageSize
 
+from SamplePreparation import UiSamplePreparation
+
 pdfmetrics.registerFont(TTFont('Arial-Bold', 'arialbd.ttf'))
 pdfmetrics.registerFont(TTFont('Arial-Regular', 'arial.ttf'))
 pdfmetrics.registerFont(TTFont('Arial-Italic', 'ariali.ttf'))
@@ -135,6 +137,7 @@ class MeasurementProcedure(object):
         self.set_measurement_results = self.main.measurement_results_message
         self.fail_pressure_set = self.main.fail_pressure_set
         self.fail_get_balance = self.main.fail_get_balance
+        self.fail_let_out_pressure = self.main.fail_let_out_pressure
         self.measurement_file = ''
         self.result_file_reader = configparser.ConfigParser()
         self.abort_procedure = self.main.abort_procedure
@@ -282,7 +285,7 @@ class MeasurementProcedure(object):
                                                                     'Sample preparation: Impulsive blowing.....Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Impulsive '
                                                                              'blowing.....Done.')
-
+        self.main.unblock_t1_gM_button4()
         # Этап 2. Измерения. Есть два вида: для большой и средней кюветы и для малой кюветы.
         if self.cuvette == Сuvette.Small:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Small.....')
@@ -349,6 +352,8 @@ class MeasurementProcedure(object):
             self.fail_get_balance.emit()
         if measurement == Abort_Type.Interrupted_by_user:
             self.abort_procedure.emit()
+        if measurement == Abort_Type.Let_out_pressure_fail:
+            self.fail_let_out_pressure.emit()
 
     """Метод, подготовки образца с помощью Вакууминга"""
     def sample_preparation_vacuuming(self):
@@ -363,6 +368,7 @@ class MeasurementProcedure(object):
         -ждать 2 секунды
         -закрыть К4, К2, К3
         """
+        self.main.sample_preparation_progressbar.emit()
         self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -718,15 +724,15 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
-            balance, success, duration = self.get_balance()
+            success, duration = self.let_out_pressure(self.measurements[i].p0)
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - fail, balance = {0}/{1}, time '
-                            'has passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                            'pressure let_out - fail, time '
+                            'has passed: {0}'.format(duration))
+                raise Exception(Abort_Type.Let_out_pressure_fail)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - success, P = {0}/{1}, time '
-                            'has passed: {2}'.format(balance, 0.01, duration))
+                            'pressure let_out - success, time '
+                            'has passed: {0}'.format(duration))
             self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -897,12 +903,12 @@ class MeasurementProcedure(object):
             balance, success, duration = self.get_balance()
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - fail, balance = {0}/{1}, time '
-                            'has passed: {2}'.format(balance, 0.01, duration))
+                                           'pressure stops changing - fail, balance = {0}/{1}, time '
+                                           'has passed: {2}'.format(balance, 0.01, duration))
                 raise Exception(Abort_Type.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - success, P = {0}/{1}, time '
-                            'has passed: {2}'.format(balance, 0.01, duration))
+                                       'pressure stops changing - success, P = {0}/{1}, time '
+                                       'has passed: {2}'.format(balance, 0.01, duration))
             self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -956,15 +962,15 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
-            balance, success, duration = self.get_balance()
+            success, duration = self.let_out_pressure(self.measurements[i].p0)
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - fail, balance = {0}/{1}, time '
-                            'has passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                            'pressure let_out - fail, time '
+                            'has passed: {0}'.format(duration))
+                raise Exception(Abort_Type.Let_out_pressure_fail)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                            'pressure stops changing - success, P = {0}/{1}, time '
-                            'has passed: {2}'.format(balance, 0.01, duration))
+                            'pressure let_out - success, time '
+                            'has passed: {0}'.format(duration))
             self.check_for_interruption()
             self.gpio.port_off(self.ports[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -1245,6 +1251,28 @@ class MeasurementProcedure(object):
                 p_test = True
             self.time_sleep(3)
         return balance, success, duration
+
+    def let_out_pressure(self, p0):
+        time_start = datetime.datetime.now()
+        p_test = False
+        success = False
+        duration = 0
+        while not p_test:
+            self.check_for_interruption()
+            self.time_sleep(0.1)
+            # Замеряем новое p_let_out_pressure, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
+            p_let_out_pressure = self.spi.get_pressure('p1')
+            # Проверяем достаточно ли низкое давление.
+            if p_let_out_pressure < p0*2 or self.is_test_mode():
+                p_test = True
+                success = True
+            time_now = datetime.datetime.now()
+            duration = round((time_now - time_start).total_seconds(), 1)
+            # Если время выпуска давления достигло 2 минут, то завершаем процедуру давления, неуспех.
+            if duration >= 120:
+                p_test = True
+            self.time_sleep(2)
+        return success, duration
 
     """Метод вывода отчета по процедуре "Измерение"."""
     def create_report(self):
@@ -1639,6 +1667,7 @@ class Abort_Type(Enum):
     Pressure_below_required = 1
     Could_not_balance = 2
     Interrupted_by_user = 3
+    Let_out_pressure_fail = 4
 
 
 # Enum для наглядного вызова портов
