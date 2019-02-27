@@ -46,6 +46,10 @@ class SPI(object):
         self.debug_log = debug_log
         self.measurement_log = measurement_log
         self.message = message
+        self.correct_data = 0
+
+    def set_correct_data(self, x):
+        self.correct_data = x
 
     """Метод для применения настроек"""
     def set_option(self):
@@ -148,7 +152,7 @@ class SPI(object):
     """Метод для получения давления с датчика"""
     def get_pressure(self, crutch):
         # получить данные с датчика
-        result = self.read_channel()
+        result = self.read_channel() - self.correct_data
         # рассчитать на их основе давление сразу во всех единицах измерения
         p = self.calc_pressure(result)
         # передаем давление в нужной единице измерения.

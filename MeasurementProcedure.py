@@ -1252,6 +1252,7 @@ class MeasurementProcedure(object):
             self.time_sleep(3)
         return balance, success, duration
 
+    """Метод сброса давления"""
     def let_out_pressure(self, p0):
         time_start = datetime.datetime.now()
         p_test = False
