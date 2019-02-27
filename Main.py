@@ -4,6 +4,7 @@
 import inspect
 import os
 import sys  # sys нужен для передачи argv в QApplication
+from enum import Enum
 
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
@@ -18,7 +19,7 @@ from Measurement import Measurement
 from MeasurementProcedure import MeasurementProcedure, Сuvette, Sample_preparation
 from PyQt5 import QtCore
 from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
-from PyQt5.QtGui import QIntValidator, QRegExpValidator
+from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap
 from PyQt5.QtWidgets import QMessageBox
 
 from SamplePreparation import UiSamplePreparation
@@ -32,7 +33,6 @@ from Controller import Controller
 """
 
 """Функция для отображенияtoFixed нужного количества знаков после '.'"""
-
 
 def toFixed(numObj, digits=0):
     if numObj!= None and numObj != '':
@@ -114,6 +114,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.setWindowState(Qt.WindowMaximized)
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.controller = Controller
+        self.wifi = False
         # Загружаем модуль настройки
         self.config = Configure()
 
@@ -250,6 +251,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t3_checkValve3.stateChanged.connect(self.on_off_port3)             # Ручное упр.   Изменение состояние К3.
         self.t3_checkValve4.stateChanged.connect(self.on_off_port4)             # Ручное упр.   Изменение состояние К4.
         self.t3_checkValve5.stateChanged.connect(self.on_off_port5)             # Ручное упр.   Изменение состояние К5.
+        self.t4_gIS_cmd1.currentIndexChanged.connect(self.changed_languare)     # Настройка.    Выбор языка.
         self.t4_MS_Edit1.textChanged.connect(self.t4_MS_Edit1_text_changed)     # Настройка.    Длинна импульса.
         self.t4_MS_Edit2.textChanged.connect(self.t4_MS_Edit2_text_changed)     # Настройка.    Pизм.
         self.t4_button_1.clicked.connect(self.option_appy)                      # Настройка.    Применение настроек.
@@ -264,6 +266,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             sample_preparation_progressbar = UiSamplePreparation(self, self.measurement_procedure.sample_preparation.name, self.measurement_procedure.sample_preparation_time + 17)
             sample_preparation_progressbar.activate()
 
+    def changed_languare(self):
+        name = self.t4_gIS_cmd1.currentText()
+        img = os.path.join(os.getcwd() + "/attachment/" + name + ".png")
+        if os.path.isfile(img):
+            self.t4_gIS_flag.setPixmap(QPixmap(img))
 
     # Отслеживаем активацию окон приложения
     def tab_change(self):
@@ -692,6 +699,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gID_Edit1.setText('')
         self.t2_gID_Edit2.setText('')
 
+        # [TAB4]
+        self.t4_gMC_Edit1.setText('')
+        self.t4_gRS_Edit1.setText('')
+        self.t4_gRS_Edit2.setText('')
+        self.t4_gSR_Edit1.setText('')
+        self.t4_gSR_Edit2.setText('')
+        self.t4_gSR_Edit3.setText('')
+
 
 
 
@@ -821,8 +836,30 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gMS_lbl2.setText(self.languages.t4_gMS_lbl2)
         self.t4_gMS_lbl3.setText(self.languages.t4_gMS_lbl3)
         self.t4_gMS_lbl4.setText(self.languages.t4_gMS_lbl4[self.config.pressure.value])
+        self.t4_groupManualControl.setTitle((self.languages.t4_groupManualControl))
+        self.t4_gMC_lbl1.setText(self.languages.t4_gMC_lbl1)
+        self.t4_gMC_chb1.setText(self.languages.t4_gMC_chb1)
+        self.t4_groupReportSetup.setTitle((self.languages.t4_groupReportSetup))
+        self.t4_gRS_chb1.setText(self.languages.t4_gRS_chb1)
+        self.t4_gRS_lbl1.setText(self.languages.t4_gRS_lbl1)
+        self.t4_gRS_lbl2.setText(self.languages.t4_gRS_lbl2)
+        self.t4_groupSavingResult.setTitle((self.languages.t4_groupSavingResult))
+        self.t4_gSR_chb1.setText(self.languages.t4_gSR_chb1)
+        self.t4_gSR_chb2.setText(self.languages.t4_gSR_chb2)
+        self.t4_gSR_lbl1.setText(self.languages.t4_gSR_lbl1)
+        self.t4_gSR_lbl2.setText(self.languages.t4_gSR_lbl2)
+        self.t4_gSR_lbl3.setText(self.languages.t4_gSR_lbl3)
+        self.t4_gSR_button1.setText(self.languages.t4_gSR_button1)
+        self.t4_gSR_button2.setText(self.languages.t4_gSR_button2)
+        if self.wifi:
+            self.t4_gSR_lbl4.setStyleSheet("color: green")
+            self.t4_gSR_lbl4.setText(self.languages.t4_wifi_true)
+        else:
+            self.t4_gSR_lbl4.setStyleSheet("color: red")
+            self.t4_gSR_lbl4.setText(self.languages.t4_wifi_false)
 
         self.show_current_settings()
+
 
         # [Menu]
         self.menumenu1.setTitle(self.languages.menu1)

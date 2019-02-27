@@ -121,6 +121,25 @@ class Languages(object):
         self.t4_gMS_lbl2 = ''
         self.t4_gMS_lbl3 = ''
         self.t4_gMS_lbl4 = []
+        self.t4_groupManualControl = ''
+        self.t4_gMC_lbl1 = ''
+        self.t4_gMC_chb1 = ''
+        self.t4_groupReportSetup = ''
+        self.t4_gRS_chb1 = ''
+        self.t4_gRS_lbl1 = ''
+        self.t4_gRS_lbl2 = ''
+        self.t4_groupSavingResult = ''
+        self.t4_gSR_chb1 = ''
+        self.t4_gSR_chb2 = ''
+        self.t4_gSR_lbl1 = ''
+        self.t4_gSR_lbl2 = ''
+        self.t4_gSR_lbl3 = ''
+        self.t4_gSR_button1 = ''
+        self.t4_gSR_button2 = ''
+        self.t4_gSR_lbl4 = ''
+        self.t4_wifi_true = ''
+        self.t4_wifi_false = ''
+
 
         # [MeasurementSetting]
         self.pressure_setting = []
@@ -318,6 +337,24 @@ class Languages(object):
         dumps = json.dumps(self.languages.get('TAB4', 't4_gMS_lbl4'))
         dumpsload = json.loads(dumps)
         self.t4_gMS_lbl4 = dumpsload.split(',')
+        self.t4_groupManualControl = self.get_string('TAB4', 't4_groupManualControl')
+        self.t4_gMC_lbl1 = self.get_string('TAB4', 't4_gMC_lbl1')
+        self.t4_gMC_chb1 = self.get_string('TAB4', 't4_gMC_chb1')
+        self.t4_groupReportSetup = self.get_string('TAB4', 't4_groupReportSetup')
+        self.t4_gRS_chb1 = self.get_string('TAB4', 't4_gRS_chb1')
+        self.t4_gRS_lbl1 = self.get_string('TAB4', 't4_gRS_lbl1')
+        self.t4_gRS_lbl2 = self.get_string('TAB4', 't4_gRS_lbl2')
+        self.t4_groupSavingResult = self.get_string('TAB4', 't4_groupSavingResult')
+        self.t4_gSR_chb1 = self.get_string('TAB4', 't4_gSR_chb1')
+        self.t4_gSR_chb2 = self.get_string('TAB4', 't4_gSR_chb2')
+        self.t4_gSR_lbl1 = self.get_string('TAB4', 't4_gSR_lbl1')
+        self.t4_gSR_lbl2 = self.get_string('TAB4', 't4_gSR_lbl2')
+        self.t4_gSR_lbl3 = self.get_string('TAB4', 't4_gSR_lbl2')
+        self.t4_gSR_button1 = self.get_string('TAB4', 't4_gSR_button1')
+        self.t4_gSR_button2 = self.get_string('TAB4', 't4_gSR_button2')
+        self.t4_gSR_lbl4 = self.get_string('TAB4', 't4_gSR_lbl4')
+        self.t4_wifi_true = self.get_string('TAB4', 't4_wifi_true')
+        self.t4_wifi_false = self.get_string('TAB4', 't4_wifi_false')
 
         # [MeasurementSetting]
         self.pressure_setting.clear()
