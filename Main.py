@@ -259,15 +259,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
+        self.sensor_calibration = False
         # нам надо откалибровать датчик.
-        if not self.config.is_test_mode():
-            self.progressbar_form = UiProgressbar(self, self.languages.TitlesForProgressbar_SensorCalibration,
-                                   self.languages.TitlesForProgressbar_SensorCalibration, 3)
-            self.progressbar_form.activate()
-            self.calibration_procedure.start_russian_sensor_calibration()
+        self.calibration_procedure.start_russian_sensor_calibration()
 
     def start_progressbar(self, title, name, time):
-        if self.config.is_test_mode():
+        if not self.config.is_test_mode():
             self.progressbar_form = UiProgressbar(self, title, name, time)
             self.progressbar_form.activate()
 

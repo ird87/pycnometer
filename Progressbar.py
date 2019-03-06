@@ -57,13 +57,11 @@ class UiProgressbar(QDialog):
 
     def progress_bar_run(self):
         t = 0
+        lock = threading.Lock()
         while t < self.valua:
-            if not self.pause:
-                time.sleep(1)
-                t += 1
-                self.prb_Progressbar.setValue(t)
-            if self.abort:
-                break
+            time.sleep(1)
+            t += 1
+            self.prb_Progressbar.setValue(t)
         # time.sleep(2)
         self.close()
 

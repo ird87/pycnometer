@@ -507,8 +507,6 @@ class CalibrationProcedure(object):
             self.table.add_calibration(self.calibrations[l])
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add calibration data to the table.....')
 
-
-
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
     def calculation(self):
@@ -1071,6 +1069,8 @@ class CalibrationProcedure(object):
         Прибавить к полученному значению 0,167
         вычесть полученное давление при каждом измерении давления
         """
+        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SensorCalibration,
+                                   self.main.languages.TitlesForProgressbar_SensorCalibration, 10)
         self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -1089,14 +1089,11 @@ class CalibrationProcedure(object):
                                    'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
         self.check_for_interruption()
         p, success, duration = self.gain_Pmeas()
-        self.main.progressbar_form.pause = True
         if not success:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                        duration))
-            self.main.progressbar_form.abort = True
             raise Exception(Abort_Type.Pressure_below_required)
-        self.main.progressbar_form.pause = False
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                       duration))
@@ -1122,14 +1119,11 @@ class CalibrationProcedure(object):
                                    'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
         self.check_for_interruption()
         balance, success, duration = self.get_balance()
-        self.main.progressbar_form.pause = True
         if not success:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure stops changing - fail, balance = {0}/{1}, time has '
                                        'passed: {2}'.format(balance, 0.01, duration))
-            self.main.progressbar_form.abort = True
             raise Exception(Abort_Type.Could_not_balance)
-        self.main.progressbar_form.pause = False
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'pressure stops changing - success, P = {0}/{1}, time has '
                                    'passed: {2}'.format(balance, 0.01, duration))
