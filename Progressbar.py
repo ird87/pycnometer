@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'SamplePreparation.ui'
+# Form implementation generated from reading ui file 'Progressbar.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -13,27 +13,28 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog
 
 
-class UiSamplePreparation(QDialog):
+class UiProgressbar(QDialog):
 
     """Конструктор класса. Поля класса"""
 
-    def __init__(self, parent, type, valua):
+    def __init__(self, parent, title, type, valua):
         super().__init__()
         self.parent = parent
         self.type = type
         self.valua = valua
+        self.title = title
         self.init_ui()
+        self.pause = False
+        self.abort = False
 
     """Метод инициализации формы"""
 
     def activate(self):
         # Устанавливаем заголовок
-        self.setWindowTitle('SamplePreparation')
+        self.setWindowTitle(self.title)
         # Устанавливаем размеры
         self.setGeometry(0, 0, 280, 100)
         # Загружаем языковые настройки
-        """Метод для установки заголовков в соответствии с языком."""
-        self.setWindowTitle(self.parent.languages.get_sample_preparation_title())
         self.setWindowModality(Qt.ApplicationModal)
         # Отображаем форму
         self.show()
@@ -57,41 +58,43 @@ class UiSamplePreparation(QDialog):
     def progress_bar_run(self):
         t = 0
         while t < self.valua:
-            time.sleep(1)
-            t += 1
-            self.prb_SamplePreparation.setValue(t)
+            if not self.pause:
+                time.sleep(1)
+                t += 1
+                self.prb_Progressbar.setValue(t)
+            if self.abort:
+                break
         # time.sleep(2)
         self.close()
 
     def init_ui(self):
-        self.setObjectName("DialogSamplePreparation")
+        self.setObjectName("DialogProgressbar")
         self.setWindowFlags(Qt.WindowTitleHint)
         self.resize(280, 100)
-        self.prb_SamplePreparation = QtWidgets.QProgressBar(self)
-        self.prb_SamplePreparation.setGeometry(QtCore.QRect(10, 60, 261, 23))
-        self.prb_SamplePreparation.setMaximum(self.valua)
-        self.prb_SamplePreparation.setValue(0)
-        self.prb_SamplePreparation.setObjectName("prb_SamplePreparation")
-        self.lblSamplePreparation = QtWidgets.QLabel(self)
-        self.lblSamplePreparation.setGeometry(QtCore.QRect(20, 20, 241, 21))
+        self.prb_Progressbar = QtWidgets.QProgressBar(self)
+        self.prb_Progressbar.setGeometry(QtCore.QRect(10, 60, 261, 23))
+        self.prb_Progressbar.setMaximum(self.valua)
+        self.prb_Progressbar.setValue(0)
+        self.prb_Progressbar.setObjectName("prb_Progressbar")
+        self.lblProgressbar = QtWidgets.QLabel(self)
+        self.lblProgressbar.setGeometry(QtCore.QRect(20, 20, 241, 21))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
-        self.lblSamplePreparation.setFont(font)
-        self.lblSamplePreparation.setAlignment(QtCore.Qt.AlignCenter)
-        self.lblSamplePreparation.setObjectName("lblSamplePreparation")
+        self.lblProgressbar.setFont(font)
+        self.lblProgressbar.setAlignment(QtCore.Qt.AlignCenter)
+        self.lblProgressbar.setObjectName("lblProgressbar")
         QtCore.QMetaObject.connectSlotsByName(self)
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("DialogSamplePreparation", "SamplePreparation"))
-        self.lblSamplePreparation.setText(self.type)
+        self.lblProgressbar.setText(self.type)
 
 
 # if __name__ == "__main__":
 #     import sys
 #     app = QtWidgets.QApplication(sys.argv)
-#     DialogSamplePreparation = QtWidgets.QDialog()
-#     ui = Ui_DialogSamplePreparation()
-#     ui.setupUi(DialogSamplePreparation)
-#     DialogSamplePreparation.show()
+#     DialogProgressbar = QtWidgets.QDialog()
+#     ui = Ui_DialogProgressbar()
+#     ui.setupUi(DialogProgressbar)
+#     DialogProgressbar.show()
 #     sys.exit(app.exec_())
 

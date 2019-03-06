@@ -16,7 +16,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 from reportlab.rl_config import defaultPageSize
 
-from SamplePreparation import UiSamplePreparation
+from Progressbar import UiProgressbar
 
 pdfmetrics.registerFont(TTFont('Arial-Bold', 'arialbd.ttf'))
 pdfmetrics.registerFont(TTFont('Arial-Regular', 'arial.ttf'))
@@ -368,7 +368,7 @@ class MeasurementProcedure(object):
         -ждать 2 секунды
         -закрыть К4, К2, К3
         """
-        self.main.sample_preparation_progressbar.emit()
+        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb1, self.sample_preparation_time + 17)
         self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -431,6 +431,7 @@ class MeasurementProcedure(object):
         -ждать 2 секунды
         -закрыть К4, К2, К3
         """
+        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb2, self.sample_preparation_time + 2)
         self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -485,6 +486,14 @@ class MeasurementProcedure(object):
                     Next i
         Закрыть К1, К2, К3, К4
         """
+        try:
+            t = round(self.sample_preparation_time / self.pulse_length)
+        except ArithmeticError:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Division by zero when calculating t, '
+                                 'denominator: self.pulse_length={0}'.format(self.pulse_length))
+            t = 0
+        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb3, self.sample_preparation_time + 3 + t * (self.pulse_length + 1))
         self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -505,13 +514,7 @@ class MeasurementProcedure(object):
         self.time_sleep(3)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(3))
-        try:
-            t = round(self.sample_preparation_time / self.pulse_length)
-        except ArithmeticError:
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 'Division by zero when calculating t, '
-                                 'denominator: self.pulse_length={0}'.format(self.pulse_length))
-            t = 0
+
         self.check_for_interruption()
         for i in range(t):
             self.check_for_interruption()

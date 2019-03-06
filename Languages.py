@@ -223,8 +223,9 @@ class Languages(object):
         self.Table_Files_Column1 = self.get_string('FileManager', 'Table_Files_Column1')
         self.Table_Files_Column2 = self.get_string('FileManager', 'Table_Files_Column2')
 
-        # [SamplePreparation]
-        self.Title_SP = self.get_string('SamplePreparation', 'Title_SP')
+        # [Other]
+        self.TitlesForProgressbar_SamplePreparation = self.get_string('TitlesForProgressbar', 'SamplePreparation')
+        self.TitlesForProgressbar_SensorCalibration = self.get_string('TitlesForProgressbar', 'SensorCalibration')
 
         # [TAB1]
         self.t1_tableMeasurement_Column.clear()

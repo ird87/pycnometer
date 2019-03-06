@@ -22,7 +22,7 @@ from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap
 from PyQt5.QtWidgets import QMessageBox
 
-from SamplePreparation import UiSamplePreparation
+from Progressbar import UiProgressbar
 from TableCalibration import UiTableCalibration
 from TableMeasurement import UiTableMeasurement
 from Controller import Controller
@@ -101,7 +101,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры из-за проблем со спуском давления.
     fail_let_out_pressure = PyQt5.QtCore.pyqtSignal()
     # Вывод прогрессбара для подготовки образца.
-    sample_preparation_progressbar = PyQt5.QtCore.pyqtSignal()
+    progressbar = PyQt5.QtCore.pyqtSignal(str, str, int)
 
     """Конструктор класса. Поля класса"""
 
@@ -154,7 +154,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.ports = self.config.get_ports()
             self.gpio = GPIO(self.ports)
             self.gpio.all_port_off()
-            self.spi = SPI(self.config, self.debug_log, self.measurement_log, self.set_pressure_message)
+            self.spi = SPI(self)
         if not self.config.is_test_mode():
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in NORMAL mode.')
             from ModulGPIO import GPIO
@@ -163,7 +163,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.ports = self.config.get_ports()
             self.gpio = GPIO(self.ports)
             self.gpio.all_port_off()
-            self.spi = SPI(self.config, self.debug_log, self.measurement_log, self.set_pressure_message)
+            self.spi = SPI(self)
         # На будущее сохраним стандартный стиль поля для ввода, иногда нам нужно будет их выделять, но
         # потом нужно будет вернуться к стандартному стилю.
         self.ss = self.t1_gM_Edit1.styleSheet()
@@ -187,9 +187,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.abort_procedure.connect(self.on_message_abort_procedure, PyQt5.QtCore.Qt.QueuedConnection)
         # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры из-за проблем со спуском давления.
         self.fail_let_out_pressure.connect(self.on_message_fail_let_out_pressure, PyQt5.QtCore.Qt.QueuedConnection)
-        # Вывод прогрессбара для подготовки образца.
-        self.sample_preparation_progressbar.connect(self.start_sample_preparation_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
-
+        # Вывод прогрессбара.
+        self.progressbar.connect(self.start_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
 
         # создаем модуль Измерение и передаем туда ссылку на main.
         self.measurement_procedure = MeasurementProcedure(self)
@@ -260,11 +259,17 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
-
-    def start_sample_preparation_progressbar(self):
+        # нам надо откалибровать датчик.
         if not self.config.is_test_mode():
-            sample_preparation_progressbar = UiSamplePreparation(self, self.measurement_procedure.sample_preparation.name, self.measurement_procedure.sample_preparation_time + 17)
-            sample_preparation_progressbar.activate()
+            self.progressbar_form = UiProgressbar(self, self.languages.TitlesForProgressbar_SensorCalibration,
+                                   self.languages.TitlesForProgressbar_SensorCalibration, 3)
+            self.progressbar_form.activate()
+            self.calibration_procedure.start_russian_sensor_calibration()
+
+    def start_progressbar(self, title, name, time):
+        if self.config.is_test_mode():
+            self.progressbar_form = UiProgressbar(self, title, name, time)
+            self.progressbar_form.activate()
 
     def changed_languare(self):
         name = self.t4_gIS_cmd1.currentText()

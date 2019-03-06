@@ -5,6 +5,9 @@ import os
 import threading
 import time
 import spidev
+
+from MeasurementProcedure import Abort_Type, Ports
+
 """Проверака и комментари: 13.01.2019"""
 
 """
@@ -27,10 +30,11 @@ class SPI(object):
     """docstring"""
 
     """Конструктор класса. Поля класса"""
-    def __init__(self, config, debug_log, measurement_log, message):
+    def __init__(self, main):
         bus = 0
         device = 0
-        self.config = config
+        self.main = main
+        self.config = self.main.config
         self.temp_channel = 0
         self.t = 0
         # я все еще не уверен до конца, но кажется это нигде не используется.
@@ -38,14 +42,15 @@ class SPI(object):
         # self.smq_max = 0
         self.smq_now = 0
         self.spi = spidev.SpiDev()
-        self.spi.max_speed_hz  = 0
+        self.spi.max_speed_hz = 0
         self.spi.open(bus, device)
         self.set_option()
         self.test_on = False
         self.file = os.path.basename(__file__)
-        self.debug_log = debug_log
-        self.measurement_log = measurement_log
-        self.message = message
+        self.debug_log = self.main.debug_log
+        self.measurement_log = self.main.measurement_log
+        self.is_test_mode = self.main.config.is_test_mode
+        self.message = self.main.message
         self.correct_data = 0
 
     def set_correct_data(self, x):
@@ -188,4 +193,3 @@ class SPI(object):
     def getDataFromPsi(self, p):
         data = p * 1023 / 130 / 0.14503773773  # кПа
         return data
-

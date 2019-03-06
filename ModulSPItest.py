@@ -26,8 +26,9 @@ class SPI(object):
     """docstring"""
 
     """Конструктор класса. Поля класса"""
-    def __init__(self, config, debug_log, measurement_log, message):
-        self.config = config
+    def __init__(self, main):
+        self.main = main
+        self.config = self.main.config
         self.t = 0
         self.temp_channel = 0        
         # я все еще не уверен до конца, но кажется это нигде не используется.
@@ -38,9 +39,9 @@ class SPI(object):
         self.spi_max_speed_hz = 0
         self.set_option()
         self.file = os.path.basename(__file__)
-        self.debug_log = debug_log
-        self.measurement_log = measurement_log
-        self.message = message
+        self.debug_log = self.main.debug_log
+        self.measurement_log = self.main.measurement_log
+        self.message = self.main.message
         self.correct_data = 0
 
     def set_correct_data(self, x):

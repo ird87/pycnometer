@@ -507,10 +507,7 @@ class CalibrationProcedure(object):
             self.table.add_calibration(self.calibrations[l])
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Add calibration data to the table.....')
 
-    """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
-    def time_sleep(self, t):
-        if not self.is_test_mode():
-            time.sleep(t)
+
 
     """Метод обсчета полученных данных. Так как все данные хранятся в таблице с динамическим пересчетом, 
                                                                                     мы просто вызываем этот пересчет"""
@@ -1018,6 +1015,148 @@ class CalibrationProcedure(object):
         if self.is_abort_procedure():
             raise Exception(Abort_Type.Interrupted_by_user)
 
+    """Метод для включения отдельного потока калибровки русского датчика прибора"""
+
+    def start_russian_sensor_calibration(self):
+        # Это команда присваивает отдельному потоку исполняемую процедуру измерения
+        self.my_russian_sensor_calibration_thread = threading.Thread(target = self.russian_sensor_calibration)
+        # Запускаем поток и процедуру калибровки
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Thread "sensor_calibration" started')
+        self.my_russian_sensor_calibration_thread.start()
+
+    """Метод для выключения отдельного потока калибровки русского датчика прибора"""
+    def close_russian_sensor_calibration(self):
+        # Вызываем выключение потока
+        self.my_russian_sensor_calibration_thread.join()
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Thread "sensor_calibration" finished')
+
+    """поток калибровки русского датчика прибора"""
+    def russian_sensor_calibration(self):
+        # Вызываем процедуру обсчета данных.
+        try:
+            self.russian_sensor_calibration_procedure()
+        except Exception as e:
+            self.interrupt_russian_sensor_calibration_procedure(e.args[0])
+            return
+
+    """Метод обработки прерывания калибровки из-за низкого давления"""
+    def interrupt_russian_sensor_calibration_procedure(self, error):
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'sensor_calibration..... ' + error.name + '.')
+        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'sensor_calibration..... ' + error.name + '.')
+        # выключаем все порты
+        self.gpio.all_port_off()
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'sensor_calibration interrupted')
+        if error == Abort_Type.Pressure_below_required:
+            self.fail_pressure_set.emit()
+        if error == Abort_Type.Could_not_balance:
+            self.fail_get_balance.emit()
+        if error == Abort_Type.Interrupted_by_user:
+            self.abort_procedure.emit()
+        if error == Abort_Type.Let_out_pressure_fail:
+            self.fail_let_out_pressure.emit()
+
+    def russian_sensor_calibration_procedure(self):
+        """
+        При запуске программы:
+        Закрыть К2, К3, К4
+        Открыть К1
+        Процедура набора давления Т1
+        Закрыть К1
+        Ждать 2 сек
+        Открыть К2, К3, К4
+        Процедура стабилизации давления Т2
+        Ждать 2 секунды
+        Закрыть К2, К3, К4
+        Измерить Р
+        Прибавить к полученному значению 0,167
+        вычесть полученное давление при каждом измерении давления
+        """
+        self.check_for_interruption()
+        self.gpio.port_off(self.ports[Ports.K2.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
+        self.gpio.port_off(self.ports[Ports.K3.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
+        self.gpio.port_off(self.ports[Ports.K4.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
+        self.gpio.port_on(self.ports[Ports.K1.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
+        p, success, duration = self.gain_Pmeas()
+        self.main.progressbar_form.pause = True
+        if not success:
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                       'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
+                                                                                                       duration))
+            self.main.progressbar_form.abort = True
+            raise Exception(Abort_Type.Pressure_below_required)
+        self.main.progressbar_form.pause = False
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
+                                                                                                      duration))
+        self.check_for_interruption()
+        self.gpio.port_off(self.ports[Ports.K1.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+        self.check_for_interruption()
+        self.time_sleep(2)
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Wait {0} sec'.format(2))
+        self.check_for_interruption()
+        self.gpio.port_on(self.ports[Ports.K2.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
+        self.gpio.port_on(self.ports[Ports.K3.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
+        self.gpio.port_on(self.ports[Ports.K4.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
+        balance, success, duration = self.get_balance()
+        self.main.progressbar_form.pause = True
+        if not success:
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                       'pressure stops changing - fail, balance = {0}/{1}, time has '
+                                       'passed: {2}'.format(balance, 0.01, duration))
+            self.main.progressbar_form.abort = True
+            raise Exception(Abort_Type.Could_not_balance)
+        self.main.progressbar_form.pause = False
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'pressure stops changing - success, P = {0}/{1}, time has '
+                                   'passed: {2}'.format(balance, 0.01, duration))
+        self.check_for_interruption()
+        self.gpio.port_off(self.ports[Ports.K2.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+        self.check_for_interruption()
+        self.gpio.port_off(self.ports[Ports.K3.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.check_for_interruption()
+        self.gpio.port_off(self.ports[Ports.K4.value])
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+        self.check_for_interruption()
+        self.time_sleep(2)
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                   'Wait {0} sec'.format(2))
+        self.check_for_interruption()
+        # Замеряем дата с датчика
+        self.check_for_interruption()
+        data_correction = self.spi.read_channel() - 0.167
+        self.spi.set_correct_data(data_correction)
+        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'data_correction = {0}'.format(data_correction))
+        self.check_for_interruption()
+
     def try_load_string(self, section, variable):
         result = ''
         try:
@@ -1049,3 +1188,8 @@ class CalibrationProcedure(object):
         except:
             result = None
         return result
+
+    """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
+    def time_sleep(self, t):
+        if not self.is_test_mode():
+            time.sleep(t)
