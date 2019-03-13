@@ -50,7 +50,7 @@ class SPI(object):
         self.debug_log = self.main.debug_log
         self.measurement_log = self.main.measurement_log
         self.is_test_mode = self.main.config.is_test_mode
-        self.message = self.main.message
+        self.message = self.main.set_pressure_message
         self.correct_data = 0
 
     def set_correct_data(self, x):

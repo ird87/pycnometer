@@ -41,7 +41,7 @@ class SPI(object):
         self.file = os.path.basename(__file__)
         self.debug_log = self.main.debug_log
         self.measurement_log = self.main.measurement_log
-        self.message = self.main.message
+        self.message = self.main.set_pressure_message
         self.correct_data = 0
 
     def set_correct_data(self, x):
