@@ -157,7 +157,7 @@ class SPI(object):
     """Метод для получения давления с датчика"""
     def get_pressure(self, crutch):
         # получить данные с датчика
-        result = self.read_channel() - self.correct_data
+        result = self.read_channel()    # - self.correct_data
         # рассчитать на их основе давление сразу во всех единицах измерения
         p = self.calc_pressure(result)
         # передаем давление в нужной единице измерения.
