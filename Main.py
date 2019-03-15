@@ -553,7 +553,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         number_of_measurements = int(self.t2_gID_Edit1.text())
 
         # Получаем значение объема стандартного образца, введенное пользователем
-        sample_volume = float(self.t2_gID_Edit1.text())
+        sample_volume = float(self.t2_gID_Edit2.text())
 
         return cuvette, number_of_measurements, sample_volume
 
