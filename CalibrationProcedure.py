@@ -1150,6 +1150,7 @@ class CalibrationProcedure(object):
         self.spi.set_correct_data(data_correction)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'data_correction = {0}'.format(data_correction))
         self.check_for_interruption()
+        print("калибровка датчика закончена")
 
     def try_load_string(self, section, variable):
         result = ''
