@@ -410,7 +410,7 @@ class CalibrationProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
                 self.check_for_interruption()
-                self.gpio.port_on(self.ports[Ports.K3.value])
+            self.gpio.port_on(self.ports[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
