@@ -1267,7 +1267,9 @@ class MeasurementProcedure(object):
             # Замеряем новое p_let_out_pressure, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p_let_out_pressure = self.spi.get_pressure('p1')
             # Проверяем достаточно ли низкое давление.
-            if p_let_out_pressure < p0*2 or self.is_test_mode():
+            print("Давление = {0} < p0*2 = {1}".format(p_let_out_pressure, p0*2))
+            # if p_let_out_pressure < p0*2 or self.is_test_mode():
+            if duration > 10:
                 p_test = True
                 success = True
             time_now = datetime.datetime.now()
