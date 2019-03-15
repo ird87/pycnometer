@@ -114,7 +114,7 @@ class SPI(object):
                                                                                 str(self.t), str(self.smq_now)))
         while self.test_on:
             # получить данные с датчика
-            result = self.read_channel()
+            result = self.read_channel()-self.correct_data
             # рассчитать на их основе давление сразу во всех единицах измерения
             p = self.calc_pressure(result)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
