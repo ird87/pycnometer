@@ -59,9 +59,8 @@ class Logger(object):
         # создаем из текущих даты, времени и типа логгера название файла
         log_name = self.get_today_date()
         find_name = True
-        a = Path(os.getcwd() + '/Logs')
-        print(a)
-        if not os.path.isdir(a):
+
+        if not os.path.isdir(os.getcwd() + '/Logs'):
             os.makedirs(Path(os.getcwd() + '/Logs'))
         if not os.path.isdir(Path(os.getcwd() + '/Logs/' + self.type)):
             os.makedirs(Path(os.getcwd() + '/Logs/' + self.type))
