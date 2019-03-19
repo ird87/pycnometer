@@ -78,10 +78,10 @@ class CalibrationProcedure(object):
         self.spi = self.main.spi
         self.gpio = self.main.gpio
         self.ports = self.main.ports
-        self.block_other_tabs = self.main.block_other_tabs
-        self.block_userinterface = self.main.block_userinterface_calibration
-        self.unblock_userinterface = self.main.unblock_userinterface_calibration
-        self.unblock_other_tabs = self.main.unblock_other_tabs
+        self.block_other_tabs = self.main.block_other_tabs_signal
+        self.block_userinterface = self.main.block_userinterface_calibration_signal
+        self.unblock_userinterface = self.main.unblock_userinterface_calibration_signal
+        self.unblock_other_tabs = self.main.unblock_other_tabs_signal
         self.message = self.main.message
         self.file = os.path.basename(__file__)
         self.debug_log = self.main.debug_log
@@ -191,9 +191,9 @@ class CalibrationProcedure(object):
     def calibrations_procedure(self):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration started')
         # Блокируем остальные вкладки для пользователя.
-        self.block_other_tabs()
+        self.block_other_tabs.emit()
         # Блокируем кнопки, поля и работу с таблицей на текущей вкладке.
-        self.block_userinterface()
+        self.block_userinterface.emit()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Interface locked, Current tab = Calibration')
         self.P = 'P'
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measure P.....')
@@ -237,9 +237,9 @@ class CalibrationProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         # Разлокируем остальные вкладки для пользователя.
-        self.unblock_other_tabs()
+        self.unblock_other_tabs.emit()
         # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
-        self.unblock_userinterface()
+        self.unblock_userinterface.emit()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Calibration')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration finished')
@@ -252,9 +252,9 @@ class CalibrationProcedure(object):
         # выключаем все порты
         self.gpio.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
-        self.unblock_other_tabs()
+        self.unblock_other_tabs.emit()
         # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
-        self.unblock_userinterface()
+        self.unblock_userinterface.emit()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Calibration')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration interrupted')

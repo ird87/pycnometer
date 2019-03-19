@@ -105,10 +105,10 @@ class MeasurementProcedure(object):
         self.spi = self.main.spi
         self.gpio = self.main.gpio
         self.ports = self.main.ports
-        self.block_other_tabs = self.main.block_other_tabs
-        self.block_userinterface = self.main.block_userinterface_measurement
-        self.unblock_userinterface = self.main.unblock_userinterface_measurement
-        self.unblock_other_tabs = self.main.unblock_other_tabs
+        self.block_other_tabs = self.main.block_other_tabs_signal
+        self.block_userinterface = self.main.block_userinterface_measurement_signal
+        self.unblock_userinterface = self.main.unblock_userinterface_measurement_signal
+        self.unblock_other_tabs = self.main.unblock_other_tabs_signal
         self.file = os.path.basename(__file__)
         self.debug_log = self.main.debug_log
         self.measurement_log = self.main.measurement_log
@@ -242,9 +242,9 @@ class MeasurementProcedure(object):
     def measurements_procedure(self):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement started')
         # Блокируем остальные вкладки для пользователя.
-        self.block_other_tabs()
+        self.block_other_tabs.emit()
         # Блокируем кнопки, поля и работу с таблицей на текущей вкладке.
-        self.block_userinterface()
+        self.block_userinterface.emit()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Interface locked, Current tab = Measurement')
         # Этап 1. Подготовка образца. Вызываем соответствующую процедуру в зависимости от выбранного типа подготовки
         if self.sample_preparation == Sample_preparation.Vacuuming:
@@ -283,7 +283,7 @@ class MeasurementProcedure(object):
                                                                     'Sample preparation: Impulsive blowing.....Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Impulsive '
                                                                              'blowing.....Done.')
-        self.main.unblock_t1_gM_button4()
+        self.main.unblock_t1_gM_button4_signal.emit()
         # Этап 2. Измерения. Есть два вида: для большой и средней кюветы и для малой кюветы.
         if self.cuvette == Сuvette.Small:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Small.....')
@@ -323,9 +323,9 @@ class MeasurementProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation..... Done.')
         # Разлокируем остальные вкладки для пользователя.
-        self.unblock_other_tabs()
+        self.unblock_other_tabs.emit()
         # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
-        self.unblock_userinterface()
+        self.unblock_userinterface.emit()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Measurement')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement finished')
@@ -338,9 +338,9 @@ class MeasurementProcedure(object):
         # выключаем все порты
         self.gpio.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
-        # self.unblock_other_tabs()
-        # # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
-        # self.unblock_userinterface()
+        self.unblock_other_tabs.emit()
+        # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
+        self.unblock_userinterface.emit()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Measurement')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement interrupted')

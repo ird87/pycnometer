@@ -104,6 +104,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     progressbar_start = PyQt5.QtCore.pyqtSignal(str, str, int)
     progressbar_change = PyQt5.QtCore.pyqtSignal(int)
     progressbar_exit = PyQt5.QtCore.pyqtSignal()
+    block_other_tabs_signal = PyQt5.QtCore.pyqtSignal()
+    unblock_other_tabs_signal = PyQt5.QtCore.pyqtSignal()
+    block_userinterface_measurement_signal = PyQt5.QtCore.pyqtSignal()
+    unblock_userinterface_measurement_signal = PyQt5.QtCore.pyqtSignal()
+    block_userinterface_calibration_signal = PyQt5.QtCore.pyqtSignal()
+    unblock_userinterface_calibration_signal = PyQt5.QtCore.pyqtSignal()
+    unblock_t1_gM_button4_signal = PyQt5.QtCore.pyqtSignal()
+
 
     """Конструктор класса. Поля класса"""
 
@@ -195,6 +203,13 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.progressbar_start.connect(self.start_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
         self.progressbar_change.connect(self.change_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
         self.progressbar_exit.connect(self.exit_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
+        self.block_other_tabs_signal.connect(self.block_other_tabs(), PyQt5.QtCore.Qt.QueuedConnection)
+        self.unblock_other_tabs_signal.connect(self.unblock_other_tabs, PyQt5.QtCore.Qt.QueuedConnection)
+        self.block_userinterface_measurement_signal.connect(self.block_userinterface_measurement, PyQt5.QtCore.Qt.QueuedConnection)
+        self.unblock_userinterface_measurement_signal.connect(self.unblock_userinterface_measurement, PyQt5.QtCore.Qt.QueuedConnection)
+        self.block_userinterface_calibration_signal.connect(self.block_userinterface_calibration, PyQt5.QtCore.Qt.QueuedConnection)
+        self.unblock_userinterface_calibration_signal.connect(self.unblock_userinterface_calibration, PyQt5.QtCore.Qt.QueuedConnection)
+        self.unblock_t1_gM_button4_signal.connect(self.unblock_t1_gM_button4, PyQt5.QtCore.Qt.QueuedConnection)
 
         # создаем модуль Измерение и передаем туда ссылку на main.
         self.measurement_procedure = MeasurementProcedure(self)
