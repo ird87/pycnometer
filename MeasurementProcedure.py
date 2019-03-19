@@ -338,11 +338,11 @@ class MeasurementProcedure(object):
         # выключаем все порты
         self.gpio.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
-        self.unblock_other_tabs()
-        # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
-        self.unblock_userinterface()
+        # self.unblock_other_tabs()
+        # # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
+        # self.unblock_userinterface()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                             'МЫ ТУТУ! Interface unlocked, Current tab = Measurement')
+                             'Interface unlocked, Current tab = Measurement')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement interrupted')
         if measurement == Abort_Type.Pressure_below_required:
             self.fail_pressure_set.emit()
