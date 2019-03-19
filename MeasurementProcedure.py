@@ -344,14 +344,14 @@ class MeasurementProcedure(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Measurement')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement interrupted')
-        if measurement == Abort_Type.Pressure_below_required:
-            self.fail_pressure_set.emit()
-        if measurement == Abort_Type.Could_not_balance:
-            self.fail_get_balance.emit()
-        if measurement == Abort_Type.Interrupted_by_user:
-            self.abort_procedure.emit()
-        if measurement == Abort_Type.Let_out_pressure_fail:
-            self.fail_let_out_pressure.emit()
+        # if measurement == Abort_Type.Pressure_below_required:
+        #     self.fail_pressure_set.emit()
+        # if measurement == Abort_Type.Could_not_balance:
+        #     self.fail_get_balance.emit()
+        # if measurement == Abort_Type.Interrupted_by_user:
+        #     self.abort_procedure.emit()
+        # if measurement == Abort_Type.Let_out_pressure_fail:
+        #     self.fail_let_out_pressure.emit()
 
     """Метод, подготовки образца с помощью Вакууминга"""
     def sample_preparation_vacuuming(self):
