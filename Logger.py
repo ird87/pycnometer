@@ -66,7 +66,7 @@ class Logger(object):
             os.makedirs(Path(os.getcwd() + '/Logs/' + self.type))
         while find_name:
             self.log_name = Path(os.getcwd() + '/Logs/' + self.type + '/' + self.type + ' - ' + log_name + '.log')
-            find_name = os.path.isfile(Path(self.log_name))
+            find_name = os.path.isfile(self.log_name)
         self.fh = logging.FileHandler(Path(self.log_name), encoding = 'WINDOWS-1251')
 
         # # create the logging file handler уже через полное имя файла
