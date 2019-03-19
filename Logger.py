@@ -2,6 +2,7 @@
 import datetime
 import logging
 import os
+from pathlib import Path
 
 """Проверака и комментари: 08.01.2019"""
 
@@ -59,27 +60,36 @@ class Logger(object):
         log_name = self.get_today_date()
         find_name = True
 
-        # create the logging file handler уже через полное имя файла
-        if self.config.is_test_mode():
-            # для тестового режима (Windows) нужны такие команды:
-            if not os.path.isdir(os.getcwd() + '\Logs'):
-                os.makedirs(os.getcwd() + '\Logs')
-            if not os.path.isdir(os.getcwd() + '\Logs\\' + self.type):
-                os.makedirs(os.getcwd() + '\Logs\\' + self.type)
-            while find_name:
-                self.log_name = os.getcwd() + '\Logs\\' + self.type + '\\' + self.type + ' - ' + log_name + '.log'
-                find_name = os.path.isfile(self.log_name)
-            self.fh = logging.FileHandler(self.log_name)
-        if not self.config.is_test_mode():
-            # для нормального режима (Linux) нужны такие команды:
-            if not os.path.isdir(os.getcwd() + '/Logs'):
-                os.makedirs(os.getcwd() + '/Logs')
-            if not os.path.isdir(os.getcwd() + '/Logs/' + self.type):
-                os.makedirs(os.getcwd() + '/Logs/' + self.type)
-            while find_name:
-                self.log_name = os.getcwd() + '/Logs/' + self.type + '/' + self.type + ' - ' + log_name + '.log'
-                find_name = os.path.isfile(self.log_name)
-            self.fh = logging.FileHandler(self.log_name, encoding = 'WINDOWS-1251')
+        if not os.path.isdir(Path(os.getcwd() + '/Logs')):
+            os.makedirs(Path(os.getcwd() + '/Logs'))
+        if not os.path.isdir(Path(os.getcwd() + '/Logs/' + self.type)):
+            os.makedirs(Path(os.getcwd() + '/Logs/' + self.type))
+        while find_name:
+            self.log_name = Path(os.getcwd() + '/Logs/' + self.type + '/' + self.type + ' - ' + log_name + '.log')
+            find_name = os.path.isfile(Path(self.log_name))
+        self.fh = logging.FileHandler(Path(self.log_name), encoding = 'WINDOWS-1251')
+
+        # # create the logging file handler уже через полное имя файла
+        # if self.config.is_test_mode():
+        #     # для тестового режима (Windows) нужны такие команды:
+        #     if not os.path.isdir(os.getcwd() + '\Logs'):
+        #         os.makedirs(os.getcwd() + '\Logs')
+        #     if not os.path.isdir(os.getcwd() + '\Logs\\' + self.type):
+        #         os.makedirs(os.getcwd() + '\Logs\\' + self.type)
+        #     while find_name:
+        #         self.log_name = os.getcwd() + '\Logs\\' + self.type + '\\' + self.type + ' - ' + log_name + '.log'
+        #         find_name = os.path.isfile(self.log_name)
+        #     self.fh = logging.FileHandler(self.log_name)
+        # if not self.config.is_test_mode():
+        #     # для нормального режима (Linux) нужны такие команды:
+        #     if not os.path.isdir(os.getcwd() + '/Logs'):
+        #         os.makedirs(os.getcwd() + '/Logs')
+        #     if not os.path.isdir(os.getcwd() + '/Logs/' + self.type):
+        #         os.makedirs(os.getcwd() + '/Logs/' + self.type)
+        #     while find_name:
+        #         self.log_name = os.getcwd() + '/Logs/' + self.type + '/' + self.type + ' - ' + log_name + '.log'
+        #         find_name = os.path.isfile(self.log_name)
+        #     self.fh = logging.FileHandler(self.log_name, encoding = 'WINDOWS-1251')
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
 

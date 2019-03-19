@@ -3,6 +3,7 @@
 import configparser
 import json
 import os
+from pathlib import Path
 
 """Проверака и комментари: 23.01.2019"""
 
@@ -172,12 +173,15 @@ class Languages(object):
 
     """Метод для назначения файла, в качестве источника данных"""
     def setup(self, config):
-        if config.is_test_mode():
-            # для тестового режима (Windows) нужны такие команды:
-            self.languages.read(os.getcwd() + '\Language\\' + config.get_language() + '.ini')
-        if not config.is_test_mode():
-            # для нормального режима (Linux) нужны такие команды:
-            self.languages.read(os.getcwd() + '/Language/' + config.get_language() + '.ini', encoding='WINDOWS-1251')
+
+        self.languages.read(Path(os.getcwd() + '/Language/' + config.get_language() + '.ini'), encoding = 'WINDOWS-1251')
+
+        # if config.is_test_mode():
+        #     # для тестового режима (Windows) нужны такие команды:
+        #     self.languages.read(os.getcwd() + '\Language\\' + config.get_language() + '.ini')
+        # if not config.is_test_mode():
+        #     # для нормального режима (Linux) нужны такие команды:
+        #     self.languages.read(os.getcwd() + '/Language/' + config.get_language() + '.ini', encoding='WINDOWS-1251')
 
     """Метод необходимый для загрузки СТРОКОЙ из файлов символа '%', в файлах он заменен на 'U+0025', и надстрочной "3" - 'U+00B3'"""
     def get_string(self, section, variable):

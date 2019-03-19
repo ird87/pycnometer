@@ -7,6 +7,8 @@ import os
 import time
 import configparser
 import threading
+from pathlib import Path
+
 from Calibration import Calibration
 from MeasurementProcedure import Сuvette, Ports, Abort_Type
 
@@ -856,7 +858,7 @@ class CalibrationProcedure(object):
             # Проверяем достаточно ли низкое давление.
             print("Давление = {0} < p0*2 = {1}".format(p_let_out_pressure, p0*2))
             # if p_let_out_pressure < p0*2 or self.is_test_mode():
-            if duration > 10:
+            if duration > 10 or self.is_test_mode():
                 p_test = True
                 success = True
             time_now = datetime.datetime.now()
@@ -998,15 +1000,15 @@ class CalibrationProcedure(object):
     def get_files_list(self):
         # проверим наличие каталога, если его нет - создадим.
         self.check_result_dir()
-        dir = ''
-        if self.is_test_mode():
-            dir = os.getcwd() + '\Results\Calibrations\\'
-        if not self.is_test_mode():
-            dir = os.getcwd() + '/Results/Calibrations/'
+        dir = Path(os.getcwd() + '/Results/Calibrations/')
+        # if self.is_test_mode():
+        #     dir = os.getcwd() + '\Results\Calibrations\\'
+        # if not self.is_test_mode():
+        #     dir = os.getcwd() + '/Results/Calibrations/'
         files = [f for f in os.listdir(dir) if f.endswith('.result')]
         ret_files = {}
         for f in files:
-            file = dir + f
+            file = dir / f
             data_changed = time.gmtime(os.path.getmtime(file))
             ret_files.update({f: data_changed})
         return ret_files, dir
