@@ -51,18 +51,28 @@ class UiProgressbar(QDialog):
         b = base_pos_y + height_parent / 2 - height_child / 2
         self.move(a, b)
 
-        self.my_thread = threading.Thread(target = self.progress_bar_run)
-        # Запускаем поток и процедуру измерения давления
-        self.my_thread.start()
+        # self.my_thread = threading.Thread(target = self.progress_bar_run)
+        # # Запускаем поток и процедуру измерения давления
+        # self.my_thread.start()
 
-    def progress_bar_run(self):
-        t = 0
-        lock = threading.Lock()
-        while t < self.valua:
+    # def progress_bar_run(self):
+    #     t = 0
+    #     lock = threading.Lock()
+    #     while t < self.valua:
+    #         time.sleep(1)
+    #         t += 1
+    #         self.prb_Progressbar.setValue(t)
+    #     # time.sleep(2)
+    #     self.accept()
+
+    def add_progress(self, t):
+        if self.prb_Progressbar.value() < self.prb_Progressbar.maximum():
+            self.prb_Progressbar.setValue(self.prb_Progressbar.value() + t)
+
+    def exit(self):
+        while self.prb_Progressbar.value() < self.prb_Progressbar.maximum():
             time.sleep(1)
-            t += 1
-            self.prb_Progressbar.setValue(t)
-        # time.sleep(2)
+            self.prb_Progressbar.setValue(self.prb_Progressbar.value() + 1)
         self.accept()
 
     def init_ui(self):
@@ -71,6 +81,8 @@ class UiProgressbar(QDialog):
         self.resize(280, 100)
         self.prb_Progressbar = QtWidgets.QProgressBar(self)
         self.prb_Progressbar.setGeometry(QtCore.QRect(10, 60, 261, 23))
+        self.setMinimumSize(QtCore.QSize(280, 100))
+        self.setMaximumSize(QtCore.QSize(280, 100))
         self.prb_Progressbar.setMaximum(self.valua)
         self.prb_Progressbar.setValue(0)
         self.prb_Progressbar.setObjectName("prb_Progressbar")

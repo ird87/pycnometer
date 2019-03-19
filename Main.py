@@ -4,7 +4,7 @@
 import inspect
 import os
 import sys  # sys нужен для передачи argv в QApplication
-from enum import Enum
+from sys import platform
 
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
@@ -101,7 +101,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры из-за проблем со спуском давления.
     fail_let_out_pressure = PyQt5.QtCore.pyqtSignal()
     # Вывод прогрессбара для подготовки образца.
-    progressbar = PyQt5.QtCore.pyqtSignal(str, str, int)
+    progressbar_start = PyQt5.QtCore.pyqtSignal(str, str, int)
+    progressbar_change = PyQt5.QtCore.pyqtSignal(int)
+    progressbar_exit = PyQt5.QtCore.pyqtSignal()
 
     """Конструктор класса. Поля класса"""
 
@@ -148,6 +150,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         if self.config.is_test_mode():
             self.setWindowTitle('*** *** *** ТЕСТОВЫЙ РЕЖИМ *** *** ***')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in TEST mode.')
+        if not self.config.is_test_mode():
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in NORMAL mode.')
+        if platform == "win32":
             from ModulGPIOtest import GPIO
             from ModulSPItest import SPI
             # Получаем данные о портах из Configure.ini
@@ -155,8 +160,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.gpio = GPIO(self.ports)
             self.gpio.all_port_off()
             self.spi = SPI(self)
-        if not self.config.is_test_mode():
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in NORMAL mode.')
+        else:
             from ModulGPIO import GPIO
             from ModulSPI import SPI
             # Получаем данные о портах из Configure.ini
@@ -188,7 +192,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Вывод на вкладку "Измерение" или "Калибровка" сообщение о прерывании процедуры из-за проблем со спуском давления.
         self.fail_let_out_pressure.connect(self.on_message_fail_let_out_pressure, PyQt5.QtCore.Qt.QueuedConnection)
         # Вывод прогрессбара.
-        self.progressbar.connect(self.start_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
+        self.progressbar_start.connect(self.start_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
+        self.progressbar_change.connect(self.change_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
+        self.progressbar_exit.connect(self.exit_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
 
         # создаем модуль Измерение и передаем туда ссылку на main.
         self.measurement_procedure = MeasurementProcedure(self)
@@ -264,9 +270,15 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.calibration_procedure.start_russian_sensor_calibration()
 
     def start_progressbar(self, title, name, time):
-        if self.config.is_test_mode():
+        if not self.config.is_test_mode():
             self.progressbar_form = UiProgressbar(self, title, name, time)
             self.progressbar_form.activate()
+
+    def change_progressbar(self, t):
+        self.progressbar_form.add_progress(t)
+
+    def exit_progressbar(self):
+        self.progressbar_form.exit()
 
     def changed_languare(self):
         name = self.t4_gIS_cmd1.currentText()

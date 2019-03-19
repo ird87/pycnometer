@@ -16,8 +16,6 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 from reportlab.rl_config import defaultPageSize
 
-from Progressbar import UiProgressbar
-
 pdfmetrics.registerFont(TTFont('Arial-Bold', 'arialbd.ttf'))
 pdfmetrics.registerFont(TTFont('Arial-Regular', 'arial.ttf'))
 pdfmetrics.registerFont(TTFont('Arial-Italic', 'ariali.ttf'))
@@ -368,7 +366,7 @@ class MeasurementProcedure(object):
         -ждать 2 секунды
         -закрыть К4, К2, К3
         """
-        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb1, self.sample_preparation_time + 17)
+        self.main.progressbar_start.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb1, self.sample_preparation_time + 17)
         self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -421,6 +419,7 @@ class MeasurementProcedure(object):
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.main.progressbar_exit.emit()
 
     """Метод, подготовки образца с помощью Продувки"""
     def sample_preparation_blow(self):
@@ -431,7 +430,7 @@ class MeasurementProcedure(object):
         -ждать 2 секунды
         -закрыть К4, К2, К3
         """
-        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb2, self.sample_preparation_time + 2)
+        self.main.progressbar_start.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb2, self.sample_preparation_time + 2)
         self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -472,6 +471,7 @@ class MeasurementProcedure(object):
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.main.progressbar_exit.emit()
 
     """Метод, подготовки образца с помощью Импульсной продувки"""
     def sample_preparation_impulsive_blowing(self):
@@ -493,7 +493,7 @@ class MeasurementProcedure(object):
                                  'Division by zero when calculating t, '
                                  'denominator: self.pulse_length={0}'.format(self.pulse_length))
             t = 0
-        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb3, self.sample_preparation_time + 3 + t * (self.pulse_length + 1))
+        self.main.progressbar_start.emit(self.main.languages.TitlesForProgressbar_SamplePreparation, self.main.languages.t1_gSP_gRB_rb3, self.sample_preparation_time + 3 + t * (self.pulse_length + 1))
         self.check_for_interruption()
         self.gpio.port_on(self.ports[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -549,6 +549,7 @@ class MeasurementProcedure(object):
         self.gpio.port_off(self.ports[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+        self.main.progressbar_exit.emit()
 
     """Метод, Измерения для кюветы большой или средней"""
     def measurement_cuvette_large_or_medium(self):
@@ -1155,10 +1156,7 @@ class MeasurementProcedure(object):
         # Вызываем вывод результатов на форму.
         self.set_measurement_results.emit()
 
-    """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
-    def time_sleep(self, t):
-        if not self.is_test_mode():
-            time.sleep(t)
+
 
     """Метод набора требуемого давления"""
     def gain_Pmeas(self):
@@ -1176,7 +1174,7 @@ class MeasurementProcedure(object):
         duration = 0
         while not p_test:
             self.check_for_interruption()
-            self.time_sleep(0.1)
+            self.time_sleep_without_interruption(0.1)
             # Замеряем давление p, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p = self.spi.get_pressure('p1')
             # Если текущее давление больше или равно требуемому, то завершаем набор давления, успех.
@@ -1219,15 +1217,15 @@ class MeasurementProcedure(object):
         success = False
         balance = 0
         duration = 0
-        self.time_sleep(3)
+        self.time_sleep_without_interruption(3)
         # Замеряем давление p_previous, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
         p_previous = self.spi.get_pressure('p1')
-        self.time_sleep(1)
+        self.time_sleep_without_interruption(1)
         # Замеряем давление p_next, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
         p_next = self.spi.get_pressure('p1')
         while not p_test:
             self.check_for_interruption()
-            self.time_sleep(1)
+            self.time_sleep_without_interruption(1)
             # p_next становиться p_previous
             p_previous = p_next
             # Замеряем новое p_next, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
@@ -1263,7 +1261,7 @@ class MeasurementProcedure(object):
         duration = 0
         while not p_test:
             self.check_for_interruption()
-            self.time_sleep(0.1)
+            self.time_sleep_without_interruption(0.1)
             # Замеряем новое p_let_out_pressure, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p_let_out_pressure = self.spi.get_pressure('p1')
             # Проверяем достаточно ли низкое давление.
@@ -1277,7 +1275,7 @@ class MeasurementProcedure(object):
             # Если время выпуска давления достигло 2 минут, то завершаем процедуру давления, неуспех.
             if duration >= 120:
                 p_test = True
-            self.time_sleep(2)
+            self.time_sleep_without_interruption(2)
         return success, duration
 
     """Метод вывода отчета по процедуре "Измерение"."""
@@ -1647,6 +1645,20 @@ class MeasurementProcedure(object):
     def check_for_interruption(self):
         if self.is_abort_procedure():
             raise Exception(Abort_Type.Interrupted_by_user)
+
+    """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
+    def time_sleep(self, t):
+        if not self.is_test_mode():
+            l = 0
+            while l < t:
+                self.check_for_interruption()
+                l += 1
+                time.sleep(1)
+                self.main.progressbar_change.emit(1)
+
+    def time_sleep_without_interruption(self, t):
+        if not self.is_test_mode():
+            time.sleep(t)
 
     def try_load_string(self, section, variable):
         result = ''

@@ -765,7 +765,7 @@ class CalibrationProcedure(object):
         duration = 0
         while not p_test:
             self.check_for_interruption()
-            self.time_sleep(0.1)
+            self.time_sleep_without_interruption(0.1)
             # Замеряем давление p, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p = self.spi.get_pressure('p1')
             # Если текущее давление больше или равно требуемому, то завершаем набор давления, успех.
@@ -808,15 +808,15 @@ class CalibrationProcedure(object):
         success = False
         balance = 0
         duration = 0
-        self.time_sleep(3)
+        self.time_sleep_without_interruption(3)
         # Замеряем давление p_previous, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
         p_previous = self.spi.get_pressure('p1')
-        self.time_sleep(1)
+        self.time_sleep_without_interruption(1)
         # Замеряем давление p_next, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
         p_next = self.spi.get_pressure('p1')
         while not p_test:
             self.check_for_interruption()
-            self.time_sleep(1)
+            self.time_sleep_without_interruption(1)
             # p_next становиться p_previous
             p_previous = p_next
             # Замеряем новое p_next, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
@@ -851,7 +851,7 @@ class CalibrationProcedure(object):
         duration = 0
         while not p_test:
             self.check_for_interruption()
-            self.time_sleep(0.1)
+            self.time_sleep_without_interruption(0.1)
             # Замеряем новое p_let_out_pressure, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p_let_out_pressure = self.spi.get_pressure('p1')
             # Проверяем достаточно ли низкое давление.
@@ -865,7 +865,7 @@ class CalibrationProcedure(object):
             # Если время выпуска давления достигло 2 минут, то завершаем процедуру давления, неуспех.
             if duration >= 120:
                 p_test = True
-            self.time_sleep(2)
+            self.time_sleep_without_interruption(2)
         return success, duration
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
@@ -1084,7 +1084,7 @@ class CalibrationProcedure(object):
         Прибавить к полученному значению 0,167
         вычесть полученное давление при каждом измерении давления
         """
-        self.main.progressbar.emit(self.main.languages.TitlesForProgressbar_SensorCalibration,
+        self.main.progressbar_start.emit(self.main.languages.TitlesForProgressbar_SensorCalibration,
                                    self.main.languages.TitlesForProgressbar_SensorCalibration, 10)
         self.check_for_interruption()
         self.gpio.port_off(self.ports[Ports.K2.value])
@@ -1165,7 +1165,23 @@ class CalibrationProcedure(object):
         self.spi.set_correct_data(data_correction)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'data_correction = {0}'.format(data_correction))
         self.check_for_interruption()
+        self.main.progressbar_exit.emit()
         print("калибровка датчика закончена")
+
+    """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
+    def time_sleep(self, t):
+        if not self.is_test_mode():
+            l = 0
+            while l < t:
+                self.check_for_interruption()
+                l += 1
+                time.sleep(1)
+                self.main.progressbar_change.emit(1)
+
+    def time_sleep_without_interruption(self, t):
+        if not self.is_test_mode():
+            time.sleep(t)
+
 
     def try_load_string(self, section, variable):
         result = ''
@@ -1198,8 +1214,3 @@ class CalibrationProcedure(object):
         except:
             result = None
         return result
-
-    """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
-    def time_sleep(self, t):
-        if not self.is_test_mode():
-            time.sleep(t)
