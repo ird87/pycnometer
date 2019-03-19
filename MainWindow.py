@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QLineEdit
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -1051,6 +1053,7 @@ class Ui_MainWindow(object):
         self.t4_gSR_Edit3.setGeometry(QtCore.QRect(142, 310, 231, 20))
         self.t4_gSR_Edit3.setAlignment(QtCore.Qt.AlignCenter)
         self.t4_gSR_Edit3.setObjectName("t4_gSR_Edit3")
+        self.t4_gSR_Edit3.setEchoMode(QLineEdit.Password)
         self.t4_gSR_lbl3 = QtWidgets.QLabel(self.t4_groupSavingResult)
         self.t4_gSR_lbl3.setGeometry(QtCore.QRect(10, 310, 121, 25))
         font = QtGui.QFont()

@@ -387,6 +387,18 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         Pmeas_const = '[{0}, {1}, {2}]'.format(p_kPa, p_Bar, p_Psi)
         self.config.set_ini('Measurement', 'Pmeas', Pmeas_const)
+        self.config.set_ini('ManualControl', 'periodicity_of_removal_of_sensor_reading', self.t4_gMC_Edit1.text())
+        self.config.set_ini('ManualControl', 'leak_test_when_starting', str(self.t4_gMC_chb1.isChecked()))
+        self.config.set_ini('ReportSetup', 'report_measurement_table', str(self.t4_gRS_chb1.isChecked()))
+        self.config.set_ini('ReportSetup', 'report_header', self.t4_gRS_Edit1.text())
+        self.config.set_ini('ReportSetup', 'report_footer', self.t4_gRS_Edit2.text())
+        self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
+        self.config.set_ini('SavingResult', 'send_report_to_mail', str(self.t4_gSR_chb2.isChecked()))
+        self.config.set_ini_hash('SavingResult', 'email_adress', self.t4_gSR_Edit1.text())
+        self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_Edit2.text())
+        self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit3.text())
+
+
         # А потом вызываем метод, который загружает и применяет все настройки из файла config.ini
         self.setup()
 
@@ -440,6 +452,36 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         # Устанавливаем текущее значение давления, которое должен набрать прибор
         self.setPressurePmeas()
+
+        # Устанавливаем Частота съема показания датчика (0.1 - 1.0 сек)
+        self.t4_gMC_Edit1.setText(str(self.config.periodicity_of_removal_of_sensor_reading))
+
+        # Проводить ли тест на натекание при запуске прибора
+        self.t4_gMC_chb1.setChecked(self.config.leak_test_when_starting)
+
+        # Выводить ли таблицу с измерениями
+        self.t4_gRS_chb1.setChecked(self.config.report_measurement_table)
+
+        # Добавить шапку отчета
+        self.t4_gRS_Edit1.setText(self.config.report_header)
+
+        # Добавить подвал отчета
+        self.t4_gRS_Edit2.setText(self.config.report_footer)
+
+        # сохранять ли на флешку.
+        self.t4_gSR_chb1.setChecked(self.config.save_to_flash_drive)
+
+        # отправлять ли отчет на почту.
+        self.t4_gSR_chb2.setChecked(self.config.send_report_to_mail)
+
+        # Адрес почты:
+        self.t4_gSR_Edit1.setText(self.config.email_adress)
+
+        # Название сети wifi:
+        self.t4_gSR_Edit2.setText(self.config.wifi_name)
+
+        # Пароль от wifi:
+        self.t4_gSR_Edit3.setText(self.config.wifi_pass)
 
     def setPressurePmeas(self):
 

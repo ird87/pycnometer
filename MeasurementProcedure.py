@@ -15,6 +15,9 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 from reportlab.rl_config import defaultPageSize
+import smtplib
+
+from email_module import send
 
 pdfmetrics.registerFont(TTFont('Arial-Bold', 'arialbd.ttf'))
 pdfmetrics.registerFont(TTFont('Arial-Regular', 'arial.ttf'))
@@ -1438,6 +1441,7 @@ class MeasurementProcedure(object):
         # Добавляем итоговую таблицу в наш массив элементов.
         elements.append(shell_table)
         doc.build(elements)
+        send(self.main.config.email_adress, report_name, "", report_name)
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
     def get_today_date(self):

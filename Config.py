@@ -4,6 +4,7 @@ import configparser
 import json
 import os
 from enum import Enum
+from cryptography.fernet import Fernet
 
 """Проверака и комментари: 13.01.2019"""
 
@@ -43,6 +44,9 @@ class Configure(object):
         self.p = [0, 0, 0, 0, 0]                    # Массив для записи номеров портов
         self.config = configparser.ConfigParser()   # Создаем экземпляр configparser
         self.config.read('Configure.ini')           # Указываем файл для считывания данных
+        # Fernet.generate_key()
+        key = b'nRDnYgvD1i727JwjmwE_SRn30ktYZeLHIHuVPxo_tSw='
+        self.cipher_suite = Fernet(key)
         self.small_cuvette = False
         self.language = ''
         self.round = 3
@@ -66,6 +70,16 @@ class Configure(object):
         self.spi_t = 0
         self.spi_max_speed_hz = 0
         self.languages = []
+        self.periodicity_of_removal_of_sensor_reading = 0
+        self.leak_test_when_starting = False
+        self.report_measurement_table = True
+        self.report_header = ""
+        self.report_footer = ""
+        self.save_to_flash_drive = False
+        self.send_report_to_mail = True
+        self.email_adress = ""
+        self.wifi_name = ""
+        self.wifi_pass = ""
         # Загружаем данные из файла
         # [Ports]
         self.set_ports()
@@ -111,6 +125,16 @@ class Configure(object):
         self.pmeas_Psi_min = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_min')
         self.pmeas_Psi_max = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_max')
         self.Pmeas_now = float(self.Pmeas[self.pressure.value])
+        self.periodicity_of_removal_of_sensor_reading = self.try_getfloat_user_config('ManualControl', 'periodicity_of_removal_of_sensor_reading')
+        self.leak_test_when_starting = self.try_getboolean_user_config('ManualControl', 'leak_test_when_starting')
+        self.report_measurement_table = self.try_getboolean_user_config('ReportSetup', 'report_measurement_table')
+        self.report_header = self.try_get_user_config('ReportSetup', 'report_header')
+        self.report_footer = self.try_get_user_config('ReportSetup', 'report_footer')
+        self.save_to_flash_drive = self.try_getboolean_user_config('SavingResult', 'save_to_flash_drive')
+        self.send_report_to_mail = self.try_getboolean_user_config('SavingResult', 'send_report_to_mail')
+        self.email_adress = self.try_get_user_config_hash('SavingResult', 'email_adress')
+        self.wifi_name = self.try_get_user_config_hash('SavingResult', 'wifi_name')
+        self.wifi_pass = self.try_get_user_config_hash('SavingResult', 'wifi_pass')
 
 
     """Метод возвращает номера портов для работы"""
@@ -130,6 +154,20 @@ class Configure(object):
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini(self, section, val, s):
+        self.config.read('Configure_user.ini.new')
+        self.config.set(section, val, s)
+        with open("Configure_user.ini.new", "w") as fh:
+            self.config.write(fh)
+        if os.path.isfile('Configure_user.ini'):
+            os.rename("Configure_user.ini", "Configure_user.ini~")
+            os.rename("Configure_user.ini.new", "Configure_user.ini")
+            os.remove("Configure_user.ini~")
+        else:
+            os.rename("Configure_user.ini.new", "Configure_user.ini")
+
+    """Метод для сохранения измененных настроек в файл"""
+    def set_ini_hash(self, section, val, s):
+        s = (self.crypting(s)).decode('utf-8')
         self.config.read('Configure_user.ini.new')
         self.config.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
@@ -189,6 +227,22 @@ class Configure(object):
                 if self.config.has_option(section, option):
                     result = self.config.getboolean(section, option)
         return result
+
+    def try_get_user_config_hash(self, section, option):
+        self.config.read('Configure.ini')
+        result = self.config.get(section, option)
+        if os.path.isfile('Configure_user.ini'):
+            self.config.read('Configure_user.ini')
+            if self.config.has_section(section):
+                if self.config.has_option(section, option):
+                    result = self.config.get(section, option)
+        if not result=="":
+            result = (self.cipher_suite.decrypt(bytes(result, encoding='utf-8'))).decode('utf-8')
+        return result
+
+    def crypting(self, text):
+        encrypted_text = self.cipher_suite.encrypt(bytes(text, encoding='utf-8'))
+        return encrypted_text
 
 
 """Enum допустимых единиц измерений Давления"""
