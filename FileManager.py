@@ -190,7 +190,7 @@ class UiFileManager(QDialog):
     def get_file(self):
         file = ''
         if len(self.table_files.selectionModel().selectedRows()) > 0:
-            file = self.dir + self.table_files.item(self.table_files.currentItem().row(), 0).text()
+            file = os.path.join(self.dir, self.table_files.item(self.table_files.currentItem().row(), 0).text())
         return file
 
 

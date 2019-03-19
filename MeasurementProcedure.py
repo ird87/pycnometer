@@ -1547,7 +1547,7 @@ class MeasurementProcedure(object):
 
     """Метод для загрузки измерений из файла"""
     def load_measurement_result(self):
-        self.result_file_reader.read(self.measurement_file, encoding = 'utf-8')
+        self.result_file_reader.read(self.measurement_file)
         # if self.is_test_mode():
         #     # для тестового режима (Windows) нужны такие команды:
         #     self.result_file_reader.read(self.measurement_file)
