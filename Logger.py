@@ -62,7 +62,7 @@ class Logger(object):
 
         if not os.path.isdir(os.getcwd() + '/Logs'):
             os.makedirs(Path(os.getcwd() + '/Logs'))
-        if not os.path.isdir(Path(os.getcwd() + '/Logs/' + self.type)):
+        if not os.path.isdir(os.getcwd() + '/Logs/' + self.type):
             os.makedirs(Path(os.getcwd() + '/Logs/' + self.type))
         while find_name:
             self.log_name = Path(os.getcwd() + '/Logs/' + self.type + '/' + self.type + ' - ' + log_name + '.log')
