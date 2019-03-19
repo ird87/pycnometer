@@ -883,38 +883,50 @@ class CalibrationProcedure(object):
         self.check_result_dir()
         find_name = True
         number = 0
-        # Ветка для программы в тестовом режиме.
-        if self.is_test_mode():
-            # Определяем следующее подходящее имя файла.
-            while find_name:
-                number += 1
-                # для тестового режима (Windows) нужны такие команды:
-                self.calibration_file = os.getcwd() + '\Results\Calibrations\Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
-                    number) + '.result'
-                find_name = os.path.isfile(self.calibration_file)
-            self.result_file_reader.read(self.calibration_file)
 
-        # Ветка для программы в нормальном режиме.
-        if not self.is_test_mode():
-            # Определяем следующее подходящее имя файла.
-            while find_name:
-                number += 1
-                # для нормального режима (Linux) нужны такие команды:
-                self.calibration_file = os.getcwd() + '/Results/Calibrations/Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
-                    number) + '.result'
-                find_name = os.path.isfile(self.calibration_file)
-            self.result_file_reader.read(self.calibration_file, encoding = 'WINDOWS-1251')
+        # Определяем следующее подходящее имя файла.
+        while find_name:
+            number += 1
+            # для нормального режима (Linux) нужны такие команды:
+            self.calibration_file = os.path.join(os.getcwd(), 'Results', 'Calibrations', 'Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
+                number) + '.result')
+            find_name = os.path.isfile(self.calibration_file)
+        self.result_file_reader.read(self.calibration_file, encoding = 'WINDOWS-1251')
+
+        # # Ветка для программы в тестовом режиме.
+        # if self.is_test_mode():
+        #     # Определяем следующее подходящее имя файла.
+        #     while find_name:
+        #         number += 1
+        #         # для тестового режима (Windows) нужны такие команды:
+        #         self.calibration_file = os.getcwd() + '\Results\Calibrations\Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
+        #             number) + '.result'
+        #         find_name = os.path.isfile(self.calibration_file)
+        #     self.result_file_reader.read(self.calibration_file)
+        #
+        # # Ветка для программы в нормальном режиме.
+        # if not self.is_test_mode():
+        #     # Определяем следующее подходящее имя файла.
+        #     while find_name:
+        #         number += 1
+        #         # для нормального режима (Linux) нужны такие команды:
+        #         self.calibration_file = os.getcwd() + '/Results/Calibrations/Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
+        #             number) + '.result'
+        #         find_name = os.path.isfile(self.calibration_file)
+        #     self.result_file_reader.read(self.calibration_file, encoding = 'WINDOWS-1251')
         with open(self.calibration_file, "w") as fh:
             self.result_file_reader.write(fh)
 
     """Проверим наличие каталога, если его нет - создадим."""
     def check_result_dir(self):
-        if self.is_test_mode():
-            if not os.path.isdir(os.getcwd() + '\Results\Calibrations'):
-                os.makedirs(os.getcwd() + '\Results\Calibrations')
-        if not self.is_test_mode():
-            if not os.path.isdir(os.getcwd() + '/Results/Calibrations'):
-                os.makedirs(os.getcwd() + '/Results/Calibrations')
+        if not os.path.isdir(os.path.join(os.getcwd(), 'Results', 'Calibrations')):
+            os.makedirs(os.path.join(os.getcwd(), 'Results', 'Calibrations'))
+        # if self.is_test_mode():
+        #     if not os.path.isdir(os.getcwd() + '\Results\Calibrations'):
+        #         os.makedirs(os.getcwd() + '\Results\Calibrations')
+        # if not self.is_test_mode():
+        #     if not os.path.isdir(os.getcwd() + '/Results/Calibrations'):
+        #         os.makedirs(os.getcwd() + '/Results/Calibrations')
 
     """Метод для сохранения калибровки в файл"""
     def save_calibration_result(self):

@@ -1285,33 +1285,46 @@ class MeasurementProcedure(object):
         # эти переменные нужна, чтобы найти следующий порядковый номер файла.
         find_name = True
         number = 0
-        report_name=''
+        report_name = ''
         self.measurement_report = self.main.measurement_report
-        # Ветка для программы в тестовом режиме.
-        if self.is_test_mode():
-            if not os.path.isdir(os.getcwd() + '\Reports'):
-                os.makedirs(os.getcwd() + '\Reports')
-            # Определяем следующее подходящее имя файла.
-            while find_name:
-                number += 1
-                # для тестового режима (Windows) нужны такие команды:
-                report_name = os.getcwd() + '\Reports\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
-                    number) + '.pdf'
-                find_name = os.path.isfile(report_name)
 
-        # Ветка для программы в нормальном режиме.
-        if not self.is_test_mode():
-            if not os.path.isdir(os.getcwd() + '/Reports'):
-                os.makedirs(os.getcwd() + '/Reports')
-            # Определяем следующее подходящее имя файла.
-            while find_name:
-                number += 1
-                # для нормального режима (Linux) нужны такие команды:
-                report_name = os.getcwd() + '/Reports/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
-                    number) + '.pdf'
-                find_name = os.path.isfile(report_name)
+        if not os.path.isdir(os.path.join(os.getcwd(), 'Reports')):
+            os.makedirs(os.path.join(os.getcwd(), 'Reports'))
+        # Определяем следующее подходящее имя файла.
+        while find_name:
+            number += 1
+            # для нормального режима (Linux) нужны такие команды:
+            report_name = os.path.join(os.getcwd(), 'Reports', 'Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+                number) + '.pdf')
+            find_name = os.path.isfile(report_name)
 
         doc = SimpleDocTemplate(report_name, pagesize = letter, encoding = 'WINDOWS-1251')
+
+        # # Ветка для программы в тестовом режиме.
+        # if self.is_test_mode():
+        #     if not os.path.isdir(os.getcwd() + '\Reports'):
+        #         os.makedirs(os.getcwd() + '\Reports')
+        #     # Определяем следующее подходящее имя файла.
+        #     while find_name:
+        #         number += 1
+        #         # для тестового режима (Windows) нужны такие команды:
+        #         report_name = os.getcwd() + '\Reports\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+        #             number) + '.pdf'
+        #         find_name = os.path.isfile(report_name)
+        #
+        # # Ветка для программы в нормальном режиме.
+        # if not self.is_test_mode():
+        #     if not os.path.isdir(os.getcwd() + '/Reports'):
+        #         os.makedirs(os.getcwd() + '/Reports')
+        #     # Определяем следующее подходящее имя файла.
+        #     while find_name:
+        #         number += 1
+        #         # для нормального режима (Linux) нужны такие команды:
+        #         report_name = os.getcwd() + '/Reports/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+        #             number) + '.pdf'
+        #         find_name = os.path.isfile(report_name)
+
+        # doc = SimpleDocTemplate(report_name, pagesize = letter, encoding = 'WINDOWS-1251')
 
         # сюда мы будем добавлять созданные таблицы.
         elements = []
@@ -1449,38 +1462,50 @@ class MeasurementProcedure(object):
         self.check_result_dir()
         find_name = True
         number = 0
-        # Ветка для программы в тестовом режиме.
-        if self.is_test_mode():
-            # Определяем следующее подходящее имя файла.
-            while find_name:
-                number += 1
-                # для тестового режима (Windows) нужны такие команды:
-                self.measurement_file = os.getcwd() + '\Results\Measurements\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
-                    number) + '.result'
-                find_name = os.path.isfile(self.measurement_file)
-            self.result_file_reader.read(self.measurement_file)
 
-        # Ветка для программы в нормальном режиме.
-        if not self.is_test_mode():
-            # Определяем следующее подходящее имя файла.
-            while find_name:
-                number += 1
-                # для нормального режима (Linux) нужны такие команды:
-                self.measurement_file = os.getcwd() + '/Results/Measurements/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
-                    number) + '.result'
-                find_name = os.path.isfile(self.measurement_file)
-            self.result_file_reader.read(self.measurement_file, encoding = 'WINDOWS-1251')
+        # Определяем следующее подходящее имя файла.
+        while find_name:
+            number += 1
+            # для нормального режима (Linux) нужны такие команды:
+            self.measurement_file = os.path.join(os.getcwd(), 'Results', 'Measurements', 'Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+                number) + '.result')
+            find_name = os.path.isfile(self.measurement_file)
+        self.result_file_reader.read(self.measurement_file, encoding = 'WINDOWS-1251')
+
+        # # Ветка для программы в тестовом режиме.
+        # if self.is_test_mode():
+        #     # Определяем следующее подходящее имя файла.
+        #     while find_name:
+        #         number += 1
+        #         # для тестового режима (Windows) нужны такие команды:
+        #         self.measurement_file = os.getcwd() + '\Results\Measurements\Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+        #             number) + '.result'
+        #         find_name = os.path.isfile(self.measurement_file)
+        #     self.result_file_reader.read(self.measurement_file)
+        #
+        # # Ветка для программы в нормальном режиме.
+        # if not self.is_test_mode():
+        #     # Определяем следующее подходящее имя файла.
+        #     while find_name:
+        #         number += 1
+        #         # для нормального режима (Linux) нужны такие команды:
+        #         self.measurement_file = os.getcwd() + '/Results/Measurements/Measurement' + ' - ' + self.get_today_date() + ' - ' + str(
+        #             number) + '.result'
+        #         find_name = os.path.isfile(self.measurement_file)
+        #     self.result_file_reader.read(self.measurement_file, encoding = 'WINDOWS-1251')
         with open(self.measurement_file, "w") as fh:
             self.result_file_reader.write(fh)
 
     """Проверим наличие каталога, если его нет - создадим."""
     def check_result_dir(self):
-        if self.is_test_mode():
-            if not os.path.isdir(os.getcwd() + '\Results\Measurements'):
-                os.makedirs(os.getcwd() + '\Results\Measurements')
-        if not self.is_test_mode():
-            if not os.path.isdir(os.getcwd() + '/Results/Measurements'):
-                os.makedirs(os.getcwd() + '/Results/Measurements')
+        if not os.path.isdir(os.path.join(os.getcwd(), 'Results', 'Measurements')):
+            os.makedirs(os.path.join(os.getcwd(), 'Results', 'Measurements'))
+        # if self.is_test_mode():
+        #     if not os.path.isdir(os.getcwd() + '\Results\Measurements'):
+        #         os.makedirs(os.getcwd() + '\Results\Measurements')
+        # if not self.is_test_mode():
+        #     if not os.path.isdir(os.getcwd() + '/Results/Measurements'):
+        #         os.makedirs(os.getcwd() + '/Results/Measurements')
 
     """Метод для сохранения измерений в файл"""
     def save_measurement_result(self):
@@ -1522,12 +1547,13 @@ class MeasurementProcedure(object):
 
     """Метод для загрузки измерений из файла"""
     def load_measurement_result(self):
-        if self.is_test_mode():
-            # для тестового режима (Windows) нужны такие команды:
-            self.result_file_reader.read(self.measurement_file)
-        if not self.is_test_mode():
-            # для нормального режима (Linux) нужны такие команды:
-            self.result_file_reader.read(self.measurement_file, encoding='utf-8')
+        self.result_file_reader.read(self.measurement_file, encoding = 'utf-8')
+        # if self.is_test_mode():
+        #     # для тестового режима (Windows) нужны такие команды:
+        #     self.result_file_reader.read(self.measurement_file)
+        # if not self.is_test_mode():
+        #     # для нормального режима (Linux) нужны такие команды:
+        #     self.result_file_reader.read(self.measurement_file, encoding='utf-8')
 
         # [GeneralInformation]
         self.operator = self.try_load_string('GeneralInformation', 'operator')
