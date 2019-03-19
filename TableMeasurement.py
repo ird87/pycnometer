@@ -356,6 +356,9 @@ class UiTableMeasurement(object):
         item.setTextAlignment(Qt.AlignHCenter)
         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(row, column, item)
+        # Устанавливаем ориентацию по центру по вертикали.
+        header = self.t1_tableMeasurement.verticalHeader()
+        header.setDefaultAlignment(Qt.AlignHCenter)
         if not active:
             self.set_color_to_row_unactive(row)
         self.t1_tableMeasurement.reset()

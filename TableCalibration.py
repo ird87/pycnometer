@@ -387,6 +387,9 @@ class UiTableCalibration(object):
         item.setTextAlignment(Qt.AlignHCenter)
         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(row, column, item)
+        # Устанавливаем ориентацию по центру по вертикали.
+        header = self.t2_tableCalibration.verticalHeader()
+        header.setDefaultAlignment(Qt.AlignHCenter)
         if not active:
             self.set_color_to_row_unactive(row)
         self.t2_tableCalibration.reset()
