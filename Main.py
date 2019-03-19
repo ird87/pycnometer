@@ -264,7 +264,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.calibration_procedure.start_russian_sensor_calibration()
 
     def start_progressbar(self, title, name, time):
-        if not self.config.is_test_mode():
+        if self.config.is_test_mode():
             self.progressbar_form = UiProgressbar(self, title, name, time)
             self.progressbar_form.activate()
 
