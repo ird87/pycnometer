@@ -89,9 +89,6 @@ class UiTableMeasurement(object):
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
         item6.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(rowPosition, 5, item6)
-        # Устанавливаем ориентацию по центру по вертикали.
-        header = self.t1_tableMeasurement.verticalHeader()
-        header.setDefaultAlignment(Qt.AlignHCenter)
         if not _measurements.active:
             self.set_color_to_row_unactive(rowPosition)
         self.t1_tableMeasurement.reset()
@@ -353,12 +350,9 @@ class UiTableMeasurement(object):
         # Добавляем в таблицу в столбец для отклонений
         from Main import toFixed
         item = QtWidgets.QTableWidgetItem(toFixed(x, self.round))
-        item.setTextAlignment(Qt.AlignHCenter)
+        item.setTextAlignment(Qt.AlignCenter)
         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t1_tableMeasurement.setItem(row, column, item)
-        # Устанавливаем ориентацию по центру по вертикали.
-        header = self.t1_tableMeasurement.verticalHeader()
-        header.setDefaultAlignment(Qt.AlignHCenter)
         if not active:
             self.set_color_to_row_unactive(row)
         self.t1_tableMeasurement.reset()

@@ -82,9 +82,6 @@ class UiTableCalibration(object):
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
         item6.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 5, item6)
-        # Устанавливаем ориентацию по центру по вертикали.
-        header = self.t2_tableCalibration.verticalHeader()
-        header.setDefaultAlignment(Qt.AlignHCenter)
         if not _calibrations.active:
             self.set_color_to_row_unactive(rowPosition)
         self.t2_tableCalibration.reset()
@@ -384,12 +381,9 @@ class UiTableCalibration(object):
     def add_item(self, x, row, column, active):
         from Main import toFixed
         item = QtWidgets.QTableWidgetItem(toFixed(x, self.round))
-        item.setTextAlignment(Qt.AlignHCenter)
+        item.setTextAlignment(Qt.AlignCenter)
         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(row, column, item)
-        # Устанавливаем ориентацию по центру по вертикали.
-        header = self.t2_tableCalibration.verticalHeader()
-        header.setDefaultAlignment(Qt.AlignHCenter)
         if not active:
             self.set_color_to_row_unactive(row)
         self.t2_tableCalibration.reset()
