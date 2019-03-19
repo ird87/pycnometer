@@ -3,7 +3,6 @@
 import configparser
 import json
 import os
-from pathlib import Path
 
 """Проверака и комментари: 23.01.2019"""
 
@@ -174,7 +173,7 @@ class Languages(object):
     """Метод для назначения файла, в качестве источника данных"""
     def setup(self, config):
 
-        self.languages.read(str(Path(os.getcwd() + '/Language/' + config.get_language() + '.ini'), encoding = 'WINDOWS-1251'))
+        self.languages.read(os.path.join(os.getcwd(), 'Language', config.get_language() + '.ini'), encoding = 'WINDOWS-1251')
 
         # if config.is_test_mode():
         #     # для тестового режима (Windows) нужны такие команды:

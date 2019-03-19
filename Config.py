@@ -4,7 +4,6 @@ import configparser
 import json
 import os
 from enum import Enum
-from pathlib import Path
 
 """Проверака и комментари: 13.01.2019"""
 
@@ -145,7 +144,7 @@ class Configure(object):
     """Метод для обновления списка всех доступных языков"""
     def reload_languages_list(self):
         self.languages.clear()
-        self.languages = os.listdir(Path(os.getcwd() + '/Language/'))
+        self.languages = os.listdir(os.path.join(os.getcwd(), 'Language'))
         # if self.is_test_mode():
         #     self.languages = os.listdir(os.getcwd() + '\Language\\')
         # if not self.is_test_mode():

@@ -7,7 +7,6 @@ import math
 import os
 import time
 import configparser
-from pathlib import Path
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
@@ -1606,7 +1605,7 @@ class MeasurementProcedure(object):
     def get_files_list(self):
         # проверим наличие каталога, если его нет - создадим.
         self.check_result_dir()
-        dir = Path(os.getcwd() + '/Results/Measurements/')
+        dir = os.path.join(os.getcwd(), 'Results', 'Measurements')
         # if self.is_test_mode():
         #     dir = os.getcwd() + '\Results\Measurements\\'
         # if not self.is_test_mode():
@@ -1614,7 +1613,7 @@ class MeasurementProcedure(object):
         files = [f for f in os.listdir(dir) if f.endswith('.result')]
         ret_files = {}
         for f in files:
-            file = dir / f
+            file = os.path.join(dir, f)
             data_changed = time.gmtime(os.path.getmtime(file))
             ret_files.update({f: data_changed})
         return ret_files, dir

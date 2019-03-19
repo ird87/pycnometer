@@ -7,7 +7,6 @@ import os
 import time
 import configparser
 import threading
-from pathlib import Path
 
 from Calibration import Calibration
 from MeasurementProcedure import Сuvette, Ports, Abort_Type
@@ -1000,7 +999,7 @@ class CalibrationProcedure(object):
     def get_files_list(self):
         # проверим наличие каталога, если его нет - создадим.
         self.check_result_dir()
-        dir = Path(os.getcwd() + '/Results/Calibrations/')
+        dir = os.path.join(os.getcwd(), 'Results', 'Calibrations')
         # if self.is_test_mode():
         #     dir = os.getcwd() + '\Results\Calibrations\\'
         # if not self.is_test_mode():
@@ -1008,7 +1007,7 @@ class CalibrationProcedure(object):
         files = [f for f in os.listdir(dir) if f.endswith('.result')]
         ret_files = {}
         for f in files:
-            file = dir / f
+            file = os.path.join(dir, f)
             data_changed = time.gmtime(os.path.getmtime(file))
             ret_files.update({f: data_changed})
         return ret_files, dir
