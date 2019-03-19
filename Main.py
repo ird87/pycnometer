@@ -275,10 +275,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.progressbar_form.activate()
 
     def change_progressbar(self, t):
-        self.progressbar_form.add_progress(t)
+        if not self.config.is_test_mode():
+            self.progressbar_form.add_progress(t)
 
     def exit_progressbar(self):
-        self.progressbar_form.exit()
+        if not self.config.is_test_mode():
+            self.progressbar_form.exit()
 
     def changed_languare(self):
         name = self.t4_gIS_cmd1.currentText()
