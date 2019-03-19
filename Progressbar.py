@@ -63,7 +63,7 @@ class UiProgressbar(QDialog):
             t += 1
             self.prb_Progressbar.setValue(t)
         # time.sleep(2)
-        self.close()
+        self.accept()
 
     def init_ui(self):
         self.setObjectName("DialogProgressbar")
