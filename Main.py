@@ -203,7 +203,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.progressbar_start.connect(self.start_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
         self.progressbar_change.connect(self.change_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
         self.progressbar_exit.connect(self.exit_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
-        self.block_other_tabs_signal.connect(self.block_other_tabs(), PyQt5.QtCore.Qt.QueuedConnection)
+        self.block_other_tabs_signal.connect(self.block_other_tabs, PyQt5.QtCore.Qt.QueuedConnection)
         self.unblock_other_tabs_signal.connect(self.unblock_other_tabs, PyQt5.QtCore.Qt.QueuedConnection)
         self.block_userinterface_measurement_signal.connect(self.block_userinterface_measurement, PyQt5.QtCore.Qt.QueuedConnection)
         self.unblock_userinterface_measurement_signal.connect(self.unblock_userinterface_measurement, PyQt5.QtCore.Qt.QueuedConnection)

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/CalibrationProcedure.py" beforeDir="false" afterPath="$PROJECT_DIR$/CalibrationProcedure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MeasurementProcedure.py" beforeDir="false" afterPath="$PROJECT_DIR$/MeasurementProcedure.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="1276" selection-start-line="1276" selection-end-line="1277" selection-end-column="70" />
+            <state relative-caret-position="306">
+              <caret line="210" column="29" lean-forward="true" selection-start-line="210" selection-start-column="29" selection-end-line="210" selection-end-column="29" />
               <folding>
                 <element signature="e#61#75#0" expanded="true" />
               </folding>
@@ -36,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MeasurementProcedure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="257" column="43" lean-forward="true" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="43" />
+            <state relative-caret-position="187">
+              <caret line="107" column="19" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="19" />
               <folding>
                 <element signature="e#96#111#0" expanded="true" />
               </folding>
@@ -45,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Configure_user.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+            <state relative-caret-position="294">
+              <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -78,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="177" selection-start-line="177" selection-end-line="177" selection-end-column="34" />
+            <state relative-caret-position="374">
+              <caret line="271" column="47" lean-forward="true" selection-start-line="271" selection-start-column="47" selection-end-line="271" selection-end-column="47" />
               <folding>
                 <element signature="e#33#48#0" expanded="true" />
               </folding>
@@ -114,7 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>close_calibrations</find>
       <find>on_message</find>
       <find>message</find>
       <find>implementation_test</find>
@@ -144,6 +145,7 @@
       <find>self.on_message_abort_procedure</find>
       <find>getcwd</find>
       <find>on_message_abort_procedure</find>
+      <find>block_</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -199,11 +201,11 @@
         <option value="$PROJECT_DIR$/Languages.py" />
         <option value="$PROJECT_DIR$/Config.py" />
         <option value="$PROJECT_DIR$/FileManager.py" />
-        <option value="$PROJECT_DIR$/CalibrationProcedure.py" />
         <option value="$PROJECT_DIR$/Progressbar.py" />
+        <option value="$PROJECT_DIR$/Configure_user.ini" />
         <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/MeasurementProcedure.py" />
-        <option value="$PROJECT_DIR$/Configure_user.ini" />
+        <option value="$PROJECT_DIR$/CalibrationProcedure.py" />
       </list>
     </option>
   </component>
@@ -737,40 +739,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Configure_user.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="1276" selection-start-line="1276" selection-end-line="1277" selection-end-column="70" />
+        <state relative-caret-position="306">
+          <caret line="210" column="29" lean-forward="true" selection-start-line="210" selection-start-column="29" selection-end-line="210" selection-end-column="29" />
           <folding>
             <element signature="e#61#75#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="177" selection-start-line="177" selection-end-line="177" selection-end-column="34" />
-          <folding>
-            <element signature="e#33#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MeasurementProcedure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="257" column="43" lean-forward="true" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="43" />
+        <state relative-caret-position="187">
+          <caret line="107" column="19" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="19" />
           <folding>
             <element signature="e#96#111#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Configure_user.ini">
+    <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+        <state relative-caret-position="374">
+          <caret line="271" column="47" lean-forward="true" selection-start-line="271" selection-start-column="47" selection-end-line="271" selection-end-column="47" />
+          <folding>
+            <element signature="e#33#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
