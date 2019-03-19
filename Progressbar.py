@@ -73,6 +73,7 @@ class UiProgressbar(QDialog):
         while self.prb_Progressbar.value() < self.prb_Progressbar.maximum():
             time.sleep(1)
             self.prb_Progressbar.setValue(self.prb_Progressbar.value() + 1)
+            time.sleep(2)
         self.accept()
 
     def init_ui(self):

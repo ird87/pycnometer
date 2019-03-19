@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/CalibrationProcedure.py" beforeDir="false" afterPath="$PROJECT_DIR$/CalibrationProcedure.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeasurementProcedure.py" beforeDir="false" afterPath="$PROJECT_DIR$/MeasurementProcedure.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progressbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progressbar.py" afterDir="false" />
-    </list>
+    <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +13,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="1412" selection-start-line="1412" selection-end-line="1412" />
+            <state relative-caret-position="272">
+              <caret line="280" column="9" selection-start-line="280" selection-start-column="9" selection-end-line="280" selection-end-column="36" />
               <folding>
                 <element signature="e#61#75#0" expanded="true" />
               </folding>
@@ -48,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Progressbar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="89" column="63" selection-start-line="89" selection-start-column="63" selection-end-line="89" selection-end-column="63" />
+            <state relative-caret-position="1224">
+              <caret line="80" column="27" lean-forward="true" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -69,13 +64,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="1089" column="23" lean-forward="true" selection-start-line="1089" selection-start-column="23" selection-end-line="1089" selection-end-column="23" />
+            <state relative-caret-position="172">
+              <caret line="851" column="25" lean-forward="true" selection-start-line="851" selection-start-column="25" selection-end-line="851" selection-end-column="25" />
               <folding>
                 <element signature="e#33#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Languages.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="173" column="25" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="25" />
+              <folding>
+                <element signature="e#78#97#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,9 +127,9 @@
       <find>self.measurement_file</find>
       <find>prog</find>
       <find>progressbar</find>
-      <find>set_measurement_file</find>
       <find>bala</find>
       <find>getcwd</find>
+      <find>set_measurement_file</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -677,16 +684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Languages.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="175" column="28" lean-forward="true" selection-start-line="175" selection-start-column="28" selection-end-line="175" selection-end-column="41" />
-          <folding>
-            <element signature="e#78#97#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/python37/Lib/threading.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
@@ -708,32 +705,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="1412" selection-start-line="1412" selection-end-line="1412" />
-          <folding>
-            <element signature="e#61#75#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MeasurementProcedure.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="1272" column="46" lean-forward="true" selection-start-line="1272" selection-start-column="46" selection-end-line="1272" selection-end-column="46" />
           <folding>
             <element signature="e#96#111#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="1089" column="23" lean-forward="true" selection-start-line="1089" selection-start-column="23" selection-end-line="1089" selection-end-column="23" />
-          <folding>
-            <element signature="e#33#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -748,10 +725,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Languages.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="173" column="25" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="25" />
+          <folding>
+            <element signature="e#78#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="280" column="9" selection-start-line="280" selection-start-column="9" selection-end-line="280" selection-end-column="36" />
+          <folding>
+            <element signature="e#61#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Progressbar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="89" column="63" selection-start-line="89" selection-start-column="63" selection-end-line="89" selection-end-column="63" />
+        <state relative-caret-position="1224">
+          <caret line="80" column="27" lean-forward="true" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CalibrationProcedure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="851" column="25" lean-forward="true" selection-start-line="851" selection-start-column="25" selection-end-line="851" selection-end-column="25" />
+          <folding>
+            <element signature="e#33#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
