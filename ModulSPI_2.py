@@ -140,9 +140,8 @@ class SPI(object):
         # до тех пор пока процедура активна
         # (а она активна, пока пользователь не покинет вкладку "Ручное управление") выполняем:
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Pressure measurement for Manual control started\nself.spi.max_speed_hz = {0}'
-                                   '\nself.t = {1}\nself.smq_now  = {2}'.format(str(self.spi.max_speed_hz),
-                                                                                str(self.t), str(self.smq_now)))
+                                   'Pressure measurement for Manual control started\n'
+                                   'self.t = {0}\nself.smq_now  = {1}'.format(str(self.t), str(self.smq_now)))
         while self.test_on:
             # получить данные с датчика
             result = self.read_channel()-self.correct_data
