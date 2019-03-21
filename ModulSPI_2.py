@@ -165,8 +165,6 @@ class SPI(object):
         for i in range(self.smq_now):
             # считываем данные с датчика
             ### STEP 3: Get data:
-            time.sleep(3)
-            print("CH_SEQUENCE: {0}".format(CH_SEQUENCE))
             raw_channels = self.ads.read_sequence(CH_SEQUENCE)
             print("raw_channels: {0}". format(raw_channels))
             # voltages = [i * self.ads.v_per_digit for i in raw_channels]
