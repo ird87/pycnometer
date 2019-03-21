@@ -58,6 +58,7 @@ class Configure(object):
         self.VcS = 0
         self.VdLM = 0
         self.VdS = 0
+        self.module_spi = ""
         self.pulse_length = 0
         self.Pmeas = []
         self.Pmeas_now = 0
@@ -114,6 +115,7 @@ class Configure(object):
         self.VdLM = self.try_getfloat_user_config('Measurement', 'VdLM')
         self.VdS = self.try_getfloat_user_config('Measurement', 'VdS')
         self.spi_t = self.try_getfloat_user_config('Measurement', 'spi_t')
+        self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi')
         self.spi_max_speed_hz = self.try_getint_user_config('Measurement', 'spi_max_speed_hz')
         self.pulse_length = self.try_getint_user_config('Measurement', 'pulse_length')
         self.Pmeas.clear()
