@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ads1256/__init__.py" beforeDir="false" />
-    </list>
+    <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +49,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ModulSPI_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="408">
+              <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+              <folding>
+                <element signature="e#59#73#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -212,9 +213,9 @@
         <option value="$PROJECT_DIR$/pyads1256.py" />
         <option value="$PROJECT_DIR$/pipyadc.py" />
         <option value="$PROJECT_DIR$/ADS1256_definitions.py" />
-        <option value="$PROJECT_DIR$/ModulSPI_2.py" />
         <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/ads1256/__init__.py" />
+        <option value="$PROJECT_DIR$/ModulSPI_2.py" />
       </list>
     </option>
   </component>
@@ -809,8 +810,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ModulSPI_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="408">
+          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding>
+            <element signature="e#59#73#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
