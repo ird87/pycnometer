@@ -106,6 +106,7 @@ class Configure(object):
     def set_measurement(self):
         self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure'))
         self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette')
+        self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi')
         self.smq_now = self.try_getint_user_config('Measurement', 'smq_now')
         self.smq_list.clear()
         self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list'))
@@ -115,7 +116,7 @@ class Configure(object):
         self.VdLM = self.try_getfloat_user_config('Measurement', 'VdLM')
         self.VdS = self.try_getfloat_user_config('Measurement', 'VdS')
         self.spi_t = self.try_getfloat_user_config('Measurement', 'spi_t')
-        self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi')
+
         self.spi_max_speed_hz = self.try_getint_user_config('Measurement', 'spi_max_speed_hz')
         self.pulse_length = self.try_getint_user_config('Measurement', 'pulse_length')
         self.Pmeas.clear()
