@@ -67,6 +67,8 @@ class SPI(object):
         self.main = main
         self.config = self.main.config
         self.t = 0
+        self.const_data = 8388607
+        self.channal = 0
 
         ### STEP 1: Initialise ADC object using default configuration:
         # (Note1: See ADS1256_default_config.py, see ADS1256 datasheet)
@@ -172,7 +174,7 @@ class SPI(object):
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
         try:
-            data = raw_channels[0] / self.smq_now
+            data = raw_channels[self.channal] / self.smq_now
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating data, '
@@ -203,30 +205,30 @@ class SPI(object):
 
     """Метод, который на основание измерения высчитывает давление в кПа"""
     def getkPa(self, data):
-        p = data / 1023 * 130 # кПа
+        p = data / self.const_data * 130 # кПа
         return p
 
     """Метод, который на основание измерения высчитывает давление в Бар"""
     def getBar(self, data):
-        p = data / 1023 * 1.3  # Бар
+        p = data / self.const_data * 1.3  # Бар
         return p
 
     """Метод, который на основание измерения высчитывает давление в psi"""
     def getPsi(self, data):
-        p = data / 1023 * 130 * 0.14503773773  # psi
+        p = data / self.const_data * 130 * 0.14503773773  # psi
         return p
 
     """Метод, который возвращает из давление в кПа значение измерения"""
     def getDataFromkPa(self, p):
-        data = p * 1023 / 130  # кПа
+        data = p * self.const_data / 130  # кПа
         return data
 
     """Метод, который возвращает из давление в Бар значение измерения"""
     def getDataFromBar(self, p):
-        data = p * 1023 / 1.3  # кПа
+        data = p * self.const_data / 1.3  # кПа
         return data
 
     """Метод, который возвращает из давление в psi значение измерения"""
     def getDataFromPsi(self, p):
-        data = p * 1023 / 130 / 0.14503773773  # кПа
+        data = p * self.const_data / 130 / 0.14503773773  # кПа
         return data
