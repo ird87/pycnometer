@@ -354,6 +354,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Применяем изменения в настройках программы.
     def option_appy(self):
         # Сначала мы записываем все изменения внутрь файла config.ini
+        self.config.set_ini('Pycnometer', 'version', self.config.version)
+        self.config.set_ini('Pycnometer', 'small_cuvette', str(self.config.small_cuvette))
+        self.config.set_ini('Pycnometer', 'module_spi', self.config.module_spi)
         # используемый язык
         self.config.set_ini('Language', 'language', self.t4_gIS_cmd1.currentText())
         # единица измерения давления

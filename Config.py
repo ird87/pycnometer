@@ -50,6 +50,7 @@ class Configure(object):
         self.cipher_suite = Fernet(key)
         self.small_cuvette = False
         self.language = ''
+        self.version = ''
         self.round = 3
         self.pressure = Pressure.kPa
         self.smq_now = 0
@@ -107,6 +108,7 @@ class Configure(object):
     def set_measurement(self):
         self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure'))
         self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette')
+        self.version = self.try_get_user_config('Pycnometer', 'version')
         self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi')
         print(self.module_spi)
         self.smq_now = self.try_getint_user_config('Measurement', 'smq_now')
@@ -174,7 +176,7 @@ class Configure(object):
     def set_ini_hash(self, section, val, s):
         s = (self.crypting(s)).decode('utf-8')
         self.config_user.read('Configure_user.ini.new')
-        self.v.set(section, val, s)
+        self.config_user.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
             self.config_user.write(fh)
         if os.path.isfile('Configure_user.ini'):
