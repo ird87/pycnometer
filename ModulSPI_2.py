@@ -166,14 +166,14 @@ class SPI(object):
         for i in range(self.smq_now):
             # считываем данные с датчика
             ### STEP 3: Get data:
-            raw_channels = self.ads.read_sequence(CH_SEQUENCE)
+            raw_channels = self.ads.read_sequence(POTI)
             print("raw_channels: {0}". format(raw_channels))
             # voltages = [i * self.ads.v_per_digit for i in raw_channels]
 
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
         try:
-            data = raw_channels / self.smq_now
+            data = raw_channels[0] / self.smq_now
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating data, '
