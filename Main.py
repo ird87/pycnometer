@@ -170,7 +170,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.spi = SPI(self)
         else:
             from ModulGPIO import GPIO
-            print(self.config.module_spi)
             if self.config.module_spi =="SPI2":
                 from ModulSPI_2 import SPI
             else:

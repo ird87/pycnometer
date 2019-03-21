@@ -108,6 +108,7 @@ class Configure(object):
         self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure'))
         self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette')
         self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi')
+        print(self.module_spi)
         self.smq_now = self.try_getint_user_config('Measurement', 'smq_now')
         self.smq_list.clear()
         self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list'))
