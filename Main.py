@@ -170,7 +170,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.spi = SPI(self)
         else:
             from ModulGPIO import GPIO
-            from ModulSPI import SPI
+            from ModulSPI_2 import SPI
             # Получаем данные о портах из Configure.ini
             self.ports = self.config.get_ports()
             self.gpio = GPIO(self.ports)
