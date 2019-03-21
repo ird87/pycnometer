@@ -5,8 +5,6 @@ import os
 import threading
 import sys
 import os
-
-from Main import toFixed
 from ads1256_ADS1256_definitions import *
 from ads1256_pipyadc import ADS1256
 
@@ -167,8 +165,10 @@ class SPI(object):
         for i in range(self.smq_now):
             # считываем данные с датчика
             ### STEP 3: Get data:
+            time.sleep(3)
+            print("CH_SEQUENCE: {0}".format(CH_SEQUENCE))
             raw_channels = self.ads.read_sequence(CH_SEQUENCE)
-            print("raw_channels: {0}". format(toFixed(float(raw_channels[0]), 15)))
+            print("raw_channels: {0}". format(raw_channels))
             # voltages = [i * self.ads.v_per_digit for i in raw_channels]
 
         # берем среднее значение
