@@ -50,8 +50,7 @@ SHORT_CIRCUIT = POS_AIN0|NEG_AIN0
 # Specify here an arbitrary length list (tuple) of arbitrary input channel pair
 # eight-bit code values to scan sequentially from index 0 to last.
 # Eight channels fit on the screen nicely for this example..
-# CH_SEQUENCE = (POTI, LDR, EXT2, EXT3, EXT4, EXT7, POTI_INVERTED, SHORT_CIRCUIT)
-CH_SEQUENCE = (POTI)
+CH_SEQUENCE = (POTI, LDR, EXT2, EXT3, EXT4, EXT7, POTI_INVERTED, SHORT_CIRCUIT)
 ################################################################################
 
 """
