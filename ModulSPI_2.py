@@ -68,7 +68,7 @@ class SPI(object):
         self.config = self.main.config
         self.t = 0
         self.const_data = 8388607
-        self.channal = 2
+        self.channel = 2
 
         ### STEP 1: Initialise ADC object using default configuration:
         # (Note1: See ADS1256_default_config.py, see ADS1256 datasheet)
@@ -167,7 +167,7 @@ class SPI(object):
             # считываем данные с датчика
             ### STEP 3: Get data:
             raw_channels = self.ads.read_sequence(CH_SEQUENCE)
-            data = data + raw_channels[self.channal]
+            data = data + raw_channels[self.channel]
             print("raw_channels: {0}". format(raw_channels))
             # voltages = [i * self.ads.v_per_digit for i in raw_channels]
 
