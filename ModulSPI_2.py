@@ -5,8 +5,8 @@ import os
 import threading
 import sys
 import os
-from ads1256.ADS1256_definitions import *
-from ads1256.pipyadc import ADS1256
+from .ads1256.ADS1256_definitions import *
+from .ads1256.pipyadc import ADS1256
 
 import time
 
