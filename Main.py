@@ -171,10 +171,10 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         else:
             from ModulGPIO import GPIO
             if self.config.module_spi == "SPI2":
-                print(self.config.module_spi)
+                print("SPI2 " + self.config.module_spi)
                 from ModulSPI_2 import SPI
             else:
-                print(self.config.module_spi)
+                print("что-то " + self.config.module_spi)
                 from ModulSPI import SPI
             # Получаем данные о портах из Configure.ini
             self.ports = self.config.get_ports()
