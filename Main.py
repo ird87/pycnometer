@@ -127,7 +127,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.wifi = False
         # Загружаем модуль настройки
         self.config = Configure()
-
+        self.config.set_measurement()
         # Это имя нашего модуля
         self.file = os.path.basename(__file__)
 
@@ -170,11 +170,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.spi = SPI(self)
         else:
             from ModulGPIO import GPIO
-            if self.config.module_spi == "SPI2":
-                print("SPI2 " + self.config.module_spi)
+            if self.config.module_spi =="SPI2":
                 from ModulSPI_2 import SPI
             else:
-                print("что-то " + self.config.module_spi)
                 from ModulSPI import SPI
             # Получаем данные о портах из Configure.ini
             self.ports = self.config.get_ports()
