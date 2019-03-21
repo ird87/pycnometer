@@ -173,7 +173,7 @@ class SPI(object):
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
         try:
-            data = raw_channels[0] / self.smq_now
+            data = raw_channels / self.smq_now
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating data, '
