@@ -44,6 +44,7 @@ class Configure(object):
         self.p = [0, 0, 0, 0, 0]                    # Массив для записи номеров портов
         self.config = configparser.ConfigParser()   # Создаем экземпляр configparser
         self.config.read('Configure.ini')           # Указываем файл для считывания данных
+        self.config_user = configparser.ConfigParser()   # Создаем экземпляр configparser
         # Fernet.generate_key()
         key = b'nRDnYgvD1i727JwjmwE_SRn30ktYZeLHIHuVPxo_tSw='
         self.cipher_suite = Fernet(key)
@@ -157,10 +158,10 @@ class Configure(object):
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini(self, section, val, s):
-        self.config.read('Configure_user.ini.new')
-        self.config.set(section, val, s)
+        self.config_user.read('Configure_user.ini.new')
+        self.config_user.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
-            self.config.write(fh)
+            self.config_user.write(fh)
         if os.path.isfile('Configure_user.ini'):
             os.rename("Configure_user.ini", "Configure_user.ini~")
             os.rename("Configure_user.ini.new", "Configure_user.ini")
@@ -171,10 +172,10 @@ class Configure(object):
     """Метод для сохранения измененных настроек в файл"""
     def set_ini_hash(self, section, val, s):
         s = (self.crypting(s)).decode('utf-8')
-        self.config.read('Configure_user.ini.new')
-        self.config.set(section, val, s)
+        self.config_user.read('Configure_user.ini.new')
+        self.v.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
-            self.config.write(fh)
+            self.config_user.write(fh)
         if os.path.isfile('Configure_user.ini'):
             os.rename("Configure_user.ini", "Configure_user.ini~")
             os.rename("Configure_user.ini.new", "Configure_user.ini")
@@ -195,50 +196,50 @@ class Configure(object):
         self.config.read('Configure.ini')
         result = self.config.get(section, option)
         if os.path.isfile('Configure_user.ini'):
-            self.config.read('Configure_user.ini')
-            if self.config.has_section(section):
-                if self.config.has_option(section, option):
-                    result = self.config.get(section, option)
+            self.config_user.read('Configure_user.ini')
+            if self.config_user.has_section(section):
+                if self.config_user.has_option(section, option):
+                    result = self.config_user.get(section, option)
         return result
 
     def try_getint_user_config(self, section, option):
         self.config.read('Configure.ini')
         result = self.config.getint(section, option)
         if os.path.isfile('Configure_user.ini'):
-            self.config.read('Configure_user.ini')
-            if self.config.has_section(section):
-                if self.config.has_option(section, option):
-                    result = self.config.getint(section, option)
+            self.config_user.read('Configure_user.ini')
+            if self.config_user.has_section(section):
+                if self.config_user.has_option(section, option):
+                    result = self.config_user.getint(section, option)
         return result
 
     def try_getfloat_user_config(self, section, option):
         self.config.read('Configure.ini')
         result = self.config.getfloat(section, option)
         if os.path.isfile('Configure_user.ini'):
-            self.config.read('Configure_user.ini')
-            if self.config.has_section(section):
-                if self.config.has_option(section, option):
-                    result = self.config.getfloat(section, option)
+            self.config_user.read('Configure_user.ini')
+            if self.config_user.has_section(section):
+                if self.config_user.has_option(section, option):
+                    result = self.config_user.getfloat(section, option)
         return result
 
     def try_getboolean_user_config(self, section, option):
         self.config.read('Configure.ini')
         result = self.config.getboolean(section, option)
         if os.path.isfile('Configure_user.ini'):
-            self.config.read('Configure_user.ini')
-            if self.config.has_section(section):
-                if self.config.has_option(section, option):
-                    result = self.config.getboolean(section, option)
+            self.config_user.read('Configure_user.ini')
+            if self.config_user.has_section(section):
+                if self.config_user.has_option(section, option):
+                    result = self.config_user.getboolean(section, option)
         return result
 
     def try_get_user_config_hash(self, section, option):
         self.config.read('Configure.ini')
         result = self.config.get(section, option)
         if os.path.isfile('Configure_user.ini'):
-            self.config.read('Configure_user.ini')
-            if self.config.has_section(section):
-                if self.config.has_option(section, option):
-                    result = self.config.get(section, option)
+            self.config_user.read('Configure_user.ini')
+            if self.config_user.has_section(section):
+                if self.config_user.has_option(section, option):
+                    result = self.config_user.get(section, option)
         if not result=="":
             result = (self.cipher_suite.decrypt(bytes(result, encoding='utf-8'))).decode('utf-8')
         return result
