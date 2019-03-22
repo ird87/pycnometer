@@ -67,7 +67,7 @@ class SPI(object):
         self.main = main
         self.config = self.main.config
         self.t = 0
-        self.const_data = 8388607
+        self.const_data = 6300000
         self.channel = 2
 
         ### STEP 1: Initialise ADC object using default configuration:
