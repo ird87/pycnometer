@@ -61,6 +61,7 @@ class Configure(object):
         self.VdLM = 0
         self.VdS = 0
         self.module_spi = ""
+        self.data_channel = 0
         self.pulse_length = 0
         self.Pmeas = []
         self.Pmeas_now = 0
@@ -110,7 +111,7 @@ class Configure(object):
         self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette')
         self.version = self.try_get_user_config('Pycnometer', 'version')
         self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi')
-        print(self.module_spi)
+        self.data_channel = self.try_getint_user_config('Pycnometer', 'data_channel') - 1
         self.smq_now = self.try_getint_user_config('Measurement', 'smq_now')
         self.smq_list.clear()
         self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list'))

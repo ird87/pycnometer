@@ -68,7 +68,7 @@ class SPI(object):
         self.config = self.main.config
         self.t = 0
         self.const_data = 6300000
-        self.channel = 2
+        self.channel = self.config.data_channel
 
         ### STEP 1: Initialise ADC object using default configuration:
         # (Note1: See ADS1256_default_config.py, see ADS1256 datasheet)
