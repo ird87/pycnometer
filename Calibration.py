@@ -54,3 +54,9 @@ class Calibration(object):
         self.p2 = 0.0
         self.ratio = 0.0
         self.deviation = 0.0
+
+    def is_active(self):
+        result = False
+        if self.active:
+            result = True
+        return result

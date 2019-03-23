@@ -82,7 +82,7 @@ class UiTableCalibration(object):
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
         item6.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 5, item6)
-        if not _calibrations.active:
+        if not _calibrations.active  or _calibrations.active is None:
             self.set_color_to_row_unactive(rowPosition)
         self.t2_tableCalibration.reset()
 
@@ -99,51 +99,54 @@ class UiTableCalibration(object):
                 menu = QMenu()
                 # Добавляем пункт меню "Пересчет", он будет доступен при нажатии на любую строку
                 recalculation_action = menu.addAction(self.popup_recount)
-                # Проверяем для данных выбранной строки включены ли они в рассчеты
-                if self.main.get_calibrations()[i.row()].active:
-                    # Если включены, то определяем в какой массив данных попадает эта строка: P или P'
-                    if i.row() < l:
-                        # Для P проверяем можно ли еще исключать строки или больше нельзя.
-                        if self.can_exclude_more1():
-                            # Если можно, то добавляем пункт меню "Исключить"
-                            exclude_action = menu.addAction(self.popup_exclude)
-                            # Отображаем меню для пользователя
-                            action = menu.exec_(QCursor.pos())
-                            # Обработка выбора пунктов меню пользователем.
-                            if action == exclude_action:
-                                self.exclude_items(i.row())
-                            if action == recalculation_action:
-                                self.recalculation_results()
-                        # выходим из метода, чтобы избежать добавления в меню вариантов, предназначенных для клика
-                        # по пустой зоне таблицы
-                        return
-                    if i.row() >= l:
-                        # Для P' проверяем можно ли еще исключать строки или больше нельзя.
-                        if self.can_exclude_more2():
-                            # Если можно, то добавляем пункт меню "Исключить"
-                            exclude_action = menu.addAction(self.popup_exclude)
-                            # Отображаем меню для пользователя
-                            action = menu.exec_(QCursor.pos())
-                            # Обработка выбора пунктов меню пользователем.
-                            if action == exclude_action:
-                                self.exclude_items(i.row())
-                            if action == recalculation_action:
-                                self.recalculation_results()
+                if not self.main.get_calibrations()[i.row()].active is None:
+                    # Проверяем для данных выбранной строки включены ли они в рассчеты
+                    if self.main.get_calibrations()[i.row()].active:
+                        # Если включены, то определяем в какой массив данных попадает эта строка: P или P'
+                        if i.row() < l:
+                            # Для P проверяем можно ли еще исключать строки или больше нельзя.
+                            if self.can_exclude_more1():
+                                # Если можно, то добавляем пункт меню "Исключить"
+                                exclude_action = menu.addAction(self.popup_exclude)
+                                # Отображаем меню для пользователя
+                                action = menu.exec_(QCursor.pos())
+                                # Обработка выбора пунктов меню пользователем.
+                                if action == exclude_action:
+                                    self.exclude_items(i.row())
+                                if action == recalculation_action:
+                                    self.recalculation_results()
+                            # выходим из метода, чтобы избежать добавления в меню вариантов, предназначенных для клика
+                            # по пустой зоне таблицы
+                            return
+                        if i.row() >= l:
+                            # Для P' проверяем можно ли еще исключать строки или больше нельзя.
+                            if self.can_exclude_more2():
+                                # Если можно, то добавляем пункт меню "Исключить"
+                                exclude_action = menu.addAction(self.popup_exclude)
+                                # Отображаем меню для пользователя
+                                action = menu.exec_(QCursor.pos())
+                                # Обработка выбора пунктов меню пользователем.
+                                if action == exclude_action:
+                                    self.exclude_items(i.row())
+                                if action == recalculation_action:
+                                    self.recalculation_results()
+                            # выходим из метода, чтобы избежать добавления в меню вариантов, предназначенных для клика
+                            # по пустой зоне таблицы
+                            return
+                    else:
+                        # Если исключены, то добавляем пункт меню "Включить"
+                        include_action = menu.addAction(self.popup_include)
+                        # Отображаем меню для пользователя
+                        action = menu.exec_(QCursor.pos())
+                        # Обработка выбора пунктов меню пользователем.
+                        if action == include_action:
+                            self.include_items(i.row())
+                        if action == recalculation_action:
+                            self.recalculation_results()
                         # выходим из метода, чтобы избежать добавления в меню вариантов, предназначенных для клика
                         # по пустой зоне таблицы
                         return
                 else:
-                    # Если исключены, то добавляем пункт меню "Включить"
-                    include_action = menu.addAction(self.popup_include)
-                    # Отображаем меню для пользователя
-                    action = menu.exec_(QCursor.pos())
-                    # Обработка выбора пунктов меню пользователем.
-                    if action == include_action:
-                        self.include_items(i.row())
-                    if action == recalculation_action:
-                        self.recalculation_results()
-                    # выходим из метода, чтобы избежать добавления в меню вариантов, предназначенных для клика
-                    # по пустой зоне таблицы
                     return
             # Сюда мы попадаем только если пользователь кликнул по таблице, но не по строкам.
             # Создаем контекстное меню
@@ -153,7 +156,7 @@ class UiTableCalibration(object):
             # Отображаем меню для пользователя
             action = menu.exec_(QCursor.pos())
             # Обработка выбора пунктов меню пользователем.
-            if action == add_action:
+            if action == add_action and self.main.config.is_test_mode():
                 self.add_items_input()
 
     """Метод добавления строки с вводом данных через вспомогательное окно |Будет отключена|"""
@@ -384,6 +387,6 @@ class UiTableCalibration(object):
         item.setTextAlignment(Qt.AlignCenter)
         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(row, column, item)
-        if not active:
+        if not active or active is None:
             self.set_color_to_row_unactive(row)
         self.t2_tableCalibration.reset()

@@ -339,7 +339,7 @@ class MeasurementProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... ' + measurement.name + '.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... ' + measurement.name + '.')
         # выключаем все порты
-        self.gpio.all_port_off()
+        self.main.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
         self.unblock_other_tabs.emit()
         # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
@@ -1088,29 +1088,30 @@ class MeasurementProcedure(object):
         # Теперь считаем отклонения для каждой строки
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL.....')
         for m in self.measurements:
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 'Calculation deviation for Measured[{0}].....'.format(counter2))
-            try:
-                # Рассчитываем отклонение
-                deviation = (self.m_medium_volume - m.volume) / self.m_medium_volume * 100
-            except ArithmeticError:
+            if not m.active is None:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     'Division by zero when calculating deviation, '
-                                     'denominator: medium_volume={0}'.format(self.m_medium_volume))
-                deviation = 0
-            if m.active:
-                m.deviation = deviation
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured[{0}] deviation = {1}'.format(counter2, m.deviation))
-            if not m.active:
-                m.deviation = ''
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured[{0}] this measurement is not active'.format(counter2))
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 'Calculation deviation for Measured[{0}]..... Done.'.format(counter2))
-            # Добавляем в таблицу в столбец для отклонений
-            self.table.add_item(m.deviation, counter2, 5, m.active)
-            counter2 += 1
+                                     'Calculation deviation for Measured[{0}].....'.format(counter2))
+                try:
+                    # Рассчитываем отклонение
+                    deviation = (self.m_medium_volume - m.volume) / self.m_medium_volume * 100
+                except ArithmeticError:
+                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                         'Division by zero when calculating deviation, '
+                                         'denominator: medium_volume={0}'.format(self.m_medium_volume))
+                    deviation = 0
+                if m.active:
+                    m.deviation = deviation
+                    self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                               'Measured[{0}] deviation = {1}'.format(counter2, m.deviation))
+                if not m.active:
+                    m.deviation = ''
+                    self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                               'Measured[{0}] this measurement is not active'.format(counter2))
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Calculation deviation for Measured[{0}]..... Done.'.format(counter2))
+                # Добавляем в таблицу в столбец для отклонений
+                self.table.add_item(m.deviation, counter2, 5, m.active)
+                counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL..... Done.')
 
         # --------------------------------------------------------------------------------------------------------------
@@ -1441,7 +1442,7 @@ class MeasurementProcedure(object):
         # Добавляем итоговую таблицу в наш массив элементов.
         elements.append(shell_table)
         doc.build(elements)
-        send(self.main.config.email_adress, report_name, "", report_name)
+        send(self.main.config.email_adress, "Report: {0}".format(report_name), "Привет! Этот отчет, который ты ждал", report_name)
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
     def get_today_date(self):
@@ -1542,7 +1543,7 @@ class MeasurementProcedure(object):
     def update_measurement_file(self, section, val, s):
         if not self.result_file_reader.has_section(section):
             self.result_file_reader.add_section(section)
-        self.result_file_reader.set(section, val, s)
+        self.result_file_reader.set(section, val, str(s))
         with open(self.measurement_file + ".new", "w") as fh:
             self.result_file_reader.write(fh)
 

@@ -166,7 +166,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             # Получаем данные о портах из Configure.ini
             self.ports = self.config.get_ports()
             self.gpio = GPIO(self.ports)
-            self.gpio.all_port_off()
+            self.all_port_off()
             self.spi = SPI(self)
         else:
             from ModulGPIO import GPIO
@@ -177,7 +177,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             # Получаем данные о портах из Configure.ini
             self.ports = self.config.get_ports()
             self.gpio = GPIO(self.ports)
-            self.gpio.all_port_off()
+            self.all_port_off()
             self.spi = SPI(self)
         # На будущее сохраним стандартный стиль поля для ввода, иногда нам нужно будет их выделять, но
         # потом нужно будет вернуться к стандартному стилю.
@@ -315,12 +315,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                 # Выключаем замер давления
                 self.spi.close_test()
                 # И выключаем все порты
-                self.gpio.all_port_off()
+                self.all_port_off()
 
             # Если мы открыли вкладку "Ручное управление"
             if self.tabPycnometer.currentIndex() == 2:
                 # Явно выключаем все порты (на всякий случай, они и так должны быть выключены)
-                self.gpio.all_port_off()
+                self.all_port_off()
                 # Включаем замер давления
                 self.spi.start_test()
         # Обработка открытия вкладки "Настройка"
@@ -548,6 +548,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         else:
             self.gpio.port_off(self.ports[4])
 
+    def all_port_off(self):
+        self.t3_checkValve1.setChecked(False)
+        self.t3_checkValve2.setChecked(False)
+        self.t3_checkValve3.setChecked(False)
+        self.t3_checkValve4.setChecked(False)
+        self.t3_checkValve5.setChecked(False)
+        self.gpio.all_port_off()
+
     # Здесь мы считываем и возвращаем все, что ввел пользователь для проведения Измерений.
     def measurement_procedure_get_setting(self):
 
@@ -609,7 +617,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                                                 VcL, VcM, VcS, VdLM, VdS, Pmeas, pulse_length)
 
         # Явно выключаем все порты (на всякий случай, они и так должны быть выключены)
-        self.gpio.all_port_off()
+        self.all_port_off()
         # Запускаем измерения.
         self.measurement_procedure.start_measurements()
         # Делаем вывод отчета доступным.
@@ -646,7 +654,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.calibration_procedure.set_settings(cuvette, number_of_measurements, sample_volume, Pmeas)
 
         # Явно выключаем все порты (на всякий случай, они и так должны быть выключены)
-        self.gpio.all_port_off()
+        self.all_port_off()
         # Запускаем измерения.
         self.calibration_procedure.start_calibrations()
 
@@ -741,7 +749,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Перехватываем закрытие программы и явно выключаем все связанные с RaspberryPi модули и измерения.
     def closeEvent(self, event):
         # Выключаем все порты
-        self.gpio.all_port_off()
+        self.all_port_off()
         # Сбрасываем установки GPIO
         self.gpio.clean_up()
         # Выключаем измерение давления для Ручного управления
@@ -1282,6 +1290,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     def calibration_save(self):
         Vc = self.calibration_procedure.c_Vc
         Vd = self.calibration_procedure.c_Vd
+        cuv = self.t2_gID_cmd1.currentIndex()
         if self.t2_gID_cmd1.currentIndex() == Сuvette.Large.value:
             self.config.set_ini('Measurement', 'VcL', toFixed(Vc, self.config.round))
             self.config.set_ini('Measurement', 'VdLM', toFixed(Vd, self.config.round))
@@ -1292,6 +1301,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.config.set_ini('Measurement', 'VcS', toFixed(Vc, self.config.round))
             self.config.set_ini('Measurement', 'VdS', toFixed(Vd, self.config.round))
         self.setup()
+        self.t2_gID_cmd1.setCurrentIndex(cuv)
         self.VcVd_download_and_display()
 
 
@@ -1415,7 +1425,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                     measurement_load[3][i]['density'],
                     measurement_load[3][i]['deviation']
                 )
-                if not measurement_load[3][i]['active']:
+                if measurement_load[3][i]['active'] is None:
+                    m.active = None
+                elif not measurement_load[3][i]['active']:
                     m.set_active_off()
                 self.measurement_procedure.measurements.append(m)
                 self.t1_tableMeasurement.add_measurement(m)
@@ -1453,7 +1465,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                     calibration_load[1][i]['ratio'],
                     calibration_load[1][i]['deviation']
                 )
-                if not calibration_load[1][i]['active']:
+                if calibration_load[1][i]['active'] is None:
+                    c.active = None
+                elif not calibration_load[1][i]['active']:
                     c.set_active_off()
                 self.calibration_procedure.calibrations.append(c)
                 self.t2_tableCalibration.add_calibration(c)

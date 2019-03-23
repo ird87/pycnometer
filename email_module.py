@@ -10,8 +10,11 @@ import smtplib
 def send(to, subject, body, attachment):
 
     try:
+        smpt_server = 'smtp.gmail.com'
+        email_adress = "pycnometer.00@gmail.com"
+        email_pass = "2p5BKuLNd9WbdiR"
+
         fromname = 'pycnometer'
-        fromemail = 'ird87.post.ru@gmail.com'
         message = MIMEMultipart()
         message["Subject"] = subject
         message["From"] = fromname
@@ -22,14 +25,15 @@ def send(to, subject, body, attachment):
         attachedfile = MIMEApplication(openedfile, _subtype = "pdf")
         attachedfile.add_header('content-disposition', 'attachment', filename = attachment)
         message.attach(attachedfile)
+        message.attach(MIMEText(body, 'plain'))
 
 
-        mailserver = smtplib.SMTP('smtp.gmail.com', 587)
+        mailserver = smtplib.SMTP(smpt_server, 587)
         mailserver.ehlo()
         mailserver.starttls()
         mailserver.ehlo()  #again
-        mailserver.login('email', 'pass')
+        mailserver.login(email_adress, email_pass)
         mailserver.sendmail(fromname, to, message.as_string())
         mailserver.quit()
-    finally:
+    except Exception:
         print("Недоступен сервер SMPT")

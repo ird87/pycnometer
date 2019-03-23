@@ -89,60 +89,60 @@ class Configure(object):
         self.set_ports()
 
         # [[TestMode]]
-        self.testMode = self.try_getint_user_config('TestMode', 'testMode')
+        self.testMode = self.try_getint_user_config('TestMode', 'testMode', True)
 
     """Метод для назначения портам указанных в ini файле значений"""
     def set_ports(self):
         # [Ports]
-        self.p[0] = self.try_getint_user_config('Ports', 'p1')
-        self.p[1] = self.try_getint_user_config('Ports', 'p2')
-        self.p[2] = self.try_getint_user_config('Ports', 'p3')
-        self.p[3] = self.try_getint_user_config('Ports', 'p4')
-        self.p[4] = self.try_getint_user_config('Ports', 'p5')
+        self.p[0] = self.try_getint_user_config('Ports', 'p1', True)
+        self.p[1] = self.try_getint_user_config('Ports', 'p2', True)
+        self.p[2] = self.try_getint_user_config('Ports', 'p3', True)
+        self.p[3] = self.try_getint_user_config('Ports', 'p4', True)
+        self.p[4] = self.try_getint_user_config('Ports', 'p5', True)
 
     """Метод для назначения языка программы согласно ini файлу"""
     def set_language(self):
         # [[Language]]
-        self.language = self.try_get_user_config('Language', 'language')
+        self.language = self.try_get_user_config('Language', 'language', True)
 
     """Метод для загрузки данных из ini файла"""
     def set_measurement(self):
-        self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure'))
-        self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette')
-        self.version = self.try_get_user_config('Pycnometer', 'version')
-        self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi')
-        self.data_channel = self.try_getint_user_config('Pycnometer', 'data_channel') - 1
-        self.smq_now = self.try_getint_user_config('Measurement', 'smq_now')
+        self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure', True))
+        self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette', True)
+        self.version = self.try_get_user_config('Pycnometer', 'version', False)
+        self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi', False)
+        self.data_channel = self.try_getint_user_config('Pycnometer', 'data_channel', False) - 1
+        self.smq_now = self.try_getint_user_config('Measurement', 'smq_now', True)
         self.smq_list.clear()
-        self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list'))
-        self.VcL = self.try_getfloat_user_config('Measurement', 'VcL')
-        self.VcM = self.try_getfloat_user_config('Measurement', 'VcM')
-        self.VcS = self.try_getfloat_user_config('Measurement', 'VcS')
-        self.VdLM = self.try_getfloat_user_config('Measurement', 'VdLM')
-        self.VdS = self.try_getfloat_user_config('Measurement', 'VdS')
-        self.spi_t = self.try_getfloat_user_config('Measurement', 'spi_t')
+        self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list', False))
+        self.VcL = self.try_getfloat_user_config('Measurement', 'VcL', True)
+        self.VcM = self.try_getfloat_user_config('Measurement', 'VcM', True)
+        self.VcS = self.try_getfloat_user_config('Measurement', 'VcS', True)
+        self.VdLM = self.try_getfloat_user_config('Measurement', 'VdLM', True)
+        self.VdS = self.try_getfloat_user_config('Measurement', 'VdS', True)
+        self.spi_t = self.try_getfloat_user_config('Measurement', 'spi_t', True)
 
-        self.spi_max_speed_hz = self.try_getint_user_config('Measurement', 'spi_max_speed_hz')
-        self.pulse_length = self.try_getint_user_config('Measurement', 'pulse_length')
+        self.spi_max_speed_hz = self.try_getint_user_config('Measurement', 'spi_max_speed_hz', False)
+        self.pulse_length = self.try_getint_user_config('Measurement', 'pulse_length', True)
         self.Pmeas.clear()
-        self.Pmeas = json.loads(self.try_get_user_config('Measurement', 'Pmeas'))
-        self.pmeas_kPa_min = self.try_getfloat_user_config('Measurement', 'pmeas_kPa_min')
-        self.pmeas_kPa_max = self.try_getfloat_user_config('Measurement', 'pmeas_kPa_max')
-        self.pmeas_Bar_min = self.try_getfloat_user_config('Measurement', 'pmeas_Bar_min')
-        self.pmeas_Bar_max = self.try_getfloat_user_config('Measurement', 'pmeas_Bar_max')
-        self.pmeas_Psi_min = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_min')
-        self.pmeas_Psi_max = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_max')
+        self.Pmeas = json.loads(self.try_get_user_config('Measurement', 'Pmeas', True))
+        self.pmeas_kPa_min = self.try_getfloat_user_config('Measurement', 'pmeas_kPa_min', False)
+        self.pmeas_kPa_max = self.try_getfloat_user_config('Measurement', 'pmeas_kPa_max', False)
+        self.pmeas_Bar_min = self.try_getfloat_user_config('Measurement', 'pmeas_Bar_min', False)
+        self.pmeas_Bar_max = self.try_getfloat_user_config('Measurement', 'pmeas_Bar_max', False)
+        self.pmeas_Psi_min = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_min', False)
+        self.pmeas_Psi_max = self.try_getfloat_user_config('Measurement', 'pmeas_Psi_max', False)
         self.Pmeas_now = float(self.Pmeas[self.pressure.value])
-        self.periodicity_of_removal_of_sensor_reading = self.try_getfloat_user_config('ManualControl', 'periodicity_of_removal_of_sensor_reading')
-        self.leak_test_when_starting = self.try_getboolean_user_config('ManualControl', 'leak_test_when_starting')
-        self.report_measurement_table = self.try_getboolean_user_config('ReportSetup', 'report_measurement_table')
-        self.report_header = self.try_get_user_config('ReportSetup', 'report_header')
-        self.report_footer = self.try_get_user_config('ReportSetup', 'report_footer')
-        self.save_to_flash_drive = self.try_getboolean_user_config('SavingResult', 'save_to_flash_drive')
-        self.send_report_to_mail = self.try_getboolean_user_config('SavingResult', 'send_report_to_mail')
-        self.email_adress = self.try_get_user_config_hash('SavingResult', 'email_adress')
-        self.wifi_name = self.try_get_user_config_hash('SavingResult', 'wifi_name')
-        self.wifi_pass = self.try_get_user_config_hash('SavingResult', 'wifi_pass')
+        self.periodicity_of_removal_of_sensor_reading = self.try_getfloat_user_config('ManualControl', 'periodicity_of_removal_of_sensor_reading', False)
+        self.leak_test_when_starting = self.try_getboolean_user_config('ManualControl', 'leak_test_when_starting', True)
+        self.report_measurement_table = self.try_getboolean_user_config('ReportSetup', 'report_measurement_table', True )
+        self.report_header = self.try_get_user_config('ReportSetup', 'report_header', True)
+        self.report_footer = self.try_get_user_config('ReportSetup', 'report_footer', True)
+        self.save_to_flash_drive = self.try_getboolean_user_config('SavingResult', 'save_to_flash_drive', True)
+        self.send_report_to_mail = self.try_getboolean_user_config('SavingResult', 'send_report_to_mail', True)
+        self.email_adress = self.try_get_user_config_hash('SavingResult', 'email_adress', True)
+        self.wifi_name = self.try_get_user_config_hash('SavingResult', 'wifi_name', True)
+        self.wifi_pass = self.try_get_user_config_hash('SavingResult', 'wifi_pass', True)
 
 
     """Метод возвращает номера портов для работы"""
@@ -196,50 +196,50 @@ class Configure(object):
         # if not self.is_test_mode():
         #     self.languages = os.listdir(os.getcwd() + '/Language/')
             
-    def try_get_user_config(self, section, option):
+    def try_get_user_config(self, section, option, user_config):
         self.config.read('Configure.ini')
         result = self.config.get(section, option)
-        if os.path.isfile('Configure_user.ini'):
+        if os.path.isfile('Configure_user.ini') and user_config:
             self.config_user.read('Configure_user.ini')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.get(section, option)
         return result
 
-    def try_getint_user_config(self, section, option):
+    def try_getint_user_config(self, section, option, user_config):
         self.config.read('Configure.ini')
         result = self.config.getint(section, option)
-        if os.path.isfile('Configure_user.ini'):
+        if os.path.isfile('Configure_user.ini') and user_config:
             self.config_user.read('Configure_user.ini')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getint(section, option)
         return result
 
-    def try_getfloat_user_config(self, section, option):
+    def try_getfloat_user_config(self, section, option, user_config):
         self.config.read('Configure.ini')
         result = self.config.getfloat(section, option)
-        if os.path.isfile('Configure_user.ini'):
+        if os.path.isfile('Configure_user.ini') and user_config:
             self.config_user.read('Configure_user.ini')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getfloat(section, option)
         return result
 
-    def try_getboolean_user_config(self, section, option):
+    def try_getboolean_user_config(self, section, option, user_config):
         self.config.read('Configure.ini')
         result = self.config.getboolean(section, option)
-        if os.path.isfile('Configure_user.ini'):
+        if os.path.isfile('Configure_user.ini') and user_config:
             self.config_user.read('Configure_user.ini')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getboolean(section, option)
         return result
 
-    def try_get_user_config_hash(self, section, option):
+    def try_get_user_config_hash(self, section, option, user_config):
         self.config.read('Configure.ini')
         result = self.config.get(section, option)
-        if os.path.isfile('Configure_user.ini'):
+        if os.path.isfile('Configure_user.ini') and user_config:
             self.config_user.read('Configure_user.ini')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):

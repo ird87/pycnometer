@@ -250,7 +250,7 @@ class CalibrationProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
         # выключаем все порты
-        self.gpio.all_port_off()
+        self.main.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
         self.unblock_other_tabs.emit()
         # Разблокируем кнопки, поля и работу с таблицей на текущей вкладке.
@@ -576,29 +576,30 @@ class CalibrationProcedure(object):
         for i in range(num):
             # Для P  index = i
             index = i
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P[{0}].....'.format(i))
-            try:
-                # Рассчитываем отклонение для P
-                deviation1 = (medium_ratio1 - self.calibrations[index].ratio) / medium_ratio1 * 100
-            except ArithmeticError:
-                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     'Division by zero when calculating deviation1, '
-                                     'denominator: medium_ratio1={0}'.format(medium_ratio1))
-                deviation1 = 0
-            if self.calibrations[index].active:
-                self.calibrations[index].deviation = deviation1
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : deviation = {2}'.format('P', i, deviation1))
-            if not self.calibrations[index].active:
-                self.calibrations[index].deviation = ''
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : this calibration is not active'.format('P', i))
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P[{0}].....Done'.format(i))
-            # Добавляем в таблицу в столбец для отклонений
-            self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
-            counter2 += 1
+            if not self.calibrations[index].active is None:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                                 'for P[{0}].....'.format(i))
+                try:
+                    # Рассчитываем отклонение для P
+                    deviation1 = (medium_ratio1 - self.calibrations[index].ratio) / medium_ratio1 * 100
+                except ArithmeticError:
+                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                         'Division by zero when calculating deviation1, '
+                                         'denominator: medium_ratio1={0}'.format(medium_ratio1))
+                    deviation1 = 0
+                if self.calibrations[index].active:
+                    self.calibrations[index].deviation = deviation1
+                    self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                               'Measured{0} {1} : deviation = {2}'.format('P', i, deviation1))
+                if not self.calibrations[index].active:
+                    self.calibrations[index].deviation = ''
+                    self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                               'Measured{0} {1} : this calibration is not active'.format('P', i))
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                                 'for P[{0}].....Done'.format(i))
+                # Добавляем в таблицу в столбец для отклонений
+                self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
+                counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P.....Done')
 
         # --------------------------------------------------------------------------------------------------------------
@@ -608,29 +609,30 @@ class CalibrationProcedure(object):
         for i in range(num):
             # Для P'  index = i + num
             index = i + num
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P\'[{0}].....'.format(i))
-            try:
-                # Рассчитываем отклонение для P'
-                deviation2 = (medium_ratio2 - self.calibrations[index].ratio) / medium_ratio2 * 100
-            except ArithmeticError:
-                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                     'Division by zero when calculating deviation2, '
-                                     'denominator: medium_ratio2={0}'.format(medium_ratio2))
-                deviation2 = 0
-            if self.calibrations[index].active:
-                self.calibrations[index].deviation = deviation2
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : deviation = {2}'.format('P\'', i, deviation2))
-            if not self.calibrations[index].active:
-                self.calibrations[index].deviation = ''
-                self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                           'Measured{0} {1} : this calibration is not active'.format('P\'', i))
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
-                                                                             'for P\'[{0}].....Done'.format(i))
-            # Добавляем в таблицу в столбец для отклонений
-            self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
-            counter2 += 1
+            if not self.calibrations[index].active is None:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                                 'for P\'[{0}].....'.format(i))
+                try:
+                    # Рассчитываем отклонение для P'
+                    deviation2 = (medium_ratio2 - self.calibrations[index].ratio) / medium_ratio2 * 100
+                except ArithmeticError:
+                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                         'Division by zero when calculating deviation2, '
+                                         'denominator: medium_ratio2={0}'.format(medium_ratio2))
+                    deviation2 = 0
+                if self.calibrations[index].active:
+                    self.calibrations[index].deviation = deviation2
+                    self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                               'Measured{0} {1} : deviation = {2}'.format('P\'', i, deviation2))
+                if not self.calibrations[index].active:
+                    self.calibrations[index].deviation = ''
+                    self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                               'Measured{0} {1} : this calibration is not active'.format('P\'', i))
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation '
+                                                                                 'for P\'[{0}].....Done'.format(i))
+                # Добавляем в таблицу в столбец для отклонений
+                self.table.add_item(self.calibrations[index].deviation, counter2, 5, self.calibrations[index].active)
+                counter2 += 1
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation deviation for ALL P\'.....Done')
 
         # --------------------------------------------------------------------------------------------------------------
@@ -951,7 +953,7 @@ class CalibrationProcedure(object):
     def update_calibration_file(self, section, val, s):
         if not self.result_file_reader.has_section(section):
             self.result_file_reader.add_section(section)
-        self.result_file_reader.set(section, val, s)
+        self.result_file_reader.set(section, val, str(s))
         with open(self.calibration_file + ".new", "w") as fh:
             self.result_file_reader.write(fh)
 
@@ -1057,7 +1059,7 @@ class CalibrationProcedure(object):
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'sensor_calibration..... ' + error.name + '.')
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'sensor_calibration..... ' + error.name + '.')
         # выключаем все порты
-        self.gpio.all_port_off()
+        self.main.all_port_off()
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'sensor_calibration interrupted')
         if error == Abort_Type.Pressure_below_required:
             self.fail_pressure_set.emit()
