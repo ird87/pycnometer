@@ -123,6 +123,7 @@ class Configure(object):
         self.spi_t = self.try_getfloat_user_config('Measurement', 'spi_t', True)
 
         self.spi_max_speed_hz = self.try_getint_user_config('Measurement', 'spi_max_speed_hz', False)
+        self.round = self.try_getint_user_config('Measurement', 'round', True)
         self.pulse_length = self.try_getint_user_config('Measurement', 'pulse_length', True)
         self.Pmeas.clear()
         self.Pmeas = json.loads(self.try_get_user_config('Measurement', 'Pmeas', True))

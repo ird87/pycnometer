@@ -393,6 +393,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         Pmeas_const = '[{0}, {1}, {2}]'.format(p_kPa, p_Bar, p_Psi)
         self.config.set_ini('Measurement', 'Pmeas', Pmeas_const)
+        self.config.set_ini('Measurement', 'round', self.config.round)
         self.config.set_ini('ManualControl', 'periodicity_of_removal_of_sensor_reading', self.t4_gMC_Edit1.text())
         self.config.set_ini('ManualControl', 'leak_test_when_starting', str(self.t4_gMC_chb1.isChecked()))
         self.config.set_ini('ReportSetup', 'report_measurement_table', str(self.t4_gRS_chb1.isChecked()))

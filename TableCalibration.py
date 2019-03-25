@@ -78,8 +78,7 @@ class UiTableCalibration(object):
         item5.setTextAlignment(QtCore.Qt.AlignCenter)
         item5.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 4, item5)
-        # item6 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.deviation, self.round))
-        item6 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.deviation, 5))
+        item6 = QtWidgets.QTableWidgetItem(toFixed(_calibrations.deviation, self.round))
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
         item6.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 5, item6)
@@ -384,8 +383,7 @@ class UiTableCalibration(object):
 
     def add_item(self, x, row, column, active):
         from Main import toFixed
-        # item = QtWidgets.QTableWidgetItem(toFixed(x, self.round))
-        item = QtWidgets.QTableWidgetItem(toFixed(x, 5))
+        item = QtWidgets.QTableWidgetItem(toFixed(x, self.round))
         item.setTextAlignment(Qt.AlignCenter)
         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(row, column, item)
