@@ -7,8 +7,6 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QLineEdit
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -29,6 +27,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tabPycnometer = QtWidgets.QTabWidget(self.centralwidget)
+        self.tabPycnometer.setEnabled(True)
         self.tabPycnometer.setGeometry(QtCore.QRect(0, 0, 1280, 680))
         self.tabPycnometer.setMinimumSize(QtCore.QSize(1280, 680))
         self.tabPycnometer.setMaximumSize(QtCore.QSize(1280, 680))
@@ -880,6 +879,13 @@ class Ui_MainWindow(object):
         self.t3_lbl_Vacuum.setAutoFillBackground(True)
         self.t3_lbl_Vacuum.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.t3_lbl_Vacuum.setObjectName("t3_lbl_Vacuum")
+        self.no_small = QtWidgets.QLabel(self.t3)
+        self.no_small.setGeometry(QtCore.QRect(450, 270, 111, 81))
+        self.no_small.setText("")
+        self.no_small.setTextFormat(QtCore.Qt.PlainText)
+        self.no_small.setPixmap(QtGui.QPixmap("attachment/no small.png"))
+        self.no_small.setScaledContents(False)
+        self.no_small.setObjectName("no_small")
         self.t3_lblFon.raise_()
         self.t3_lblPycnometerScheme.raise_()
         self.t3_checkValve1.raise_()
@@ -897,6 +903,7 @@ class Ui_MainWindow(object):
         self.t3_lbl_Helium.raise_()
         self.t3_lbl_Atmosphere.raise_()
         self.t3_lbl_Vacuum.raise_()
+        self.no_small.raise_()
         self.tabPycnometer.addTab(self.t3, "")
         self.t4 = QtWidgets.QWidget()
         self.t4.setObjectName("t4")
@@ -1053,7 +1060,6 @@ class Ui_MainWindow(object):
         self.t4_gSR_Edit3.setGeometry(QtCore.QRect(142, 310, 231, 20))
         self.t4_gSR_Edit3.setAlignment(QtCore.Qt.AlignCenter)
         self.t4_gSR_Edit3.setObjectName("t4_gSR_Edit3")
-        self.t4_gSR_Edit3.setEchoMode(QLineEdit.Password)
         self.t4_gSR_lbl3 = QtWidgets.QLabel(self.t4_groupSavingResult)
         self.t4_gSR_lbl3.setGeometry(QtCore.QRect(10, 310, 121, 25))
         font = QtGui.QFont()
@@ -1096,6 +1102,9 @@ class Ui_MainWindow(object):
         self.t4_gSR_wifi.setScaledContents(True)
         self.t4_gSR_wifi.setObjectName("t4_gSR_wifi")
         self.tabPycnometer.addTab(self.t4, "")
+        self.t5 = QtWidgets.QWidget()
+        self.t5.setObjectName("t5")
+        self.tabPycnometer.addTab(self.t5, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 21))
@@ -1235,6 +1244,7 @@ class Ui_MainWindow(object):
         self.t4_gSR_button2.setText(_translate("MainWindow", "t4_gSR_button2"))
         self.t4_gSR_lbl4.setText(_translate("MainWindow", "t4_gSR_lbl4"))
         self.tabPycnometer.setTabText(self.tabPycnometer.indexOf(self.t4), _translate("MainWindow", "t4"))
+        self.tabPycnometer.setTabText(self.tabPycnometer.indexOf(self.t5), _translate("MainWindow", "t5"))
         self.menumenu1.setTitle(_translate("MainWindow", "menu1"))
         self.menumenu2.setTitle(_translate("MainWindow", "menu2"))
         self.menumenu3.setTitle(_translate("MainWindow", "menu3"))

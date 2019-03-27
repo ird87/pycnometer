@@ -42,6 +42,9 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabPycnometer">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -2534,6 +2537,28 @@
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
+     <widget class="QLabel" name="no_small">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>270</y>
+        <width>111</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
+      </property>
+      <property name="pixmap">
+       <pixmap>attachment/no small.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+     </widget>
      <zorder>t3_lblFon</zorder>
      <zorder>t3_lblPycnometerScheme</zorder>
      <zorder>t3_checkValve1</zorder>
@@ -2551,6 +2576,7 @@
      <zorder>t3_lbl_Helium</zorder>
      <zorder>t3_lbl_Atmosphere</zorder>
      <zorder>t3_lbl_Vacuum</zorder>
+     <zorder>no_small</zorder>
     </widget>
     <widget class="QWidget" name="t4">
      <attribute name="title">
@@ -3203,6 +3229,11 @@
        </property>
       </widget>
      </widget>
+    </widget>
+    <widget class="QWidget" name="t5">
+     <attribute name="title">
+      <string>t5</string>
+     </attribute>
     </widget>
    </widget>
   </widget>

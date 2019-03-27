@@ -111,6 +111,8 @@ class CalibrationProcedure(object):
         self.result_file_reader = configparser.ConfigParser()
         self.abort_procedure = self.main.abort_procedure
         self.abort_procedure_on = False
+        self.time_of_calibration = None
+        self.data_of_calibration = None
 
     """Метод для проверки. Возвращает True, если калибровка запущена иначе False"""
     def is_test_on(self):
@@ -146,6 +148,8 @@ class CalibrationProcedure(object):
     def set_settings(self, _cuvette, _number_of_measurements, _sample_volume, _Pmeas):
 
         # self.test_on и abort_procedure_on должены быть False перед началом калибровки
+        self.time_of_calibration = time.strftime("%H:%M:%S", time.localtime())
+        self.data_of_calibration = time.strftime("%Y-%m-%d", time.localtime())
         self.test_on = False
         self.abort_procedure_on = False
         self.cuvette = _cuvette
@@ -162,7 +166,8 @@ class CalibrationProcedure(object):
         txt = 'The following calibration settings are set:\nCuvette = ' + str(self.cuvette) + '\nNumber of measurements = ' + \
               str(self.number_of_measurements) + '\nSample volume = ' + str(self.sample_volume) + '\nVcL = ' + \
               str(self.VcL) + '\nVcM = ' + str(self.VcM) + '\nVcS = ' + str(self.VcS) + '\nVdLM = ' + str(self.VdLM) + \
-              '\nVdS = ' + str(self.VdS) + '\nPmeas = ' + str(self.Pmeas)
+              '\nVdS = ' + str(self.VdS) + '\nPmeas = ' + str(self.Pmeas) + '\nData = ' + str(self.data_of_calibration) \
+              + '\nTime = ' + str(self.time_of_calibration)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, txt)
 
     """Метод для запуска отдельного потока калибровки прибора"""
@@ -890,7 +895,7 @@ class CalibrationProcedure(object):
         while find_name:
             number += 1
             # для нормального режима (Linux) нужны такие команды:
-            self.calibration_file = os.path.join(os.getcwd(), 'Results', 'Calibrations', 'Calibration' + ' - ' + self.get_today_date() + ' - ' + str(
+            self.calibration_file = os.path.join(os.getcwd(), 'Results', 'Calibrations', 'Calibration' + ' - ' + self.data_of_calibration + ' - ' + str(
                 number) + '.result')
             find_name = os.path.isfile(self.calibration_file)
         self.result_file_reader.read(self.calibration_file, encoding = 'WINDOWS-1251')
@@ -936,6 +941,9 @@ class CalibrationProcedure(object):
         self.update_calibration_file('SourceData', 'cuvette', str(self.cuvette.value))
         self.update_calibration_file('SourceData', 'number_of_measurements', str(self.number_of_measurements))
         self.update_calibration_file('SourceData', 'sample', str(self.sample_volume))
+        self.update_calibration_file('SourceData', 'data', self.data_of_calibration)
+        self.update_calibration_file('SourceData', 'time', self.time_of_calibration)
+
         for i in range(len(self.calibrations)):
             self.update_calibration_file('Calibration-' + str(i), 'P', self.calibrations[i].measurement)
             self.update_calibration_file('Calibration-' + str(i), 'p0', str(self.calibrations[i].p0))
@@ -959,12 +967,13 @@ class CalibrationProcedure(object):
 
     """Метод для загрузки калибровки из файла"""
     def load_calibration_result(self):
-        if self.is_test_mode():
-            # для тестового режима (Windows) нужны такие команды:
-            self.result_file_reader.read(self.calibration_file)
-        if not self.is_test_mode():
-            # для нормального режима (Linux) нужны такие команды:
-            self.result_file_reader.read(self.calibration_file, encoding='utf-8')
+        self.result_file_reader.read(self.calibration_file, encoding='utf-8')
+        # if self.is_test_mode():
+        #     # для тестового режима (Windows) нужны такие команды:
+        #     self.result_file_reader.read(self.calibration_file)
+        # if not self.is_test_mode():
+        #     # для нормального режима (Linux) нужны такие команды:
+        #     self.result_file_reader.read(self.calibration_file, encoding='utf-8')
 
         # [SourceData]
         cuvette_type = self.try_load_int('SourceData', 'cuvette')
@@ -974,10 +983,14 @@ class CalibrationProcedure(object):
             self.cuvette = Сuvette(cuvette_type)
         self.number_of_measurements = self.try_load_int('SourceData', 'number_of_measurements')
         self.sample_volume = self.try_load_float('SourceData', 'sample')
+        self.data_of_calibration = self.try_load_string('SourceData', 'data')
+        self.time_of_calibration = self.try_load_string('SourceData', 'time')
         source_data = {
             'cuvette': self.cuvette,
             'number_of_measurements': self.number_of_measurements,
-            'sample': self.sample_volume
+            'sample': self.sample_volume,
+            'data': self.data_of_calibration,
+            'time': self.time_of_calibration
         }
 
         calibrations = []

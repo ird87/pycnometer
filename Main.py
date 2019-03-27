@@ -283,6 +283,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
+        self.menubar.setVisible(False)
         self.sensor_calibration = False
         # нам надо откалибровать датчик.
         self.calibration_procedure.start_russian_sensor_calibration()
@@ -334,10 +335,15 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             # Если мы открыли вкладку Калибровка
             if self.tabPycnometer.currentIndex() == 1:
                 self.VcVd_download_and_display()
+        def exit_check():
+            # Если мы открыли вкладку Калибровка
+            if self.tabPycnometer.currentIndex() == 4:
+                self.closeEvent(None)
         # Вызов внутренних функций метода, расписанных выше.
         manual_control_check()
         options_check()
         calibration_check()
+        exit_check()
 
     # Загрузить и отобразить Vc и Vd из конфига.
     def VcVd_download_and_display(self):
@@ -354,6 +360,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Применяем изменения в настройках программы.
     def option_appy(self):
         # Сначала мы записываем все изменения внутрь файла config.ini
+        self.config.set_ini('Pycnometer', 'model', self.config.model)
         self.config.set_ini('Pycnometer', 'version', self.config.version)
         self.config.set_ini('Pycnometer', 'small_cuvette', str(self.config.small_cuvette))
         self.config.set_ini('Pycnometer', 'module_spi', self.config.module_spi)
@@ -684,6 +691,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gMI_Edit4.setEnabled(False)
         self.actionmenu4_command1.setEnabled(False)
         self.actionmenu1_command1.setEnabled(False)
+        self.tabPycnometer.setTabEnabled(4, False)
         self.t1_tableMeasurement.popup_menu_enable = False
 
     # Разблокируем кнопки на вкладке измерений
@@ -706,6 +714,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t1_gMI_Edit4.setEnabled(True)
         self.actionmenu4_command1.setEnabled(True)
         self.actionmenu1_command1.setEnabled(True)
+        self.tabPycnometer.setTabEnabled(4, True)
         self.t1_tableMeasurement.popup_menu_enable = True
 
     # Блокируем кнопки на вкладке измерений
@@ -719,6 +728,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gID_button3.setEnabled(False)
         self.t2_gID_button4.setEnabled(True)
         self.actionmenu1_command1.setEnabled(False)
+        self.tabPycnometer.setTabEnabled(4, False)
         self.t2_tableCalibration.popup_menu_enable = False
 
     def unblock_userinterface_calibration(self):
@@ -731,6 +741,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gID_button3.setEnabled(True)
         self.t2_gID_button4.setEnabled(False)
         self.actionmenu1_command1.setEnabled(True)
+        self.tabPycnometer.setTabEnabled(4, True)
         self.t2_tableCalibration.popup_menu_enable = True
 
     # Блокируем остальные вкладки
@@ -809,6 +820,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.tabPycnometer.setTabText(self.tabPycnometer.indexOf(self.t2), self.languages.t2)
         self.tabPycnometer.setTabText(self.tabPycnometer.indexOf(self.t3), self.languages.t3)
         self.tabPycnometer.setTabText(self.tabPycnometer.indexOf(self.t4), self.languages.t4)
+        self.tabPycnometer.setTabText(self.tabPycnometer.indexOf(self.t5), self.languages.t5)
 
         # [InputMeasurement]
         input_measurement_header = []
@@ -897,6 +909,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             [self.languages.t2_gID_cmd1_1, self.languages.t2_gID_cmd1_2])
         if self.config.small_cuvette:
             self.t2_gID_cmd1.addItem(self.languages.t2_gID_cmd1_3)
+            self.no_small.setVisible(False)
 
         self.t2_gID_button1.setText(self.languages.t2_gID_button1)
         self.t2_gID_button2.setText(self.languages.t2_gID_button2)

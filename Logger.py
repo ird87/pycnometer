@@ -25,7 +25,7 @@ class Logger(object):
         self.type = _type
         self.config = config
         self.logger = logging.getLogger("exampleApp")
-        self.now = datetime.datetime.utcnow()
+        self.now = datetime.datetime.now()
         self.log_name = ''
         self.fh = ''
 

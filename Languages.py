@@ -21,6 +21,8 @@ class Languages(object):
         self.t1 = ''
         self.t2 = ''
         self.t3 = ''
+        self.t4 = ''
+        self.t5 = ''
 
         # [InputMeasurement]
         self.Edit_InputMeasurement = []
@@ -208,6 +210,7 @@ class Languages(object):
         self.t2 = self.get_string('MAIN', 't2')
         self.t3 = self.get_string('MAIN', 't3')
         self.t4 = self.get_string('MAIN', 't4')
+        self.t5 = self.get_string('MAIN', 't5')
 
         # [InputMeasurement]
         self.Edit_InputMeasurement.clear()

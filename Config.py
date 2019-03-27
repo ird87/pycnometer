@@ -43,7 +43,7 @@ class Configure(object):
     def __init__(self):
         self.p = [0, 0, 0, 0, 0]                    # Массив для записи номеров портов
         self.config = configparser.ConfigParser()   # Создаем экземпляр configparser
-        self.config.read('Configure.ini')           # Указываем файл для считывания данных
+        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')           # Указываем файл для считывания данных
         self.config_user = configparser.ConfigParser()   # Создаем экземпляр configparser
         # Fernet.generate_key()
         key = b'nRDnYgvD1i727JwjmwE_SRn30ktYZeLHIHuVPxo_tSw='
@@ -51,6 +51,7 @@ class Configure(object):
         self.small_cuvette = False
         self.language = ''
         self.version = ''
+        self.model = ''
         self.round = 3
         self.pressure = Pressure.kPa
         self.smq_now = 0
@@ -109,6 +110,7 @@ class Configure(object):
     def set_measurement(self):
         self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure', True))
         self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette', True)
+        self.model = self.try_get_user_config('Pycnometer', 'model', True)
         self.version = self.try_get_user_config('Pycnometer', 'version', False)
         self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi', False)
         self.data_channel = self.try_getint_user_config('Pycnometer', 'data_channel', False) - 1
@@ -163,7 +165,7 @@ class Configure(object):
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini(self, section, val, s):
-        self.config_user.read('Configure_user.ini.new')
+        self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
         self.config_user.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
             self.config_user.write(fh)
@@ -177,7 +179,7 @@ class Configure(object):
     """Метод для сохранения измененных настроек в файл"""
     def set_ini_hash(self, section, val, s):
         s = (self.crypting(s)).decode('utf-8')
-        self.config_user.read('Configure_user.ini.new')
+        self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
         self.config_user.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
             self.config_user.write(fh)
@@ -198,50 +200,50 @@ class Configure(object):
         #     self.languages = os.listdir(os.getcwd() + '/Language/')
             
     def try_get_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini')
+        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
         result = self.config.get(section, option)
         if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini')
+            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.get(section, option)
         return result
 
     def try_getint_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini')
+        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
         result = self.config.getint(section, option)
         if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini')
+            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getint(section, option)
         return result
 
     def try_getfloat_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini')
+        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
         result = self.config.getfloat(section, option)
         if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini')
+            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getfloat(section, option)
         return result
 
     def try_getboolean_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini')
+        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
         result = self.config.getboolean(section, option)
         if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini')
+            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getboolean(section, option)
         return result
 
     def try_get_user_config_hash(self, section, option, user_config):
-        self.config.read('Configure.ini')
+        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
         result = self.config.get(section, option)
         if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini')
+            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.get(section, option)
