@@ -209,7 +209,7 @@ class SPI(object):
 
         for i in range(len(t)):
             txt += "\tT{0}={1}".format(i, t[i])
-        handle = open(file, "w")
+        handle = open(file, "a")
         handle.write(txt)
         handle.close()
 
