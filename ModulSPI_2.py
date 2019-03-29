@@ -95,6 +95,14 @@ class SPI(object):
         self.message = self.main.set_pressure_message
         self.correct_data = 0
 
+
+        self.file = os.path.join(os.getcwd(), "temperature.txt")
+        if os.path.isfile(self.file):
+            os.remove(self.file)
+        handle = open(self.file, "w")
+        handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
+        handle.close()
+
     def set_correct_data(self, x):
         self.correct_data = x
 
@@ -202,16 +210,12 @@ class SPI(object):
         return data
 
     def print_t(self, p, t):
-        file = os.path.join(os.getcwd(), "temperature.txt")
-        if os.path.isfile(file):
-            os.remove(file)
+
         txt = "\n{0} -> P={1}".format(time.strftime("%H:%M:%S", time.localtime()), p)
-        handle = open(file, "w")
-        handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
-        handle.close()
+
         for i in range(len(t)):
             txt += "\tT{0}={1}".format(i, t[i])
-        handle = open(file, "a+")
+        handle = open(self.file, "a+")
         handle.write(txt)
         handle.close()
 
