@@ -170,10 +170,12 @@ class SPI(object):
         data_channels = []
         # Канал, измеряющий давление всегда: [0]
         data_channels.append(CH_SEQUENCE[self.p_channel])
+        data.append(0)
         # Теперь добавим каналы для температуры, если они есть.
         if len(self.t_channels) > 0:
             for t_channel in self.t_channels:
                 data_channels.append(CH_SEQUENCE[t_channel])
+                data.append(0)
 
         # делаем цикл по требуемому количеству замеров согласно config.ini
         for i in range(self.smq_now):
