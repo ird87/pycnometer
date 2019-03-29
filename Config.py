@@ -116,7 +116,7 @@ class Configure(object):
         self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi', False)
         self.data_channel = self.try_getint_user_config('Pycnometer', 'data_channel', False)
         self.t_channels.clear()
-        self.t_channels = json.loads(self.try_get_user_config('Pycnometer', 't_channels', False))
+        self.t_channels = json.loads(self.try_get_user_config('Pycnometer', 't_channels', True))
         self.smq_now = self.try_getint_user_config('Measurement', 'smq_now', True)
         self.smq_list.clear()
         self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list', False))

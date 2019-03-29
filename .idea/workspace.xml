@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configure.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Configure.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModulSPI_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/ModulSPI_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModulSPItest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ModulSPItest.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ModulSPI_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="222" column="13" lean-forward="true" selection-start-line="222" selection-start-column="13" selection-end-line="222" selection-end-column="24" />
+            <state relative-caret-position="238">
+              <caret line="226" column="28" lean-forward="true" selection-start-line="226" selection-start-column="28" selection-end-line="226" selection-end-column="28" />
               <folding>
                 <element signature="e#59#73#0" expanded="true" />
               </folding>
@@ -53,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1972">
-              <caret line="116" column="92" lean-forward="true" selection-start-line="116" selection-start-column="92" selection-end-line="116" selection-end-column="92" />
+            <state relative-caret-position="221">
+              <caret line="118" column="94" selection-start-line="118" selection-start-column="94" selection-end-line="118" selection-end-column="94" />
               <folding>
                 <element signature="e#77#96#0" expanded="true" />
               </folding>
@@ -138,8 +133,8 @@
       <find>read</find>
       <find>smq_now</find>
       <find>set_pressure_message</find>
-      <find>read_channel</find>
       <find>set_pressure</find>
+      <find>read_channel</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -208,11 +203,11 @@
         <option value="$PROJECT_DIR$/Reports.py" />
         <option value="$PROJECT_DIR$/Configure_user.ini" />
         <option value="$PROJECT_DIR$/MeasurementProcedure.py" />
-        <option value="$PROJECT_DIR$/Config.py" />
         <option value="$PROJECT_DIR$/Configure.ini" />
         <option value="$PROJECT_DIR$/ModulSPI_2.py" />
         <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/ModulSPItest.py" />
+        <option value="$PROJECT_DIR$/Config.py" />
       </list>
     </option>
   </component>
@@ -769,16 +764,6 @@
     <entry file="file://$PROJECT_DIR$/Reports.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1972">
-          <caret line="116" column="92" lean-forward="true" selection-start-line="116" selection-start-column="92" selection-end-line="116" selection-end-column="92" />
-          <folding>
-            <element signature="e#77#96#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Languages.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
@@ -828,10 +813,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ModulSPI_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="222" column="13" lean-forward="true" selection-start-line="222" selection-start-column="13" selection-end-line="222" selection-end-column="24" />
+        <state relative-caret-position="238">
+          <caret line="226" column="28" lean-forward="true" selection-start-line="226" selection-start-column="28" selection-end-line="226" selection-end-column="28" />
           <folding>
             <element signature="e#59#73#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="118" column="94" selection-start-line="118" selection-start-column="94" selection-end-line="118" selection-end-column="94" />
+          <folding>
+            <element signature="e#77#96#0" expanded="true" />
           </folding>
         </state>
       </provider>
