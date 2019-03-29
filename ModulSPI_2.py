@@ -206,10 +206,12 @@ class SPI(object):
         if os.path.isfile(file):
             os.remove(file)
         txt = "\n{0} -> P={1}".format(time.strftime("%H:%M:%S", time.localtime()), p)
-
+        handle = open(file, "w")
+        handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
+        handle.close()
         for i in range(len(t)):
             txt += "\tT{0}={1}".format(i, t[i])
-        handle = open(file, "a")
+        handle = open(file, "a+")
         handle.write(txt)
         handle.close()
 
