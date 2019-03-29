@@ -1176,7 +1176,7 @@ class CalibrationProcedure(object):
         self.check_for_interruption()
         # Замеряем дата с датчика
         self.check_for_interruption()
-        data_correction = self.spi.read_channel() - 0.167
+        data_correction = self.spi.read_channel()[0] - 0.167
         self.spi.set_correct_data(data_correction)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'data_correction = {0}'.format(data_correction))
         self.check_for_interruption()
