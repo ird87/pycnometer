@@ -985,6 +985,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     # Вывод двнных теста давления, вызывается через сигнал.
     def set_pressure(self, p):
+        if p<0:
+            p=0
         self.t3_lblPressure2.setText(toFixed(p, self.config.round))
 
     # При любом вводе данных на форму Измерения или форму Калибровки мы проверяем можно ли сделать кнопки для начала
