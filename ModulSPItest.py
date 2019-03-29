@@ -101,12 +101,10 @@ class SPI(object):
                                    '\nself.t = {1}\nself.smq_now  = {2}'.format(str(self.spi_max_speed_hz),
                                                                                 str(self.t), str(self.smq_now)))
         while self.test_on:
-            # получить данные с датчика
-            result = self.read_channel()
-            # рассчитать на их основе давление сразу во всех единицах измерения
-            p = self.calc_pressure(result)
+            # получить давление
+            p = self.get_pressure()
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Pressure = {0}Pa\t{1}Bar\t{2}psi'.format(str(p[0]), str(p[1]), str(p[2])))
+                                       'Pressure = {0}'.format(p))
             # отправляем сообщение о том, что давление рассчитано и его можно выводить в форму
             self.message.emit(p)
             # ожидание в соответсвии с config.ini
@@ -147,7 +145,7 @@ class SPI(object):
         return [p1, p2, p3]
 
     """Метод для получения давления с датчика"""
-    def get_pressure(self, p_num):
+    def get_pressure(self, p_num = "p2"):
         # вместо данных с датчика мы их тут наигрываем через рандом
         data = 0
         p_num1 = 0

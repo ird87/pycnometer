@@ -68,7 +68,14 @@ class SPI(object):
         self.config = self.main.config
         self.t = 0
         self.const_data = 6300000
-        self.channel = self.config.data_channel
+        self.p_channel = self.config.data_channel-1
+        # Заведем переменную для массива каналов, измеряющих температуру.
+        self.t_channels = []
+        # Переберем каналы из настроек и добавим их в переменную.
+        for t_channel in self.config.t_channels:
+            #  номер канала должен быть между 1 и 8 и он не должен повторяться.
+            if 1 <= t_channel <= 8 and not (t_channel-1) in self.t_channels:
+                self.t_channels.append(t_channel-1)
 
         ### STEP 1: Initialise ADC object using default configuration:
         # (Note1: See ADS1256_default_config.py, see ADS1256 datasheet)
@@ -145,12 +152,10 @@ class SPI(object):
                                    'Pressure measurement for Manual control started\n'
                                    'self.t = {0}\nself.smq_now  = {1}'.format(str(self.t), str(self.smq_now)))
         while self.test_on:
-            # получить данные с датчика
-            result = self.read_channel()-self.correct_data
-            # рассчитать на их основе давление сразу во всех единицах измерения
-            p = self.calc_pressure(result)
+            # получить давление
+            p = self.get_pressure()
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Pressure = {0}Pa\t{1}Bar\t{2}psi'.format(str(p[0]), str(p[1]), str(p[2])))
+                                       'Pressure = {0}'.format(p))
             # отправляем сообщение о том, что давление рассчитано и его можно выводить в форму
             self.message.emit(p)
             # ожидание в соответсвии с config.ini
@@ -161,49 +166,83 @@ class SPI(object):
     """Метод, где мы получаем данные с датчика"""
     def read_channel(self):
         # инициализируем под измерение переменную data
-        data = 0
-        data_channel=[]
-        data_channel.append(CH_SEQUENCE[self.channel])
+        data = []
+        data_channels = []
+        # Канал, измеряющий давление всегда: [0]
+        data_channels.append(CH_SEQUENCE[self.p_channel])
+        # Теперь добавим каналы для температуры, если они есть.
+        if len(self.t_channels) > 0:
+            for t_channel in self.t_channels:
+                data_channels.append(CH_SEQUENCE[t_channel])
+
         # делаем цикл по требуемому количеству замеров согласно config.ini
         for i in range(self.smq_now):
             # считываем данные с датчика
             ### STEP 3: Get data:
-            raw_channels = self.ads.read_sequence(data_channel)
-            data = data + raw_channels[0]
-            print("raw_channels: {0}". format(raw_channels))
-            # voltages = [i * self.ads.v_per_digit for i in raw_channels]
+            raw_channels = self.ads.read_sequence(data_channels)
+            for channel in range(len(raw_channels)):
+                data[channel] += raw_channels[channel]
+                # print("raw_channels: {0}". format(raw_channels))
+                # voltages = [i * self.ads.v_per_digit for i in raw_channels]
 
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
-        try:
-            data = data / self.smq_now
-        except ArithmeticError:
-            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
-                                 'Division by zero when calculating data, '
-                                 'denominator: self.smq_now = {0}'.format(str(self.smq_now)))
-            data = 0
+        for i in range(len(data)):
+            try:
+                data[i] = data[i] / self.smq_now
+            except ArithmeticError:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Division by zero when calculating data[{0}], '
+                                     'denominator: self.smq_now = {1}'.format(i, str(self.smq_now)))
+                data[i] = 0
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data..... Done.')
+
         return data
 
+    def print_t(self, p, t):
+        file = os.path.join(os.getcwd(), "temperature.txt")
+        if os.path.isfile(file):
+            os.remove(file)
+        txt = "\n{0} -> P={1}".format(time.strftime("%H:%M:%S", time.localtime()), p)
+
+        for i in range(len(t)):
+            txt += "\tT{0}={1}".format(i, t[i])
+        handle = open(file, "w")
+        handle.write(txt)
+        handle.close()
+
     """Метод рассчета давления на основание данных с датчика"""
-    def calc_pressure(self, data):
+    def calc_pressure(self, data_p):
         # считаем сразу в кПа, Бар и psi и заворачиваем в массив
-        p1 = self.getkPa(data)  # кПа
-        p2 = self.getBar(data)  # Бар
-        p3 = self.getPsi(data)  # psi
+        p1 = self.getkPa(data_p)  # кПа
+        p2 = self.getBar(data_p)  # Бар
+        p3 = self.getPsi(data_p)  # psi
         # Возвращаем массив
         return [p1, p2, p3]
 
+    def calc_temperature(self, data_t):
+        result = []
+        for _data_t in data_t:
+            t = _data_t * 1
+            result.append(t)
+        return result
+
     """Метод для получения давления с датчика"""
-    def get_pressure(self, crutch):
+    def get_pressure(self, crutch="p"):
         # получить данные с датчика
-        result = self.read_channel()-self.correct_data
+        data = self.read_channel()
+        result = data[0] - self.correct_data
 
         # рассчитать на их основе давление сразу во всех единицах измерения
-        p = self.calc_pressure(result)
+        _p = self.calc_pressure(result)
         # передаем давление в нужной единице измерения.
-        s = p[self.config.pressure.value]
-        return s
+        p = _p[self.config.pressure.value]
+        if len(self.t_channels) > 0:
+            data_t = data
+            data_t.pop(0)
+            t = self.calc_temperature(data_t)
+            self.print_t(p, t)
+        return p
 
     """Метод, который на основание измерения высчитывает давление в кПа"""
     def getkPa(self, data):

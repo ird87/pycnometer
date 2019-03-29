@@ -91,7 +91,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Вывод на вкладку "Калибровка" итогов калибровки
     calibration_results_message = PyQt5.QtCore.pyqtSignal()
     # Вывод на вкладку "Ручное управление" замера давления
-    set_pressure_message = PyQt5.QtCore.pyqtSignal(list)
+    set_pressure_message = PyQt5.QtCore.pyqtSignal(float)
     # Вывод на вкладку "Измерение" или "Калибровка" сообщение о неудачном наборе газа
     fail_pressure_set = PyQt5.QtCore.pyqtSignal()
     # Вывод на вкладку "Измерение" или "Калибровка" сообщение о слишком долгом ожидание баланса
@@ -364,6 +364,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini('Pycnometer', 'version', self.config.version)
         self.config.set_ini('Pycnometer', 'small_cuvette', str(self.config.small_cuvette))
         self.config.set_ini('Pycnometer', 'module_spi', self.config.module_spi)
+        self.config.set_ini('Pycnometer', 'data_channel', str(self.config.data_channel))
         # используемый язык
         self.config.set_ini('Language', 'language', self.t4_gIS_cmd1.currentText())
         # единица измерения давления
@@ -983,8 +984,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
 
     # Вывод двнных теста давления, вызывается через сигнал.
-    def set_pressure(self, s):
-        self.t3_lblPressure2.setText(toFixed(s[self.config.pressure.value], self.config.round))
+    def set_pressure(self, p):
+        self.t3_lblPressure2.setText(toFixed(p, self.config.round))
 
     # При любом вводе данных на форму Измерения или форму Калибровки мы проверяем можно ли сделать кнопки для начала
     # процедур активными (для этого должны быть заполнены все поля и заполненны корректно)
