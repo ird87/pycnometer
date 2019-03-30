@@ -2,8 +2,11 @@
 # coding=utf-8
 # Главный модуль программы.
 import inspect
+import ntpath
 import os
+import shutil
 import sys  # sys нужен для передачи argv в QApplication
+import time
 from sys import platform
 
 import MainWindow  # Это наш конвертированный файл дизайна
@@ -34,8 +37,9 @@ from Controller import Controller
 
 """Функция для отображенияtoFixed нужного количества знаков после '.'"""
 
+
 def toFixed(numObj, digits=0):
-    if numObj!= None and numObj != '':
+    if numObj != None and numObj != '':
         if isfloat(numObj):
             retVal = '{0:.{1}f}'.format(numObj, digits)
             return retVal
@@ -46,6 +50,8 @@ def toFixed(numObj, digits=0):
 
 
 """Функция проверки переменной на тип int"""
+
+
 def isint(s):
     try:
         int(s)
@@ -55,6 +61,8 @@ def isint(s):
 
 
 """Функция проверки переменной на тип float"""
+
+
 def isfloat(s):
     try:
         float(s)
@@ -62,8 +70,8 @@ def isfloat(s):
     except ValueError:
         return False
 
-def clickable(widget):
 
+def clickable(widget):
     class Filter(QObject):
         clicked = PyQt5.QtCore.pyqtSignal()
 
@@ -111,7 +119,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     block_userinterface_calibration_signal = PyQt5.QtCore.pyqtSignal()
     unblock_userinterface_calibration_signal = PyQt5.QtCore.pyqtSignal()
     unblock_t1_gM_button4_signal = PyQt5.QtCore.pyqtSignal()
-
 
     """Конструктор класса. Поля класса"""
 
@@ -170,7 +177,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.spi = SPI(self)
         else:
             from ModulGPIO import GPIO
-            if self.config.module_spi =="SPI2":
+            if self.config.module_spi == "SPI2":
                 from ModulSPI_2 import SPI
             else:
                 from ModulSPI import SPI
@@ -208,10 +215,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.progressbar_exit.connect(self.exit_progressbar, PyQt5.QtCore.Qt.QueuedConnection)
         self.block_other_tabs_signal.connect(self.block_other_tabs, PyQt5.QtCore.Qt.QueuedConnection)
         self.unblock_other_tabs_signal.connect(self.unblock_other_tabs, PyQt5.QtCore.Qt.QueuedConnection)
-        self.block_userinterface_measurement_signal.connect(self.block_userinterface_measurement, PyQt5.QtCore.Qt.QueuedConnection)
-        self.unblock_userinterface_measurement_signal.connect(self.unblock_userinterface_measurement, PyQt5.QtCore.Qt.QueuedConnection)
-        self.block_userinterface_calibration_signal.connect(self.block_userinterface_calibration, PyQt5.QtCore.Qt.QueuedConnection)
-        self.unblock_userinterface_calibration_signal.connect(self.unblock_userinterface_calibration, PyQt5.QtCore.Qt.QueuedConnection)
+        self.block_userinterface_measurement_signal.connect(self.block_userinterface_measurement,
+                                                            PyQt5.QtCore.Qt.QueuedConnection)
+        self.unblock_userinterface_measurement_signal.connect(self.unblock_userinterface_measurement,
+                                                              PyQt5.QtCore.Qt.QueuedConnection)
+        self.block_userinterface_calibration_signal.connect(self.block_userinterface_calibration,
+                                                            PyQt5.QtCore.Qt.QueuedConnection)
+        self.unblock_userinterface_calibration_signal.connect(self.unblock_userinterface_calibration,
+                                                              PyQt5.QtCore.Qt.QueuedConnection)
         self.unblock_t1_gM_button4_signal.connect(self.unblock_t1_gM_button4, PyQt5.QtCore.Qt.QueuedConnection)
 
         # создаем модуль Измерение и передаем туда ссылку на main.
@@ -242,51 +253,56 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_MS_Edit1.setValidator(self.onlyInt)  # Настройка.    Длинна импульса.
 
         # Подключаем к объектам интерфейса методы их обработки.
-        self.t1_gM_button1.clicked.connect(self.measurement_procedure_start)    # Измерение.    Начало измерений.
-        self.t1_gM_button2.clicked.connect(self.measurement_clear)              # Измерение.    Очистка измерений.
+        self.t1_gM_button1.clicked.connect(self.measurement_procedure_start)  # Измерение.    Начало измерений.
+        self.t1_gM_button2.clicked.connect(self.measurement_clear)  # Измерение.    Очистка измерений.
         self.t1_gM_button3.clicked.connect(self.measurement_file_manager_open)  # Измерение.    Окно загрузки файлов.
-        self.t1_gM_button4.clicked.connect(self.measurement_stop)               # Измерение.   Прервать измерение.
-        self.t1_gMI_Edit1.textChanged.connect(self.t1_gMI_Edit1_text_changed)   # Измерение.    Ввод Оператор.
-        self.t1_gMI_Edit2.textChanged.connect(self.t1_gMI_Edit2_text_changed)   # Измерение.    Ввод Организация.
-        self.t1_gMI_Edit3.textChanged.connect(self.t1_gMI_Edit3_text_changed)   # Измерение.    Ввод Образец.
-        self.t1_gMI_Edit4.textChanged.connect(self.t1_gMI_Edit4_text_changed)   # Измерение.    Ввод Партия/Серия.
+        self.t1_gM_button4.clicked.connect(self.measurement_stop)  # Измерение.   Прервать измерение.
+        self.t1_gMI_Edit1.textChanged.connect(self.t1_gMI_Edit1_text_changed)  # Измерение.    Ввод Оператор.
+        self.t1_gMI_Edit2.textChanged.connect(self.t1_gMI_Edit2_text_changed)  # Измерение.    Ввод Организация.
+        self.t1_gMI_Edit3.textChanged.connect(self.t1_gMI_Edit3_text_changed)  # Измерение.    Ввод Образец.
+        self.t1_gMI_Edit4.textChanged.connect(self.t1_gMI_Edit4_text_changed)  # Измерение.    Ввод Партия/Серия.
         # ------------------------------------------------------------------------------------------------------------
         # Хочу по двойному клику автозаполнение
-        clickable(self.t1_gMI_Edit1).connect(self.t1_gMI_Edit1_clicked)            # Измерение.    Ввод Оператор.
-        clickable(self.t1_gMI_Edit2).connect(self.t1_gMI_Edit2_clicked)            # Измерение.    Ввод Организация.
-        clickable(self.t1_gMI_Edit3).connect(self.t1_gMI_Edit3_clicked)            # Измерение.    Ввод Образец.
-        clickable(self.t1_gMI_Edit4).connect(self.t1_gMI_Edit4_clicked)            # Измерение.    Ввод Партия/Серия.
+        clickable(self.t1_gMI_Edit1).connect(self.t1_gMI_Edit1_clicked)  # Измерение.    Ввод Оператор.
+        clickable(self.t1_gMI_Edit2).connect(self.t1_gMI_Edit2_clicked)  # Измерение.    Ввод Организация.
+        clickable(self.t1_gMI_Edit3).connect(self.t1_gMI_Edit3_clicked)  # Измерение.    Ввод Образец.
+        clickable(self.t1_gMI_Edit4).connect(self.t1_gMI_Edit4_clicked)  # Измерение.    Ввод Партия/Серия.
         # ------------------------------------------------------------------------------------------------------------
-        self.t2_gCR_button1.clicked.connect(self.calibration_save)              # Калибровка.   Сохранить результат.
-        self.t1_gSP_Edit1.textChanged.connect(self.t1_gSP_Edit1_text_changed)   # Измерение.    Ввод времени подготовки.
-        self.t1_gM_Edit1.textChanged.connect(self.t1_gM_Edit1_text_changed)     # Измерение.    Ввод массы образца.
-        self.t1_gM_Edit2.textChanged.connect(self.t1_gM_Edit2_text_changed)     # Измерение.    Ввод количество измер.
-        self.t1_gM_Edit3.textChanged.connect(self.t1_gM_Edit3_text_changed)     # Измерение.    Ввод взять последних.
+        self.t2_gCR_button1.clicked.connect(self.calibration_save)  # Калибровка.   Сохранить результат.
+        self.t1_gSP_Edit1.textChanged.connect(self.t1_gSP_Edit1_text_changed)  # Измерение.    Ввод времени подготовки.
+        self.t1_gM_Edit1.textChanged.connect(self.t1_gM_Edit1_text_changed)  # Измерение.    Ввод массы образца.
+        self.t1_gM_Edit2.textChanged.connect(self.t1_gM_Edit2_text_changed)  # Измерение.    Ввод количество измер.
+        self.t1_gM_Edit3.textChanged.connect(self.t1_gM_Edit3_text_changed)  # Измерение.    Ввод взять последних.
         self.t2_gID_cmd1.currentIndexChanged.connect(self.t2_gID_cmd1_changed)  # Калибровка.   Выбор кюветы.
-        self.t2_gID_button1.clicked.connect(self.calibration_procedure_start)   # Калибровка.   Начало Калибровки.
-        self.t2_gID_button2.clicked.connect(self.calibration_clear)             # Калибровка.   Очистка калибровки.
-        self.t2_gID_button3.clicked.connect(self.calibration_file_manager_open) # Калибровка.   Окно загрузки файлов.
-        self.t2_gID_button4.clicked.connect(self.calibration_stop)              # Калибровка.   Прервать калибровку.
-        self.t2_gID_Edit1.textChanged.connect(self.t2_gID_Edit1_text_changed)   # Калибровка.   Ввод количество измер.
-        self.t2_gID_Edit2.textChanged.connect(self.t2_gID_Edit2_text_changed)   # Калибровка.   Ввод объема ст. образца.
-        self.t3_checkValve1.stateChanged.connect(self.on_off_port1)             # Ручное упр.   Изменение состояние К1.
-        self.t3_checkValve2.stateChanged.connect(self.on_off_port2)             # Ручное упр.   Изменение состояние К2.
-        self.t3_checkValve3.stateChanged.connect(self.on_off_port3)             # Ручное упр.   Изменение состояние К3.
-        self.t3_checkValve4.stateChanged.connect(self.on_off_port4)             # Ручное упр.   Изменение состояние К4.
-        self.t3_checkValve5.stateChanged.connect(self.on_off_port5)             # Ручное упр.   Изменение состояние К5.
-        self.t4_gIS_cmd1.currentIndexChanged.connect(self.changed_languare)     # Настройка.    Выбор языка.
-        self.t4_MS_Edit1.textChanged.connect(self.t4_MS_Edit1_text_changed)     # Настройка.    Длинна импульса.
-        self.t4_MS_Edit2.textChanged.connect(self.t4_MS_Edit2_text_changed)     # Настройка.    Pизм.
-        self.t4_button_1.clicked.connect(self.option_appy)                      # Настройка.    Применение настроек.
-        self.t4_button_2.clicked.connect(self.show_current_settings)            # Настройка.    Отмена изменений.
-        self.t4_gMS_cmd1.currentIndexChanged.connect(self.setPressurePmeas)     # Настройка.    изменение ед.изм. давл.
-        self.tabPycnometer.currentChanged.connect(self.tab_change)              # Переключение вкладок программы.
+        self.t2_gID_button1.clicked.connect(self.calibration_procedure_start)  # Калибровка.   Начало Калибровки.
+        self.t2_gID_button2.clicked.connect(self.calibration_clear)  # Калибровка.   Очистка калибровки.
+        self.t2_gID_button3.clicked.connect(self.calibration_file_manager_open)  # Калибровка.   Окно загрузки файлов.
+        self.t2_gID_button4.clicked.connect(self.calibration_stop)  # Калибровка.   Прервать калибровку.
+        self.t2_gID_Edit1.textChanged.connect(self.t2_gID_Edit1_text_changed)  # Калибровка.   Ввод количество измер.
+        self.t2_gID_Edit2.textChanged.connect(self.t2_gID_Edit2_text_changed)  # Калибровка.   Ввод объема ст. образца.
+        self.t3_checkValve1.stateChanged.connect(self.on_off_port1)  # Ручное упр.   Изменение состояние К1.
+        self.t3_checkValve2.stateChanged.connect(self.on_off_port2)  # Ручное упр.   Изменение состояние К2.
+        self.t3_checkValve3.stateChanged.connect(self.on_off_port3)  # Ручное упр.   Изменение состояние К3.
+        self.t3_checkValve4.stateChanged.connect(self.on_off_port4)  # Ручное упр.   Изменение состояние К4.
+        self.t3_checkValve5.stateChanged.connect(self.on_off_port5)  # Ручное упр.   Изменение состояние К5.
+        self.t4_gIS_cmd1.currentIndexChanged.connect(self.changed_languare)  # Настройка.    Выбор языка.
+        self.t4_MS_Edit1.textChanged.connect(self.t4_MS_Edit1_text_changed)  # Настройка.    Длинна импульса.
+        self.t4_MS_Edit2.textChanged.connect(self.t4_MS_Edit2_text_changed)  # Настройка.    Pизм.
+        self.t4_button_1.clicked.connect(self.option_appy)  # Настройка.    Применение настроек.
+        self.t4_button_2.clicked.connect(self.show_current_settings)  # Настройка.    Отмена изменений.
+        self.t4_gMS_cmd1.currentIndexChanged.connect(self.setPressurePmeas)  # Настройка.    изменение ед.изм. давл.
+        self.t4_gRS_button1.clicked.connect(self.set_report_header)  # Настройка.    добавить шапку в отчет.
+        self.t4_gRS_button2.clicked.connect(self.clear_report_header)  # Настройка.    удалить шапку из отчета.
+        self.t4_gRS_button3.clicked.connect(self.get_report_footer)  # Настройка.    добавить подвал в отчет.
+        self.t4_gRS_button4.clicked.connect(self.clear_report_footer)  # Настройка.    удалить подвал из отчета.
+        self.tabPycnometer.currentChanged.connect(self.tab_change)  # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
         self.menubar.setVisible(False)
         self.sensor_calibration = False
         # нам надо откалибровать датчик.
-        self.calibration_procedure.start_russian_sensor_calibration()
+        if not self.config.is_test_mode():
+            self.calibration_procedure.start_russian_sensor_calibration()
 
     def start_progressbar(self, title, name, time):
         if not self.config.is_test_mode():
@@ -324,21 +340,25 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                 self.all_port_off()
                 # Включаем замер давления
                 self.spi.start_test()
+
         # Обработка открытия вкладки "Настройка"
         def options_check():
             # Если мы перешли на вкладку настроек
             if self.tabPycnometer.currentIndex() == 3:
                 # Загружаем текущие настройки в форму программы.
                 self.show_current_settings()
+
         # Обработка открытия вкладки "Калибровка"
         def calibration_check():
             # Если мы открыли вкладку Калибровка
             if self.tabPycnometer.currentIndex() == 1:
                 self.VcVd_download_and_display()
+
         def exit_check():
             # Если мы открыли вкладку Калибровка
             if self.tabPycnometer.currentIndex() == 4:
                 self.closeEvent(None)
+
         # Вызов внутренних функций метода, расписанных выше.
         manual_control_check()
         options_check()
@@ -405,6 +425,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini('ManualControl', 'periodicity_of_removal_of_sensor_reading', self.t4_gMC_Edit1.text())
         self.config.set_ini('ManualControl', 'leak_test_when_starting', str(self.t4_gMC_chb1.isChecked()))
         self.config.set_ini('ReportSetup', 'report_measurement_table', str(self.t4_gRS_chb1.isChecked()))
+        self.save_header_and_footer()
         self.config.set_ini('ReportSetup', 'report_header', self.t4_gRS_Edit1.text())
         self.config.set_ini('ReportSetup', 'report_footer', self.t4_gRS_Edit2.text())
         self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
@@ -412,7 +433,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini_hash('SavingResult', 'email_adress', self.t4_gSR_Edit1.text())
         self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_Edit2.text())
         self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit3.text())
-
 
         # А потом вызываем метод, который загружает и применяет все настройки из файла config.ini
         self.setup()
@@ -431,6 +451,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.languages.load(self.config)
         # Применяем данные языкового модуля
         self.set_languages()
+        self.header_path = ""
+        self.footer_path = ""
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program setup done.')
 
     # Этот метод загружает на вкладку настроек все данные с учетом текущих установок
@@ -621,7 +643,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         pulse_length = self.config.pulse_length
 
         # Устанавливаем настройки Измерений
-        self.measurement_procedure.set_settings(operator, organization, sample, batch_series, cuvette, sample_preparation, sample_preparation_time_in_minute,
+        self.measurement_procedure.set_settings(operator, organization, sample, batch_series, cuvette,
+                                                sample_preparation, sample_preparation_time_in_minute,
                                                 sample_mass, number_of_measurements, take_the_last_measurements,
                                                 VcL, VcM, VcS, VdLM, VdS, Pmeas, pulse_length)
 
@@ -807,9 +830,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gSR_Edit2.setText('')
         self.t4_gSR_Edit3.setText('')
 
-
-
-
     # Применяем данные языкового модуля, для удобства указанны разделы.
     def set_languages(self):
         # [MAIN]
@@ -954,14 +974,13 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gSR_button1.setText(self.languages.t4_gSR_button1)
         self.t4_gSR_button2.setText(self.languages.t4_gSR_button2)
         if self.wifi:
-            self.t4_gSR_lbl4.setStyleSheet("color: green")
+            # self.t4_gSR_lbl4.setStyleSheet("color: green")
             self.t4_gSR_lbl4.setText(self.languages.t4_wifi_true)
         else:
-            self.t4_gSR_lbl4.setStyleSheet("color: red")
+            # self.t4_gSR_lbl4.setStyleSheet("color: red")
             self.t4_gSR_lbl4.setText(self.languages.t4_wifi_false)
 
         self.show_current_settings()
-
 
         # [Menu]
         self.menumenu1.setTitle(self.languages.menu1)
@@ -980,13 +999,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.message_txt5 = self.languages.message_txt5
 
         # [MeasurementReport]
-        self.measurement_report=self.languages.measurement_report
-
+        self.measurement_report = self.languages.measurement_report
 
     # Вывод двнных теста давления, вызывается через сигнал.
     def set_pressure(self, p):
-        if p<0:
-            p=0
+        if p < 0:
+            p = 0
         self.t3_lblPressure2.setText(toFixed(p, self.config.round))
 
     # При любом вводе данных на форму Измерения или форму Калибровки мы проверяем можно ли сделать кнопки для начала
@@ -1321,7 +1339,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t2_gID_cmd1.setCurrentIndex(cuv)
         self.VcVd_download_and_display()
 
-
     # Вывод данных Измерений, вызывается через сигнал.
     def set_measurement_results(self):
         # получаем средний объем
@@ -1453,8 +1470,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.measurement_results_message.emit()
             self.actionmenu4_command1.setEnabled(True)
 
-
-
     # Открываем файловый менеджер для загрузки калибровки
     def calibration_file_manager_open(self):
         files, dir = self.calibration_procedure.get_files_list()
@@ -1472,7 +1487,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.t2_gID_Edit2.setText(str(calibration_load[0]['sample']))
 
             # [Calibration-0] - [Calibration-(number_of_measurements-1)]
-            for i in range(calibration_load[0]['number_of_measurements']*2):
+            for i in range(calibration_load[0]['number_of_measurements'] * 2):
                 c = Calibration()
                 c.set_calibration(
                     calibration_load[1][i]['p'],
@@ -1493,7 +1508,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.calibration_results_message.emit()
             self.t2_gCR_button1.setEnabled(True)
 
-
     # Прерываем процедуру измерения
     def measurement_stop(self):
         self.measurement_procedure.set_abort_procedure(True)
@@ -1501,6 +1515,100 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     # Прерываем процедуру калибровки
     def calibration_stop(self):
         self.calibration_procedure.set_abort_procedure(True)
+
+    def change_file_for_header_or_footer(self):
+        result = None
+        usblist = [os.path.join(os.getcwd(), 'attachment')]
+        masks = [".png", ".jpg"]
+        files = self.get_files_on_usblist(usblist, masks)
+        self.file_manager = UiFileManager(self, "")
+        self.file_manager.add_files(files)
+        self.file_manager.activate()
+        if self.file_manager.exec_():
+            result = self.file_manager.get_file()
+        return result
+
+    def save_header_and_footer(self):
+        # Запишем путь к папке, где будем хранить файлы для шапки и подвала.
+        path = os.path.join(os.getcwd(), 'attachment', 'header & footer')
+        # Нам надо создать каталог, если его еще нет.
+        if not os.path.isdir(os.path.join(path)):
+            os.makedirs(os.path.join(path))
+
+        if not self.header_path == "":
+            file_header_path = os.path.join(path, ntpath.basename(self.header_path))
+            # А теперь сохраним наши файлы под его названием в директории программы:
+            shutil.copy2(r'{0}'.format(self.header_path), r'{0}'.format(file_header_path))
+
+        if not self.footer_path == "":
+            file_footer_path = os.path.join(path, ntpath.basename(self.footer_path))
+            # А теперь сохраним наши файлы под его названием в директории программы:
+            shutil.copy2(r'{0}'.format(self.footer_path), r'{0}'.format(file_footer_path))
+
+    def set_report_header(self):
+        # получим путь к файлу, выбранному пользователем из списка подходящих файлов на usb устройствах.
+        file = self.change_file_for_header_or_footer()
+        if not file is None:
+            # Узнаем имя этого файла
+            file_name = ntpath.basename(file)
+            # Запишем его в соответсвующее поле и запомним полный путь
+            self.t4_gRS_Edit1.setText(file_name)
+            self.header_path = file
+
+    def clear_report_header(self):
+        self.t4_gRS_Edit1.clear()
+        self.header_path = ""
+
+    def get_report_footer(self):
+        # получим путь к файлу, выбранному пользователем из списка подходящих файлов на usb устройствах.
+        file = self.change_file_for_header_or_footer()
+        if not file is None:
+            # Узнаем имя этого файла
+            file_name = ntpath.basename(file)
+            # Запишем его в соответсвующее поле и запомним полный путь
+            self.t4_gRS_Edit2.setText(file_name)
+            self.footer_path = file
+
+    def clear_report_footer(self):
+        self.t4_gRS_Edit2.clear()
+        self.footer_path = ""
+
+    def get_usblist(self):
+        usblist = []
+        if platform == "win32":
+            pass
+        else:
+            import re
+            import subprocess
+            device_re = re.compile("Bus\s+(?P<bus>\d+)\s+Device\s+(?P<device>\d+).+ID\s(?P<id>\w+:\w+)\s(?P<tag>.+)$", re.I)
+            df = subprocess.check_output("lsusb")
+            for i in df.split('\n'):
+                if i:
+                    info = device_re.match(i)
+                    if info:
+                        dinfo = info.groupdict()
+                        dinfo['device'] = '/dev/bus/usb/%s/%s' % (dinfo.pop('bus'), dinfo.pop('device'))
+                        usblist.append(dinfo)
+            print(usblist)
+        # Мы должны получить список подключенных usb - устройств.
+        # TODO получить список usb
+        # И вернуть его
+        return usblist
+
+    def get_files_on_usblist(self, usblist, masks):
+        # Мы должны составить список файлов на usblist удовлетворяющих masks,
+        # мы должны использовать полные имена файлов и соответсвующую им дату изменений.
+        ret_files = {}
+        for usbdevice in usblist:
+            for top, dirs, files in os.walk(usbdevice):
+                for nm in files:
+                    for mask in masks:
+                        if nm.endswith(mask):
+                            f = os.path.join(top, nm)
+                            data_changed = time.gmtime(os.path.getmtime(f))
+                            ret_files.update({f: data_changed})
+        return ret_files
+
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

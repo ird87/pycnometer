@@ -9,9 +9,9 @@ import time
 import configparser
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import letter, A4
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.units import inch
+from reportlab.lib.units import mm
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -806,13 +806,13 @@ class MeasurementProcedure(object):
             # Считаем объем.
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation volume.....')
             try:
-                print("\n((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0)")
-                print("(({0} - {1}) * ({2} + {3}) - ({4} - {5}) * {6}) / ({7} - {8})".format(P2, P0, Vd, Vc, P1, P0, Vd,
-                                                                                             P2, P0))
-                print("VcL = {0}\nVcM = {1}\nVcS = {2}\nVdLM = {3}\nVdS = {4}".format(self.VcL, self.VcM, self.VcS,
-                                                                                      self.VdLM, self.VdS))
+                # print("\n((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0)")
+                # print("(({0} - {1}) * ({2} + {3}) - ({4} - {5}) * {6}) / ({7} - {8})".format(P2, P0, Vd, Vc, P1, P0, Vd,
+                #                                                                              P2, P0))
+                # print("VcL = {0}\nVcM = {1}\nVcS = {2}\nVdLM = {3}\nVdS = {4}".format(self.VcL, self.VcM, self.VcS,
+                #                                                                       self.VdLM, self.VdS))
                 volume = ((P2 - P0) * (Vd + Vc) - (P1 - P0) * Vd) / (P2 - P0)
-                print("volume = {0}".format(volume))
+                # print("volume = {0}".format(volume))
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating volume, '
@@ -1317,7 +1317,7 @@ class MeasurementProcedure(object):
             # Замеряем новое p_let_out_pressure, ('p1') - нужно только для тестового режима, чтобы имитировать похожее давление.
             p_let_out_pressure = self.spi.get_pressure('p1')
             # Проверяем достаточно ли низкое давление.
-            print("Давление = {0} < p0*2 = {1}".format(p_let_out_pressure, p0 * 2))
+            # print("Давление = {0} < p0*2 = {1}".format(p_let_out_pressure, p0 * 2))
             # if p_let_out_pressure < p0*2 or self.is_test_mode():
             if duration > 10 or self.is_test_mode():
                 p_test = True
@@ -1350,9 +1350,21 @@ class MeasurementProcedure(object):
                                            number) + '.pdf')
             find_name = os.path.isfile(report_name)
 
-        doc = SimpleDocTemplate(report_name, pagesize = letter, encoding = 'WINDOWS-1251',
-                        rightMargin=0.5*inch, leftMargin=0.5*inch,
-                        topMargin=1.45*inch, bottomMargin=0.5*inch)
+        header_pic = os.path.join(os.getcwd(), 'attachment', 'header & footer', self.main.config.report_header)
+        footer_pic = os.path.join(os.getcwd(), 'attachment', 'header & footer', self.main.config.report_footer)
+
+        right_indent = 10*mm
+        left_indent = 10*mm
+        top_indent = 10*mm
+        bottom_indent = 10*mm
+
+        if not self.main.config.report_header == "" and os.path.isfile(header_pic):
+            top_indent = 38*mm
+        if not self.main.config.report_footer == "" and os.path.isfile(footer_pic):
+            bottom_indent = 38*mm
+        doc = SimpleDocTemplate(report_name, pagesize = A4, encoding = 'WINDOWS-1251',
+                        rightMargin=right_indent, leftMargin=left_indent,
+                        topMargin=top_indent, bottomMargin=bottom_indent)
 
         # # Ветка для программы в тестовом режиме.
         # if self.is_test_mode():
@@ -1386,64 +1398,40 @@ class MeasurementProcedure(object):
         # Определяем размеры страницы.
         PAGE_WIDTH = defaultPageSize[0]
         PAGE_HEIGHT = defaultPageSize[1]
-        y_default = 0.27
+        y_default = 2*mm
 
 
 
         # Шапка таблицы (если есть)
-        pic = os.path.join(os.getcwd(), 'attachment', 'logo.png')
+
         def myPages(canvas, doc):
             canvas.saveState()
 
-            logo = ImageReader(pic)
-            w = PAGE_WIDTH - inch
-            h = 1.2 * inch
-            x = 1 * inch
-            y = PAGE_HEIGHT - 1 * inch - h
-
-            canvas.drawImage(logo, x, y, w, h, mask = 'auto')
+            if not self.main.config.report_header == "" and os.path.isfile(header_pic):
+                header_image = ImageReader(header_pic)
+                header_iw, header_ih = header_image.getSize()
+                header_aspect = header_iw / header_ih
+                header_h = mm * 35
+                header_w = header_h * header_aspect
+                header_x = (PAGE_WIDTH - header_w)/2
+                header_y = PAGE_HEIGHT - header_h
+                canvas.drawImage(header_image, header_x, header_y, header_w, header_h,  preserveAspectRatio=True, mask='auto', anchor='c')
+            if not self.main.config.report_footer == "" and os.path.isfile(footer_pic):
+                footer_image = ImageReader(footer_pic)
+                footer_iw, footer_ih = footer_image.getSize()
+                footer_aspect = footer_iw / footer_ih
+                footer_h = mm * 35
+                footer_w = footer_h * footer_aspect
+                footer_x = (PAGE_WIDTH - footer_w)/2
+                footer_y = mm * 7
+                canvas.drawImage(footer_image, footer_x, footer_y, footer_w, footer_h, preserveAspectRatio=True, mask='auto', anchor='c')
             canvas.restoreState()
-
-        # if os.path.isfile(logo):
-        #     # Save the state of our canvas so we can draw on it
-        #     header = Image(logo)
-        #     header.drawWidth = PAGE_WIDTH - inch
-        #     header.drawHeight = 1.2 * inch
-        # else:
-        #     header = None
-
-        # Подвал таблицы (если есть)
-        if len(self.main.config.report_footer) > 0:
-            # Устанавливаем нужное количество строк, столбцов
-            # и отталкиваясь от этого, считаем ширину ячейки.
-            table_row_footer = 1
-            table_column_footer = 1
-            x_footer = (PAGE_WIDTH - 20) / table_column_footer / inch
-            y_footer = y_default
-
-            # Создаем массив данных для добавления в таблицу.
-            data_footer = [
-                [self.main.config.report_footer],
-            ]
-
-            # Добавляем данные в таблицу и форматируем ее.
-            t_footer = Table(data_footer, table_column_footer * [x_footer * inch],
-                             table_row_footer * [y_footer * inch])
-            t_footer.setStyle(TableStyle([
-                ('SPAN', (0, 0), (0, 0)),
-                ('ALIGN', (0, 0), (0, 0), 'CENTER'),
-                ('FONT', (0, 0), (0, 0), 'Arial-Regular'),
-                ('FONT', (0, 0), (0, 0), 'Arial-Bold'),
-                ('VALIGN', (0, 0), (0, 0), 'MIDDLE'),
-            ]))
-        else:
-            t_footer = None
 
         # Таблица 1 "Общая информация", устанавливаем нужное количество строк, столбцов
         # и отталкиваясь от этого, считаем ширину ячейки.
         table_row1 = 13
         table_column1 = 2
-        x1 = (PAGE_WIDTH - 20) / table_column1 / inch
+        x1 = (PAGE_WIDTH - 20*mm) / table_column1 / mm
         y1 = y_default
 
 
@@ -1482,7 +1470,7 @@ class MeasurementProcedure(object):
         ]
 
         # Добавляем данные в таблицу и форматируем ее.
-        t1 = Table(data1, table_column1 * [x1 * inch], table_row1 * [y1 * inch])
+        t1 = Table(data1, table_column1 * [x1 * mm], table_row1 * [y1 * mm])
         t1.setStyle(TableStyle([
             ('SPAN', (0, 0), (1, 0)),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -1515,14 +1503,14 @@ class MeasurementProcedure(object):
                               toFixed(m.volume, self.round), toFixed(m.density, self.round),
                               toFixed(m.deviation, self.round)])
                 table_row2 += 1
-        print(str(data2))
+        # print(str(data2))
 
         # и отталкиваясь от этого, считаем ширину ячейки.
-        x2 = (PAGE_WIDTH - 20) / table_column2 / inch
+        x2 = (PAGE_WIDTH - 20*mm) / table_column2 / mm
         y2 = y_default
 
         # Добавляем данные в таблицу и форматируем ее.
-        t2 = Table(data2, table_column2 * [x2 * inch], table_row2 * [y2 * inch])
+        t2 = Table(data2, table_column2 * [x2 * mm], table_row2 * [y2 * mm], repeatRows=2)
         t2.setStyle(TableStyle([
             ('SPAN', (0, 0), (5, 0)),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -1537,7 +1525,7 @@ class MeasurementProcedure(object):
         # и отталкиваясь от этого, считаем ширину ячейки.
         table_row3 = 3
         table_column3 = 4
-        x3 = (PAGE_WIDTH - 20) / table_column3 / inch
+        x3 = (PAGE_WIDTH - 20*mm) / table_column3 / mm
         y3 = y_default
 
         # Создаем массив данных для добавления в таблицу.
@@ -1550,7 +1538,7 @@ class MeasurementProcedure(object):
         ]
 
         # Добавляем данные в таблицу и форматируем ее.
-        t3 = Table(data3, table_column3 * [x3 * inch], table_row3 * [y3 * inch])
+        t3 = Table(data3, table_column3 * [x3 * mm], table_row3 * [y3 * mm], repeatRows=1)
         t3.setStyle(TableStyle([
             ('SPAN', (0, 0), (3, 0)),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -1562,28 +1550,29 @@ class MeasurementProcedure(object):
         ]))
 
         # Создаем общий массив данных стостоящий из 3-х наших таблиц.
-        data = []
-        data.append([t1])
-        data.append([''])
-        data.append([t3])
-        if self.main.config.report_measurement_table:
-            data.append([''])
-            data.append([t2])
-        if not t_footer is None:
-            data.append([''])
-            data.append([t_footer])
-
-        # Добавляем данные в итоговую таблицу
-        shell_table = Table(data)
+        # data = []
+        # data.append([t1])
+        # data.append([''])
+        # data.append([t3])
+        # if self.main.config.report_measurement_table:
+        #     data.append([''])
+        #     data.append([t2])
+        #
+        # # Добавляем данные в итоговую таблицу
+        # shell_table = Table(data)
 
         # Добавляем итоговую таблицу в наш массив элементов.
         # if not header is None:
         #     elements.append(header)
-        elements.append(shell_table)
-        if os.path.isfile(pic):
-            doc.build(elements, onFirstPage =myPages, onLaterPages = myPages)
-        else:
-            doc.build(elements)
+        elements.append(t1)
+        elements.append(Table(['']))
+        elements.append(t3)
+        if self.main.config.report_measurement_table:
+            elements.append(Table(['']))
+            elements.append(t2)
+        doc.build(elements, onFirstPage =myPages, onLaterPages = myPages)
+        # else:
+        #     doc.build(elements)
         if self.main.config.send_report_to_mail:
             send(self.main.config.email_adress, "Report: {0}".format(report_name), "Привет! Этот отчет, который ты ждал",
              report_name)

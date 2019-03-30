@@ -89,6 +89,9 @@
     <property name="documentMode">
      <bool>false</bool>
     </property>
+    <property name="movable">
+     <bool>false</bool>
+    </property>
     <widget class="QWidget" name="t1">
      <attribute name="title">
       <string>t1</string>
@@ -2894,7 +2897,7 @@
         <rect>
          <x>10</x>
          <y>100</y>
-         <width>361</width>
+         <width>301</width>
          <height>20</height>
         </rect>
        </property>
@@ -2903,6 +2906,9 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QLabel" name="t4_gRS_lbl1">
@@ -2941,7 +2947,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>130</y>
+         <y>140</y>
          <width>361</width>
          <height>25</height>
         </rect>
@@ -2961,7 +2967,7 @@
         <rect>
          <x>10</x>
          <y>170</y>
-         <width>361</width>
+         <width>301</width>
          <height>20</height>
         </rect>
        </property>
@@ -2970,6 +2976,61 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t4_gRS_button1">
+       <property name="geometry">
+        <rect>
+         <x>320</x>
+         <y>98</y>
+         <width>24</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t4_gRS_button3">
+       <property name="geometry">
+        <rect>
+         <x>320</x>
+         <y>168</y>
+         <width>24</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t4_gRS_button2">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>98</y>
+         <width>24</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="t4_gRS_button4">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>168</y>
+         <width>24</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>-</string>
        </property>
       </widget>
      </widget>
@@ -3018,7 +3079,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>230</y>
+         <y>300</y>
          <width>361</width>
          <height>25</height>
         </rect>
@@ -3053,7 +3114,7 @@
        <property name="geometry">
         <rect>
          <x>142</x>
-         <y>270</y>
+         <y>350</y>
          <width>231</width>
          <height>20</height>
         </rect>
@@ -3069,7 +3130,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>270</y>
+         <y>350</y>
          <width>121</width>
          <height>25</height>
         </rect>
@@ -3088,7 +3149,7 @@
        <property name="geometry">
         <rect>
          <x>142</x>
-         <y>310</y>
+         <y>390</y>
          <width>231</width>
          <height>20</height>
         </rect>
@@ -3104,7 +3165,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>310</y>
+         <y>390</y>
          <width>121</width>
          <height>25</height>
         </rect>
@@ -3126,7 +3187,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>350</y>
+         <y>430</y>
          <width>171</width>
          <height>31</height>
         </rect>
@@ -3139,7 +3200,7 @@
        <property name="geometry">
         <rect>
          <x>200</x>
-         <y>350</y>
+         <y>430</y>
          <width>171</width>
          <height>31</height>
         </rect>
@@ -3152,7 +3213,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>410</y>
+         <y>250</y>
          <width>361</width>
          <height>25</height>
         </rect>
@@ -3163,7 +3224,7 @@
           <colorrole role="WindowText">
            <brush brushstyle="SolidPattern">
             <color alpha="255">
-             <red>255</red>
+             <red>0</red>
              <green>0</green>
              <blue>0</blue>
             </color>
@@ -3174,7 +3235,7 @@
           <colorrole role="WindowText">
            <brush brushstyle="SolidPattern">
             <color alpha="255">
-             <red>255</red>
+             <red>0</red>
              <green>0</green>
              <blue>0</blue>
             </color>
