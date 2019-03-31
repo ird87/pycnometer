@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/Config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModulWIFI.py" beforeDir="false" afterPath="$PROJECT_DIR$/ModulWIFI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="1653" selection-start-line="1653" selection-end-line="1653" />
+            <state relative-caret-position="299">
+              <caret line="465" column="21" lean-forward="true" selection-start-line="465" selection-start-column="21" selection-end-line="465" selection-end-column="21" />
               <folding>
                 <element signature="e#61#75#0" expanded="true" />
               </folding>
@@ -27,13 +28,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ModulWIFI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="16" lean-forward="true" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+            <state relative-caret-position="255">
+              <caret line="15" column="15" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Config.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
@@ -97,8 +98,8 @@
       <find>appy</find>
       <find>platform</find>
       <find>WIFI</find>
-      <find>urlop</find>
       <find>enco</find>
+      <find>urlop</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -168,10 +169,10 @@
         <option value="$PROJECT_DIR$/ModulSPItest.py" />
         <option value="$PROJECT_DIR$/wifi.py" />
         <option value="$PROJECT_DIR$/ModulSPI_2.py" />
-        <option value="$PROJECT_DIR$/ModulWIFI.py" />
         <option value="$PROJECT_DIR$/Languages.py" />
-        <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/Config.py" />
+        <option value="$PROJECT_DIR$/ModulWIFI.py" />
+        <option value="$PROJECT_DIR$/Main.py" />
       </list>
     </option>
   </component>
@@ -766,29 +767,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ModulWIFI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="16" lean-forward="true" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Languages.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3518">
           <caret line="364" lean-forward="true" selection-start-line="364" selection-end-line="364" />
           <folding>
             <element signature="e#78#97#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="1653" selection-start-line="1653" selection-end-line="1653" />
-          <folding>
-            <element signature="e#61#75#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -809,6 +793,23 @@
           <caret line="190" column="74" selection-start-line="190" selection-start-column="74" selection-end-line="190" selection-end-column="74" />
           <folding>
             <element signature="e#77#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ModulWIFI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="15" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="465" column="21" lean-forward="true" selection-start-line="465" selection-start-column="21" selection-end-line="465" selection-end-column="21" />
+          <folding>
+            <element signature="e#61#75#0" expanded="true" />
           </folding>
         </state>
       </provider>

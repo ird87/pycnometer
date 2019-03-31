@@ -13,6 +13,17 @@ def Search():
 
     return wifilist
 
+def SearchNames():
+    wifilist = Search()
+    wifi_networks = []
+    for wifi_network in wifilist:
+        network = str(wifi_network)
+        network = network.replace('Cell(ssid=', '')
+        network = network[:-1]
+        if not network in wifi_networks:
+            wifi_networks.append(network)
+    return wifi_networks
+
 
 def FindFromSearchList(ssid):
     wifilist = Search()

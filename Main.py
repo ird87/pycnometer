@@ -457,13 +457,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Применяем данные языкового модуля
         self.set_languages()
         if not platform == "win32":
-            if self.config.wifi_name in ModulWIFI.Search():
-                try:
-                    ModulWIFI.Connect(self.config.wifi_name, self.config.wifi_pass)
-                except Exception:
-                    self.get_messagebox(self.message_headline1, self.message_txt6)
-            else:
-                self.get_messagebox(self.message_headline1, self.message_txt7)
+            if not self.config.wifi_name == "":
+                if self.config.wifi_name in ModulWIFI.SearchNames():
+                    try:
+                        ModulWIFI.Connect(self.config.wifi_name, self.config.wifi_pass)
+                    except Exception:
+                        self.get_messagebox(self.message_headline1, self.message_txt6)
+                else:
+                    self.get_messagebox(self.message_headline1, self.message_txt7)
 
 
         self.header_path = ""
@@ -530,14 +531,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gSR_Edit1.setText(self.config.email_adress)
         if not platform == "win32":
             # Название сети wifi:
-            wifilist = ModulWIFI.Search()
-            wifi_networks = []
-            for wifi_network in wifilist:
-                network = str(wifi_network)
-                network = network.replace('Cell(ssid=', '')
-                network = network[:-1]
-                if not network in wifi_networks:
-                    wifi_networks.append(network)
+            wifi_networks = ModulWIFI.SearchNames()
             for wifi_network in wifi_networks:
                 self.t4_gSR_cmd1.addItem(wifi_network)
             self.t4_gSR_cmd1.setCurrentText(self.config.wifi_name)
