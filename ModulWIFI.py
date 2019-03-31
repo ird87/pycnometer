@@ -5,33 +5,38 @@ from wifi import Cell, Scheme
 class WIFI(object):
     """Конструктор класса. Поля класса"""
     def __init__(self):
-        self.wifi_name = "Gleeson55"
-        self.wifi_pass = "Brendan19"
+        self.wifi_name = ""
+        self.wifi_pass = ""
+        self.myssid = None
+        self.myssidA = None
 
+    def set_wifi(self, name, password):
+        self.wifi_name = name
+        self.wifi_pass = password
 
     def wifiscan(self):
         allSSID = Cell.all('wlan0')
         allSSID_list = list(allSSID)
         # print(allSSID_list)   # prints all available WIFI SSIDs
         myssid= 'Cell(ssid={0})'.format(self.wifi_name)   # vivekHome is my wifi name
-        print("myssid: " + myssid)
-        myssidA = None
+        # print("myssid: " + myssid)
         for i in range(len(allSSID_list)):
-            print("{0}: {1}".format(i, str(allSSID_list[i])))
+            # print("{0}: {1}".format(i, str(allSSID_list[i])))
             if str(allSSID_list[i]) == myssid:
                 a = i
-                myssidA = allSSID_list[a]
-                print("myssidA: " + str(myssidA))
-                break
+                self.myssidA = allSSID_list[a]
+                # print("myssidA: " + str(self.myssidA))
+                return True
             else:
-                print("getout")
+                # print("getout")
+                return False
 
-        # Creating Scheme with my SSID.
-        myssid = Scheme.for_cell('wlan0', 'home', myssidA, "not")   # vive1234 is the password to my wifi myssidA is the wifi name
-        myssid.activate()
-        time.sleep(10)
-        myssid = Scheme.for_cell('wlan0', 'home', myssidA, self.wifi_pass)   # vive1234 is the password to my wifi myssidA is the wifi name
-        myssid.activate()
+    def wifi_connect(self):
+        self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, self.wifi_pass)
+        self.myssid.activate()
 
+    def wifi_disconnect(self):
+        self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, "disconnect")
+        self.myssid.activate()
 
 

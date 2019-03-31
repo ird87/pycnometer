@@ -232,6 +232,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # создаем модуль Калибровка и передаем туда ссылку на main.
         self.calibration_procedure = CalibrationProcedure(self)
 
+        self.wifi = WIFI()
         # Нам нужны два Validator'а для установки ограничений на ввод в поля форм.
         # Для int подойдет штатный QIntValidator
         self.onlyInt = QIntValidator()
@@ -296,6 +297,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gRS_button2.clicked.connect(self.clear_report_header)  # Настройка.    удалить шапку из отчета.
         self.t4_gRS_button3.clicked.connect(self.get_report_footer)  # Настройка.    добавить подвал в отчет.
         self.t4_gRS_button4.clicked.connect(self.clear_report_footer)  # Настройка.    удалить подвал из отчета.
+        self.t4_gSR_button1.clicked.connect(self.wifi_connect)
+        self.t4_gSR_button2.clicked.connect(self.wifi_disconnect)
         self.tabPycnometer.currentChanged.connect(self.tab_change)  # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
@@ -304,8 +307,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # нам надо откалибровать датчик.
         if not self.config.is_test_mode():
             self.calibration_procedure.start_russian_sensor_calibration()
-        wifi = WIFI()
-        wifi.wifiscan()
 
     def start_progressbar(self, title, name, time):
         if not self.config.is_test_mode():
@@ -454,6 +455,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.languages.load(self.config)
         # Применяем данные языкового модуля
         self.set_languages()
+        self.wifi.set_wifi(self.config.wifi_name, self.config.wifi_pass)
         self.header_path = ""
         self.footer_path = ""
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program setup done.')
@@ -1000,6 +1002,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.message_txt3 = self.languages.message_txt3
         self.message_txt4 = self.languages.message_txt4
         self.message_txt5 = self.languages.message_txt5
+        self.message_txt6 = self.languages.message_txt6
+        self.message_txt7 = self.languages.message_txt7
 
         # [MeasurementReport]
         self.measurement_report = self.languages.measurement_report
@@ -1612,6 +1616,19 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                             ret_files.update({f: data_changed})
         return ret_files
 
+    def wifi_connect(self):
+        wifi_try = self.wifi.wifiscan()
+        if wifi_try:
+            self.wifi.wifi_connect()
+        else:
+            self.get_messagebox(self.message_headline1, self.message_txt6)
+
+    def wifi_disconnect(self):
+        wifi_try = self.wifi.wifiscan()
+        if wifi_try:
+            self.wifi.wifi_disconnect()
+        else:
+            self.get_messagebox(self.message_headline1, self.message_txt7)
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

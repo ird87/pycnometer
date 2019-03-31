@@ -161,6 +161,8 @@ class Languages(object):
         self.message_txt3 = ''
         self.message_txt4 = ''
         self.message_txt5 = ''
+        self.message_txt6 = ''
+        self.message_txt7 = ''
 
         # [MeasurementReport]
         self.measurement_report = []
@@ -384,6 +386,8 @@ class Languages(object):
         self.message_txt3 = self.get_string('Message', 'message_txt3')
         self.message_txt4 = self.get_string('Message', 'message_txt4')
         self.message_txt5 = self.get_string('Message', 'message_txt5')
+        self.message_txt6 = self.get_string('Message', 'message_txt6')
+        self.message_txt7 = self.get_string('Message', 'message_txt7')
 
         # [MeasurementReport]
         self.measurement_report = self.get_item("MeasurementReport")
