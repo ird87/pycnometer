@@ -219,9 +219,10 @@ class SPI(object):
             raw_channels = self.ads.read_sequence(data_channels)
             for channel in range(len(raw_channels)):
                 data[channel] += raw_channels[channel]
-                # print("raw_channels: {0}". format(raw_channels))
+                print("raw_channels: {0}". format(raw_channels))
                 # voltages = [i * self.ads.v_per_digit for i in raw_channels]
-            # self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
+                print("pressure PA: " + str(self.calc_pressure(raw_channels[0])[0]))
+            self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
 
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
