@@ -34,13 +34,19 @@ class WIFI(object):
 
     def wifi_connect(self):
         self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, self.wifi_pass)
-        self.myssid.save()
+        try:
+            self.myssid.save()
+        except Exception:
+            pass
         self.myssid.activate()
         self.connect = True
 
     def wifi_disconnect(self):
         self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, "disconnect")
-        self.myssid.save()
+        try:
+            self.myssid.save()
+        except Exception:
+            pass
         self.myssid.activate()
         self.connect = False
 
