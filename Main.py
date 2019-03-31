@@ -538,7 +538,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                 network = network[:-1]
                 if not network in wifi_networks:
                     wifi_networks.append(network)
-            self.t4_gSR_cmd1.addItem(wifi_networks)
+            for wifi_network in wifi_networks:
+                self.t4_gSR_cmd1.addItem(wifi_network)
+            self.t4_gSR_cmd1.setCurrentText(self.config.wifi_name)
 
             # Пароль от wifi:
             self.t4_gSR_Edit2.setText(self.config.wifi_pass)
