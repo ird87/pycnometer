@@ -115,7 +115,7 @@ class SPI(object):
         self.file = os.path.join(os.getcwd(), "temperature & pressure.xls")
         if os.path.isfile(self.file):
             os.remove(self.file)
-        self.wb = xlwt.Workbook()
+        self.wb = xlwt.Workbook(encoding = 'WINDOWS-1251')
         self.wb_style = xlwt.easyxf("align: horiz centre; borders: left thin, right thin, top thin, bottom thin;")
         self.wsp = self.wb.add_sheet("{0} | pressure".format(time.strftime("%Y-%m-%d", time.localtime())))
         self.wsp_row = 0
