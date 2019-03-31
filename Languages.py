@@ -359,8 +359,6 @@ class Languages(object):
         self.t4_gSR_lbl1 = self.get_string('TAB4', 't4_gSR_lbl1')
         self.t4_gSR_lbl2 = self.get_string('TAB4', 't4_gSR_lbl2')
         self.t4_gSR_lbl3 = self.get_string('TAB4', 't4_gSR_lbl3')
-        self.t4_gSR_button1 = self.get_string('TAB4', 't4_gSR_button1')
-        self.t4_gSR_button2 = self.get_string('TAB4', 't4_gSR_button2')
         self.t4_gSR_lbl4 = self.get_string('TAB4', 't4_gSR_lbl4')
         self.t4_wifi_true = self.get_string('TAB4', 't4_wifi_true')
         self.t4_wifi_false = self.get_string('TAB4', 't4_wifi_false')

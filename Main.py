@@ -8,7 +8,7 @@ import shutil
 import sys  # sys нужен для передачи argv в QApplication
 import time
 from sys import platform
-
+from urllib.request import urlopen
 import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
 
@@ -25,7 +25,7 @@ from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap
 from PyQt5.QtWidgets import QMessageBox
 
-from ModulWIFI import WIFI
+import ModulWIFI
 from Progressbar import UiProgressbar
 from TableCalibration import UiTableCalibration
 from TableMeasurement import UiTableMeasurement
@@ -160,7 +160,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Загружаем языковой модуль
         self.languages = Languages()
 
-        self.wifi = WIFI()
         # очищаем поля для ввода данных.
         self.initial_field_clearing()
 
@@ -298,8 +297,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gRS_button2.clicked.connect(self.clear_report_header)  # Настройка.    удалить шапку из отчета.
         self.t4_gRS_button3.clicked.connect(self.get_report_footer)  # Настройка.    добавить подвал в отчет.
         self.t4_gRS_button4.clicked.connect(self.clear_report_footer)  # Настройка.    удалить подвал из отчета.
-        self.t4_gSR_button1.clicked.connect(self.wifi_connect)
-        self.t4_gSR_button2.clicked.connect(self.wifi_disconnect)
         self.tabPycnometer.currentChanged.connect(self.tab_change)  # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
@@ -436,8 +433,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
         self.config.set_ini('SavingResult', 'send_report_to_mail', str(self.t4_gSR_chb2.isChecked()))
         self.config.set_ini_hash('SavingResult', 'email_adress', self.t4_gSR_Edit1.text())
-        self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_Edit2.text())
-        self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit3.text())
+        if not platform == "win32":
+            if not self.t4_gSR_cmd1.currentText() == self.config.wifi_name:
+                ModulWIFI.Delete(self.config.wifi_name)
+        self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_cmd1.currentText())
+        self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit2.text())
 
         # А потом вызываем метод, который загружает и применяет все настройки из файла config.ini
         self.setup()
@@ -456,7 +456,16 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.languages.load(self.config)
         # Применяем данные языкового модуля
         self.set_languages()
-        self.wifi.set_wifi(self.config.wifi_name, self.config.wifi_pass)
+        if not platform == "win32":
+            if self.config.wifi_name in ModulWIFI.Search():
+                try:
+                    ModulWIFI.Connect(self.config.wifi_name, self.config.wifi_pass)
+                except Exception:
+                    self.get_messagebox(self.message_headline1, self.message_txt6)
+            else:
+                self.get_messagebox(self.message_headline1, self.message_txt7)
+
+
         self.header_path = ""
         self.footer_path = ""
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program setup done.')
@@ -519,12 +528,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         # Адрес почты:
         self.t4_gSR_Edit1.setText(self.config.email_adress)
+        if not platform == "win32":
+            # Название сети wifi:
+            self.t4_gSR_cmd1.addItem(ModulWIFI.Search())
 
-        # Название сети wifi:
-        self.t4_gSR_Edit2.setText(self.config.wifi_name)
-
-        # Пароль от wifi:
-        self.t4_gSR_Edit3.setText(self.config.wifi_pass)
+            # Пароль от wifi:
+            self.t4_gSR_Edit2.setText(self.config.wifi_pass)
 
     def setPressurePmeas(self):
 
@@ -834,7 +843,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gRS_Edit2.setText('')
         self.t4_gSR_Edit1.setText('')
         self.t4_gSR_Edit2.setText('')
-        self.t4_gSR_Edit3.setText('')
 
     # Применяем данные языкового модуля, для удобства указанны разделы.
     def set_languages(self):
@@ -977,15 +985,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gSR_lbl1.setText(self.languages.t4_gSR_lbl1)
         self.t4_gSR_lbl2.setText(self.languages.t4_gSR_lbl2)
         self.t4_gSR_lbl3.setText(self.languages.t4_gSR_lbl3)
-        self.t4_gSR_button1.setText(self.languages.t4_gSR_button1)
-        self.t4_gSR_button2.setText(self.languages.t4_gSR_button2)
-        if self.wifi.connect:
-            # self.t4_gSR_lbl4.setStyleSheet("color: green")
+        try:
+            url = "https://mail.ru/"
+            urlopen(url)
             self.t4_gSR_lbl4.setText(self.languages.t4_wifi_true)
-        else:
-            # self.t4_gSR_lbl4.setStyleSheet("color: red")
+        except:
             self.t4_gSR_lbl4.setText(self.languages.t4_wifi_false)
-
         self.show_current_settings()
 
         # [Menu]
@@ -1617,19 +1622,20 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                             ret_files.update({f: data_changed})
         return ret_files
 
-    def wifi_connect(self):
-        wifi_try = self.wifi.wifiscan()
-        if wifi_try:
-            self.wifi.wifi_connect()
-        else:
-            self.get_messagebox(self.message_headline1, self.message_txt6)
+    # def wifi_connect(self):
+    #
+    #     wifi_try = self.wifi.wifiscan()
+    #     if wifi_try:
+    #         self.wifi.wifi_connect()
+    #     else:
+    #         self.get_messagebox(self.message_headline1, self.message_txt6)
 
-    def wifi_disconnect(self):
-        wifi_try = self.wifi.wifiscan()
-        if wifi_try:
-            self.wifi.wifi_disconnect()
-        else:
-            self.get_messagebox(self.message_headline1, self.message_txt7)
+    # def wifi_disconnect(self):
+    #     wifi_try = self.wifi.wifiscan()
+    #     if wifi_try:
+    #         self.wifi.wifi_disconnect()
+    #     else:
+    #         self.get_messagebox(self.message_headline1, self.message_txt7)
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

@@ -3079,7 +3079,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>300</y>
+         <y>335</y>
          <width>361</width>
          <height>25</height>
         </rect>
@@ -3110,27 +3110,11 @@
         <string>t4_gSR_chb1</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="t4_gSR_Edit2">
-       <property name="geometry">
-        <rect>
-         <x>142</x>
-         <y>350</y>
-         <width>231</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>t4_gSR_Edit2</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
       <widget class="QLabel" name="t4_gSR_lbl2">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>350</y>
+         <y>375</y>
          <width>121</width>
          <height>25</height>
         </rect>
@@ -3145,13 +3129,13 @@
         <string>t4_gSR_lbl2</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="t4_gSR_Edit3">
+      <widget class="QLineEdit" name="t4_gSR_Edit2">
        <property name="geometry">
         <rect>
          <x>142</x>
-         <y>390</y>
-         <width>231</width>
-         <height>20</height>
+         <y>420</y>
+         <width>230</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="text">
@@ -3168,7 +3152,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>390</y>
+         <y>420</y>
          <width>121</width>
          <height>25</height>
         </rect>
@@ -3186,37 +3170,11 @@
         <enum>Qt::AutoText</enum>
        </property>
       </widget>
-      <widget class="QPushButton" name="t4_gSR_button1">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>430</y>
-         <width>171</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>t4_gSR_button1</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="t4_gSR_button2">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>430</y>
-         <width>171</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>t4_gSR_button2</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="t4_gSR_lbl4">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>250</y>
+         <y>280</y>
          <width>361</width>
          <height>25</height>
         </rect>
@@ -3276,10 +3234,10 @@
       <widget class="QLabel" name="t4_gSR_wifi">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>120</x>
          <y>140</y>
-         <width>101</width>
-         <height>91</height>
+         <width>141</width>
+         <height>121</height>
         </rect>
        </property>
        <property name="text">
@@ -3290,6 +3248,16 @@
        </property>
        <property name="scaledContents">
         <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="t4_gSR_cmd1">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>375</y>
+         <width>230</width>
+         <height>25</height>
+        </rect>
        </property>
       </widget>
      </widget>

@@ -1,66 +1,97 @@
-import time
+# -*- coding: utf-8 -*-
 
 import wifi
-from wifi import Cell, Scheme
 
-class WIFI(object):
-    """Конструктор класса. Поля класса"""
-    def __init__(self):
-        self.wifi_name = ""
-        self.wifi_pass = ""
-        self.myssid = None
-        self.myssidA = None
-        self.connect = False
 
-    def set_wifi(self, name, password):
-        self.wifi_name = name
-        self.wifi_pass = password
+def Search():
+    wifilist = []
 
-    def wifiscan(self):
-        allSSID = Cell.all('wlan0')
-        allSSID_list = list(allSSID)
-        print(allSSID_list)   # prints all available WIFI SSIDs
-        myssid= 'Cell(ssid={0})'.format(self.wifi_name)   # vivekHome is my wifi name
-        # print("myssid: " + myssid)
-        for i in range(len(allSSID_list)):
-            print("{0}: {1}".format(i, str(allSSID_list[i])))
-            if str(allSSID_list[i]) == myssid:
-                a = i
-                self.myssidA = allSSID_list[a]
-                print("myssidA: " + str(self.myssidA))
-                return True
+    cells = wifi.Cell.all('wlan0')
+
+    for cell in cells:
+        wifilist.append(cell)
+
+    return wifilist
+
+
+def FindFromSearchList(ssid):
+    wifilist = Search()
+
+    for cell in wifilist:
+        if cell.ssid == ssid:
+            return cell
+
+    return False
+
+
+def FindFromSavedList(ssid):
+    cell = wifi.Scheme.find('wlan0', ssid)
+
+    if cell:
+        return cell
+
+    return False
+
+
+def Connect(ssid, password=None):
+    cell = FindFromSearchList(ssid)
+
+    if cell:
+        savedcell = FindFromSavedList(cell.ssid)
+
+        # Already Saved from Setting
+        if savedcell:
+            savedcell.activate()
+            return cell
+
+        # First time to conenct
+        else:
+            if cell.encrypted:
+                if password:
+                    scheme = Add(cell, password)
+
+                    try:
+                        scheme.activate()
+
+                    # Wrong Password
+                    except wifi.exceptions.ConnectionError:
+                        Delete(ssid)
+                        return False
+
+                    return cell
+                else:
+                    return False
             else:
-                print("getout")
-                return False
+                scheme = Add(cell)
 
-    def wifi_connect(self):
-        self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, self.wifi_pass)
-        try:
-            self.myssid.save()
-        except Exception:
-            pass
-        try:
-            self.myssid.activate()
-            # Wrong Password
-        except Exception:
-            self.myssid.delete()
-            print("JOPA")
-            return False
-        self.connect = True
+                try:
+                    scheme.activate()
+                except wifi.exceptions.ConnectionError:
+                    Delete(ssid)
+                    return False
 
-    def wifi_disconnect(self):
-        self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, "disconnect")
-        try:
-            self.myssid.save()
-        except Exception:
-            pass
-        try:
-            self.myssid.activate()
-            # Wrong Password
-        except Exception:
-            self.myssid.delete()
-            print("JOPA")
-            return False
-        self.connect = False
+                return cell
+
+    return False
 
 
+def Add(cell, password=None):
+    if not cell:
+        return False
+
+    scheme = wifi.Scheme.for_cell('wlan0', cell.ssid, cell, password)
+    scheme.save()
+    return scheme
+
+
+def Delete(ssid):
+    if not ssid:
+        return False
+
+    cell = FindFromSavedList(ssid)
+
+    if cell:
+        cell.delete()
+        return True
+
+    return False
