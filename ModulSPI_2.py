@@ -103,6 +103,13 @@ class SPI(object):
         handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
         handle.close()
 
+        self.file_p = os.path.join(os.getcwd(), "pressure.txt")
+        if os.path.isfile(self.file_p):
+            os.remove(self.file_p)
+        handle = open(self.file_p, "w")
+        handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
+        handle.close()
+
     def set_correct_data(self, x):
         self.correct_data = x
 
@@ -194,6 +201,7 @@ class SPI(object):
                 data[channel] += raw_channels[channel]
                 # print("raw_channels: {0}". format(raw_channels))
                 # voltages = [i * self.ads.v_per_digit for i in raw_channels]
+            self.print_p(self.calc_pressure(raw_channels[0])[0])
 
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
@@ -206,18 +214,39 @@ class SPI(object):
                                      'denominator: self.smq_now = {1}'.format(i, str(self.smq_now)))
                 data[i] = 0
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data..... Done.')
-
         return data
 
     def print_t(self, p, t):
-
         txt = "\n{0} -> P={1}".format(time.strftime("%H:%M:%S", time.localtime()), p)
-
         for i in range(len(t)):
             txt += "\tT{0}={1}".format(i, t[i])
         handle = open(self.file, "a+")
         handle.write(txt)
         handle.close()
+
+    def print_p(self, p):
+        txt = "\n{0}".format(p)
+        handle = open(self.file_p, "a+")
+        handle.write(txt)
+        handle.close()
+
+    def save_xls(self):
+        import xlwt
+        DATA = (("The Essential Calvin and Hobbes", 1988,),
+                ("The Authoritative Calvin and Hobbes", 1990,),
+                ("The Indispensable Calvin and Hobbes", 1992,),
+                ("Attack of the Deranged Mutant Killer Monster Snow Goons", 1992,),
+                ("The Days Are Just Packed", 1993,),
+                ("Homicidal Psycho Jungle Cat", 1994,),
+                ("There's Treasure Everywhere", 1996,),
+                ("It's a Magical World", 1996,),)
+        wb = xlwt.Workbook()
+        ws = wb.add_sheet("My Sheet")
+        for i, row in enumerate(DATA):
+            for j, col in enumerate(row):
+                ws.write(i, j, col)
+        ws.col(0).width = 256 * max([len(row[0]) for row in DATA])
+        wb.save("myworkbook.xls")
 
     """Метод рассчета давления на основание данных с датчика"""
     def calc_pressure(self, data_p):
