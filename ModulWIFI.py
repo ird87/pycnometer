@@ -10,10 +10,12 @@ class WIFI(object):
     def wifiscan(self):
         allSSID = Cell.all('wlan0')
         allSSID_list = list(allSSID)
-        print(allSSID_list)   # prints all available WIFI SSIDs
+        # print(allSSID_list)   # prints all available WIFI SSIDs
         myssid= 'Cell(ssid = {0})'.format(self.wifi_name)   # vivekHome is my wifi name
+        print("myssid: " + myssid)
         myssidA = None
         for i in range(len(allSSID_list)):
+            print("{0}: {1}".format(i, str(allSSID_list[i])))
             if str(allSSID_list[i]) == myssid:
                 a = i
                 myssidA = allSSID_list[a]
