@@ -1,5 +1,6 @@
 import time
 
+import wifi
 from wifi import Cell, Scheme
 
 class WIFI(object):
@@ -38,7 +39,13 @@ class WIFI(object):
             self.myssid.save()
         except Exception:
             pass
-        self.myssid.activate()
+        try:
+            self.myssid.activate()
+            # Wrong Password
+        except Exception:
+            self.myssid.delete()
+            print("JOPA")
+            return False
         self.connect = True
 
     def wifi_disconnect(self):
@@ -47,7 +54,13 @@ class WIFI(object):
             self.myssid.save()
         except Exception:
             pass
-        self.myssid.activate()
+        try:
+            self.myssid.activate()
+            # Wrong Password
+        except Exception:
+            self.myssid.delete()
+            print("JOPA")
+            return False
         self.connect = False
 
 

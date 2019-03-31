@@ -48,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ModulWIFI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
+            <state relative-caret-position="526">
+              <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -870,8 +870,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ModulWIFI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
+        <state relative-caret-position="526">
+          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
