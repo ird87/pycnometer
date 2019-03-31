@@ -48,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ModulWIFI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="285">
+              <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -212,8 +212,8 @@
         <option value="$PROJECT_DIR$/ModulSPItest.py" />
         <option value="$PROJECT_DIR$/ModulSPI_2.py" />
         <option value="$PROJECT_DIR$/wifi.py" />
-        <option value="$PROJECT_DIR$/ModulWIFI.py" />
         <option value="$PROJECT_DIR$/Main.py" />
+        <option value="$PROJECT_DIR$/ModulWIFI.py" />
       </list>
     </option>
   </component>
@@ -857,8 +857,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ModulWIFI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="285">
+          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
         </state>
       </provider>
     </entry>

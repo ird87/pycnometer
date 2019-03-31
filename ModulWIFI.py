@@ -17,7 +17,7 @@ class WIFI(object):
             if str(allSSID_list[i]) == myssid:
                     a = i
                     myssidA = allSSID_list[a]
-                    print(myssidA)
+                    print("myssidA: " + myssidA)
                     break
             else:
                     print("getout")
