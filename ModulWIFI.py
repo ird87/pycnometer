@@ -1,3 +1,5 @@
+import time
+
 from wifi import Cell, Scheme
 
 class WIFI(object):
@@ -25,9 +27,10 @@ class WIFI(object):
                 print("getout")
 
         # Creating Scheme with my SSID.
+        myssid = Scheme.for_cell('wlan0', 'home', myssidA, "not")   # vive1234 is the password to my wifi myssidA is the wifi name
+        myssid.activate()
+        time.sleep(10)
         myssid = Scheme.for_cell('wlan0', 'home', myssidA, self.wifi_pass)   # vive1234 is the password to my wifi myssidA is the wifi name
-
-        print(myssid)
         myssid.activate()
 
 
