@@ -28,7 +28,6 @@ class WIFI(object):
         myssid = Scheme.for_cell('wlan0', 'home', myssidA, self.wifi_pass)   # vive1234 is the password to my wifi myssidA is the wifi name
 
         print(myssid)
-        myssid.save()
         myssid.activate()
 
 
