@@ -159,6 +159,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         # Загружаем языковой модуль
         self.languages = Languages()
+
+        self.wifi = WIFI()
         # очищаем поля для ввода данных.
         self.initial_field_clearing()
 
@@ -232,7 +234,6 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # создаем модуль Калибровка и передаем туда ссылку на main.
         self.calibration_procedure = CalibrationProcedure(self)
 
-        self.wifi = WIFI()
         # Нам нужны два Validator'а для установки ограничений на ввод в поля форм.
         # Для int подойдет штатный QIntValidator
         self.onlyInt = QIntValidator()
