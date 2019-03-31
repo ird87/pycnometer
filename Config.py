@@ -172,7 +172,7 @@ class Configure(object):
         if not self.config_user.has_section(section):
             self.config_user.add_section(section)
         self.config_user.set(section, val, s)
-        with open("Configure_user.ini.new", "w") as fh:
+        with open("Configure_user.ini.new", "w", encoding = 'WINDOWS-1251') as fh:
             self.config_user.write(fh)
         if os.path.isfile('Configure_user.ini'):
             os.rename("Configure_user.ini", "Configure_user.ini~")
@@ -188,7 +188,7 @@ class Configure(object):
         if not self.config_user.has_section(section):
             self.config_user.add_section(section)
         self.config_user.set(section, val, s)
-        with open("Configure_user.ini.new", "w") as fh:
+        with open("Configure_user.ini.new", "w", encoding = 'WINDOWS-1251') as fh:
             self.config_user.write(fh)
         if os.path.isfile('Configure_user.ini'):
             os.rename("Configure_user.ini", "Configure_user.ini~")
