@@ -221,7 +221,7 @@ class SPI(object):
                 data[channel] += raw_channels[channel]
                 # print("raw_channels: {0}". format(raw_channels))
                 # voltages = [i * self.ads.v_per_digit for i in raw_channels]
-            self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
+            # self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
 
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
@@ -293,7 +293,7 @@ class SPI(object):
             data_t = data
             data_t.pop(0)
             t = self.calc_temperature(data_t)
-            self.save_t_xls(p, t)
+            # self.save_t_xls(p, t)
         return p
 
     """Метод, который на основание измерения высчитывает давление в кПа"""
