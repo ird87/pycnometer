@@ -979,7 +979,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gSR_lbl3.setText(self.languages.t4_gSR_lbl3)
         self.t4_gSR_button1.setText(self.languages.t4_gSR_button1)
         self.t4_gSR_button2.setText(self.languages.t4_gSR_button2)
-        if self.wifi:
+        if self.wifi.connect:
             # self.t4_gSR_lbl4.setStyleSheet("color: green")
             self.t4_gSR_lbl4.setText(self.languages.t4_wifi_true)
         else:

@@ -9,6 +9,7 @@ class WIFI(object):
         self.wifi_pass = ""
         self.myssid = None
         self.myssidA = None
+        self.connect = False
 
     def set_wifi(self, name, password):
         self.wifi_name = name
@@ -17,26 +18,28 @@ class WIFI(object):
     def wifiscan(self):
         allSSID = Cell.all('wlan0')
         allSSID_list = list(allSSID)
-        # print(allSSID_list)   # prints all available WIFI SSIDs
+        print(allSSID_list)   # prints all available WIFI SSIDs
         myssid= 'Cell(ssid={0})'.format(self.wifi_name)   # vivekHome is my wifi name
         # print("myssid: " + myssid)
         for i in range(len(allSSID_list)):
-            # print("{0}: {1}".format(i, str(allSSID_list[i])))
+            print("{0}: {1}".format(i, str(allSSID_list[i])))
             if str(allSSID_list[i]) == myssid:
                 a = i
                 self.myssidA = allSSID_list[a]
-                # print("myssidA: " + str(self.myssidA))
+                print("myssidA: " + str(self.myssidA))
                 return True
             else:
-                # print("getout")
+                print("getout")
                 return False
 
     def wifi_connect(self):
         self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, self.wifi_pass)
         self.myssid.activate()
+        self.connect = True
 
     def wifi_disconnect(self):
         self.myssid = Scheme.for_cell('wlan0', 'home', self.myssidA, "disconnect")
         self.myssid.activate()
+        self.connect = False
 
 
