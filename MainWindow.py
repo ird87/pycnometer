@@ -1070,7 +1070,7 @@ class Ui_MainWindow(object):
         self.t4_gSR_Edit2 = QtWidgets.QLineEdit(self.t4_groupSavingResult)
         self.t4_gSR_Edit2.setGeometry(QtCore.QRect(142, 420, 230, 25))
         self.t4_gSR_Edit2.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.t4_gSR_Edit2.setAlignment(QtCore.Qt.AlignCenter)
+        self.t4_gSR_Edit2.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.t4_gSR_Edit2.setObjectName("t4_gSR_Edit2")
         self.t4_gSR_lbl3 = QtWidgets.QLabel(self.t4_groupSavingResult)
         self.t4_gSR_lbl3.setGeometry(QtCore.QRect(10, 420, 121, 25))

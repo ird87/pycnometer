@@ -168,7 +168,10 @@ class Configure(object):
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini(self, section, val, s):
-        self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
+        if os.path.isfile('Configure_user.ini'):
+            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
+        else:
+            self.config_user.read('Configure.ini', encoding = 'WINDOWS-1251')
         self.config_user.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
             self.config_user.write(fh)
@@ -182,7 +185,10 @@ class Configure(object):
     """Метод для сохранения измененных настроек в файл"""
     def set_ini_hash(self, section, val, s):
         s = (self.crypting(s)).decode('utf-8')
-        self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
+        if os.path.isfile('Configure_user.ini'):
+            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
+        else:
+            self.config_user.read('Configure.ini', encoding = 'WINDOWS-1251')
         self.config_user.set(section, val, s)
         with open("Configure_user.ini.new", "w") as fh:
             self.config_user.write(fh)

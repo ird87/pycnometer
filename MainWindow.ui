@@ -3145,7 +3145,7 @@
         <enum>QLineEdit::Password</enum>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
       <widget class="QLabel" name="t4_gSR_lbl3">
