@@ -529,7 +529,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Адрес почты:
         self.t4_gSR_Edit1.setText(self.config.email_adress)
         if not platform == "win32":
-            print(ModulWIFI.Search())
+            print(list(ModulWIFI.Search()))
             # Название сети wifi:
             self.t4_gSR_cmd1.addItem(ModulWIFI.Search())
 
