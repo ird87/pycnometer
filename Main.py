@@ -456,15 +456,15 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.languages.load(self.config)
         # Применяем данные языкового модуля
         self.set_languages()
-        if not platform == "win32":
-            if not self.config.wifi_name == "":
-                if self.config.wifi_name in ModulWIFI.SearchNames():
-                    try:
-                        ModulWIFI.Connect(self.config.wifi_name, self.config.wifi_pass)
-                    except Exception:
-                        self.get_messagebox(self.message_headline1, self.message_txt6)
-                else:
-                    self.get_messagebox(self.message_headline1, self.message_txt7)
+        # if not platform == "win32":
+        #     if not self.config.wifi_name == "":
+        #         if self.config.wifi_name in ModulWIFI.SearchNames():
+        #             try:
+        #                 ModulWIFI.Connect(self.config.wifi_name, self.config.wifi_pass)
+        #             except Exception:
+        #                 self.get_messagebox(self.message_headline1, self.message_txt6)
+        #         else:
+        #             self.get_messagebox(self.message_headline1, self.message_txt7)
 
 
         self.header_path = ""
