@@ -5,6 +5,9 @@ import os
 import threading
 import sys
 import os
+
+import xlwt
+
 from ads1256_ADS1256_definitions import *
 from ads1256_pipyadc import ADS1256
 
@@ -95,20 +98,37 @@ class SPI(object):
         self.message = self.main.set_pressure_message
         self.correct_data = 0
 
+        # self.file = os.path.join(os.getcwd(), "temperature.txt")
+        # if os.path.isfile(self.file):
+        #     os.remove(self.file)
+        # handle = open(self.file, "w")
+        # handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
+        # handle.close()
+        #
+        # self.file_p = os.path.join(os.getcwd(), "pressure.txt")
+        # if os.path.isfile(self.file_p):
+        #     os.remove(self.file_p)
+        # handle = open(self.file_p, "w")
+        # handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
+        # handle.close()
 
-        self.file = os.path.join(os.getcwd(), "temperature.txt")
+        self.file = os.path.join(os.getcwd(), "temperature & pressure.xls")
         if os.path.isfile(self.file):
             os.remove(self.file)
-        handle = open(self.file, "w")
-        handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
-        handle.close()
-
-        self.file_p = os.path.join(os.getcwd(), "pressure.txt")
-        if os.path.isfile(self.file_p):
-            os.remove(self.file_p)
-        handle = open(self.file_p, "w")
-        handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
-        handle.close()
+        self.wb = xlwt.Workbook()
+        self.wb_style = xlwt.easyxf("align: horiz centre; borders: left thin, right thin, top thin, bottom thin;")
+        self.wsp = self.wb.add_sheet("{0} | pressure".format(time.strftime("%Y-%m-%d", time.localtime())))
+        self.wsp_row = 0
+        self.wsp.write(self.wsp_row, 0, 'P', self.wb_style)
+        self.wst = self.wb.add_sheet("{0} | temperature".format(time.strftime("%Y-%m-%d", time.localtime())))
+        self.wst_row = 0
+        self.wst.write(self.wst_row, 0, 'Time', self.wb_style)
+        self.wst.write(self.wst_row, 1, 'P', self.wb_style)
+        self.wst.write(self.wst_row, 2, 'T1', self.wb_style)
+        self.wst.write(self.wst_row, 3, 'T2', self.wb_style)
+        self.wst.write(self.wst_row, 4, 'T3', self.wb_style)
+        self.wst.write(self.wst_row, 5, 'T4', self.wb_style)
+        self.wb.save(self.file)
 
     def set_correct_data(self, x):
         self.correct_data = x
@@ -201,7 +221,7 @@ class SPI(object):
                 data[channel] += raw_channels[channel]
                 # print("raw_channels: {0}". format(raw_channels))
                 # voltages = [i * self.ads.v_per_digit for i in raw_channels]
-            self.print_p(self.calc_pressure(raw_channels[0])[0])
+            self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
 
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
@@ -216,37 +236,32 @@ class SPI(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data..... Done.')
         return data
 
-    def print_t(self, p, t):
-        txt = "\n{0} -> P={1}".format(time.strftime("%H:%M:%S", time.localtime()), p)
+    # def print_t(self, p, t):
+    #     txt = "\n{0} -> P={1}".format(time.strftime("%H:%M:%S", time.localtime()), p)
+    #     for i in range(len(t)):
+    #         txt += "\tT{0}={1}".format(i, t[i])
+    #     handle = open(self.file, "a+")
+    #     handle.write(txt)
+    #     handle.close()
+    #
+    # def print_p(self, p):
+    #     txt = "\n{0}".format(p)
+    #     handle = open(self.file_p, "a+")
+    #     handle.write(txt)
+    #     handle.close()
+
+    def save_t_xls(self, p, t):
+        self.wst_row += 1
+        self.wst.write(self.wst_row, 0, time.strftime("%H:%M:%S", time.localtime()), self.wb_style)
+        self.wst.write(self.wst_row, 1, str(p), self.wb_style)
         for i in range(len(t)):
-            txt += "\tT{0}={1}".format(i, t[i])
-        handle = open(self.file, "a+")
-        handle.write(txt)
-        handle.close()
+            self.wst.write(self.wst_row, i+2, str(t[i]), self.wb_style)
+        self.wb.save(self.file)
 
-    def print_p(self, p):
-        txt = "\n{0}".format(p)
-        handle = open(self.file_p, "a+")
-        handle.write(txt)
-        handle.close()
-
-    def save_xls(self):
-        import xlwt
-        DATA = (("The Essential Calvin and Hobbes", 1988,),
-                ("The Authoritative Calvin and Hobbes", 1990,),
-                ("The Indispensable Calvin and Hobbes", 1992,),
-                ("Attack of the Deranged Mutant Killer Monster Snow Goons", 1992,),
-                ("The Days Are Just Packed", 1993,),
-                ("Homicidal Psycho Jungle Cat", 1994,),
-                ("There's Treasure Everywhere", 1996,),
-                ("It's a Magical World", 1996,),)
-        wb = xlwt.Workbook()
-        ws = wb.add_sheet("My Sheet")
-        for i, row in enumerate(DATA):
-            for j, col in enumerate(row):
-                ws.write(i, j, col)
-        ws.col(0).width = 256 * max([len(row[0]) for row in DATA])
-        wb.save("myworkbook.xls")
+    def save_p_xls(self, p):
+        self.wsp_row += 1
+        self.wsp.write(self.wsp_row, 0, str(p), self.wb_style)
+        self.wb.save(self.file)
 
     """Метод рассчета давления на основание данных с датчика"""
     def calc_pressure(self, data_p):
@@ -278,7 +293,7 @@ class SPI(object):
             data_t = data
             data_t.pop(0)
             t = self.calc_temperature(data_t)
-            self.print_t(p, t)
+            self.save_t_xls(p, t)
         return p
 
     """Метод, который на основание измерения высчитывает давление в кПа"""
