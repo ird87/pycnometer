@@ -383,7 +383,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
     def option_appy(self):
         # Сначала мы записываем все изменения внутрь файла config.ini
         self.config.set_ini('Pycnometer', 'model', self.config.model)
-        self.config.set_ini('Pycnometer', 'version', self.config.version)
+        self.config.set_ini('Pycnometer', 'version', str(self.config.version))
         self.config.set_ini('Pycnometer', 'small_cuvette', str(self.config.small_cuvette))
         self.config.set_ini('Pycnometer', 'module_spi', self.config.module_spi)
         self.config.set_ini('Pycnometer', 'data_channel', str(self.config.data_channel))
