@@ -531,11 +531,14 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         if not platform == "win32":
             # Название сети wifi:
             wifilist = ModulWIFI.Search()
+            wifi_networks = []
             for wifi_network in wifilist:
                 network = str(wifi_network)
                 network = network.replace('Cell(ssid=', '')
-                network = network.replace(')', '')
-                self.t4_gSR_cmd1.addItem(network)
+                network = network[:-1]
+                if not network in wifi_networks:
+                    wifi_networks.append(network)
+            self.t4_gSR_cmd1.addItem(wifi_networks)
 
             # Пароль от wifi:
             self.t4_gSR_Edit2.setText(self.config.wifi_pass)
