@@ -12,7 +12,7 @@ class WIFI(object):
        print(allSSID)   # prints all available WIFI SSIDs
        myssid= 'Cell(ssid = vivekHome)'   # vivekHome is my wifi name
        myssidA = None
-       for i in range(len(allSSID)):
+       for i in range(len(list(allSSID))):
             if str(allSSID[i]) == myssid:
                     a = i
                     myssidA = allSSID[a]
