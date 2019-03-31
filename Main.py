@@ -25,6 +25,7 @@ from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap
 from PyQt5.QtWidgets import QMessageBox
 
+from ModulWIFI import WIFI
 from Progressbar import UiProgressbar
 from TableCalibration import UiTableCalibration
 from TableMeasurement import UiTableMeasurement
@@ -303,6 +304,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # нам надо откалибровать датчик.
         if not self.config.is_test_mode():
             self.calibration_procedure.start_russian_sensor_calibration()
+        wifi = WIFI()
+        wifi.wifiscan()
 
     def start_progressbar(self, title, name, time):
         if not self.config.is_test_mode():
