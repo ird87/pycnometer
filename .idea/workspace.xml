@@ -16,7 +16,7 @@
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="422">
-              <caret line="535" column="16" selection-start-line="535" selection-start-column="16" selection-end-line="535" selection-end-column="16" />
+              <caret line="535" column="53" selection-start-line="535" selection-start-column="53" selection-end-line="535" selection-end-column="53" />
               <folding>
                 <element signature="e#61#75#0" expanded="true" />
               </folding>
@@ -331,14 +331,14 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49375" weight="0.32980973" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.403125" visible="true" weight="0.32135308" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.403125" visible="true" weight="0.32135308" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.41458333" weight="0.422833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32980973" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.596875" side_tool="true" visible="true" weight="0.32135308" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="9" sideWeight="0.596875" side_tool="true" visible="true" weight="0.32135308" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32980973" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -792,7 +792,7 @@
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
-          <caret line="535" column="16" selection-start-line="535" selection-start-column="16" selection-end-line="535" selection-end-column="16" />
+          <caret line="535" column="53" selection-start-line="535" selection-start-column="53" selection-end-line="535" selection-end-column="53" />
           <folding>
             <element signature="e#61#75#0" expanded="true" />
           </folding>

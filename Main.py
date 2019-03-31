@@ -533,7 +533,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             wifilist = ModulWIFI.Search()
             for wifi_network in wifilist:
                 network = str(wifi_network)
-                network = network.replace('Cell(', '')
+                network = network.replace('Cell(ssid=', '')
                 network = network.replace(')', '')
                 self.t4_gSR_cmd1.addItem(network)
 
