@@ -9,13 +9,14 @@ class WIFI(object):
 
     def wifiscan(self):
        allSSID = Cell.all('wlan0')
-       print(allSSID)   # prints all available WIFI SSIDs
+       allSSID_list = list(allSSID)
+       print(allSSID_list)   # prints all available WIFI SSIDs
        myssid= 'Cell(ssid = vivekHome)'   # vivekHome is my wifi name
        myssidA = None
-       for i in range(len(list(allSSID))):
-            if str(allSSID[i]) == myssid:
+       for i in range(len(allSSID_list)):
+            if str(allSSID_list[i]) == myssid:
                     a = i
-                    myssidA = allSSID[a]
+                    myssidA = allSSID_list[a]
                     print(myssidA)
                     break
             else:
