@@ -36,7 +36,7 @@ def SearchSSID(name):
             a = i
             myssidA = allSSID[a]
             print("myssidA: " + str(myssidA))
-            return myssid
+            return myssidA
         else:
             print("getout")
     return None
