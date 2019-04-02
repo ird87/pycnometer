@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import wifi
+from wifi import Cell, Scheme
 
 
 def Search():
@@ -23,6 +24,38 @@ def SearchNames():
         if not network in wifi_networks:
             wifi_networks.append(network)
     return wifi_networks
+
+def SearchSSID(name):
+    allSSID = Search()
+    myssid = 'Cell(ssid={0})'.format(name)   # vivekHome is my wifi name
+    # print("myssid: " + myssid)
+    for i in range(len(allSSID)):
+        # print("{0}: {1}".format(i, str(allSSID[i])))
+        if str(allSSID[i]) == myssid:
+            a = i
+            myssidA = allSSID[a]
+            print("myssidA: " + str(myssidA))
+            return True
+        else:
+            print("getout")
+            return False
+
+def addSSID(ssid, password):
+    myssid = Scheme.for_cell('wlan0', 'home', ssid, password)
+    try:
+        myssid.save()
+        return True
+    except Exception:
+        return False
+
+def deleteSSID(ssid, password):
+    myssid = Scheme.for_cell('wlan0', 'home', ssid, password)
+    try:
+        myssid.delete()
+        return True
+    except Exception:
+        return False
+
 
 
 # def FindFromSearchList(ssid):

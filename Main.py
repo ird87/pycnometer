@@ -7,6 +7,7 @@ import os
 import shutil
 import sys  # sys нужен для передачи argv в QApplication
 import time
+from subprocess import Popen, PIPE
 from sys import platform
 from urllib.request import urlopen
 import MainWindow  # Это наш конвертированный файл дизайна
@@ -433,12 +434,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
         self.config.set_ini('SavingResult', 'send_report_to_mail', str(self.t4_gSR_chb2.isChecked()))
         self.config.set_ini_hash('SavingResult', 'email_adress', self.t4_gSR_Edit1.text())
-        # if not platform == "win32":
-        #     if not self.t4_gSR_cmd1.currentText() == self.config.wifi_name:
-        #         ModulWIFI.Delete(self.config.wifi_name)
+        if not platform == "win32":
+            ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
+            ModulWIFI.deleteSSID(ssid, self.config.wifi_pass)
         self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_cmd1.currentText())
         self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit2.text())
-
         # А потом вызываем метод, который загружает и применяет все настройки из файла config.ini
         self.setup()
 
@@ -457,10 +457,17 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Применяем данные языкового модуля
         self.set_languages()
         if not platform == "win32" and not self.config.wifi_name == "":
-            interface = 'wlan0'
-            name = self.config.wifi_name
-            password = self.config.wifi_pass
-            os.system('iwconfig ' + interface + ' essid ' + name + ' key ' + password)
+            ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
+            ModulWIFI.addSSID(ssid, self.config.wifi_pass)
+            p = Popen(['connect_to_wifi'], stdout = PIPE, bufsize = 1)
+            with p.stdout:
+                for line in iter(p.stdout.readline, b''):
+                    print(line)
+            p.wait()
+            # interface = 'wlan0'
+            # name = self.config.wifi_name
+            # password = self.config.wifi_pass
+            # os.system('iwconfig ' + interface + ' essid ' + name + ' key ' + password)
         #     if not self.config.wifi_name == "":
         #         if self.config.wifi_name in ModulWIFI.SearchNames():
         #             try:
