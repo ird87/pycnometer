@@ -458,6 +458,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.set_languages()
         if not platform == "win32" and not self.config.wifi_name == "":
             ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
+            print(str(ssid))
             ModulWIFI.addSSID(ssid, self.config.wifi_pass)
             p = Popen(['connect_to_wifi'], stdout = PIPE, bufsize = 1)
             with p.stdout:
