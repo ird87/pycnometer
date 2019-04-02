@@ -456,7 +456,11 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.languages.load(self.config)
         # Применяем данные языкового модуля
         self.set_languages()
-        # if not platform == "win32":
+        if not platform == "win32" and not self.config.wifi_name == "":
+            interface = 'wlan0'
+            name = self.config.wifi_name
+            password = self.config.wifi_pass
+            os.system('iwconfig ' + interface + ' essid ' + name + ' key ' + password)
         #     if not self.config.wifi_name == "":
         #         if self.config.wifi_name in ModulWIFI.SearchNames():
         #             try:
