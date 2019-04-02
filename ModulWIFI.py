@@ -39,7 +39,7 @@ def SearchSSID(name):
             return myssid
         else:
             print("getout")
-            return None
+    return None
 
 def addSSID(ssid, password):
     myssid = Scheme.for_cell('wlan0', 'home', ssid, password)
