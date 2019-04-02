@@ -27,7 +27,7 @@ def SearchNames():
 
 def SearchSSID(name):
     allSSID = Search()
-    print("allSSID: " + allSSID)
+    print("allSSID: " + str(allSSID))
     myssid = 'Cell(ssid={0})'.format(name)   # vivekHome is my wifi name
     print("myssid: " + myssid)
     for i in range(len(allSSID)):
