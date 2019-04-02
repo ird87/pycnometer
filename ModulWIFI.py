@@ -47,12 +47,14 @@ def addSSID(ssid, password):
         myssid.save()
         return True
     except Exception:
+        print("NO addSSID")
         return False
 
 def deleteSSID(ssid, password):
     myssid = Scheme.for_cell('wlan0', 'home', ssid, password)
     try:
         myssid.delete()
+        print("deleteSSID addSSID")
         return True
     except Exception:
         return False

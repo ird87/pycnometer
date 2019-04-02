@@ -460,11 +460,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
             print(str(ssid))
             ModulWIFI.addSSID(ssid, self.config.wifi_pass)
-            p = Popen([os.path.join(os.getcwd(), 'connect_to_wifi')], stdout = PIPE, bufsize = 1)
-            with p.stdout:
-                for line in iter(p.stdout.readline, b''):
-                    print(line)
-            p.wait()
+            cmd = 'ifconfig wlan0 up'
+            os.system(cmd)
             # interface = 'wlan0'
             # name = self.config.wifi_name
             # password = self.config.wifi_pass
