@@ -15,10 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="467" column="66" selection-start-line="467" selection-start-column="66" selection-end-line="467" selection-end-column="66" />
-              <caret line="466" column="66" selection-start-line="466" selection-start-column="66" selection-end-line="466" selection-end-column="66" />
-              <caret line="465" column="66" selection-start-line="465" selection-start-column="66" selection-end-line="465" selection-end-column="66" />
+            <state relative-caret-position="594">
+              <caret line="469" column="27" selection-start-line="469" selection-start-column="27" selection-end-line="469" selection-end-column="27" />
               <folding>
                 <element signature="e#61#75#0" expanded="true" />
               </folding>
@@ -859,10 +857,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="467" column="66" selection-start-line="467" selection-start-column="66" selection-end-line="467" selection-end-column="66" />
-          <caret line="466" column="66" selection-start-line="466" selection-start-column="66" selection-end-line="466" selection-end-column="66" />
-          <caret line="465" column="66" selection-start-line="465" selection-start-column="66" selection-end-line="465" selection-end-column="66" />
+        <state relative-caret-position="594">
+          <caret line="469" column="27" selection-start-line="469" selection-start-column="27" selection-end-line="469" selection-end-column="27" />
           <folding>
             <element signature="e#61#75#0" expanded="true" />
           </folding>

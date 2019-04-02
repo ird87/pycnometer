@@ -460,13 +460,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Применяем данные языкового модуля
         self.set_languages()
         if not platform == "win32" and not self.config.wifi_name == "":
-            # os.system('wpa_cli -i wlan0 reconfigure || ( systemctl restart dhcpcd; wpa_cli -i wlan0 reconfigure; )')
-            # os.system('wpa_cli -i wlan0 ADD_NETWORK 1')
-            os.system("wpa_cli -p /var/run/wpa_supplicant -i wlan0 SET_NETWORK 1 ssid \"{0}\"".format(self.config.wifi_name))
-            os.system("wpa_cli -p /var/run/wpa_supplicant -i wlan0 SET_NETWORK 1 psk  \"{0}\"".format(self.config.wifi_pass))
+            os.system('wpa_cli -p /var/run/wpa_supplicant -i wlan0 ADD_NETWORK 1')
+            os.system("wpa_cli -p /var/run/wpa_supplicant -i wlan0 SET_NETWORK 1 ssid '\"{0}\"'".format(self.config.wifi_name))
+            os.system("wpa_cli -p /var/run/wpa_supplicant -i wlan0 SET_NETWORK 1 psk  '\"{0}\"'".format(self.config.wifi_pass))
             os.system("wpa_cli -p /var/run/wpa_supplicant -i wlan0 ENABLE_NETWORK 1")
             os.system("wpa_cli -p /var/run/wpa_supplicant -i wlan0 RECONNECT")
-            # os.system('wpa_cli -i wlan0 SELECT_NETWORK 1')
+            os.system('wpa_cli -p /var/run/wpa_supplicant -i wlan0 SELECT_NETWORK 1')
 
             # interface = 'wlan0'
             # name = self.config.wifi_name
