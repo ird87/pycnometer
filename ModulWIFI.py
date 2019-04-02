@@ -35,10 +35,10 @@ def SearchSSID(name):
             a = i
             myssidA = allSSID[a]
             print("myssidA: " + str(myssidA))
-            return True
+            return myssid
         else:
             print("getout")
-            return False
+            return None
 
 def addSSID(ssid, password):
     myssid = Scheme.for_cell('wlan0', 'home', ssid, password)
