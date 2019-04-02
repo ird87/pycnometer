@@ -459,7 +459,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Применяем данные языкового модуля
         self.set_languages()
         if not platform == "win32" and not self.config.wifi_name == "":
-            os.system('nmcli d wifi connect {0} password {1} iface {2}' % (self.config.wifi_name, self.config.wifi_pass, 'wlan0'))
+            os.system('nmcli d wifi connect {0} password {1} iface {2}'.format(self.config.wifi_name, self.config.wifi_pass, 'wlan0'))
             # interface = 'wlan0'
             # name = self.config.wifi_name
             # password = self.config.wifi_pass
