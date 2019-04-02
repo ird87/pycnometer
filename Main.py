@@ -433,9 +433,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
         self.config.set_ini('SavingResult', 'send_report_to_mail', str(self.t4_gSR_chb2.isChecked()))
         self.config.set_ini_hash('SavingResult', 'email_adress', self.t4_gSR_Edit1.text())
-        if not platform == "win32":
-            if not self.t4_gSR_cmd1.currentText() == self.config.wifi_name:
-                ModulWIFI.Delete(self.config.wifi_name)
+        # if not platform == "win32":
+        #     if not self.t4_gSR_cmd1.currentText() == self.config.wifi_name:
+        #         ModulWIFI.Delete(self.config.wifi_name)
         self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_cmd1.currentText())
         self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit2.text())
 
@@ -536,6 +536,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         if not platform == "win32":
             # Название сети wifi:
             wifi_networks = ModulWIFI.SearchNames()
+            self.t4_gSR_cmd1.clear()
+            self.t4_gSR_cmd1.addItem("")
             for wifi_network in wifi_networks:
                 self.t4_gSR_cmd1.addItem(wifi_network)
             self.t4_gSR_cmd1.setCurrentText(self.config.wifi_name)
