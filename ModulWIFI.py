@@ -65,7 +65,7 @@ def _disconnect_all(_iface):
     """
     Disconnect all wireless networks.
     """
-    lines = os.system("wpa_cli -i %s list_networks" % _iface).split("\n")
+    lines = os.system("wpa_cli -i %s list_networks" % _iface)
     if lines:
         for line in lines[1:-1]:
             os.system("wpa_cli -i %s remove_network %s" % (_iface, line.split()[0]))
