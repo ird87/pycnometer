@@ -459,7 +459,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Применяем данные языкового модуля
         self.set_languages()
         if not platform == "win32" and not self.config.wifi_name == "":
-            os.system('wpa_cli -i wlan0 CONNECT')
+            os.system('wpa_cli -i wlan0 reconfigure || ( systemctl restart dhcpcd; wpa_cli -i wlan0 reconfigure; )')
             # interface = 'wlan0'
             # name = self.config.wifi_name
             # password = self.config.wifi_pass
