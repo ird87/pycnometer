@@ -437,6 +437,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         if not platform == "win32" and not self.config.wifi_name == "":
             ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
             ModulWIFI.deleteSSID(ssid, self.config.wifi_pass)
+            ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
+            ModulWIFI.addSSID(ssid, self.config.wifi_pass)
         self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_cmd1.currentText())
         self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit2.text())
         # А потом вызываем метод, который загружает и применяет все настройки из файла config.ini
@@ -457,10 +459,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Применяем данные языкового модуля
         self.set_languages()
         if not platform == "win32" and not self.config.wifi_name == "":
-            ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
-            print(str(ssid))
-            ModulWIFI.addSSID(ssid, self.config.wifi_pass)
-            os.system('nmcli d wifi connect "%s" password %s iface %s' % (self.config.wifi_name, self.config.wifi_pass, 'wlan0'))
+            os.system('nmcli d wifi connect {0} password {1} iface {2}' % (self.config.wifi_name, self.config.wifi_pass, 'wlan0'))
             # interface = 'wlan0'
             # name = self.config.wifi_name
             # password = self.config.wifi_pass
