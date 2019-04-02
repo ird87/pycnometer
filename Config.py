@@ -86,12 +86,14 @@ class Configure(object):
         self.email_adress = ""
         self.wifi_name = ""
         self.wifi_pass = ""
+        self.spi2_xls = False
         # Загружаем данные из файла
         # [Ports]
         self.set_ports()
 
         # [[TestMode]]
         self.testMode = self.try_getint_user_config('TestMode', 'testMode', True)
+        self.spi2_xls = self.try_get_user_config_hash('TestMode', 'tp', True)
 
     """Метод для назначения портам указанных в ini файле значений"""
     def set_ports(self):
@@ -149,6 +151,7 @@ class Configure(object):
         self.email_adress = self.try_get_user_config_hash('SavingResult', 'email_adress', True)
         self.wifi_name = self.try_get_user_config_hash('SavingResult', 'wifi_name', True)
         self.wifi_pass = self.try_get_user_config_hash('SavingResult', 'wifi_pass', True)
+
 
 
     """Метод возвращает номера портов для работы"""

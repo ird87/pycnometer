@@ -34,21 +34,21 @@ import time
 # on the Waveshare board is set.
 #
 # Input pin for the potentiometer on the Waveshare Precision ADC board:
-POTI = POS_AIN0|NEG_AINCOM
+POTI = POS_AIN0 | NEG_AINCOM
 # Light dependant resistor of the same board:
-LDR  = POS_AIN1|NEG_AINCOM
+LDR = POS_AIN1 | NEG_AINCOM
 # The other external input screw terminals of the Waveshare board:
-EXT2, EXT3, EXT4 = POS_AIN2|NEG_AINCOM, POS_AIN3|NEG_AINCOM, POS_AIN4|NEG_AINCOM
-EXT5, EXT6, EXT7 = POS_AIN5|NEG_AINCOM, POS_AIN6|NEG_AINCOM, POS_AIN7|NEG_AINCOM
+EXT2, EXT3, EXT4 = POS_AIN2 | NEG_AINCOM, POS_AIN3 | NEG_AINCOM, POS_AIN4 | NEG_AINCOM
+EXT5, EXT6, EXT7 = POS_AIN5 | NEG_AINCOM, POS_AIN6 | NEG_AINCOM, POS_AIN7 | NEG_AINCOM
 
 # You can connect any pin as well to the positive as to the negative ADC input.
 # The following reads the voltage of the potentiometer with negative polarity.
 # The ADC reading should be identical to that of the POTI channel, but negative.
-POTI_INVERTED = POS_AINCOM|NEG_AIN0
+POTI_INVERTED = POS_AINCOM | NEG_AIN0
 
 # For fun, connect both ADC inputs to the same physical input pin.
 # The ADC should always read a value close to zero for this.
-SHORT_CIRCUIT = POS_AIN0|NEG_AIN0
+SHORT_CIRCUIT = POS_AIN0 | NEG_AIN0
 
 # Specify here an arbitrary length list (tuple) of arbitrary input channel pair
 # eight-bit code values to scan sequentially from index 0 to last.
@@ -61,24 +61,26 @@ CH_SEQUENCE = (POTI, LDR, EXT2, EXT3, EXT4, EXT7, POTI_INVERTED, SHORT_CIRCUIT)
 
 """
 
+
 # Модуль для взаимодействия с Raspberry Pi
 class SPI(object):
     """docstring"""
 
     """Конструктор класса. Поля класса"""
+
     def __init__(self, main):
         self.main = main
         self.config = self.main.config
         self.t = 0
         self.const_data = 6300000
-        self.p_channel = self.config.data_channel-1
+        self.p_channel = self.config.data_channel - 1
         # Заведем переменную для массива каналов, измеряющих температуру.
         self.t_channels = []
         # Переберем каналы из настроек и добавим их в переменную.
         for t_channel in self.config.t_channels:
             #  номер канала должен быть между 1 и 8 и он не должен повторяться.
-            if 1 <= t_channel <= 8 and not (t_channel-1) in self.t_channels:
-                self.t_channels.append(t_channel-1)
+            if 1 <= t_channel <= 8 and not (t_channel - 1) in self.t_channels:
+                self.t_channels.append(t_channel - 1)
 
         ### STEP 1: Initialise ADC object using default configuration:
         # (Note1: See ADS1256_default_config.py, see ADS1256 datasheet)
@@ -98,6 +100,7 @@ class SPI(object):
         self.message = self.main.set_pressure_message
         self.correct_data = 0
 
+        # region open textfile
         # self.file = os.path.join(os.getcwd(), "temperature.txt")
         # if os.path.isfile(self.file):
         #     os.remove(self.file)
@@ -111,29 +114,15 @@ class SPI(object):
         # handle = open(self.file_p, "w")
         # handle.write("{0}".format(time.strftime("%Y-%m-%d", time.localtime())))
         # handle.close()
+        # endregion
 
-        self.file = os.path.join(os.getcwd(), "temperature & pressure.xls")
-        if os.path.isfile(self.file):
-            os.remove(self.file)
-        self.wb = xlwt.Workbook(encoding = 'WINDOWS-1251')
-        self.wb_style = xlwt.easyxf("align: horiz centre; borders: left thin, right thin, top thin, bottom thin;")
-        self.wsp = self.wb.add_sheet("{0} | pressure".format(time.strftime("%Y-%m-%d", time.localtime())))
-        self.wsp_row = 0
-        self.wsp.write(self.wsp_row, 0, 'P', self.wb_style)
-        self.wst = self.wb.add_sheet("{0} | temperature".format(time.strftime("%Y-%m-%d", time.localtime())))
-        self.wst_row = 0
-        self.wst.write(self.wst_row, 0, 'Time', self.wb_style)
-        self.wst.write(self.wst_row, 1, 'P', self.wb_style)
-        self.wst.write(self.wst_row, 2, 'T1', self.wb_style)
-        self.wst.write(self.wst_row, 3, 'T2', self.wb_style)
-        self.wst.write(self.wst_row, 4, 'T3', self.wb_style)
-        self.wst.write(self.wst_row, 5, 'T4', self.wb_style)
-        self.wb.save(self.file)
+        self.create_xls_file()
 
     def set_correct_data(self, x):
         self.correct_data = x
 
     """Метод для применения настроек"""
+
     def set_option(self):
         self.test_on = False
         # Тест должен быть выключен для применения настроек. Ситуации, когда настройки применяются, а он включен
@@ -145,6 +134,7 @@ class SPI(object):
         self.smq_now = self.config.smq_now
 
     """Метод для проверки. Возвращает True, если измерение давления запущено иначе False"""
+
     def is_test_on(self):
         result = False
         if self.test_on:
@@ -152,23 +142,26 @@ class SPI(object):
         return result
 
     """Метод для установки состояния переключателя работы измерения давления в положение True/False"""
+
     def set_test_on(self, s):
         self.test_on = s
 
     """Метод для запуска отдельного потока для измерения давления"""
+
     def start_test(self):
         # Проверяем, что измерение давления еще не запущео
         if not self.is_test_on():
             # Устанавливаем состояние в режим "запущена"
             self.set_test_on(True)
             # Это команда присваивает отдельному потоку исполняемую процедуру калибровки
-            self.my_thread = threading.Thread(target=self.implementation_test)
+            self.my_thread = threading.Thread(target = self.implementation_test)
             # Запускаем поток и процедуру измерения давления
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Thread "Pressure measurement" started in the NORMAL MODE')
             self.my_thread.start()
 
     """Метод для выключения отдельного потока калибровки прибора"""
+
     def close_test(self):
         # Проверяем, что измерение давления запущено
         if self.is_test_on():
@@ -180,6 +173,7 @@ class SPI(object):
                                                                              'in the NORMAL MODE')
 
     """Метод, где расположена процедура обработки измерения давления в отдельном потоке"""
+
     def implementation_test(self):
         # до тех пор пока процедура активна
         # (а она активна, пока пользователь не покинет вкладку "Ручное управление") выполняем:
@@ -199,6 +193,7 @@ class SPI(object):
                                    'Pressure measurement for Manual control finished')
 
     """Метод, где мы получаем данные с датчика"""
+
     def read_channel(self):
         # инициализируем под измерение переменную data
         data = []
@@ -224,7 +219,6 @@ class SPI(object):
                 # # voltages = [i * self.ads.v_per_digit for i in raw_channels]
                 # print("pressure PA: " + str(self.calc_pressure(raw_channels[0])[0]))
 
-
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
         for i in range(len(data)):
@@ -238,6 +232,7 @@ class SPI(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data..... Done.')
         return data
 
+    # region add text to file
     # def print_t(self, p, t):
     #     txt = "\n{0} -> P={1}".format(time.strftime("%H:%M:%S", time.localtime()), p)
     #     for i in range(len(t)):
@@ -251,21 +246,45 @@ class SPI(object):
     #     handle = open(self.file_p, "a+")
     #     handle.write(txt)
     #     handle.close()
+    # endregion
+
+    def create_xls_file(self):
+        self.file = os.path.join(os.getcwd(), "temperature & pressure.xls")
+        if os.path.isfile(self.file):
+            os.remove(self.file)
+        if self.main.config.spi2_xls:
+            self.wb = xlwt.Workbook(encoding = 'WINDOWS-1251')
+            self.wb_style = xlwt.easyxf("align: horiz centre; borders: left thin, right thin, top thin, bottom thin;")
+            self.wsp = self.wb.add_sheet("{0} | pressure".format(time.strftime("%Y-%m-%d", time.localtime())))
+            self.wsp_row = 0
+            self.wsp.write(self.wsp_row, 0, 'P', self.wb_style)
+            self.wst = self.wb.add_sheet("{0} | temperature".format(time.strftime("%Y-%m-%d", time.localtime())))
+            self.wst_row = 0
+            self.wst.write(self.wst_row, 0, 'Time', self.wb_style)
+            self.wst.write(self.wst_row, 1, 'P', self.wb_style)
+            self.wst.write(self.wst_row, 2, 'T1', self.wb_style)
+            self.wst.write(self.wst_row, 3, 'T2', self.wb_style)
+            self.wst.write(self.wst_row, 4, 'T3', self.wb_style)
+            self.wst.write(self.wst_row, 5, 'T4', self.wb_style)
+            self.wb.save(self.file)
 
     def save_t_xls(self, p, t):
-        self.wst_row += 1
-        self.wst.write(self.wst_row, 0, time.strftime("%H:%M:%S", time.localtime()), self.wb_style)
-        self.wst.write(self.wst_row, 1, str(p), self.wb_style)
-        for i in range(len(t)):
-            self.wst.write(self.wst_row, i+2, str(t[i]), self.wb_style)
-        self.wb.save(self.file)
+        if self.main.config.spi2_xls:
+            self.wst_row += 1
+            self.wst.write(self.wst_row, 0, time.strftime("%H:%M:%S", time.localtime()), self.wb_style)
+            self.wst.write(self.wst_row, 1, str(p), self.wb_style)
+            for i in range(len(t)):
+                self.wst.write(self.wst_row, i + 2, str(t[i]), self.wb_style)
+            self.wb.save(self.file)
 
     def save_p_xls(self, p):
-        self.wsp_row += 1
-        self.wsp.write(self.wsp_row, 0, str(p), self.wb_style)
-        self.wb.save(self.file)
+        if self.main.config.spi2_xls:
+            self.wsp_row += 1
+            self.wsp.write(self.wsp_row, 0, str(p), self.wb_style)
+            self.wb.save(self.file)
 
     """Метод рассчета давления на основание данных с датчика"""
+
     def calc_pressure(self, data_p):
         # считаем сразу в кПа, Бар и psi и заворачиваем в массив
         p1 = self.getkPa(data_p)  # кПа
@@ -282,6 +301,7 @@ class SPI(object):
         return result
 
     """Метод для получения давления с датчика"""
+
     def get_pressure(self, crutch="p"):
         # получить данные с датчика
         data = self.read_channel()
@@ -299,31 +319,37 @@ class SPI(object):
         return p
 
     """Метод, который на основание измерения высчитывает давление в кПа"""
+
     def getkPa(self, data):
-        p = data / self.const_data * 130 # кПа
+        p = data / self.const_data * 130  # кПа
         return p
 
     """Метод, который на основание измерения высчитывает давление в Бар"""
+
     def getBar(self, data):
         p = data / self.const_data * 1.3  # Бар
         return p
 
     """Метод, который на основание измерения высчитывает давление в psi"""
+
     def getPsi(self, data):
         p = data / self.const_data * 130 * 0.14503773773  # psi
         return p
 
     """Метод, который возвращает из давление в кПа значение измерения"""
+
     def getDataFromkPa(self, p):
         data = p * self.const_data / 130  # кПа
         return data
 
     """Метод, который возвращает из давление в Бар значение измерения"""
+
     def getDataFromBar(self, p):
         data = p * self.const_data / 1.3  # кПа
         return data
 
     """Метод, который возвращает из давление в psi значение измерения"""
+
     def getDataFromPsi(self, p):
         data = p * self.const_data / 130 / 0.14503773773  # кПа
         return data
