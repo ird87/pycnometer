@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-import time
 
 import wifi
 from wifi import Cell, Scheme
@@ -61,35 +59,7 @@ def deleteSSID(ssid, password):
     except Exception:
         return False
 
-def _disconnect_all(_iface):
-    """
-    Disconnect all wireless networks.
-    """
-    lines = os.system("wpa_cli -i %s list_networks" % _iface)
-    if lines:
-        for line in lines[1:-1]:
-            os.system("wpa_cli -i %s remove_network %s" % (_iface, line.split()[0]))
 
-def connect_to_network(_iface, _ssid, _type, _pass=None):
-    """
-    Associate to a wireless network. Support _type options:
-    *WPA[2], WEP, OPEN
-    """
-    _disconnect_all(_iface)
-    time.sleep(1)
-    if os.system("wpa_cli -i %s add_network" % _iface) == "0\n":
-        if os.system('wpa_cli -i %s set_network 0 ssid \'"%s"\'' % (_iface, _ssid)) == "OK\n":
-            if _type == "OPEN":
-                os.system("wpa_cli -i %s set_network 0 auth_alg OPEN" % _iface)
-                os.system("wpa_cli -i %s set_network 0 key_mgmt NONE" % _iface)
-            elif _type == "WPA" or _type == "WPA2":
-                os.system('wpa_cli -i %s set_network 0 psk "%s"' % (_iface, _pass))
-            elif _type == "WEP":
-                os.system("wpa_cli -i %s set_network 0 wep_key %s" % (_iface, _pass))
-            else:
-                print("Unsupported type")
-
-                os.system("wpa_cli -i %s select_network 0" % _iface)
 
 
 # def FindFromSearchList(ssid):
