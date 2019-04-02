@@ -462,6 +462,23 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         if not platform == "win32" and not self.config.wifi_name == "":
             # os.system('wpa_cli -i wlan0 reconfigure || ( systemctl restart dhcpcd; wpa_cli -i wlan0 reconfigure; )')
             # os.system('wpa_cli -i wlan0 ADD_NETWORK 1')
+
+            with open('/etc/wpa_supplicant/wpa_supplicant.conf', 'r') as f:
+                in_file = f.readlines()
+                f.close()
+
+            out_file = []
+            for line in in_file:
+                if line.startswith("psk"):
+                    line = 'ssid=' + '"' + self.config.wifi_name + '"' + '\n'
+                if line.startswith("psk"):
+                    line = 'psk=' + '"' + self.config.wifi_pass + '"' + '\n'
+                out_file.append(line)
+
+            with open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w') as f:
+                for line in out_file:
+                    f.write(line)
+
             os.system("wpa_cli -i SET_NETWORK 1 ssid \"{0}\"".format(self.config.wifi_name))
             os.system("wpa_cli -i SET_NETWORK 1 psk  \"{0}\"".format(self.config.wifi_pass))
             os.system("wpa_cli -i ENABLE_NETWORK 1")
