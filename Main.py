@@ -437,7 +437,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         if not platform == "win32" and not self.config.wifi_name == "":
             ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
             ModulWIFI.deleteSSID(ssid, self.config.wifi_pass)
-            os.system('wpa_cli -i wlan0 REMOVE_NETWORK 1')
+            # os.system('wpa_cli -i wlan0 REMOVE_NETWORK 1')
             ssid = ModulWIFI.SearchSSID(self.t4_gSR_cmd1.currentText())
             ModulWIFI.addSSID(ssid, self.t4_gSR_Edit2.text())
         self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_cmd1.currentText())
@@ -460,11 +460,12 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Применяем данные языкового модуля
         self.set_languages()
         if not platform == "win32" and not self.config.wifi_name == "":
+            ModulWIFI.connect_to_network('wlan0', self.config.wifi_name, "WPA2", self.config.wifi_pass)
             # os.system('wpa_cli -i wlan0 reconfigure || ( systemctl restart dhcpcd; wpa_cli -i wlan0 reconfigure; )')
-            os.system('wpa_cli -i wlan0 ADD_NETWORK 1')
-            os.system('SET_NETWORK 1 ssid "%s"' % (self.config.wifi_name))
-            os.system('SET_NETWORK 1 psk  "%s"' % (self.config.wifi_pass))
-            os.system('wpa_cli -i wlan0 ENABLE_NETWORK 1')
+            # os.system('wpa_cli -i wlan0 ADD_NETWORK 1')
+            # os.system('SET_NETWORK 1 ssid "%s"' % (self.config.wifi_name))
+            # os.system('SET_NETWORK 1 psk  "%s"' % (self.config.wifi_pass))
+            # os.system('wpa_cli -i wlan0 ENABLE_NETWORK 1')
             # os.system('wpa_cli -i wlan0 SELECT_NETWORK 1')
 
             # interface = 'wlan0'
