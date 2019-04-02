@@ -93,7 +93,7 @@ class Configure(object):
 
         # [[TestMode]]
         self.testMode = self.try_getint_user_config('TestMode', 'testMode', True)
-        self.spi2_xls = self.try_get_user_config_hash('TestMode', 'tp', True)
+        self.spi2_xls = self.try_getboolean_user_config('TestMode', 'tp', True)
 
     """Метод для назначения портам указанных в ini файле значений"""
     def set_ports(self):
