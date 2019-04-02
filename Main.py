@@ -434,7 +434,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
         self.config.set_ini('SavingResult', 'send_report_to_mail', str(self.t4_gSR_chb2.isChecked()))
         self.config.set_ini_hash('SavingResult', 'email_adress', self.t4_gSR_Edit1.text())
-        if not platform == "win32":
+        if not platform == "win32" and not self.config.wifi_name == "":
             ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
             ModulWIFI.deleteSSID(ssid, self.config.wifi_pass)
         self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_cmd1.currentText())
