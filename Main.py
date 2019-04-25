@@ -1555,8 +1555,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Найдем в папке прибора, отвечающей за шапки и подвалы, имеющиеся файлы ".png", ".jpg"
         app_list = [os.path.join(os.getcwd(), 'attachment', 'header & footer')]
         app_masks = [".png", ".jpg"]
-        app_files = self.get_files_on_usblist(app_list, app_masks)
-        if app_files is None:
+        app_files = self.get_files_on_datalist(app_list, app_masks)
+        if len(app_files) == 0:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find app_files')
         else:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find app_files: {0}'.format(app_files))
@@ -1564,26 +1564,26 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # найдем папку пикнометр на usb
         data_dir_list = ["/media/pi"]
         data_dir_masks = ["pycnometer"]
-        data_dir = self.get_files_on_usblist(data_dir_list, data_dir_masks)
-        if data_dir is None:
+        data_dir = self.get_dir_on_datalist(data_dir_list, data_dir_masks)
+        if len(data_dir) == 0:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find data_dir')
         else:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find data_dir: {0}'.format(data_dir))
 
         # Найдем папку header & footer на usb
-        hf_dir_list = data_dir
+        hf_dir_list = list(data_dir.keys())
         hf_dir_masks = ["header & footer"]
-        hf_dir = self.get_files_on_usblist(hf_dir_list, hf_dir_masks)
-        if hf_dir is None:
+        hf_dir = self.get_dir_on_datalist(hf_dir_list, hf_dir_masks)
+        if len(hf_dir) == 0:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find hf_dir')
         else:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find hf_dir: {0}'.format(hf_dir))
 
         # Найдем файлы ".png", ".jpg" в папке 'header & footer' на usb
-        usb_list = data_dir
+        usb_list = list(hf_dir.keys())
         usb_masks = [".png", ".jpg"]
-        usb_files = self.get_files_on_usblist(usb_list, usb_masks)
-        if usb_files is None:
+        usb_files = self.get_files_on_datalist(usb_list, usb_masks)
+        if len(usb_files) == 0:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find usb_files')
         else:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find usb_files: {0}'.format(usb_files))
@@ -1664,7 +1664,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # И вернуть его
         return usblist
 
-    def get_files_on_usblist(self, usblist, masks):
+    def get_files_on_datalist(self, usblist, masks):
         # Мы должны составить список файлов на usblist удовлетворяющих masks,
         # мы должны использовать полные имена файлов и соответсвующую им дату изменений.
         ret_files = {}
@@ -1674,6 +1674,20 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
                     for mask in masks:
                         if nm.endswith(mask):
                             f = os.path.join(top, nm)
+                            data_changed = time.gmtime(os.path.getmtime(f))
+                            ret_files.update({f: data_changed})
+        return ret_files
+
+    def get_dir_on_datalist(self, usblist, masks):
+        # Мы должны составить список файлов на usblist удовлетворяющих masks,
+        # мы должны использовать полные имена файлов и соответсвующую им дату изменений.
+        ret_files = {}
+        for usbdevice in usblist:
+            for top, dirs, files in os.walk(usbdevice):
+                for dir in dirs:
+                    for mask in masks:
+                        if mask in dir:
+                            f = os.path.join(top, dir)
                             data_changed = time.gmtime(os.path.getmtime(f))
                             ret_files.update({f: data_changed})
         return ret_files
