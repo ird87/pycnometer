@@ -5,6 +5,7 @@ import datetime
 import inspect
 import math
 import os
+import shutil
 import time
 import configparser
 
@@ -1573,6 +1574,27 @@ class MeasurementProcedure(object):
         doc.build(elements, onFirstPage =myPages, onLaterPages = myPages)
         # else:
         #     doc.build(elements)
+        if self.main.config.save_to_flash_drive:
+            # найдем папку пикнометр на usb
+            data_dir_list = ["/media/pi"]
+            data_dir_masks = ["pycnometer"]
+            data_dir = self.main.get_dir_on_datalist(data_dir_list, data_dir_masks)
+            if len(data_dir) == 0:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find data_dir')
+            else:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find data_dir: {0}'.format(data_dir))
+
+            # Найдем папку header & footer на usb
+            r_dir_list = list(data_dir.keys())
+            r_dir_masks = ["reports"]
+            r_dir = self.main.get_dir_on_datalist(r_dir_list, r_dir_masks)
+            if len(r_dir) == 0:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find r_dir')
+            else:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find r_dir: {0}'.format(r_dir))
+                r_dir0 = list(data_dir.keys())
+                r_path = os.path.join(r_dir0[0], ('Measurement' + ' - ' + self.data_of_measurement + ' - ' + str(number) + '.pdf'))
+                shutil.copy2(report_name, r_path)
         if self.main.config.send_report_to_mail:
             send(self.main.config.email_adress, "Report: {0}".format(report_name), "Привет! Этот отчет, который ты ждал",
              report_name)
