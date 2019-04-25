@@ -1580,10 +1580,10 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find hf_dir: {0}'.format(hf_dir))
 
         # Найдем файлы ".png", ".jpg" в папке 'header & footer' на usb
-        usb_list = [os.path.join(os.getcwd(), 'attachment', 'header & footer')]
+        usb_list = data_dir
         usb_masks = [".png", ".jpg"]
         usb_files = self.get_files_on_usblist(usb_list, usb_masks)
-        if app_files is None:
+        if usb_files is None:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find usb_files')
         else:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find usb_files: {0}'.format(usb_files))
