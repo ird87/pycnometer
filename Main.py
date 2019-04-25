@@ -296,7 +296,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gMS_cmd1.currentIndexChanged.connect(self.setPressurePmeas)  # Настройка.    изменение ед.изм. давл.
         self.t4_gRS_button1.clicked.connect(self.set_report_header)  # Настройка.    добавить шапку в отчет.
         self.t4_gRS_button2.clicked.connect(self.clear_report_header)  # Настройка.    удалить шапку из отчета.
-        self.t4_gRS_button3.clicked.connect(self.get_report_footer)  # Настройка.    добавить подвал в отчет.
+        self.t4_gRS_button3.clicked.connect(self.set_report_footer)  # Настройка.    добавить подвал в отчет.
         self.t4_gRS_button4.clicked.connect(self.clear_report_footer)  # Настройка.    удалить подвал из отчета.
         self.tabPycnometer.currentChanged.connect(self.tab_change)  # Переключение вкладок программы.
         self.actionmenu4_command1.triggered.connect(self.report_measurment)
@@ -1551,11 +1551,47 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
     def change_file_for_header_or_footer(self):
         result = None
-        usblist = [os.path.join(os.getcwd(), 'attachment')]
-        masks = [".png", ".jpg"]
-        files = self.get_files_on_usblist(usblist, masks)
+
+        # Найдем в папке прибора, отвечающей за шапки и подвалы, имеющиеся файлы ".png", ".jpg"
+        app_list = [os.path.join(os.getcwd(), 'attachment', 'header & footer')]
+        app_masks = [".png", ".jpg"]
+        app_files = self.get_files_on_usblist(app_list, app_masks)
+        if app_files is None:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find app_files')
+        else:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find app_files: {0}'.format(app_files))
+
+        # найдем папку пикнометр на usb
+        data_dir_list = ["/media/pi"]
+        data_dir_masks = ["pycnometer"]
+        data_dir = self.get_files_on_usblist(data_dir_list, data_dir_masks)
+        if data_dir is None:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find data_dir')
+        else:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find data_dir: {0}'.format(data_dir))
+
+        # Найдем папку header & footer на usb
+        hf_dir_list = data_dir
+        hf_dir_masks = ["header & footer"]
+        hf_dir = self.get_files_on_usblist(hf_dir_list, hf_dir_masks)
+        if hf_dir is None:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find hf_dir')
+        else:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find hf_dir: {0}'.format(hf_dir))
+
+        # Найдем файлы ".png", ".jpg" в папке 'header & footer' на usb
+        usb_list = [os.path.join(os.getcwd(), 'attachment', 'header & footer')]
+        usb_masks = [".png", ".jpg"]
+        usb_files = self.get_files_on_usblist(usb_list, usb_masks)
+        if app_files is None:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find usb_files')
+        else:
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find usb_files: {0}'.format(usb_files))
+
         self.file_manager = UiFileManager(self, "")
-        self.file_manager.add_files(files)
+        # Добавим найденные файлы.
+        self.file_manager.add_files(app_files)
+        self.file_manager.add_files(usb_files)
         self.file_manager.activate()
         if self.file_manager.exec_():
             result = self.file_manager.get_file()
@@ -1592,7 +1628,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_gRS_Edit1.clear()
         self.header_path = ""
 
-    def get_report_footer(self):
+    def set_report_footer(self):
         # получим путь к файлу, выбранному пользователем из списка подходящих файлов на usb устройствах.
         file = self.change_file_for_header_or_footer()
         if not file is None:
