@@ -1592,7 +1592,7 @@ class MeasurementProcedure(object):
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'not find r_dir')
             else:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find r_dir: {0}'.format(r_dir))
-                r_dir0 = list(data_dir.keys())
+                r_dir0 = list(r_dir.keys())
                 r_path = os.path.join(r_dir0[0], file_name)
                 shutil.copy2(report_name, r_path)
         if self.main.config.send_report_to_mail:

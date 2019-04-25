@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="" />
+    <list default="true" id="4cf28043-6b7b-4a71-a8d7-d9162ff7180c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/MeasurementProcedure.py" beforeDir="false" afterPath="$PROJECT_DIR$/MeasurementProcedure.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MeasurementProcedure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="1594" column="46" lean-forward="true" selection-start-line="1594" selection-start-column="46" selection-end-line="1594" selection-end-column="46" />
+            <state relative-caret-position="305">
+              <caret line="1596" column="46" lean-forward="true" selection-start-line="1596" selection-start-column="46" selection-end-line="1596" selection-end-column="46" />
               <folding>
                 <element signature="e#96#111#0" expanded="true" />
               </folding>
@@ -853,8 +855,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MeasurementProcedure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="1594" column="46" lean-forward="true" selection-start-line="1594" selection-start-column="46" selection-end-line="1594" selection-end-column="46" />
+        <state relative-caret-position="305">
+          <caret line="1596" column="46" lean-forward="true" selection-start-line="1596" selection-start-column="46" selection-end-line="1596" selection-end-column="46" />
           <folding>
             <element signature="e#96#111#0" expanded="true" />
           </folding>
