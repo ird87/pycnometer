@@ -1337,6 +1337,7 @@ class MeasurementProcedure(object):
         # эти переменные нужна, чтобы найти следующий порядковый номер файла.
         find_name = True
         number = 0
+        file_name = ''
         report_name = ''
         self.measurement_report = self.main.measurement_report
 
@@ -1346,9 +1347,8 @@ class MeasurementProcedure(object):
         while find_name:
             number += 1
             # для нормального режима (Linux) нужны такие команды:
-            report_name = os.path.join(os.getcwd(), 'Reports',
-                                       'Measurement' + ' - ' + self.data_of_measurement + ' - ' + str(
-                                           number) + '.pdf')
+            file_name = 'Measurement' + ' - ' + self.data_of_measurement + ' - ' + str(number) + '.pdf'
+            report_name = os.path.join(os.getcwd(), 'Reports', file_name)
             find_name = os.path.isfile(report_name)
 
         header_pic = os.path.join(os.getcwd(), 'attachment', 'header & footer', self.main.config.report_header)
@@ -1593,7 +1593,7 @@ class MeasurementProcedure(object):
             else:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'find r_dir: {0}'.format(r_dir))
                 r_dir0 = list(data_dir.keys())
-                r_path = os.path.join(r_dir0[0], ('Measurement' + ' - ' + self.data_of_measurement + ' - ' + str(number) + '.pdf'))
+                r_path = os.path.join(r_dir0[0], file_name)
                 shutil.copy2(report_name, r_path)
         if self.main.config.send_report_to_mail:
             send(self.main.config.email_adress, "Report: {0}".format(report_name), "Привет! Этот отчет, который ты ждал",
