@@ -73,7 +73,6 @@ class SPI(object):
         self.config = self.main.config
         self.t = 0
         self.const_data = 6300000
-        self.maximum_sensor_pressure = self.config.maximum_sensor_pressure
         self.p_channel = self.config.data_channel - 1
         # Заведем переменную для массива каналов, измеряющих температуру.
         self.t_channels = []
@@ -131,6 +130,7 @@ class SPI(object):
         self.close_test()
         # Присваиваем значения.
         self.t = self.config.spi_t
+        self.maximum_sensor_pressure = self.config.maximum_sensor_pressure
         # self.spi.max_speed_hz = self.config.spi_max_speed_hz
         self.smq_now = self.config.smq_now
 
