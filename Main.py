@@ -544,14 +544,16 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         # Адрес почты:
         self.t4_gSR_Edit1.setText(self.config.email_adress)
         if not platform == "win32":
-            # Название сети wifi:
-            wifi_networks = ModulWIFI.SearchNames()
-            self.t4_gSR_cmd1.clear()
-            self.t4_gSR_cmd1.addItem("")
-            for wifi_network in wifi_networks:
-                self.t4_gSR_cmd1.addItem(wifi_network)
+            try:
+                # Название сети wifi:
+                wifi_networks = ModulWIFI.SearchNames()
+                self.t4_gSR_cmd1.clear()
+                self.t4_gSR_cmd1.addItem("")
+                for wifi_network in wifi_networks:
+                    self.t4_gSR_cmd1.addItem(wifi_network)
+            except:
+                pass
             self.t4_gSR_cmd1.setCurrentText(self.config.wifi_name)
-
             # Пароль от wifi:
             self.t4_gSR_Edit2.setText(self.config.wifi_pass)
 
