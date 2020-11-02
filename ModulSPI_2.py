@@ -73,6 +73,7 @@ class SPI(object):
         self.config = self.main.config
         self.t = 0
         self.const_data = 6300000
+        self.maximum_sensor_pressure = self.config.maximum_sensor_pressure
         self.p_channel = self.config.data_channel - 1
         # Заведем переменную для массива каналов, измеряющих температуру.
         self.t_channels = []
@@ -321,35 +322,35 @@ class SPI(object):
     """Метод, который на основание измерения высчитывает давление в кПа"""
 
     def getkPa(self, data):
-        p = data / self.const_data * 130  # кПа
+        p = data / self.const_data * self.maximum_sensor_pressure  # кПа
         return p
 
     """Метод, который на основание измерения высчитывает давление в Бар"""
 
     def getBar(self, data):
-        p = data / self.const_data * 1.3  # Бар
+        p = data / self.const_data * self.maximum_sensor_pressure * 0.01  # Бар
         return p
 
     """Метод, который на основание измерения высчитывает давление в psi"""
 
     def getPsi(self, data):
-        p = data / self.const_data * 130 * 0.14503773773  # psi
+        p = data / self.const_data * self.maximum_sensor_pressure * 0.14503773773  # psi
         return p
 
     """Метод, который возвращает из давление в кПа значение измерения"""
 
     def getDataFromkPa(self, p):
-        data = p * self.const_data / 130  # кПа
+        data = p * self.const_data / self.maximum_sensor_pressure  # кПа
         return data
 
     """Метод, который возвращает из давление в Бар значение измерения"""
 
     def getDataFromBar(self, p):
-        data = p * self.const_data / 1.3  # кПа
+        data = p * self.const_data / self.maximum_sensor_pressure * 0.01  # кПа
         return data
 
     """Метод, который возвращает из давление в psi значение измерения"""
 
     def getDataFromPsi(self, p):
-        data = p * self.const_data / 130 / 0.14503773773  # кПа
+        data = p * self.const_data / self.maximum_sensor_pressure / 0.14503773773  # кПа
         return data

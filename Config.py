@@ -64,6 +64,7 @@ class Configure(object):
         self.module_spi = ""
         self.data_channel = 0
         self.t_channels = []
+        self.maximum_sensor_pressure = 0
         self.pulse_length = 0
         self.Pmeas = []
         self.Pmeas_now = 0
@@ -119,6 +120,7 @@ class Configure(object):
         self.data_channel = self.try_getint_user_config('Pycnometer', 'data_channel', False)
         self.t_channels.clear()
         self.t_channels = json.loads(self.try_get_user_config('Pycnometer', 't_channels', True))
+        self.maximum_sensor_pressure = self.try_getint_user_config('Pycnometer', 'maximum_sensor_pressure', False)
         self.smq_now = self.try_getint_user_config('Measurement', 'smq_now', True)
         self.smq_list.clear()
         self.smq_list = json.loads(self.try_get_user_config('Measurement', 'smq_list', False))
