@@ -781,6 +781,7 @@ class CalibrationProcedure(object):
                 success = True
             time_now = datetime.datetime.now()
             duration = round((time_now - time_start).total_seconds(), 1)
+            print("p = {0} | Pmeas = {1} | success = {2} | duration = {3}".format(p, Pmeas, success, duration))
             # Если время набора давления достигло 30 сек, то завершаем набор давления, неуспех.
             if duration >= 30:
                 p_test = True
