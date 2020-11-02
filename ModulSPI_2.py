@@ -213,7 +213,7 @@ class SPI(object):
             # считываем данные с датчика
             ### STEP 3: Get data:
             raw_channels = self.ads.read_sequence(data_channels)
-            self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
+            # self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
             for channel in range(len(raw_channels)):
                 data[channel] += raw_channels[channel]
                 # print("raw_channels: {0}". format(raw_channels))
