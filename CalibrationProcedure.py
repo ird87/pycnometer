@@ -113,6 +113,7 @@ class CalibrationProcedure(object):
         self.abort_procedure_on = False
         self.time_of_calibration = None
         self.data_of_calibration = None
+        self.vovin_method = True
 
     """Метод для проверки. Возвращает True, если калибровка запущена иначе False"""
     def is_test_on(self):
@@ -750,6 +751,62 @@ class CalibrationProcedure(object):
                              'Calculation c_Vd.....Done')
 
         # -----------------------------------------------------------------------------------------------------
+        if self.vovin_method:
+            # ***************************************************************************************************
+            # Пересчитываем объем кюветы по хитрой Вовиной формуле.
+
+            # Переменная для записи альтернативного объема кюветы
+            _Vc = 0
+            counter = 0
+            for i in range(num):
+                index1 = i + num
+                # Если измерение включено в рассчет
+                if self.calibrations[index1].active:
+
+                    # P'
+                    P0a = self.calibrations[index1].p0
+                    P1a = self.calibrations[index1].p1
+                    P2a = self.calibrations[index1].p2
+
+                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                         'Recalculation Vc0 for P\'[{0}].....'.format(index1))
+                    try:
+
+                        _Vc0 = self.c_Vd * (P1a/P2a-1) + self.Vss
+
+
+                    except ArithmeticError:
+                        self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                             'Division by zero when recalculating Vc0 for P\'[{0}], '
+                                             'denominator: (P2a\'={1}'
+                                             .format(index1, P2a))
+                        _Vc0 = 0
+                    self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                               'Measured for P\'[{0}]  : Vc0 = {1}'.format(index1, _Vc0))
+                    self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                         'Recalculation Vc0 for P\'[{0}].....Done'.format(index1))
+
+                    # -----------------------------------------------------------------------------------------------------
+                    # Суммируем объемы _Vc и увеличиваем счетчик
+                    _Vc += _Vc0
+                    counter += 1
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Realculation c_Vc.....')
+            try:
+                # Рассчитываем объем кюветы по хитрой Вовиной формуле
+                self.c_Vc = _Vc / counter
+            except ArithmeticError:
+                self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                     'Division by zero when calculating c_Vc, denominator: counter={0}'.format(
+                                         counter))
+                self._c_Vc = 0
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                       'Measured : c_Vc = {0}'.format(self.c_Vc))
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
+                                 'Recalculation c_Vc.....Done')
+
+            # -----------------------------------------------------------------------------------------------------
+            # ***************************************************************************************************
 
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation Vc & Vd.....Done')
         self.save_calibration_result()
@@ -865,7 +922,7 @@ class CalibrationProcedure(object):
             # Проверяем достаточно ли низкое давление.
             print("Давление = {0} < p0*2 = {1}".format(p_let_out_pressure, p0*2))
             # if p_let_out_pressure < p0*2 or self.is_test_mode():
-            if duration > 10 or self.is_test_mode():
+            if duration > 60 or self.is_test_mode():
                 p_test = True
                 success = True
             time_now = datetime.datetime.now()

@@ -73,14 +73,14 @@ class SPI(object):
         self.config = self.main.config
         self.t = 0
         self.const_data = 6300000
-        self.p_channel = self.config.data_channel - 1
+        self.p_channel = self.config.data_channel
         # Заведем переменную для массива каналов, измеряющих температуру.
         self.t_channels = []
         # Переберем каналы из настроек и добавим их в переменную.
         for t_channel in self.config.t_channels:
             #  номер канала должен быть между 1 и 8 и он не должен повторяться.
-            if 1 <= t_channel <= 8 and not (t_channel - 1) in self.t_channels:
-                self.t_channels.append(t_channel - 1)
+            if 1 <= t_channel <= 8 and not (t_channel) in self.t_channels:
+                self.t_channels.append(t_channel)
 
         ### STEP 1: Initialise ADC object using default configuration:
         # (Note1: See ADS1256_default_config.py, see ADS1256 datasheet)

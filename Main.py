@@ -564,19 +564,25 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
             self.onlyInt = QIntValidator()
             self.t4_MS_Edit2.setValidator(self.onlyInt)
             self.t4_MS_Edit2.setText(toFixed(self.config.Pmeas[self.t4_gMS_cmd1.currentIndex()], 0))
+            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_kPa_min,
+                                                            self.config.pmeas_kPa_max))
         if self.t4_gMS_cmd1.currentIndex() == Pressure.Bar.value:
             # ограничение на ввод давления для Бар 0.90 - 1.10
             rx = QRegExp(r'^[0-9][.]{0,1}[0-9]*$')
             self.onlyFloat = QRegExpValidator(rx, self)
             self.t4_MS_Edit2.setValidator(self.onlyFloat)
             self.t4_MS_Edit2.setText(toFixed(self.config.Pmeas[self.t4_gMS_cmd1.currentIndex()], 2))
+            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_Bar_min,
+                                                            self.config.pmeas_Bar_max))
         if self.t4_gMS_cmd1.currentIndex() == Pressure.Psi.value:
             # ограничение на ввод давления для psi 13.0 - 16.0
             rx = QRegExp(r'^[0-9][.]{0,1}[0-9]*$')
             self.onlyFloat = QRegExpValidator(rx, self)
             self.t4_MS_Edit2.setValidator(self.onlyFloat)
             self.t4_MS_Edit2.setText(toFixed(self.config.Pmeas[self.t4_gMS_cmd1.currentIndex()], 1))
-        self.t4_gMS_lbl4.setText(self.languages.t4_gMS_lbl4[self.t4_gMS_cmd1.currentIndex()])
+            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_Psi_min,
+                                                            self.config.pmeas_Psi_max))
+
         # Проверяем активна ли кнопка "Применить"
         self.set_t4_button_1_enabled()
 
