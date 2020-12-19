@@ -8,7 +8,7 @@
 import threading
 import time
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog
 
@@ -18,7 +18,8 @@ class UiProgressbar(QDialog):
     """Конструктор класса. Поля класса"""
 
     def __init__(self, parent, title, type, valua):
-        super().__init__()
+        super(UiProgressbar, self).__init__()
+        uic.loadUi('ui/Progressbar.ui', self)
         self.parent = parent
         self.type = type
         self.valua = valua

@@ -126,6 +126,7 @@ class Languages(object):
         self.t4_groupManualControl = ''
         self.t4_gMC_lbl1 = ''
         self.t4_gMC_chb1 = ''
+        self.t4_gMC_chb2 = ''
         self.t4_groupReportSetup = ''
         self.t4_gRS_chb1 = ''
         self.t4_gRS_lbl1 = ''
@@ -346,6 +347,7 @@ class Languages(object):
         self.t4_groupManualControl = self.get_string('TAB4', 't4_groupManualControl')
         self.t4_gMC_lbl1 = self.get_string('TAB4', 't4_gMC_lbl1')
         self.t4_gMC_chb1 = self.get_string('TAB4', 't4_gMC_chb1')
+        self.t4_gMC_chb2 = self.get_string('TAB4', 't4_gMC_chb2')
         self.t4_groupReportSetup = self.get_string('TAB4', 't4_groupReportSetup')
         self.t4_gRS_chb1 = self.get_string('TAB4', 't4_gRS_chb1')
         self.t4_gRS_lbl1 = self.get_string('TAB4', 't4_gRS_lbl1')

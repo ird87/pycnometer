@@ -10,7 +10,7 @@ import os
 import sys
 import time
 
-from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtWidgets, QtGui, uic
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QWidget, QApplication, QHeaderView, QAbstractItemView, QDialog)
 
@@ -19,7 +19,8 @@ class UiFileManager(QDialog):
     """Конструктор класса. Поля класса"""
 
     def __init__(self, parent, dir):
-        super().__init__()
+        super(UiFileManager, self).__init__()
+        uic.loadUi('ui/FileManager.ui', self)
         self.parent = parent
         self.dir = dir
         self.init_ui()

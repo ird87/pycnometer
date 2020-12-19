@@ -54,7 +54,8 @@ class SPI(object):
         self.correct_data = 0
 
     def set_correct_data(self, x):
-        self.correct_data = x
+        self.config.set_correct_data(x)
+        self.correct_data = self.config.correct_data
 
     """Метод для применения настроек"""
     def set_option(self):

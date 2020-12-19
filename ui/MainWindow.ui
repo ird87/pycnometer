@@ -2879,6 +2879,19 @@
         <string>t4_gMC_chb1</string>
        </property>
       </widget>
+      <widget class="QCheckBox" name="t4_gMC_chb2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>361</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>t4_gMC_chb2</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="t4_groupReportSetup">
       <property name="geometry">

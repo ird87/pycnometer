@@ -98,7 +98,7 @@ class SPI(object):
         self.measurement_log = self.main.measurement_log
         self.is_test_mode = self.main.config.is_test_mode
         self.message = self.main.set_pressure_message
-        self.correct_data = 0
+        self.correct_data = self.main.config.correct_data
 
         # region open textfile
         # self.file = os.path.join(os.getcwd(), "temperature.txt")
@@ -119,7 +119,8 @@ class SPI(object):
         self.create_xls_file()
 
     def set_correct_data(self, x):
-        self.correct_data = x
+        self.config.set_correct_data(x)
+        self.correct_data = self.config.correct_data
 
     """Метод для применения настроек"""
 
@@ -133,6 +134,7 @@ class SPI(object):
         self.maximum_sensor_pressure = self.config.maximum_sensor_pressure
         # self.spi.max_speed_hz = self.config.spi_max_speed_hz
         self.smq_now = self.config.smq_now
+        self.correct_data = self.config.correct_data
 
     """Метод для проверки. Возвращает True, если измерение давления запущено иначе False"""
 
@@ -213,7 +215,8 @@ class SPI(object):
             # считываем данные с датчика
             ### STEP 3: Get data:
             raw_channels = self.ads.read_sequence(data_channels)
-            # self.save_p_xls(self.calc_pressure(raw_channels[0])[0])
+            if self.main.config.output_pt_to_xls:
+                self.save_p_xls(raw_channels[0], self.calc_pressure(raw_channels[0])[0])
             for channel in range(len(raw_channels)):
                 data[channel] += raw_channels[channel]
                 # print("raw_channels: {0}". format(raw_channels))
@@ -253,12 +256,13 @@ class SPI(object):
         self.file = os.path.join(os.getcwd(), "temperature & pressure.xls")
         if os.path.isfile(self.file):
             os.remove(self.file)
-        if self.main.config.spi2_xls:
+        if self.main.config.output_pt_to_xls:
             self.wb = xlwt.Workbook(encoding = 'WINDOWS-1251')
             self.wb_style = xlwt.easyxf("align: horiz centre; borders: left thin, right thin, top thin, bottom thin;")
             self.wsp = self.wb.add_sheet("{0} | pressure".format(time.strftime("%Y-%m-%d", time.localtime())))
             self.wsp_row = 0
-            self.wsp.write(self.wsp_row, 0, 'P', self.wb_style)
+            self.wsp.write(self.wsp_row, 0, 'Data', self.wb_style)
+            self.wsp.write(self.wsp_row, 1, 'P', self.wb_style)
             self.wst = self.wb.add_sheet("{0} | temperature".format(time.strftime("%Y-%m-%d", time.localtime())))
             self.wst_row = 0
             self.wst.write(self.wst_row, 0, 'Time', self.wb_style)
@@ -270,7 +274,7 @@ class SPI(object):
             self.wb.save(self.file)
 
     def save_t_xls(self, p, t):
-        if self.main.config.spi2_xls:
+        if self.main.config.output_pt_to_xls:
             self.wst_row += 1
             self.wst.write(self.wst_row, 0, time.strftime("%H:%M:%S", time.localtime()), self.wb_style)
             self.wst.write(self.wst_row, 1, str(p), self.wb_style)
@@ -278,10 +282,11 @@ class SPI(object):
                 self.wst.write(self.wst_row, i + 2, str(t[i]), self.wb_style)
             self.wb.save(self.file)
 
-    def save_p_xls(self, p):
-        if self.main.config.spi2_xls:
+    def save_p_xls(self,data, p):
+        if self.main.config.output_pt_to_xls:
             self.wsp_row += 1
-            self.wsp.write(self.wsp_row, 0, str(p), self.wb_style)
+            self.wsp.write(self.wsp_row, 0, str(data), self.wb_style)
+            self.wsp.write(self.wsp_row, 1, str(p), self.wb_style)
             self.wb.save(self.file)
 
     """Метод рассчета давления на основание данных с датчика"""

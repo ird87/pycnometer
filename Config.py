@@ -23,6 +23,7 @@ from cryptography.fernet import Fernet
     self.VdLM - Дополнительный объем большой или средней кюветы
     self.VdS - Дополнительный объем малой кюветы
     self.pulse_length - длинна импульса для Импульсивной продувки
+    self.correct_data - поправка для датчика, рассчитывается при стартовой калибровке
     self.Pmeas_now  - давление, которое должен набрать прибор для текущей ед. измерения
     self.Pmeas - список для всех ед. измерений 
     pmeas_kPa_min - минимальный допуск для давления в кПа
@@ -66,6 +67,7 @@ class Configure(object):
         self.t_channels = []
         self.maximum_sensor_pressure = 0
         self.pulse_length = 0
+        self.correct_data = 0
         self.Pmeas = []
         self.Pmeas_now = 0
         self.pmeas_kPa_min = 0
@@ -79,6 +81,7 @@ class Configure(object):
         self.languages = []
         self.periodicity_of_removal_of_sensor_reading = 0
         self.leak_test_when_starting = False
+        self.сalibrate_sensor_when_starting = True
         self.report_measurement_table = True
         self.report_header = ""
         self.report_footer = ""
@@ -87,14 +90,14 @@ class Configure(object):
         self.email_adress = ""
         self.wifi_name = ""
         self.wifi_pass = ""
-        self.spi2_xls = False
+        self.output_pt_to_xls = False
         # Загружаем данные из файла
         # [Ports]
         self.set_ports()
 
         # [[TestMode]]
-        self.testMode = self.try_getint_user_config('TestMode', 'testMode', True)
-        self.spi2_xls = self.try_getboolean_user_config('TestMode', 'tp', True)
+        self.testMode = self.try_getboolean_user_config('TestMode', 'testMode', False)
+        self.output_pt_to_xls = self.try_getboolean_user_config('TestMode', 'output_pt_to_xls', False)
 
     """Метод для назначения портам указанных в ini файле значений"""
     def set_ports(self):
@@ -110,10 +113,14 @@ class Configure(object):
         # [[Language]]
         self.language = self.try_get_user_config('Language', 'language', True)
 
+    def set_correct_data(self, x):
+        self.correct_data = x
+        self.set_ini('Measurement', 'correct_data', self.correct_data)
+
     """Метод для загрузки данных из ini файла"""
     def set_measurement(self):
         self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure', True))
-        self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette', True)
+        self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette', False)
         self.model = self.try_get_user_config('Pycnometer', 'model', True)
         self.version = self.try_get_user_config('Pycnometer', 'version', False)
         self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi', False)
@@ -134,6 +141,7 @@ class Configure(object):
         self.spi_max_speed_hz = self.try_getint_user_config('Measurement', 'spi_max_speed_hz', False)
         self.round = self.try_getint_user_config('Measurement', 'round', True)
         self.pulse_length = self.try_getint_user_config('Measurement', 'pulse_length', True)
+        self.correct_data = self.try_getint_user_config('Measurement', 'correct_data', False)
         self.Pmeas.clear()
         self.Pmeas = json.loads(self.try_get_user_config('Measurement', 'Pmeas', True))
         self.pmeas_kPa_min = self.try_getfloat_user_config('Measurement', 'pmeas_kPa_min', False)
@@ -145,6 +153,7 @@ class Configure(object):
         self.Pmeas_now = float(self.Pmeas[self.pressure.value])
         self.periodicity_of_removal_of_sensor_reading = self.try_getfloat_user_config('ManualControl', 'periodicity_of_removal_of_sensor_reading', False)
         self.leak_test_when_starting = self.try_getboolean_user_config('ManualControl', 'leak_test_when_starting', True)
+        self.сalibrate_sensor_when_starting = self.try_getboolean_user_config('ManualControl', 'сalibrate_sensor_when_starting', True)
         self.report_measurement_table = self.try_getboolean_user_config('ReportSetup', 'report_measurement_table', True )
         self.report_header = self.try_get_user_config('ReportSetup', 'report_header', True)
         self.report_footer = self.try_get_user_config('ReportSetup', 'report_footer', True)

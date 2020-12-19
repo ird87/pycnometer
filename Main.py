@@ -10,7 +10,6 @@ import time
 from subprocess import Popen, PIPE
 from sys import platform
 from urllib.request import urlopen
-import MainWindow  # Это наш конвертированный файл дизайна
 import PyQt5
 
 from Calibration import Calibration
@@ -21,7 +20,7 @@ from Languages import Languages
 from Logger import Logger
 from Measurement import Measurement
 from MeasurementProcedure import MeasurementProcedure, Сuvette, Sample_preparation
-from PyQt5 import QtCore
+from PyQt5 import QtCore, uic
 from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap
 from PyQt5.QtWidgets import QMessageBox
@@ -91,7 +90,7 @@ def clickable(widget):
     return filter.clicked
 
 
-class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # название файла с дизайном и название класса в нем.
+class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с дизайном и название класса в нем.
 
     # Это сигналы, они получают команду из других модулей и вызывают методы модуля.
     # Вывод модального окна с просьбой положить в кювету образец
@@ -128,8 +127,8 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         # Это здесь нужно для доступа к переменным, методам
         # и т.д. в файле design.py
-        super().__init__()
-        self.setupUi(self)  # Это нужно для инициализации нашего дизайна
+        super(Main, self).__init__()
+        uic.loadUi('ui/MainWindow.ui', self)
         self.setWindowState(Qt.WindowMaximized)
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.controller = Controller
@@ -304,8 +303,10 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.menubar.setVisible(False)
         self.sensor_calibration = False
         # нам надо откалибровать датчик.
-        if not self.config.is_test_mode():
+        if not self.config.is_test_mode() and self.config.сalibrate_sensor_when_starting:
             self.calibration_procedure.start_russian_sensor_calibration()
+        else:
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'data_correction = {0}'.format(self.config.correct_data))
 
     def start_progressbar(self, title, name, time):
         if not self.config.is_test_mode():
@@ -427,6 +428,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.config.set_ini('Measurement', 'round', str(self.config.round))
         self.config.set_ini('ManualControl', 'periodicity_of_removal_of_sensor_reading', self.t4_gMC_Edit1.text())
         self.config.set_ini('ManualControl', 'leak_test_when_starting', str(self.t4_gMC_chb1.isChecked()))
+        self.config.set_ini('ManualControl', 'сalibrate_sensor_when_starting', str(self.t4_gMC_chb2.isChecked()))
         self.config.set_ini('ReportSetup', 'report_measurement_table', str(self.t4_gRS_chb1.isChecked()))
         self.save_header_and_footer()
         self.config.set_ini('ReportSetup', 'report_header', self.t4_gRS_Edit1.text())
@@ -525,6 +527,9 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
 
         # Проводить ли тест на натекание при запуске прибора
         self.t4_gMC_chb1.setChecked(self.config.leak_test_when_starting)
+
+        # Проводить ли калибровку датчика при запуске прибора
+        self.t4_gMC_chb2.setChecked(self.config.сalibrate_sensor_when_starting)
 
         # Выводить ли таблицу с измерениями
         self.t4_gRS_chb1.setChecked(self.config.report_measurement_table)
@@ -1003,6 +1008,7 @@ class Main(PyQt5.QtWidgets.QMainWindow, MainWindow.Ui_MainWindow):  # назва
         self.t4_groupManualControl.setTitle((self.languages.t4_groupManualControl))
         self.t4_gMC_lbl1.setText(self.languages.t4_gMC_lbl1)
         self.t4_gMC_chb1.setText(self.languages.t4_gMC_chb1)
+        self.t4_gMC_chb2.setText(self.languages.t4_gMC_chb2)
         self.t4_groupReportSetup.setTitle((self.languages.t4_groupReportSetup))
         self.t4_gRS_chb1.setText(self.languages.t4_gRS_chb1)
         self.t4_gRS_lbl1.setText(self.languages.t4_gRS_lbl1)

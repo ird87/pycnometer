@@ -3,3 +3,5 @@ Reports/*.pdf
 Results/Measurements/*.result
 Results/Calibrations/*.result
 Configure_user.ini
+
+Trash*
