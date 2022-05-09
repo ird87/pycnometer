@@ -1,6 +1,7 @@
 *.log
 __pycache__
 .vs
+.idea
 Trash
 venv
 pycnometer.pyproj
