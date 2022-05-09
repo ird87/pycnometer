@@ -1,0 +1,11 @@
+configparser==3.5.0
+pip==10.0.1
+PyQt5==5.11.3
+PyQt5-sip==4.19.13
+setuptools==39.1.0
+singleton==0.1.0
+reportlab==3.5.13
+pillow>=4.0.0
+cryptography==2.6.1
+wifi==0.3.8
+pbkdf2==1.3

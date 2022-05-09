@@ -1487,7 +1487,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>attachment/Pycnometer scheme.jpg</pixmap>
+       <pixmap>../attachment/Pycnometer scheme.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>

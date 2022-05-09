@@ -182,6 +182,7 @@ class Configure(object):
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini(self, section, val, s):
+        s=str(s)
         self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
         if not self.config_user.has_section(section):
             self.config_user.add_section(section)
@@ -197,6 +198,7 @@ class Configure(object):
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini_hash(self, section, val, s):
+        s=str(s)
         s = (self.crypting(s)).decode('utf-8')
         self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
         if not self.config_user.has_section(section):

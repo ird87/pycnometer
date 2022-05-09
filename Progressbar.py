@@ -17,11 +17,11 @@ class UiProgressbar(QDialog):
 
     """Конструктор класса. Поля класса"""
 
-    def __init__(self, parent, title, type, valua):
+    def __init__(self, parent, title, msg, valua):
         super(UiProgressbar, self).__init__()
         uic.loadUi('ui/Progressbar.ui', self)
         self.parent = parent
-        self.type = type
+        self.msg = msg
         self.valua = valua
         self.title = title
         self.init_ui()
@@ -98,7 +98,7 @@ class UiProgressbar(QDialog):
         self.lblProgressbar.setObjectName("lblProgressbar")
         QtCore.QMetaObject.connectSlotsByName(self)
         _translate = QtCore.QCoreApplication.translate
-        self.lblProgressbar.setText(self.type)
+        self.lblProgressbarMsg.setText(self.msg)
 
 
 # if __name__ == "__main__":

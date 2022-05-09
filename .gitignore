@@ -1,7 +1,13 @@
 *.log
-Reports/*.pdf
-Results/Measurements/*.result
-Results/Calibrations/*.result
+__pycache__
+.vs
+Trash
+venv
+pycnometer.pyproj
+pycnometer.pyproj.user
+Reports
+Results
+Logs
 Configure_user.ini
 
 Trash*

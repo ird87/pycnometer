@@ -1,9 +1,7 @@
 #!/usr/bin/python
 # Модуль для считывания данных с датчика
 import inspect
-import os
 import threading
-import sys
 import os
 
 import xlwt
