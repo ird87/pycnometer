@@ -20,8 +20,8 @@ Ulrich Lukas, 2017-03-03
 import time
 import struct
 import wiringpi as wp
-from ads1256_ADS1256_definitions import *
-import ads1256_ADS1256_default_config as ADS1256_default_config
+from .ads1256_ADS1256_definitions import *
+from . import ads1256_ADS1256_default_config as ADS1256_default_config
 
 class ADS1256(object):
     """Python class for interfacing the ADS1256 and ADS1255 analog to

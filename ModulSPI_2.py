@@ -6,8 +6,8 @@ import os
 
 import xlwt
 
-from ads1256_ADS1256_definitions import *
-from ads1256_pipyadc import ADS1256
+from SPI_Driver.ads1256_ADS1256_definitions import *
+from SPI_Driver.ads1256_pipyadc import ADS1256
 
 import time
 
