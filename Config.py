@@ -42,17 +42,33 @@ from cryptography.fernet import Fernet
 class Configure(object):
     """Конструктор класса. Поля класса"""
     def __init__(self):
-        self.p = [0, 0, 0, 0, 0]                    # Массив для записи номеров портов
-        self.config = configparser.ConfigParser()   # Создаем экземпляр configparser
-        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')           # Указываем файл для считывания данных
+        
+        # configparsers
+        self.config_application = configparser.ConfigParser()   # Создаем экземпляр configparser
+        self.config_device_file = os.path.join('conf','Configure_device.ini')
+        self.config_application_file = os.path.join('conf','Configure_application.ini')        
+        self.config_user_file = os.path.join('conf','Configure_user.ini')        
+        self.config_device = configparser.ConfigParser()   # Создаем экземпляр configparser
+        self.config_application.read(self.config_application_file, encoding = 'utf-8')           # Указываем файл для считывания данных
         self.config_user = configparser.ConfigParser()   # Создаем экземпляр configparser
+        
+        # cryptography
         # Fernet.generate_key()
         key = b'nRDnYgvD1i727JwjmwE_SRn30ktYZeLHIHuVPxo_tSw='
         self.cipher_suite = Fernet(key)
+
+        # [DEVICE CONFIG]
+
+        self.model = 'Тестовый пикнометр'
+        self.let_out_pressure_duration = 60
+        self.testMode = True
+        self.output_pt_to_xls = False
+
+        self.p = [0, 0, 0, 0, 0]                    # Массив для записи номеров портов
         self.small_cuvette = False
         self.language = ''
         self.version = ''
-        self.model = ''
+        
         self.round = 3
         self.pressure = Pressure.kPa
         self.smq_now = 0
@@ -90,14 +106,17 @@ class Configure(object):
         self.email_adress = ""
         self.wifi_name = ""
         self.wifi_pass = ""
-        self.output_pt_to_xls = False
+        
+
         # Загружаем данные из файла
+        self.load_device_config()
+        self.save_device_config()
+
+
         # [Ports]
         self.set_ports()
-
-        # [[TestMode]]
-        self.testMode = self.try_getboolean_user_config('TestMode', 'testMode', False)
-        self.output_pt_to_xls = self.try_getboolean_user_config('TestMode', 'output_pt_to_xls', False)
+        
+        
 
     """Метод для назначения портам указанных в ini файле значений"""
     def set_ports(self):
@@ -117,11 +136,25 @@ class Configure(object):
         self.correct_data = x
         self.set_ini('Measurement', 'correct_data', self.correct_data)
 
+    def load_device_config(self):
+        """загружаем все настройки из области прибора"""  
+        self.model = self.try_get_device_config('Pycnometer', 'model', self.model)
+        self.testMode = self.try_getboolean_device_config('TestMode', 'testMode', self.testMode)   
+        self.output_pt_to_xls = self.try_getboolean_device_config('TestMode', 'output_pt_to_xls', self.output_pt_to_xls)
+        self.let_out_pressure_duration= self.try_getint_device_config('Measurement', 'let_out_pressure_duration', self.let_out_pressure_duration)   
+
+    def save_device_config(self):
+        """Сохраняем все настройки из области прибора"""  
+        self.set_device_ini('Pycnometer', 'model', self.model)
+        self.set_device_ini('TestMode', 'testMode', self.testMode)
+        self.set_device_ini('TestMode', 'output_pt_to_xls', self.output_pt_to_xls)
+        self.set_device_ini('Measurement', 'let_out_pressure_duration', self.let_out_pressure_duration)
+
     """Метод для загрузки данных из ini файла"""
     def set_measurement(self):
+
         self.pressure = Pressure(self.try_getint_user_config('Measurement', 'pressure', True))
         self.small_cuvette = self.try_getboolean_user_config('Pycnometer', 'small_cuvette', False)
-        self.model = self.try_get_user_config('Pycnometer', 'model', True)
         self.version = self.try_get_user_config('Pycnometer', 'version', False)
         self.module_spi = self.try_get_user_config('Pycnometer', 'module_spi', False)
         self.data_channel = self.try_getint_user_config('Pycnometer', 'data_channel', False)
@@ -183,35 +216,35 @@ class Configure(object):
     """Метод для сохранения измененных настроек в файл"""
     def set_ini(self, section, val, s):
         s=str(s)
-        self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
+        self.config_user.read(self.config_user_file+'.new', encoding = 'utf-8')
         if not self.config_user.has_section(section):
             self.config_user.add_section(section)
         self.config_user.set(section, val, s)
-        with open("Configure_user.ini.new", "w", encoding = 'WINDOWS-1251') as fh:
+        with open(self.config_user_file+".new", "w", encoding = 'utf-8') as fh:
             self.config_user.write(fh)
-        if os.path.isfile('Configure_user.ini'):
-            os.rename("Configure_user.ini", "Configure_user.ini~")
-            os.rename("Configure_user.ini.new", "Configure_user.ini")
-            os.remove("Configure_user.ini~")
+        if os.path.isfile(self.config_user_file):
+            os.rename(self.config_user_file, self.config_user_file+"~")
+            os.rename(self.config_user_file+".new", self.config_user_file)
+            os.remove(self.config_user_file+"~")
         else:
-            os.rename("Configure_user.ini.new", "Configure_user.ini")
+            os.rename(self.config_user_file+".new", self.config_user_file)
 
     """Метод для сохранения измененных настроек в файл"""
     def set_ini_hash(self, section, val, s):
         s=str(s)
         s = (self.crypting(s)).decode('utf-8')
-        self.config_user.read('Configure_user.ini.new', encoding = 'WINDOWS-1251')
+        self.config_user.read(config_user_file+'.new', encoding = 'utf-8')
         if not self.config_user.has_section(section):
             self.config_user.add_section(section)
         self.config_user.set(section, val, s)
-        with open("Configure_user.ini.new", "w", encoding = 'WINDOWS-1251') as fh:
+        with open(self.config_user_file+".new", "w", encoding = 'utf-8') as fh:
             self.config_user.write(fh)
-        if os.path.isfile('Configure_user.ini'):
-            os.rename("Configure_user.ini", "Configure_user.ini~")
-            os.rename("Configure_user.ini.new", "Configure_user.ini")
-            os.remove("Configure_user.ini~")
+        if os.path.isfile(self.config_user_file):
+            os.rename(self.config_user_file, self.config_user_file+"~")
+            os.rename(self.config_user_file+".new", self.config_user_file)
+            os.remove(self.config_user_file+"~")
         else:
-            os.rename("Configure_user.ini.new", "Configure_user.ini")
+            os.rename(self.config_user_file+".new", self.config_user_file)
 
     """Метод для обновления списка всех доступных языков"""
     def reload_languages_list(self):
@@ -223,53 +256,119 @@ class Configure(object):
         #     self.languages = os.listdir(os.getcwd() + '/Language/')
             
     def try_get_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
-        result = self.config.get(section, option)
-        if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
+        self.config_application.read(self.config_application_file, encoding = 'utf-8')
+        result = self.config_application.get(section, option)
+        if os.path.isfile(self.config_user_file) and user_config:
+            self.config_user.read(self.config_user_file, encoding = 'utf-8')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.get(section, option)
         return result
 
     def try_getint_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
-        result = self.config.getint(section, option)
-        if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
+        self.config_application.read(self.config_application_file, encoding = 'utf-8')
+        result = self.config_application.getint(section, option)
+        if os.path.isfile(self.config_user_file) and user_config:
+            self.config_user.read(self.config_user_file, encoding = 'utf-8')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getint(section, option)
         return result
 
     def try_getfloat_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
-        result = self.config.getfloat(section, option)
-        if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
+        self.config_application.read(self.config_application_file, encoding = 'utf-8')
+        result = self.config_application.getfloat(section, option)
+        if os.path.isfile(self.config_user_file) and user_config:
+            self.config_user.read(self.config_user_file, encoding = 'utf-8')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getfloat(section, option)
         return result
 
     def try_getboolean_user_config(self, section, option, user_config):
-        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
-        result = self.config.getboolean(section, option)
-        if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
+        self.config_application.read(self.config_application_file, encoding = 'utf-8')
+        result = self.config_application.getboolean(section, option)
+        if os.path.isfile(self.config_user_file) and user_config:
+            self.config_user.read(self.config_user_file, encoding = 'utf-8')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.getboolean(section, option)
         return result
 
     def try_get_user_config_hash(self, section, option, user_config):
-        self.config.read('Configure.ini', encoding = 'WINDOWS-1251')
-        result = self.config.get(section, option)
-        if os.path.isfile('Configure_user.ini') and user_config:
-            self.config_user.read('Configure_user.ini', encoding = 'WINDOWS-1251')
+        self.config_application.read(self.config_application_file, encoding = 'utf-8')
+        result = self.config_application.get(section, option)
+        if os.path.isfile(self.config_user_file) and user_config:
+            self.config_user.read(self.config_user_file, encoding = 'utf-8')
             if self.config_user.has_section(section):
                 if self.config_user.has_option(section, option):
                     result = self.config_user.get(section, option)
+        if not result=="":
+            result = (self.cipher_suite.decrypt(bytes(result, encoding='utf-8'))).decode('utf-8')
+        return result
+
+    """Метод для сохранения измененных настроек в файл"""
+    def set_device_ini(self, section, val, s):
+        s=str(s)
+        self.config_device.read(self.config_device_file+'.new', encoding = 'utf-8')
+        if not self.config_device.has_section(section):
+            self.config_device.add_section(section)
+        self.config_device.set(section, val, s)
+        with open(self.config_device_file+".new", "w", encoding = 'utf-8') as fh:
+            self.config_device.write(fh)
+        if os.path.isfile(self.config_device_file):
+            os.rename(self.config_device_file, self.config_device_file+"~")
+            os.rename(self.config_device_file+".new", self.config_device_file)
+            os.remove(self.config_device_file+"~")
+        else:
+            os.rename(self.config_device_file+".new", self.config_device_file)
+
+    """Метод для сохранения измененных настроек в файл"""
+    def set_device_ini_hash(self, section, val, s):
+        s=str(s)
+        s = (self.crypting(s)).decode('utf-8')
+        self.config_device.read(config_device_file+'.new', encoding = 'utf-8')
+        if not self.config_device.has_section(section):
+            self.config_device.add_section(section)
+        self.config_device.set(section, val, s)
+        with open(self.config_device_file+".new", "w", encoding = 'utf-8') as fh:
+            self.config_device.write(fh)
+        if os.path.isfile(self.config_device_file):
+            os.rename(self.config_device_file, self.config_device_file+"~")
+            os.rename(self.config_device_file+".new", self.config_device_file)
+            os.remove(self.config_device_file+"~")
+        else:
+            os.rename(self.config_device_file+".new", self.config_device_file)
+
+    def try_get_device_config(self, section, option, default):
+        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
+        self.config_device.read(self.config_device_file, encoding = 'utf-8')
+        result = self.config_device.get(section, option)        
+        return result
+
+    def try_getint_device_config(self, section, option, default):
+        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
+        self.config_device.read(self.config_device_file, encoding = 'utf-8')
+        result = self.config_device.getint(section, option)
+        return result
+
+    def try_getfloat_device_config(self, section, option, default):
+        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
+        self.config_device.read(self.config_device_file, encoding = 'utf-8')
+        result = self.config_device.getfloat(section, option)
+        return result
+
+    def try_getboolean_device_config(self, section, option, default):
+        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
+        self.config_device.read(self.config_device_file, encoding = 'utf-8')
+        result = self.config_device.getboolean(section, option)
+        print(result)
+        return result
+
+    def try_get_device_config_hash(self, section, option, default):
+        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
+        self.config_device.read(self.config_device_file, encoding = 'utf-8')
+        result = self.config_device.get(section, option)
         if not result=="":
             result = (self.cipher_suite.decrypt(bytes(result, encoding='utf-8'))).decode('utf-8')
         return result
