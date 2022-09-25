@@ -3,6 +3,7 @@ import inspect
 import os
 import sys
 import RPi.GPIO as GPIO
+import time
 """Проверака и комментари: 08.01.2019"""
 
 """
@@ -28,13 +29,22 @@ class GPIO(object):
     def port_on(self, port):
         # проверяем, что порт указан
         if port > 0:
-            self.gpio.output(port, True)
+            if(port==36):
+                self.gpio.output(36, True)
+                time.sleep(0.06)
+                self.gpio.output(32, True)
+                self.gpio.output(36, False)
+            else:            
+                self.gpio.output(port, True)
 
     """Метод отключает подачу напряжения на указанный порт"""
     def port_off(self, port):
         # проверяем, что порт указан
         if port > 0:
-            self.gpio.output(port, False)
+            if(port==36):
+                self.gpio.output(32, False)
+            else: 
+                self.gpio.output(port, False)
 
     """Метод отключает подачу напряжения на все заявленные к использованию порты"""
     def all_port_off(self):

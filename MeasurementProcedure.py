@@ -1294,15 +1294,15 @@ class MeasurementProcedure(object):
                 balance = 0
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation balance.....Done')
             # Если отклонение давлений в пределах погрешности
-            if balance <= 0.01:
+            if balance <= 0.00003:
                 p_test = True
                 success = True
             time_now = datetime.datetime.now()
             duration = round((time_now - time_start).total_seconds(), 1)
             # Если время набора давления достигло 5 минут, то завершаем набор давления, неуспех.
-            if duration >= 300:
+            if duration >= 60:
                 p_test = True
-            self.time_sleep(3)
+            self.time_sleep(1)
         return balance, success, duration
 
     """Метод сброса давления"""
@@ -1320,7 +1320,7 @@ class MeasurementProcedure(object):
             # Проверяем достаточно ли низкое давление.
             # print("Давление = {0} < p0*2 = {1}".format(p_let_out_pressure, p0 * 2))
             # if p_let_out_pressure < p0*2 or self.is_test_mode():
-            if duration > 60 or self.is_test_mode():
+            if duration > 6 or self.is_test_mode():
                 p_test = True
                 success = True
             time_now = datetime.datetime.now()
