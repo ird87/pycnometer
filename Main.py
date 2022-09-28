@@ -169,7 +169,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in TEST mode.')
         if not self.config.is_test_mode():
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in NORMAL mode.')
-        if platform == "win32":
+        if platform == "win32" or "linux":
             from ModulGPIOtest import GPIO
             from ModulSPItest import SPI
             # Получаем данные о портах из Configure.ini
