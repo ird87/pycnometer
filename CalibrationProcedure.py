@@ -922,7 +922,7 @@ class CalibrationProcedure(object):
             # Проверяем достаточно ли низкое давление.
             print("Давление = {0} < p0*2 = {1}".format(p_let_out_pressure, p0*2))
             # if p_let_out_pressure < p0*2 or self.is_test_mode():
-            if duration > 60 or self.is_test_mode():
+            if duration > self.main.config.let_out_pressure_duration or self.is_test_mode():
                 p_test = True
                 success = True
             time_now = datetime.datetime.now()
