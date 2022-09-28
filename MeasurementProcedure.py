@@ -1212,7 +1212,6 @@ class MeasurementProcedure(object):
     def gain_Pmeas(self):
         """с частотой 0,1 сек проверять не набрано ли уже давление Ризм, снимая показания датчика,
         если набрано, переходить к следующему пункту в алгоритме.
-
         ограничение на 30 сек, если за это время не набрал давление, то останавливать полностью измерение или
         калибровку, выдавать окошко “Низкий поток газа, измерение прервано”.
         """
@@ -1242,12 +1241,9 @@ class MeasurementProcedure(object):
 
     def get_balance(self):
         """Установка равновесия (вместо Т2, Т3 и Т4)
-
         Необходимо ожидать пока давление перестанет изменяться.
-
         То есть необходимо измерять давление каждую секунду и если оно не меняется больше чем на 1% по сравнению с предыдущим, то переходим к следующему шагу
         строчку “Ждать Т2” в итоге заменит что то вроде:
-
         Ждать 3 сек
         Измерить Рпред
         Ждать 1 сек
@@ -1257,11 +1253,8 @@ class MeasurementProcedure(object):
            Рпред=Рслед
            Измерить Р (Рслед=Р)
         Ждать 3 сек
-
         Переходим к следующему шагу в общем алгоритме
-
         Здесь тоже необходима проверка по общему времени, но тут 5 минут.
-
         """
         time_start = datetime.datetime.now()
         p_test = False
@@ -1294,15 +1287,15 @@ class MeasurementProcedure(object):
                 balance = 0
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation balance.....Done')
             # Если отклонение давлений в пределах погрешности
-            if balance <= 0.01:
+            if balance <= 0.00003:
                 p_test = True
                 success = True
             time_now = datetime.datetime.now()
             duration = round((time_now - time_start).total_seconds(), 1)
             # Если время набора давления достигло 5 минут, то завершаем набор давления, неуспех.
-            if duration >= 300:
+            if duration >= 60:
                 p_test = True
-            self.time_sleep(3)
+            self.time_sleep(1)
         return balance, success, duration
 
     """Метод сброса давления"""
