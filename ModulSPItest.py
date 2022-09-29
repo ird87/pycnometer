@@ -54,7 +54,7 @@ class SPI(object):
         # быть не должно, но на всякий случай мы явно вызовем его выключение.
         self.close_test()
         # Присваиваем значения.
-        self.t = self.config.spi_t
+        self.t = self.config.periodicity_of_removal_of_sensor_reading
         self.spi_max_speed_hz = self.config.spi_max_speed_hz
         self.smq_now = self.config.smq_now
 

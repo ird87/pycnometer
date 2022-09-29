@@ -11,7 +11,7 @@ def send(to, subject, body, attachment):
 
     try:
         smpt_server = 'smtp.gmail.com'
-        email_adress = "pycnometer.00@gmail.com"
+        email_address = "pycnometer.00@gmail.com"
         email_pass = "2p5BKuLNd9WbdiR"
 
         fromname = 'pycnometer'
@@ -32,7 +32,7 @@ def send(to, subject, body, attachment):
         mailserver.ehlo()
         mailserver.starttls()
         mailserver.ehlo()  #again
-        mailserver.login(email_adress, email_pass)
+        mailserver.login(email_address, email_pass)
         mailserver.sendmail(fromname, to, message.as_string())
         mailserver.quit()
     except Exception:

@@ -303,7 +303,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.menubar.setVisible(False)
         self.sensor_calibration = False
         # нам надо откалибровать датчик.
-        if not self.config.is_test_mode() and self.config.сalibrate_sensor_when_starting:
+        if not self.config.is_test_mode() and self.config.calibrate_sensor_when_starting:
             self.calibration_procedure.start_russian_sensor_calibration()
         else:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'data_correction = {0}'.format(self.config.correct_data))
@@ -428,14 +428,14 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.config.set_ini('Measurement', 'round', str(self.config.round))
         self.config.set_ini('ManualControl', 'periodicity_of_removal_of_sensor_reading', self.t4_gMC_Edit1.text())
         self.config.set_ini('ManualControl', 'leak_test_when_starting', str(self.t4_gMC_chb1.isChecked()))
-        self.config.set_ini('ManualControl', 'сalibrate_sensor_when_starting', str(self.t4_gMC_chb2.isChecked()))
+        self.config.set_ini('ManualControl', 'calibrate_sensor_when_starting', str(self.t4_gMC_chb2.isChecked()))
         self.config.set_ini('ReportSetup', 'report_measurement_table', str(self.t4_gRS_chb1.isChecked()))
         self.save_header_and_footer()
         self.config.set_ini('ReportSetup', 'report_header', self.t4_gRS_Edit1.text())
         self.config.set_ini('ReportSetup', 'report_footer', self.t4_gRS_Edit2.text())
         self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
         self.config.set_ini('SavingResult', 'send_report_to_mail', str(self.t4_gSR_chb2.isChecked()))
-        self.config.set_ini_hash('SavingResult', 'email_adress', self.t4_gSR_Edit1.text())
+        self.config.set_ini_hash('SavingResult', 'email_address', self.t4_gSR_Edit1.text())
         if not platform == "win32" and not self.config.wifi_name == "":
             ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
             ModulWIFI.deleteSSID(ssid, self.config.wifi_pass)
@@ -529,7 +529,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.t4_gMC_chb1.setChecked(self.config.leak_test_when_starting)
 
         # Проводить ли калибровку датчика при запуске прибора
-        self.t4_gMC_chb2.setChecked(self.config.сalibrate_sensor_when_starting)
+        self.t4_gMC_chb2.setChecked(self.config.calibrate_sensor_when_starting)
 
         # Выводить ли таблицу с измерениями
         self.t4_gRS_chb1.setChecked(self.config.report_measurement_table)
@@ -547,7 +547,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.t4_gSR_chb2.setChecked(self.config.send_report_to_mail)
 
         # Адрес почты:
-        self.t4_gSR_Edit1.setText(self.config.email_adress)
+        self.t4_gSR_Edit1.setText(self.config.email_address)
         if not platform == "win32":
             try:
                 # Название сети wifi:

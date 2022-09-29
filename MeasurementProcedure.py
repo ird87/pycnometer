@@ -1589,7 +1589,7 @@ class MeasurementProcedure(object):
                 r_path = os.path.join(r_dir0[0], file_name)
                 shutil.copy2(report_name, r_path)
         if self.main.config.send_report_to_mail:
-            send(self.main.config.email_adress, "Report: {0}".format(report_name), "Привет! Этот отчет, который ты ждал",
+            send(self.main.config.email_address, "Report: {0}".format(report_name), "Привет! Этот отчет, который ты ждал",
              report_name)
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
