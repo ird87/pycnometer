@@ -6,8 +6,6 @@ import threading
 import time
 import spidev
 
-from MeasurementProcedure import Abort_Type, Ports
-
 """Проверака и комментари: 13.01.2019"""
 
 """

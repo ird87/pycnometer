@@ -9,6 +9,7 @@ from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QHeaderView, QMenu
 
 from InputCalibration import UiInputCalibration
+import helper
 
 """
 "Класс реализует интерфейс таблицы "Калибровка"
@@ -61,7 +62,6 @@ class UiTableCalibration(object):
         # и, наконец, разместить в нужной ячейке по координатом строки и столбца
         self.t2_tableCalibration.setItem(rowPosition, 0, item1)
         # повторить для каждой ячейки, куда надо внести данные.
-        from Main import toFixed
 
         p0 = _calibrations.p0
         p1 = _calibrations.p1
@@ -77,23 +77,23 @@ class UiTableCalibration(object):
         if p2 < 0:
             p2 = 0
 
-        item2 = QtWidgets.QTableWidgetItem(toFixed(p0, self.round))
+        item2 = QtWidgets.QTableWidgetItem(helper.to_fixed(p0, self.round))
         item2.setTextAlignment(QtCore.Qt.AlignCenter)
         item2.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 1, item2)
-        item3 = QtWidgets.QTableWidgetItem(toFixed(p1, self.round))
+        item3 = QtWidgets.QTableWidgetItem(helper.to_fixed(p1, self.round))
         item3.setTextAlignment(QtCore.Qt.AlignCenter)
         item3.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 2, item3)
-        item4 = QtWidgets.QTableWidgetItem(toFixed(p2, self.round))
+        item4 = QtWidgets.QTableWidgetItem(helper.to_fixed(p2, self.round))
         item4.setTextAlignment(QtCore.Qt.AlignCenter)
         item4.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 3, item4)
-        item5 = QtWidgets.QTableWidgetItem(toFixed(ratio, self.round))
+        item5 = QtWidgets.QTableWidgetItem(helper.to_fixed(ratio, self.round))
         item5.setTextAlignment(QtCore.Qt.AlignCenter)
         item5.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 4, item5)
-        item6 = QtWidgets.QTableWidgetItem(toFixed(deviation, self.round))
+        item6 = QtWidgets.QTableWidgetItem(helper.to_fixed(deviation, self.round))
         item6.setTextAlignment(QtCore.Qt.AlignCenter)
         item6.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(rowPosition, 5, item6)
@@ -397,10 +397,9 @@ class UiTableCalibration(object):
         self.main.calibration_procedure.calculation()
 
     def add_item(self, x, row, column, active):
-        from Main import toFixed
         if 2 >= column >= 0 > x:
             x = 0
-        item = QtWidgets.QTableWidgetItem(toFixed(x, self.round))
+        item = QtWidgets.QTableWidgetItem(helper.to_fixed(x, self.round))
         item.setTextAlignment(Qt.AlignCenter)
         item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
         self.t2_tableCalibration.setItem(row, column, item)

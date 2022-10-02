@@ -3,8 +3,11 @@
 import configparser
 import json
 import os
+import helper
 from enum import Enum
 from cryptography.fernet import Fernet
+
+from MeasurementProcedure import Cuvette
 from version import version
 
 """Проверака и комментари: 13.01.2019"""
@@ -70,11 +73,11 @@ class Configure(object):
         self.maximum_sensor_pressure = 101
         # [Measurement]
         self.spi_max_speed_hz = 1000000
-        self.VcL = 60
-        self.VcM = 40
-        self.VcS = 20
-        self.VdLM = 20
-        self.VdS = 10
+        self.vc_large = 60
+        self.vc_medium = 40
+        self.vc_small = 20
+        self.vd_large_and_medium = 20
+        self.vd_small = 10
         self.correct_data = 0
         self.let_out_pressure_duration = 60
         # [Ports]
@@ -95,7 +98,7 @@ class Configure(object):
         self.smq_list = [100, 500, 1000, 2000, 3000, 5000, 7500, 10000, 50000, 100000]
         self.smq_now = 3000
         self.pulse_length = 2
-        self.Pmeas = [90, 0.90, 13.1]
+        self.pmeas = [90, 0.90, 13.1]
         self.pmeas_kpa_min = 90
         self.pmeas_kpa_max = 110
         self.pmeas_bar_min = 0.9
@@ -142,6 +145,27 @@ class Configure(object):
         self.correct_data = x
         self.set_ini('Measurement', 'correct_data', self.correct_data)
 
+    def set_pmeas(self, p_kpa, p_bar, p_psi):
+        """Pressure to be applied to the device"""
+        self.pmeas = '[{0}, {1}, {2}]'.format(p_kpa, p_bar, p_psi)
+
+    def calibration_save(self, cuvette, vc, vd):
+        if cuvette == Cuvette.Large.value:
+            self.vc_large = helper.to_fixed(vc, self.round)
+            self.set_device_ini('Measurement', 'VcL', self.vc_large)
+            self.vd_large_and_medium = helper.to_fixed(vd, self.round)
+            self.set_device_ini('Measurement', 'VdLM', self.vd_large_and_medium)
+        if cuvette == Cuvette.Medium.value:
+            self.vc_medium = helper.to_fixed(vc, self.round)
+            self.set_device_ini('Measurement', 'VcM', self.vc_large)
+            self.vd_large_and_medium = helper.to_fixed(vd, self.round)
+            self.set_device_ini('Measurement', 'VdLM', self.vd_large_and_medium)
+        if cuvette == Cuvette.Small.value:
+            self.vc_small = helper.to_fixed(vc, self.round)
+            self.set_device_ini('Measurement', 'VcS', self.vc_large)
+            self.vd_small = helper.to_fixed(vd, self.round)
+            self.set_device_ini('Measurement', 'VdS', self.vd_large_and_medium)
+
     def load_device_config(self):
         """загружаем все настройки из области прибора"""
         # [Pycnometer]
@@ -150,15 +174,16 @@ class Configure(object):
         self.module_spi = self.try_get_device_config('Pycnometer', 'module_spi', self.module_spi)
         self.data_channel = self.try_getint_device_config('Pycnometer', 'data_channel', self.data_channel)
         self.t_channels.clear()
+        print(self.try_get_device_config('Pycnometer', 't_channels', self.t_channels))
         self.t_channels = json.loads(self.try_get_device_config('Pycnometer', 't_channels', self.t_channels))
         self.maximum_sensor_pressure = self.try_getint_device_config('Pycnometer', 'maximum_sensor_pressure', self.maximum_sensor_pressure)
         # [Measurement]
         self.spi_max_speed_hz = self.try_getint_device_config('Measurement', 'spi_max_speed_hz', self.spi_max_speed_hz)
-        self.VcL = self.try_getfloat_device_config('Measurement', 'VcL', self.VcL)
-        self.VcM = self.try_getfloat_device_config('Measurement', 'VcM', self.VcM)
-        self.VcS = self.try_getfloat_device_config('Measurement', 'VcS', self.VcS)
-        self.VdLM = self.try_getfloat_device_config('Measurement', 'VdLM', self.VdLM)
-        self.VdS = self.try_getfloat_device_config('Measurement', 'VdS', self.VdS)
+        self.vc_large = self.try_getfloat_device_config('Measurement', 'VcL', self.vc_large)
+        self.vc_medium = self.try_getfloat_device_config('Measurement', 'VcM', self.vc_medium)
+        self.vc_small = self.try_getfloat_device_config('Measurement', 'VcS', self.vc_small)
+        self.vd_large_and_medium = self.try_getfloat_device_config('Measurement', 'VdLM', self.vd_large_and_medium)
+        self.vd_small = self.try_getfloat_device_config('Measurement', 'VdS', self.vd_small)
         self.correct_data = self.try_getint_device_config('Measurement', 'correct_data', self.correct_data)
         self.let_out_pressure_duration = self.try_getint_device_config('Measurement', 'let_out_pressure_duration', self.let_out_pressure_duration)
         # [Ports]
@@ -179,11 +204,11 @@ class Configure(object):
         self.set_device_ini('Pycnometer', 'maximum_sensor_pressure', self.maximum_sensor_pressure)
         # [Measurement]
         self.set_device_ini('Measurement', 'spi_max_speed_hz', self.spi_max_speed_hz)
-        self.set_device_ini('Measurement', 'VcL', self.VcL)
-        self.set_device_ini('Measurement', 'VcM', self.VcM)
-        self.set_device_ini('Measurement', 'VcS', self.VcS)
-        self.set_device_ini('Measurement', 'VdLM', self.VdLM)
-        self.set_device_ini('Measurement', 'VdS', self.VdS)
+        self.set_device_ini('Measurement', 'VcL', self.vc_large)
+        self.set_device_ini('Measurement', 'VcM', self.vc_medium)
+        self.set_device_ini('Measurement', 'VcS', self.vc_small)
+        self.set_device_ini('Measurement', 'VdLM', self.vd_large_and_medium)
+        self.set_device_ini('Measurement', 'VdS', self.vd_small)
         self.set_device_ini('Measurement', 'correct_data', self.correct_data)
         self.set_device_ini('Measurement', 'let_out_pressure_duration', self.let_out_pressure_duration)
         # [Ports]
@@ -205,14 +230,14 @@ class Configure(object):
         self.set_language()
         # [Measurement]
         self.pressure = Pressure(self.try_getint_application_config('Measurement', 'pressure', True))
-        self.round = self.try_getint_application_config('Measurement', 'round', True)
+        self.round = self.try_getint_application_config('Measurement', 'round', False)
         self.periodicity_of_removal_of_sensor_reading = self.try_getfloat_application_config('Measurement', 'periodicity_of_removal_of_sensor_reading', True)
         self.smq_list.clear()
         self.smq_list = json.loads(self.try_get_application_config('Measurement', 'smq_list', False))
         self.smq_now = self.try_getint_application_config('Measurement', 'smq_now', True)
         self.pulse_length = self.try_getint_application_config('Measurement', 'pulse_length', True)
-        self.Pmeas.clear()
-        self.Pmeas = json.loads(self.try_get_application_config('Measurement', 'Pmeas', True))
+        self.pmeas.clear()
+        self.pmeas = json.loads(self.try_get_application_config('Measurement', 'Pmeas', True))
         self.pmeas_kpa_min = self.try_getfloat_application_config('Measurement', 'pmeas_kPa_min', False)
         self.pmeas_kpa_max = self.try_getfloat_application_config('Measurement', 'pmeas_kPa_max', False)
         self.pmeas_bar_min = self.try_getfloat_application_config('Measurement', 'pmeas_Bar_min', False)
@@ -234,39 +259,27 @@ class Configure(object):
         self.wifi_pass = self.try_get_application_config_hash('SavingResult', 'wifi_pass', True)
 
     def save_application_config(self):
-        # [Pycnometer]
-        self.version = self.try_get_application_config('Pycnometer', 'version', False)
         # [Language]
-        self.set_language()
+        self.set_ini('Language', 'language', self.language)
         # [Measurement]
-        self.pressure = Pressure(self.try_getint_application_config('Measurement', 'pressure', True))
-        self.round = self.try_getint_application_config('Measurement', 'round', True)
-        self.periodicity_of_removal_of_sensor_reading = self.try_getfloat_application_config('Measurement', 'periodicity_of_removal_of_sensor_reading', True)
-        self.smq_list.clear()
-        self.smq_list = json.loads(self.try_get_application_config('Measurement', 'smq_list', False))
-        self.smq_now = self.try_getint_application_config('Measurement', 'smq_now', True)
-        self.pulse_length = self.try_getint_application_config('Measurement', 'pulse_length', True)
-        self.Pmeas.clear()
-        self.Pmeas = json.loads(self.try_get_application_config('Measurement', 'Pmeas', True))
-        self.pmeas_kpa_min = self.try_getfloat_application_config('Measurement', 'pmeas_kPa_min', False)
-        self.pmeas_kpa_max = self.try_getfloat_application_config('Measurement', 'pmeas_kPa_max', False)
-        self.pmeas_bar_min = self.try_getfloat_application_config('Measurement', 'pmeas_Bar_min', False)
-        self.pmeas_bar_max = self.try_getfloat_application_config('Measurement', 'pmeas_Bar_max', False)
-        self.pmeas_psi_min = self.try_getfloat_application_config('Measurement', 'pmeas_Psi_min', False)
-        self.pmeas_psi_max = self.try_getfloat_application_config('Measurement', 'pmeas_Psi_max', False)
+        self.set_ini('Measurement', 'pressure', self.pressure)
+        self.set_ini('Measurement', 'periodicity_of_removal_of_sensor_reading', self.periodicity_of_removal_of_sensor_reading)
+        self.set_ini('Measurement', 'smq_now', self.smq_now)
+        self.set_ini('Measurement', 'pulse_length', self.pulse_length)
+        self.set_ini('Measurement', 'Pmeas', self.pmeas)
         # [ManualControl]
-        self.leak_test_when_starting = self.try_getboolean_application_config('ManualControl', 'leak_test_when_starting', True)
-        self.calibrate_sensor_when_starting = self.try_getboolean_application_config('ManualControl', 'calibrate_sensor_when_starting', True)
+        self.set_ini('ManualControl', 'leak_test_when_starting', self.leak_test_when_starting)
+        self.set_ini('ManualControl', 'calibrate_sensor_when_starting', self.calibrate_sensor_when_starting)
         # [ReportSetup]
-        self.report_measurement_table = self.try_getboolean_application_config('ReportSetup', 'report_measurement_table', True)
-        self.report_header = self.try_get_application_config('ReportSetup', 'report_header', True)
-        self.report_footer = self.try_get_application_config('ReportSetup', 'report_footer', True)
+        self.set_ini('ReportSetup', 'report_measurement_table', self.report_measurement_table)
+        self.set_ini('ReportSetup', 'report_header', self.report_header)
+        self.set_ini('ReportSetup', 'report_footer', self.report_footer)
         # [SavingResult]
-        self.save_to_flash_drive = self.try_getboolean_application_config('SavingResult', 'save_to_flash_drive', True)
-        self.send_report_to_mail = self.try_getboolean_application_config('SavingResult', 'send_report_to_mail', True)
-        self.email_address = self.try_get_application_config_hash('SavingResult', 'email_address', True)
-        self.wifi_name = self.try_get_application_config_hash('SavingResult', 'wifi_name', True)
-        self.wifi_pass = self.try_get_application_config_hash('SavingResult', 'wifi_pass', True)
+        self.set_ini('SavingResult', 'save_to_flash_drive', self.save_to_flash_drive)
+        self.set_ini('SavingResult', 'send_report_to_mail', self.send_report_to_mail)
+        self.set_ini_hash('SavingResult', 'email_address', self.email_address)
+        self.set_ini_hash('SavingResult', 'wifi_name', self.wifi_name)
+        self.set_ini_hash('SavingResult', 'wifi_pass', self.wifi_pass)
 
     def get_ports(self):
         """Метод возвращает номера портов для работы"""
@@ -414,9 +427,11 @@ class Configure(object):
             os.rename(self.config_device_file + ".new", self.config_device_file)
 
     def try_get_device_config(self, section, option, default):
+        print(section, self.config_device.has_section(section))
         if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
         self.config_device.read(self.config_device_file, encoding='utf-8')
         result = self.config_device.get(section, option)
+
         return result
 
     def try_getint_device_config(self, section, option, default):
@@ -461,6 +476,9 @@ class Valve(object):
     def set_ports(self, ports):
         self.port_open = ports[0]
         self.port_hold = ports[1]
+
+    def is_correct(self):
+        return self.port_open != 0 and self.port_hold != 0
 
 
 class Pressure(Enum):

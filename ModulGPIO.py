@@ -2,55 +2,91 @@
 import inspect
 import os
 import sys
-import RPi.GPIO as GPIO
 import time
-"""Проверака и комментари: 08.01.2019"""
+from Config import Valve
 
 """
-"Класс для работы с GPIO с Raspberry Pi"    
-    self.gpio - ссылка на модуль работы с GPIO
-    self.gpio - устанавливаем вариант работы с GPIO
-    self.ports - берем номера портов из config.ini
+    self.gpio - GPIO Module
+    self.gpio.setmode - set mode GPIO (BOARD / BCM)
+    
+    ---------------------------------------------------------------------
+    |    POWER    |   3.3V    |   1   |   2   |  5V       |    POWER    |
+    ---------------------------------------------------------------------
+    |   SDA1 I2C  |   GPIO2   |   3   |   4   |  5V       |    POWER    |
+    ---------------------------------------------------------------------
+    |   SCL1 I2C  |   GPIO3   |   5   |   6   |  GROUND   |             |
+    ---------------------------------------------------------------------    
+    |             |   GPIO4   |   7   |   8   |  GPIO14   |  UART0_TXD  |
+    ---------------------------------------------------------------------
+    |             |   GROUND  |   9   |   10  |  GPIO15   |  UART0_RXD  |
+    ---------------------------------------------------------------------
+    |             |   GPIO17  |  11   |   12  |  GPIO18   |   PCM_CLK   |
+    ---------------------------------------------------------------------
+    |             |   GPIO27  |  13   |   14  |  GROUND   |             |  
+    ---------------------------------------------------------------------
+    |             |   GPIO22  |  15   |   16  |  GPIO23   |             | 
+    ---------------------------------------------------------------------
+    |    POWER    |   3.3V    |  17   |   18  |  GPIO24   |             | 
+    ---------------------------------------------------------------------  
+    |  SPI0_MOSI  |   GPIO10  |  19   |   20  |  GROUND   |             |
+    ---------------------------------------------------------------------
+    |  SPI0_MISO  |   GPIO9   |  21   |   22  |  GPIO25   |             |
+    ---------------------------------------------------------------------
+    |  SPI0_SCLK  |   GPIO11  |  23   |   24  |  GPIO8    | SPI0_CE0_N  |
+    ---------------------------------------------------------------------
+    |             |   GROUND  |  25   |   26  |  GPIO7    | SPI0_CE1_N  |
+    ---------------------------------------------------------------------  
+    |I2C ID EEPROM|   ID_SD   |  27   |   28  |  ID_SC    |I2C ID EEPROM|
+    --------------------------------------------------------------------- 
+    |             |   GPIO5   |  29   |   30  |  GROUND   |             |
+    ---------------------------------------------------------------------
+    |             |   GPIO6   |  31   |   32  |  GPIO12   |             |  
+    ---------------------------------------------------------------------
+    |             |   GPIO13  |   33  |   34  |  GROUND   |             |  
+    ---------------------------------------------------------------------
+    |             |   GPIO19  |   35  |   36  |  GPIO16   |             |  
+    ---------------------------------------------------------------------
+    |             |   GPIO26  |   37  |   38  |  GPIO20   |             |  
+    ---------------------------------------------------------------------
+    |             |   GROUND  |   39  |   40  |  GPIO21   |             |  
+    ---------------------------------------------------------------------  
+    
+    self.valves - valves setup from config.ini    
 """
+
 
 class GPIO(object):
-    """docstring"""
+    """GPIO for working mode"""
 
-    """Конструктор класса. Поля класса"""
-    def __init__(self, ports):
+    def __init__(self, valves: list[Valve]):
         import RPi.GPIO as GPIO
         self.gpio = GPIO
         self.gpio.setmode(GPIO.BOARD)
-        self.ports = ports
+        self.valves = valves
         # установки GPIO
-        self.gpio.setup(self.ports, GPIO.OUT, initial = GPIO.LOW)
+        self.gpio.setup(self.valves, GPIO.OUT, initial=GPIO.LOW)
 
-    """Метод включаем подачу напряжения на указанный порт"""
-    def port_on(self, port):
+    def port_on(self, valve: Valve):
+        """Open valve and activate hold mode"""
         # проверяем, что порт указан
-        if port > 0:
-            if(port==36):
-                self.gpio.output(36, True)
-                time.sleep(0.06)
-                self.gpio.output(32, True)
-                self.gpio.output(36, False)
-            else:            
-                self.gpio.output(port, True)
+        if valve.is_correct():
+            self.gpio.output(valve.port_open, True)
+            time.sleep(0.06)
+            self.gpio.output(valve.port_hold, True)
+            self.gpio.output(valve.port_open, False)
 
-    """Метод отключает подачу напряжения на указанный порт"""
-    def port_off(self, port):
+    def port_off(self, valve: Valve):
+        """Close valve"""
         # проверяем, что порт указан
-        if port > 0:
-            if(port==36):
-                self.gpio.output(32, False)
-            else: 
-                self.gpio.output(port, False)
+        if valve.is_correct():
+            self.gpio.output(valve.port_hold, False)
 
-    """Метод отключает подачу напряжения на все заявленные к использованию порты"""
     def all_port_off(self):
-        for port in self.ports:
-            self.gpio.output(port, False)
+        """Close all valve"""
+        for valve in self.valves:
+            self.gpio.output(valve.port_open, False)
+            self.gpio.output(valve.port_hold, False)
 
-    """Метод для сбрасывания установки"""
     def clean_up(self):
+        """Setup clear"""
         self.gpio.cleanup()

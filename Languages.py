@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # Модуль для загрузки используемого языка из Language/*.ini
 import configparser
-import json
 import os
 
 """Проверака и комментари: 23.01.2019"""

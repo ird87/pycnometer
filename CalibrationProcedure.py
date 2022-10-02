@@ -9,7 +9,7 @@ import configparser
 import threading
 
 from Calibration import Calibration
-from MeasurementProcedure import Сuvette, Ports, Abort_Type
+from MeasurementProcedure import Cuvette, Ports, AbortType
 
 """Проверка и комментари: 19.01.2019"""
 
@@ -77,7 +77,7 @@ class CalibrationProcedure(object):
         self.table = self.main.t2_tableCalibration
         self.spi = self.main.spi
         self.gpio = self.main.gpio
-        self.ports = self.main.ports
+        self.ports = self.main.valves
         self.block_other_tabs = self.main.block_other_tabs_signal
         self.block_userinterface = self.main.block_userinterface_calibration_signal
         self.unblock_userinterface = self.main.unblock_userinterface_calibration_signal
@@ -86,7 +86,7 @@ class CalibrationProcedure(object):
         self.file = os.path.basename(__file__)
         self.debug_log = self.main.debug_log
         self.measurement_log = self.main.measurement_log
-        self.cuvette = Сuvette.Large
+        self.cuvette = Cuvette.Large
         self.number_of_measurements = 0
         self.sample_volume = 0
         self.VcL = 0
@@ -105,8 +105,8 @@ class CalibrationProcedure(object):
         self.fail_let_out_pressure = self.main.fail_let_out_pressure
         self.set_calibration_results = main.calibration_results_message
         self.Vss = 0
-        self.c_Vc = 0.0
-        self.c_Vd = 0.0
+        self.c_vc = 0.0
+        self.c_vd = 0.0
         self.calibration_file = ''
         self.result_file_reader = configparser.ConfigParser()
         self.abort_procedure = self.main.abort_procedure
@@ -264,13 +264,13 @@ class CalibrationProcedure(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Calibration')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration interrupted')
-        if calibration == Abort_Type.Pressure_below_required:
+        if calibration == AbortType.Pressure_below_required:
             self.fail_pressure_set.emit()
-        if calibration == Abort_Type.Could_not_balance:
+        if calibration == AbortType.Could_not_balance:
             self.fail_get_balance.emit()
-        if calibration == Abort_Type.Interrupted_by_user:
+        if calibration == AbortType.Interrupted_by_user:
             self.abort_procedure.emit()
-        if calibration == Abort_Type.Let_out_pressure_fail:
+        if calibration == AbortType.Let_out_pressure_fail:
             self.fail_let_out_pressure.emit()
 
     """Метод калибровки для кюветы любого размера"""
@@ -385,7 +385,7 @@ class CalibrationProcedure(object):
             if not success:
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
-                raise Exception(Abort_Type.Pressure_below_required)
+                raise Exception(AbortType.Pressure_below_required)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas, duration))
             self.check_for_interruption()
@@ -411,7 +411,7 @@ class CalibrationProcedure(object):
                                        'Measured{0} {1} : p1 = {2}'.format(i, self.calibrations[l].measurement,
                                                                         self.calibrations[l].p1))
             # только для большой и средней кюветы
-            if not self.cuvette == Сuvette.Small:
+            if not self.cuvette == Cuvette.Small:
                 self.check_for_interruption()
                 self.gpio.port_on(self.ports[Ports.K2.value])
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -428,12 +428,12 @@ class CalibrationProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - fail, balance = {0}/{1}, time has '
                             'passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                raise Exception(AbortType.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure stops changing - success, P = {0}/{1}, time has '
                             'passed: {2}'.format(balance, 0.01, duration))
             # только для большой и средней кюветы
-            if not self.cuvette == Сuvette.Small:
+            if not self.cuvette == Cuvette.Small:
                 self.check_for_interruption()
                 self.gpio.port_off(self.ports[Ports.K2.value])
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -472,7 +472,7 @@ class CalibrationProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure let_out - fail, time '
                             'has passed: {0}'.format(duration))
-                raise Exception(Abort_Type.Let_out_pressure_fail)
+                raise Exception(AbortType.Let_out_pressure_fail)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                             'pressure let_out - success, time '
                             'has passed: {0}'.format(duration))
@@ -724,13 +724,13 @@ class CalibrationProcedure(object):
                              'Calculation c_Vc.....')
         try:
             # Рассчитываем объем кюветы
-            self.c_Vc = Vc / divider
+            self.c_vc = Vc / divider
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating c_Vc, denominator: divider={0}'.format(divider))
-            self.c_Vc = 0
+            self.c_vc = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measured : c_Vc = {0}'.format(self.c_Vc))
+                                   'Measured : c_Vc = {0}'.format(self.c_vc))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Calculation c_Vc.....Done')
 
@@ -740,13 +740,13 @@ class CalibrationProcedure(object):
                              'Calculation c_Vd.....')
         try:
             # Рассчитываем доп. объем кюветы
-            self.c_Vd = Vd / divider
+            self.c_vd = Vd / divider
         except ArithmeticError:
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Division by zero when calculating c_Vd, denominator: divider={0}'.format(divider))
-            self.c_Vd = 0
+            self.c_vd = 0
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measured : c_Vd = {0}'.format(self.c_Vd))
+                                   'Measured : c_Vd = {0}'.format(self.c_vd))
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Calculation c_Vd.....Done')
 
@@ -772,7 +772,7 @@ class CalibrationProcedure(object):
                                          'Recalculation Vc0 for P\'[{0}].....'.format(index1))
                     try:
 
-                        _Vc0 = self.c_Vd * (P1a/P2a-1) + self.Vss
+                        _Vc0 = self.c_vd * (P1a / P2a - 1) + self.Vss
 
 
                     except ArithmeticError:
@@ -794,14 +794,14 @@ class CalibrationProcedure(object):
                                  'Realculation c_Vc.....')
             try:
                 # Рассчитываем объем кюветы по хитрой Вовиной формуле
-                self.c_Vc = _Vc / counter
+                self.c_vc = _Vc / counter
             except ArithmeticError:
                 self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                      'Division by zero when calculating c_Vc, denominator: counter={0}'.format(
                                          counter))
                 self._c_Vc = 0
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Measured : c_Vc = {0}'.format(self.c_Vc))
+                                       'Measured : c_Vc = {0}'.format(self.c_vc))
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                                  'Recalculation c_Vc.....Done')
 
@@ -1010,8 +1010,8 @@ class CalibrationProcedure(object):
             self.update_calibration_file('Calibration-' + str(i), 'ratio', str(self.calibrations[i].ratio))
             self.update_calibration_file('Calibration-' + str(i), 'deviation', str(self.calibrations[i].deviation))
             self.update_calibration_file('Calibration-' + str(i), 'active', str(self.calibrations[i].active))
-        self.update_calibration_file('CalibrationResult', 'Vc', str(self.c_Vc))
-        self.update_calibration_file('CalibrationResult', 'Vd', str(self.c_Vd))
+        self.update_calibration_file('CalibrationResult', 'Vc', str(self.c_vc))
+        self.update_calibration_file('CalibrationResult', 'Vd', str(self.c_vd))
         os.rename(self.calibration_file, self.calibration_file + "~")
         os.rename(self.calibration_file + ".new", self.calibration_file)
         os.remove(self.calibration_file + "~")
@@ -1036,9 +1036,9 @@ class CalibrationProcedure(object):
         # [SourceData]
         cuvette_type = self.try_load_int('SourceData', 'cuvette')
         if cuvette_type is None:
-            self.cuvette = Сuvette.Large
+            self.cuvette = Cuvette.Large
         else:
-            self.cuvette = Сuvette(cuvette_type)
+            self.cuvette = Cuvette(cuvette_type)
         self.number_of_measurements = self.try_load_int('SourceData', 'number_of_measurements')
         self.sample_volume = self.try_load_float('SourceData', 'sample')
         self.data_of_calibration = self.try_load_string('SourceData', 'data')
@@ -1072,11 +1072,11 @@ class CalibrationProcedure(object):
             })
 
         # [CalibrationResult]
-            self.c_Vc = self.try_load_float('CalibrationResult', 'vc')
-            self.c_Vd = self.try_load_float('CalibrationResult', 'vd')
+            self.c_vc = self.try_load_float('CalibrationResult', 'vc')
+            self.c_vd = self.try_load_float('CalibrationResult', 'vd')
         calibration_result = {
-            'vc': self.c_Vc,
-            'vd': self.c_Vd
+            'vc': self.c_vc,
+            'vd': self.c_vd
         }
         result = [source_data, calibrations, calibration_result]
         return result
@@ -1099,7 +1099,7 @@ class CalibrationProcedure(object):
 
     def check_for_interruption(self):
         if self.is_abort_procedure():
-            raise Exception(Abort_Type.Interrupted_by_user)
+            raise Exception(AbortType.Interrupted_by_user)
 
     """Метод для включения отдельного потока калибровки русского датчика прибора"""
 
@@ -1132,13 +1132,13 @@ class CalibrationProcedure(object):
         # выключаем все порты
         self.main.all_port_off()
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'sensor_calibration interrupted')
-        if error == Abort_Type.Pressure_below_required:
+        if error == AbortType.Pressure_below_required:
             self.fail_pressure_set.emit()
-        if error == Abort_Type.Could_not_balance:
+        if error == AbortType.Could_not_balance:
             self.fail_get_balance.emit()
-        if error == Abort_Type.Interrupted_by_user:
+        if error == AbortType.Interrupted_by_user:
             self.abort_procedure.emit()
-        if error == Abort_Type.Let_out_pressure_fail:
+        if error == AbortType.Let_out_pressure_fail:
             self.fail_let_out_pressure.emit()
 
     def russian_sensor_calibration_procedure(self):
@@ -1181,7 +1181,7 @@ class CalibrationProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                        duration))
-            raise Exception(Abort_Type.Pressure_below_required)
+            raise Exception(AbortType.Pressure_below_required)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                       duration))
@@ -1211,7 +1211,7 @@ class CalibrationProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure stops changing - fail, balance = {0}/{1}, time has '
                                        'passed: {2}'.format(balance, 0.01, duration))
-            raise Exception(Abort_Type.Could_not_balance)
+            raise Exception(AbortType.Could_not_balance)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'pressure stops changing - success, P = {0}/{1}, time has '
                                    'passed: {2}'.format(balance, 0.01, duration))

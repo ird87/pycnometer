@@ -66,7 +66,7 @@ class Logger(object):
         while find_name:
             self.log_name = os.path.join(os.getcwd(), 'Logs', self.type, self.type + ' - ' + log_name + '.log')
             find_name = os.path.isfile(self.log_name)
-        self.fh = logging.FileHandler(self.log_name, encoding = 'WINDOWS-1251')
+        self.fh = logging.FileHandler(self.log_name, encoding='UTF8')
 
         # # create the logging file handler уже через полное имя файла
         # if self.config.is_test_mode():

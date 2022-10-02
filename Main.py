@@ -5,6 +5,7 @@ import inspect
 import ntpath
 import os
 import shutil
+import helper
 import sys  # sys нужен для передачи argv в QApplication
 import time
 from subprocess import Popen, PIPE
@@ -12,6 +13,7 @@ from sys import platform
 from urllib.request import urlopen
 import PyQt5
 
+import Converter
 from Calibration import Calibration
 from CalibrationProcedure import CalibrationProcedure
 from Config import Configure, Pressure
@@ -19,7 +21,7 @@ from FileManager import UiFileManager
 from Languages import Languages
 from Logger import Logger
 from Measurement import Measurement
-from MeasurementProcedure import MeasurementProcedure, Сuvette, Sample_preparation
+from MeasurementProcedure import MeasurementProcedure, Cuvette, SamplePreparation
 from PyQt5 import QtCore, uic
 from PyQt5.QtCore import QRegExp, QObject, QEvent, Qt
 from PyQt5.QtGui import QIntValidator, QRegExpValidator, QPixmap
@@ -35,41 +37,6 @@ from Controller import Controller
 """
 "Главный класс. Работа с GUI, управление приложением, обработка ввода пользователя и работы процедур измерений и калибровки"
 """
-
-"""Функция для отображенияtoFixed нужного количества знаков после '.'"""
-
-
-def toFixed(numObj, digits=0):
-    if numObj != None and numObj != '':
-        if isfloat(numObj):
-            retVal = '{0:.{1}f}'.format(numObj, digits)
-            return retVal
-        else:
-            return 'Not float'
-    else:
-        return 'None'
-
-
-"""Функция проверки переменной на тип int"""
-
-
-def isint(s):
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False
-
-
-"""Функция проверки переменной на тип float"""
-
-
-def isfloat(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
 
 
 def clickable(widget):
@@ -135,7 +102,8 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.wifi = False
         # Загружаем модуль настройки
         self.config = Configure()
-        self.config.set_measurement()
+        # загружаем настройки программы
+        self.config.load_application_config()
         # Это имя нашего модуля
         self.file = os.path.basename(__file__)
 
@@ -371,86 +339,77 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
 
     # Загрузить и отобразить Vc и Vd из конфига.
     def VcVd_download_and_display(self):
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Small.value:
-            self.t2_gCR_Edit3.setText(str(self.config.VcS))
-            self.t2_gCR_Edit4.setText(str(self.config.VdS))
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Medium.value:
-            self.t2_gCR_Edit3.setText(str(self.config.VcM))
-            self.t2_gCR_Edit4.setText(str(self.config.VdLM))
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Large.value:
-            self.t2_gCR_Edit3.setText(str(self.config.VcL))
-            self.t2_gCR_Edit4.setText(str(self.config.VdLM))
+        if self.t2_gID_cmd1.currentIndex() == Cuvette.Small.value:
+            self.t2_gCR_Edit3.setText(str(self.config.vc_small))
+            self.t2_gCR_Edit4.setText(str(self.config.vd_small))
+        if self.t2_gID_cmd1.currentIndex() == Cuvette.Medium.value:
+            self.t2_gCR_Edit3.setText(str(self.config.vc_medium))
+            self.t2_gCR_Edit4.setText(str(self.config.vd_large_and_medium))
+        if self.t2_gID_cmd1.currentIndex() == Cuvette.Large.value:
+            self.t2_gCR_Edit3.setText(str(self.config.vc_large))
+            self.t2_gCR_Edit4.setText(str(self.config.vd_large_and_medium))
 
     # Применяем изменения в настройках программы.
     def option_appy(self):
-        # Сначала мы записываем все изменения внутрь файла config.ini
-        self.config.set_ini('Pycnometer', 'model', self.config.model)
-        self.config.set_ini('Pycnometer', 'version', str(self.config.version))
-        self.config.set_ini('Pycnometer', 'small_cuvette', str(self.config.small_cuvette))
-        self.config.set_ini('Pycnometer', 'module_spi', self.config.module_spi)
-        self.config.set_ini('Pycnometer', 'data_channel', str(self.config.data_channel))
-        # используемый язык
-        self.config.set_ini('Language', 'language', self.t4_gIS_cmd1.currentText())
-        # единица измерения давления
-        self.config.set_ini('Measurement', 'pressure', str(self.t4_gMS_cmd1.currentIndex()))
-        # количество измерений с датчика, для получения замера давления
-        self.config.set_ini('Measurement', 'smq_now', self.t4_gMS_cmd2.currentText())
-        # Длинна импульса для Импульсной продувки
-        self.config.set_ini('Measurement', 'pulse_length', self.t4_MS_Edit1.text())
-        # Давление, которое должен набрать прибор
-        Pmeas_const = ''
-        p_kPa = 0
-        p_Bar = 0
-        p_Psi = 0
+        # Сначала мы записываем все изменения в config
+        # [Language]
+        self.config.language = self.t4_gIS_cmd1.currentText()
+        # [Measurement]
+        self.config.pressure = Converter.str_to_int(self.t4_gMS_cmd1.currentIndex())
+        self.config.periodicity_of_removal_of_sensor_reading = Converter.str_to_float(self.t4_gMC_Edit1.text())
+        self.config.smq_now = Converter.str_to_int(self.t4_gMS_cmd2.text())
+        self.config.pulse_length = Converter.str_to_int(self.t4_MS_Edit1.text())
+        pressure = Converter.str_to_float(self.t4_MS_Edit2.text())
+        unit = self.t4_gMS_cmd1.currentIndex()
+        p_kpa = 0
+        p_bar = 0
+        p_psi = 0
         data = 0
-        s = self.t4_MS_Edit2.text()
-        # Если давление измеряется в кПа
-        if self.t4_gMS_cmd1.currentIndex() == Pressure.kPa.value:
-            p_kPa = toFixed(float(s), 0)
-            data = self.spi.getDataFromkPa(float(p_kPa))
-            p_Bar = toFixed(self.spi.getBar(data), 2)
-            p_Psi = toFixed(self.spi.getPsi(data), 1)
-        # Если давление измеряется в Бар
-        if self.t4_gMS_cmd1.currentIndex() == Pressure.Bar.value:
-            p_Bar = toFixed(float(s), 2)
-            data = self.spi.getDataFromBar(float(p_Bar))
-            p_kPa = toFixed(self.spi.getkPa(data), 0)
-            p_Psi = toFixed(self.spi.getPsi(data), 1)
-        # Если давление измеряется в psi
-        if self.t4_gMS_cmd1.currentIndex() == Pressure.Psi.value:
-            p_Psi = toFixed(float(s), 1)
-            data = self.spi.getDataFromPsi(float(p_Psi))
-            p_Bar = toFixed(self.spi.getBar(data), 2)
-            p_kPa = toFixed(self.spi.getkPa(data), 0)
-
-        Pmeas_const = '[{0}, {1}, {2}]'.format(p_kPa, p_Bar, p_Psi)
-        self.config.set_ini('Measurement', 'Pmeas', Pmeas_const)
-        self.config.set_ini('Measurement', 'round', str(self.config.round))
-        self.config.set_ini('ManualControl', 'periodicity_of_removal_of_sensor_reading', self.t4_gMC_Edit1.text())
-        self.config.set_ini('ManualControl', 'leak_test_when_starting', str(self.t4_gMC_chb1.isChecked()))
-        self.config.set_ini('ManualControl', 'calibrate_sensor_when_starting', str(self.t4_gMC_chb2.isChecked()))
-        self.config.set_ini('ReportSetup', 'report_measurement_table', str(self.t4_gRS_chb1.isChecked()))
+        # If pressure is measured in kPa
+        if unit == Pressure.kPa.value:
+            p_kpa = helper.to_fixed(pressure, 0)
+            data = self.main.spi.getDataFromkPa(float(p_kpa))
+            p_bar = helper.to_fixed(self.spi.getBar(data), 2)
+            p_psi = helper.to_fixed(self.spi.getPsi(data), 1)
+        # If pressure is measured in Bar
+        if unit == Pressure.Bar.value:
+            p_bar = helper.to_fixed(pressure, 2)
+            data = self.spi.getDataFromBar(float(p_bar))
+            p_kpa = helper.to_fixed(self.spi.getkPa(data), 0)
+            p_psi = helper.to_fixed(self.spi.getPsi(data), 1)
+        # If pressure is measured in psi
+        if unit == Pressure.Psi.value:
+            p_psi = helper.to_fixed(pressure, 1)
+            data = self.spi.getDataFromPsi(float(p_psi))
+            p_bar = helper.to_fixed(self.spi.getBar(data), 2)
+            p_kpa = helper.to_fixed(self.spi.getkPa(data), 0)
+        self.config.set_pmeas(p_kpa, p_bar, p_psi)
+        # ManualControl
+        self.config.leak_test_when_starting = self.t4_gMC_chb1.isChecked()
+        self.config.calibrate_sensor_when_starting = self.t4_gMC_chb2.isChecked()
+        # ReportSetup
+        self.config.report_measurement_table = self.t4_gRS_chb1.isChecked()
         self.save_header_and_footer()
-        self.config.set_ini('ReportSetup', 'report_header', self.t4_gRS_Edit1.text())
-        self.config.set_ini('ReportSetup', 'report_footer', self.t4_gRS_Edit2.text())
-        self.config.set_ini('SavingResult', 'save_to_flash_drive', str(self.t4_gSR_chb1.isChecked()))
-        self.config.set_ini('SavingResult', 'send_report_to_mail', str(self.t4_gSR_chb2.isChecked()))
-        self.config.set_ini_hash('SavingResult', 'email_address', self.t4_gSR_Edit1.text())
-        if not platform == "win32" and not self.config.wifi_name == "":
+        self.config.report_header = self.t4_gRS_Edit1.text()
+        self.config.report_footer = self.t4_gRS_Edit2.text()
+        # SavingResult
+        self.config.save_to_flash_drive = self.t4_gSR_chb1.isChecked()
+        self.config.send_report_to_mail = self.t4_gSR_chb2.isChecked()
+        self.config.email_address = self.t4_gSR_Edit1.text()
+        if not (platform == "win32" or "linux") and not self.config.wifi_name == "":
             ssid = ModulWIFI.SearchSSID(self.config.wifi_name)
             ModulWIFI.deleteSSID(ssid, self.config.wifi_pass)
             # os.system('wpa_cli -i wlan0 REMOVE_NETWORK 1')
             ssid = ModulWIFI.SearchSSID(self.t4_gSR_cmd1.currentText())
             ModulWIFI.addSSID(ssid, self.t4_gSR_Edit2.text())
-        self.config.set_ini_hash('SavingResult', 'wifi_name', self.t4_gSR_cmd1.currentText())
-        self.config.set_ini_hash('SavingResult', 'wifi_pass', self.t4_gSR_Edit2.text())
-        # А потом вызываем метод, который загружает и применяет все настройки из файла config.ini
+        self.config.wifi_name = self.t4_gSR_cmd1.currentText()
+        self.config.wifi_pass = self.t4_gSR_Edit2.text()
+        self.config.save_application_config()
+        # А потом вызываем метод, который применяет все настройки из файла config.ini
         self.setup()
 
     # Применение к программе настроек, хранящихся в config.ini
     def setup(self):
-        # загружаем настройки измерений
-        self.config.set_measurement()
         # применяем настройки изменений
         self.spi.set_option()
         # вызываем метод устанавливающий язык приложения
@@ -481,7 +440,6 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         #                 self.get_messagebox(self.message_headline1, self.message_txt6)
         #         else:
         #             self.get_messagebox(self.message_headline1, self.message_txt7)
-
 
         self.header_path = ""
         self.footer_path = ""
@@ -568,25 +526,25 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             # ограничение на ввод давления для кПа 90 - 110
             self.onlyInt = QIntValidator()
             self.t4_MS_Edit2.setValidator(self.onlyInt)
-            self.t4_MS_Edit2.setText(toFixed(self.config.Pmeas[self.t4_gMS_cmd1.currentIndex()], 0))
-            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_kPa_min,
-                                                            self.config.pmeas_kPa_max))
+            self.t4_MS_Edit2.setText(helper.to_fixed(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()], 0))
+            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_kpa_min,
+                                                            self.config.pmeas_kpa_max))
         if self.t4_gMS_cmd1.currentIndex() == Pressure.Bar.value:
             # ограничение на ввод давления для Бар 0.90 - 1.10
             rx = QRegExp(r'^[0-9][.]{0,1}[0-9]*$')
             self.onlyFloat = QRegExpValidator(rx, self)
             self.t4_MS_Edit2.setValidator(self.onlyFloat)
-            self.t4_MS_Edit2.setText(toFixed(self.config.Pmeas[self.t4_gMS_cmd1.currentIndex()], 2))
-            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_Bar_min,
-                                                            self.config.pmeas_Bar_max))
+            self.t4_MS_Edit2.setText(helper.to_fixed(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()], 2))
+            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_bar_min,
+                                                            self.config.pmeas_bar_max))
         if self.t4_gMS_cmd1.currentIndex() == Pressure.Psi.value:
             # ограничение на ввод давления для psi 13.0 - 16.0
             rx = QRegExp(r'^[0-9][.]{0,1}[0-9]*$')
             self.onlyFloat = QRegExpValidator(rx, self)
             self.t4_MS_Edit2.setValidator(self.onlyFloat)
-            self.t4_MS_Edit2.setText(toFixed(self.config.Pmeas[self.t4_gMS_cmd1.currentIndex()], 1))
-            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_Psi_min,
-                                                            self.config.pmeas_Psi_max))
+            self.t4_MS_Edit2.setText(helper.to_fixed(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()], 1))
+            self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_psi_min,
+                                                            self.config.pmeas_psi_max))
 
         # Проверяем активна ли кнопка "Применить"
         self.set_t4_button_1_enabled()
@@ -642,22 +600,24 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         organization = self.t1_gMI_Edit2.text()
         sample = self.t1_gMI_Edit3.text()
         batch_series = self.t1_gMI_Edit4.text()
+        cuvette = None
+        sample_preparation = None
 
         # Определяем выбранную Кювету
-        if self.t1_gM_cmd1.currentIndex() == Сuvette.Large.value:
-            cuvette = Сuvette.Large
-        if self.t1_gM_cmd1.currentIndex() == Сuvette.Medium.value:
-            cuvette = Сuvette.Medium
-        if self.t1_gM_cmd1.currentIndex() == Сuvette.Small.value:
-            cuvette = Сuvette.Small
+        if self.t1_gM_cmd1.currentIndex() == Cuvette.Large.value:
+            cuvette = Cuvette.Large
+        if self.t1_gM_cmd1.currentIndex() == Cuvette.Medium.value:
+            cuvette = Cuvette.Medium
+        if self.t1_gM_cmd1.currentIndex() == Cuvette.Small.value:
+            cuvette = Cuvette.Small
 
         # Определяем выбранный тип подготовки образца
         if self.t1_gSP_gRB_rb1.isChecked():
-            sample_preparation = Sample_preparation.Vacuuming
+            sample_preparation = sample_preparation.Vacuuming
         if self.t1_gSP_gRB_rb2.isChecked():
-            sample_preparation = Sample_preparation.Blow
+            sample_preparation = sample_preparation.Blow
         if self.t1_gSP_gRB_rb3.isChecked():
-            sample_preparation = Sample_preparation.Impulsive_blowing
+            sample_preparation = sample_preparation.Impulsive_blowing
 
         # Получаем значение времени, введенное пользователем в минутах
         sample_preparation_time_in_minute = int(self.t1_gSP_Edit1.text())
@@ -682,19 +642,19 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         take_the_last_measurements = self.measurement_procedure_get_setting()
 
         # Данные о кювете получаем из файла конфигурации
-        VcL = self.config.VcL
-        VcM = self.config.VcM
-        VcS = self.config.VcS
-        VdLM = self.config.VdLM
-        VdS = self.config.VdS
-        Pmeas = self.config.Pmeas_now
+        vc_large = self.config.vc_large
+        vc_medium = self.config.vc_medium
+        vc_small = self.config.vc_small
+        vd_large_and_medium = self.config.vd_large_and_medium
+        vd_small = self.config.vd_small
+        pmeas = self.config.pmeas
         pulse_length = self.config.pulse_length
 
         # Устанавливаем настройки Измерений
         self.measurement_procedure.set_settings(operator, organization, sample, batch_series, cuvette,
                                                 sample_preparation, sample_preparation_time_in_minute,
                                                 sample_mass, number_of_measurements, take_the_last_measurements,
-                                                VcL, VcM, VcS, VdLM, VdS, Pmeas, pulse_length)
+                                                vc_large, vc_medium, vc_small, vd_large_and_medium, vd_small, pmeas, pulse_length)
 
         # Явно выключаем все порты (на всякий случай, они и так должны быть выключены)
         self.all_port_off()
@@ -705,14 +665,14 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
 
     # Здесь мы считываем и возвращаем все, что ввел пользователь для проведения Калибровки.
     def calibration_procedure_get_setting(self):
-
+        cuvette = None
         # Определяем выбранную Кювету
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Large.value:
-            cuvette = Сuvette.Large
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Medium.value:
-            cuvette = Сuvette.Medium
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Small.value:
-            cuvette = Сuvette.Small
+        if self.t2_gID_cmd1.currentIndex() == Cuvette.Large.value:
+            cuvette = Cuvette.Large
+        if self.t2_gID_cmd1.currentIndex() == Cuvette.Medium.value:
+            cuvette = Cuvette.Medium
+        if self.t2_gID_cmd1.currentIndex() == Cuvette.Small.value:
+            cuvette = Cuvette.Small
 
         # Получаем количество измерений, введенное пользователем
         number_of_measurements = int(self.t2_gID_Edit1.text())
@@ -728,10 +688,10 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # Получаем данные введенные пользователем
         cuvette, number_of_measurements, sample_volume = self.calibration_procedure_get_setting()
 
-        Pmeas = self.config.Pmeas_now
+        pmeas = self.config.pmeas
 
         # Устанавливаем настройки Измерений
-        self.calibration_procedure.set_settings(cuvette, number_of_measurements, sample_volume, Pmeas)
+        self.calibration_procedure.set_settings(cuvette, number_of_measurements, sample_volume, pmeas)
 
         # Явно выключаем все порты (на всякий случай, они и так должны быть выключены)
         self.all_port_off()
@@ -1052,7 +1012,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
     def set_pressure(self, p):
         if p < 0:
             p = 0
-        self.t3_lblPressure2.setText(toFixed(p, self.config.round))
+        self.t3_lblPressure2.setText(helper.to_fixed(p, self.config.round))
 
     # При любом вводе данных на форму Измерения или форму Калибровки мы проверяем можно ли сделать кнопки для начала
     # процедур активными (для этого должны быть заполнены все поля и заполненны корректно)
@@ -1087,7 +1047,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
     # Тут мы сразу должны передать в таблицу калибровки данные. Так надо;)
     def t2_gID_Edit2_text_changed(self):
         self.set_t2_gID_button1_enabled()
-        if isfloat(self.t2_gID_Edit2.text()):
+        if helper.is_float(self.t2_gID_Edit2.text()):
             self.calibration_procedure.Vss = float(self.t2_gID_Edit2.text())
 
     def t4_MS_Edit1_text_changed(self):
@@ -1111,7 +1071,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             # -> поле выделяем красным
             self.t4_MS_Edit1.setStyleSheet("border: 1px solid red;")
         # Если текстовое поле "Длинна импульса" непустое и введенные данные можно привести к типу int...
-        if len(self.t4_MS_Edit1.text()) > 0 and isint(self.t4_MS_Edit1.text()):
+        if len(self.t4_MS_Edit1.text()) > 0 and helper.is_float(self.t4_MS_Edit1.text()):
             # ...но при этом значение будет меньше 0 ->
             if int(self.t4_MS_Edit1.text()) < 0:
                 # -> кнопка выключена
@@ -1123,16 +1083,16 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
                 self.t4_MS_Edit1.setStyleSheet(self.ss)
         # Если давление измеряется в кПа
         if self.t4_gMS_cmd1.currentIndex() == Pressure.kPa.value:
-            p_min = self.config.pmeas_kPa_min
-            p_max = self.config.pmeas_kPa_max
+            p_min = self.config.pmeas_kpa_min
+            p_max = self.config.pmeas_kpa_max
         # Если давление измеряется в Бар
         if self.t4_gMS_cmd1.currentIndex() == Pressure.Bar.value:
-            p_min = self.config.pmeas_Bar_min
-            p_max = self.config.pmeas_Bar_max
+            p_min = self.config.pmeas_bar_min
+            p_max = self.config.pmeas_bar_max
         # Если давление измеряется в psi
         if self.t4_gMS_cmd1.currentIndex() == Pressure.Psi.value:
-            p_min = self.config.pmeas_Psi_min
-            p_max = self.config.pmeas_Psi_max
+            p_min = self.config.pmeas_psi_min
+            p_max = self.config.pmeas_psi_max
         # Eсли текстовое поле "Pизм" пустое ->
         if len(self.t4_MS_Edit2.text()) <= 0:
             # -> кнопка выключена
@@ -1142,7 +1102,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # Eсли текстовое поле "Pизм" непустое...
         if len(self.t4_MS_Edit2.text()) > 0:
             # ...и введенные данные можно привести к типу float...
-            if isfloat(self.t4_MS_Edit2.text()):
+            if helper.is_float(self.t4_MS_Edit2.text()):
                 # ...и значение находится в нужных пределах ->
                 if p_min <= float(self.t4_MS_Edit2.text()) <= p_max:
                     # -> данные поля корректны, сбрасываем выделение поля.
@@ -1170,7 +1130,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             # -> кнопка выключена
             enabled = False
         # Если текстовое поле "Время подготовки обр" непустое и введенные данные можно привести к типу int...
-        if len(self.t1_gSP_Edit1.text()) > 0 and isint(self.t1_gSP_Edit1.text()):
+        if len(self.t1_gSP_Edit1.text()) > 0 and helper.is_int(self.t1_gSP_Edit1.text()):
             # ...но при этом значение будет меньше 0 ->
             if int(self.t1_gSP_Edit1.text()) < 0:
                 # -> кнопка выключена
@@ -1188,7 +1148,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # Если текстовое поле "Масса образца" непустое...
         if len(self.t1_gM_Edit1.text()) > 0:
             # ...и введенные данные можно привести к типу float...
-            if isfloat(self.t1_gM_Edit1.text()):
+            if helper.is_float(self.t1_gM_Edit1.text()):
                 # ...но при этом значение будет меньше или равно 0 ->
                 if float(self.t1_gM_Edit1.text()) <= 0:
                     # -> кнопка выключена
@@ -1212,7 +1172,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # Если текстовое поле "Количество измерений" непустое...
         else:
             # ...и введенные данные можно привести к типу int...
-            if isint(self.t1_gM_Edit2.text()):
+            if helper.is_int(self.t1_gM_Edit2.text()):
                 # ...записываем введенное значение
                 a = int(self.t1_gM_Edit2.text())
         # Если текстовое поле "Взять последних" пустое ->
@@ -1222,12 +1182,12 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # Если текстовое поле "Взять последних" непустое...
         else:
             # ...и введенные данные можно привести к типу int...
-            if isint(self.t1_gM_Edit3.text()):
+            if helper.is_int(self.t1_gM_Edit3.text()):
                 # ...записываем введенное значение
                 b = int(self.t1_gM_Edit3.text())
         # Если значение текстового поля "Взять последних" больше знаяения текстового поля "Количество измерений",
         # и при этом каждое больше или равно 0 ->
-        if a >= 0 and b >= 0 and b > a:
+        if 0 <= a < b and b >= 0:
             # -> кнопка выключена
             enabled = False
             # -> оба поля выделяем красным
@@ -1239,7 +1199,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             self.t1_gM_Edit2.setStyleSheet(self.ss)
             self.t1_gM_Edit3.setStyleSheet(self.ss)
             # ...Если текстовое поле "Количество измерений" непустое и введенные данные можно привести к типу int...
-            if len(self.t1_gM_Edit2.text()) > 0 and isint(self.t1_gM_Edit2.text()):
+            if len(self.t1_gM_Edit2.text()) > 0 and helper.is_int(self.t1_gM_Edit2.text()):
                 # ...но его значение меньше или равно 0 ->
                 if a <= 0:
                     # -> кнопка выключена
@@ -1250,7 +1210,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
                 else:
                     self.t1_gM_Edit2.setStyleSheet(self.ss)
             # ...Если текстовое поле "Взять последних" непустое и введенные данные можно привести к типу int...
-            if len(self.t1_gM_Edit3.text()) > 0 and isint(self.t1_gM_Edit3.text()):
+            if len(self.t1_gM_Edit3.text()) > 0 and helper.is_int(self.t1_gM_Edit3.text()):
                 # ...но его значение меньше или равно 0 ->
                 if b <= 0:
                     # -> кнопка выключена
@@ -1316,7 +1276,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             # -> кнопка выключена
             enabled = False
         # Если текстовое поле "Количество измерений" непустое и введенные данные можно привести к типу int...
-        if len(self.t2_gID_Edit1.text()) > 0 and isint(self.t2_gID_Edit1.text()):
+        if len(self.t2_gID_Edit1.text()) > 0 and helper.is_int(self.t2_gID_Edit1.text()):
             # ...но при этом значение будет меньше или равно 0 ->
             if int(self.t2_gID_Edit1.text()) <= 0:
                 # -> кнопка выключена
@@ -1334,7 +1294,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # Если текстовое поле "Масса образца" непустое...
         if len(self.t2_gID_Edit2.text()) > 0:
             # ...и введенные данные можно привести к типу float...
-            if isfloat(self.t2_gID_Edit2.text()):
+            if helper.is_float(self.t2_gID_Edit2.text()):
                 # ...но при этом значение будет меньше или равно 0 ->
                 if float(self.t2_gID_Edit2.text()) <= 0:
                     # -> кнопка выключена
@@ -1370,20 +1330,10 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
 
     # Тут происходит сохранение в config.ini результатов калибровки
     def calibration_save(self):
-        Vc = self.calibration_procedure.c_Vc
-        Vd = self.calibration_procedure.c_Vd
+        vc = self.calibration_procedure.c_vc
+        vd = self.calibration_procedure.c_vd
         cuv = self.t2_gID_cmd1.currentIndex()
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Large.value:
-            self.config.set_ini('Measurement', 'VcL', toFixed(Vc, self.config.round))
-            self.config.set_ini('Measurement', 'VdLM', toFixed(Vd, self.config.round))
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Medium.value:
-            self.config.set_ini('Measurement', 'VcM', toFixed(Vc, self.config.round))
-            self.config.set_ini('Measurement', 'VdLM', toFixed(Vd, self.config.round))
-        if self.t2_gID_cmd1.currentIndex() == Сuvette.Small.value:
-            self.config.set_ini('Measurement', 'VcS', toFixed(Vc, self.config.round))
-            self.config.set_ini('Measurement', 'VdS', toFixed(Vd, self.config.round))
-        self.setup()
-        self.t2_gID_cmd1.setCurrentIndex(cuv)
+        self.config.calibration_save(cuv, vc, vd)
         self.VcVd_download_and_display()
 
     # Вывод данных Измерений, вызывается через сигнал.
@@ -1397,19 +1347,21 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # получаем СКО %
         SD_per = self.measurement_procedure.m_SD_per
         # выводим в текстовые поля формы "Измерение"
-        self.t1_gMR_Edit1.setText(toFixed(medium_volume, self.config.round))
-        self.t1_gMR_Edit2.setText(toFixed(medium_density, self.config.round))
-        self.t1_gMR_Edit3.setText(toFixed(SD, self.config.round))
-        self.t1_gMR_Edit4.setText(toFixed(SD_per, self.config.round))
+        self.t1_gMR_Edit1.setText(helper.to_fixed(medium_volume, self.config.round))
+        self.t1_gMR_Edit2.setText(helper.to_fixed(medium_density, self.config.round))
+        self.t1_gMR_Edit3.setText(helper.to_fixed(SD, self.config.round))
+        self.t1_gMR_Edit4.setText(helper.to_fixed(SD_per, self.config.round))
 
-    # Вывод двнных Калибровки, вызывается через сигнал.
+        # Вывод двнных Калибровки, вызывается через сигнал.
+
     def set_calibration_results(self):
-        Vc = self.calibration_procedure.c_Vc
-        Vd = self.calibration_procedure.c_Vd
-        self.t2_gCR_Edit1.setText(toFixed(Vc, self.config.round))
-        self.t2_gCR_Edit2.setText(toFixed(Vd, self.config.round))
+        vc = self.calibration_procedure.c_vc
+        vd = self.calibration_procedure.c_vd
+        self.t2_gCR_Edit1.setText(helper.to_fixed(vc, self.config.round))
+        self.t2_gCR_Edit2.setText(helper.to_fixed(vd, self.config.round))
 
-    # метод дя создания модального окна для подтверждения пользователя
+        # метод дя создания модального окна для подтверждения пользователя
+
     def get_messagebox(self, title, message):
         self.my_message = QMessageBox()
         self.my_message.about(self, title, message)
@@ -1481,11 +1433,11 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             self.t1_gMI_Edit4.setText(measurement_load[0]['batch_series'])
 
             # [SamplePreparation]
-            if measurement_load[1]['sample_preparation'] == Sample_preparation.Vacuuming:
+            if measurement_load[1]['sample_preparation'] == SamplePreparation.Vacuuming:
                 self.t1_gSP_gRB_rb1.setChecked(True)
-            if measurement_load[1]['sample_preparation'] == Sample_preparation.Blow:
+            if measurement_load[1]['sample_preparation'] == SamplePreparation.Blow:
                 self.t1_gSP_gRB_rb2.setChecked(True)
-            if measurement_load[1]['sample_preparation'] == Sample_preparation.Impulsive_blowing:
+            if measurement_load[1]['sample_preparation'] == SamplePreparation.Impulsive_blowing:
                 self.t1_gSP_gRB_rb3.setChecked(True)
             self.t1_gSP_Edit1.setText(str(measurement_load[1]['sample_preparation_time']))
 
@@ -1720,6 +1672,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
     #         self.wifi.wifi_disconnect()
     #     else:
     #         self.get_messagebox(self.message_headline1, self.message_txt7)
+
 
 def main():
     app = PyQt5.QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

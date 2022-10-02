@@ -2,37 +2,43 @@
 # Модуль для взаимодействия с Raspberry Pi (Тестовая версия!!!)
 import inspect
 import os
+import time
+
+from Config import Valve
+
 """Проверака и комментари: 08.01.2019"""
 
 """
-"Класс для работы программы в тестовом режиме под Windows"    
-    self.ports - берем номера портов из config.ini
+    self.valves - valves setup from config.ini    
 """
 
+
 class GPIO(object):
-    """docstring"""
+    """GPIO for testing mode"""
 
-    """Конструктор класса. Поля класса"""
-    def __init__(self, ports):
+    def __init__(self, valves: list[Valve]):
         # Список заявленных к работе портов
-        self.ports = ports
+        self.valves = valves
 
-    """Метод включаем подачу напряжения на указанный порт"""
-    def port_on(self, port):
-        # проверяем, что порт указан
-        if port > 0:
-            print('Включаем подачу напряжения на ' + str(port) + ' порт')
+    def port_on(self, valve: Valve):
+        """Open valve and activate hold mode"""
+        if valve.is_correct():
+            print("Valve.OpenPort #{0} is open".format(valve.port_open))
+            time.sleep(0.06)
+            print("Valve.HoldPort #{0} is open".format(valve.port_hold))
+            print("Valve.OpenPort #{0} is close".format(valve.port_open))
 
-    """Метод отключает подачу напряжения на указанный порт"""
-    def port_off(self, port):
-        # проверяем, что порт указан
-        if port > 0:
-            print('Отключаем подачу напряжения на ' + str(port) + ' порт')
+    def port_off(self, valve: Valve):
+        """Close valve"""
+        if valve.is_correct():
+            print("Valve.HoldPort #{0} is close".format(valve.port_hold))
 
-    """Метод отключает подачу напряжения на все заявленные к использованию порты"""
     def all_port_off(self):
-        print('Отключаем подачу напряжения на все заявленные к использованию порты')
+        """Close all valve"""
+        for valve in self.valves:
+            print("Valve.OpenPort #{0} is close".format(valve.port_open))
+            print("Valve.HoldPort #{0} is close".format(valve.port_hold))
 
-    """Метод для сбрасывания установки"""
     def clean_up(self):
-        print('Сбрасываем сетап ')
+        """Setup clear"""
+        print("Valves setup clear")

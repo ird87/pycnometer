@@ -8,18 +8,15 @@ import os
 import shutil
 import time
 import configparser
-
+import helper
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter, A4
-from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Table, TableStyle, SimpleDocTemplate, Paragraph, Image
 from reportlab.rl_config import defaultPageSize
-from reportlab.pdfgen import canvas
-import smtplib
 
 from email_module import send
 
@@ -114,7 +111,7 @@ class MeasurementProcedure(object):
         self.round = self.table.round
         self.spi = self.main.spi
         self.gpio = self.main.gpio
-        self.ports = self.main.ports
+        self.ports = self.main.valves
         self.block_other_tabs = self.main.block_other_tabs_signal
         self.block_userinterface = self.main.block_userinterface_measurement_signal
         self.unblock_userinterface = self.main.unblock_userinterface_measurement_signal
@@ -122,8 +119,8 @@ class MeasurementProcedure(object):
         self.file = os.path.basename(__file__)
         self.debug_log = self.main.debug_log
         self.measurement_log = self.main.measurement_log
-        self.cuvette = Сuvette.Large
-        self.sample_preparation = Sample_preparation.Vacuuming
+        self.cuvette = Cuvette.Large
+        self.sample_preparation = SamplePreparation.Vacuuming
         self.sample_preparation_time = 0  # время в секундах
         self.sample_mass = 0
         self.number_of_measurements = 0
@@ -236,8 +233,8 @@ class MeasurementProcedure(object):
               '\nPmeas = {11}' \
               '\nData = {12}' \
               '\nTime = {13}'.format(self.cuvette, self.sample_preparation, self.sample_preparation_time,
-                                      self.sample_mass, self.number_of_measurements, self.take_the_last_measurements,
-                                      self.VcL, self.VcM, self.VcS, self.VdLM, self.VdS, self.Pmeas,
+                                     self.sample_mass, self.number_of_measurements, self.take_the_last_measurements,
+                                     self.VcL, self.VcM, self.VcS, self.VdLM, self.VdS, self.Pmeas,
                                      self.data_of_measurement, self.time_of_measurement)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, txt)
 
@@ -249,11 +246,10 @@ class MeasurementProcedure(object):
             # Устанавливаем состояние измерения в режим "запущена"
             self.set_test_on(True)
             # Это команда присваивает отдельному потоку исполняемую процедуру измерения
-            self.my_thread = threading.Thread(target = self.measurements_procedure)
+            self.my_thread = threading.Thread(target=self.measurements_procedure)
             # Запускаем поток и процедуру калибровки
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Thread "Measurement" started')
             self.my_thread.start()
-
 
     """Метод для выключения отдельного потока измерения прибора"""
 
@@ -276,7 +272,7 @@ class MeasurementProcedure(object):
         self.block_userinterface.emit()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Interface locked, Current tab = Measurement')
         # Этап 1. Подготовка образца. Вызываем соответствующую процедуру в зависимости от выбранного типа подготовки
-        if self.sample_preparation == Sample_preparation.Vacuuming:
+        if self.sample_preparation == SamplePreparation.Vacuuming:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....')
             try:
@@ -287,7 +283,7 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....'
                                                                                    'Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Vacuuming.....Done.')
-        if self.sample_preparation == Sample_preparation.Blow:
+        if self.sample_preparation == SamplePreparation.Blow:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Blow.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Blow.....')
             try:
@@ -298,7 +294,7 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Sample preparation: Blow.....Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Blow.....Done.')
-        if self.sample_preparation == Sample_preparation.Impulsive_blowing:
+        if self.sample_preparation == SamplePreparation.Impulsive_blowing:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Impulsive '
                                                                                    'blowing.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Sample preparation: Impulsive '
@@ -314,7 +310,7 @@ class MeasurementProcedure(object):
                                                                              'blowing.....Done.')
         self.main.unblock_t1_gM_button4_signal.emit()
         # Этап 2. Измерения. Есть два вида: для большой и средней кюветы и для малой кюветы.
-        if self.cuvette == Сuvette.Small:
+        if self.cuvette == Cuvette.Small:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Small.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Small.....')
             try:
@@ -325,7 +321,7 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measurement for Сuvette.Small.....Done.')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Small.....Done.')
-        if not self.cuvette == Сuvette.Small:
+        if not self.cuvette == Cuvette.Small:
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Large '
                                                                                    'or Cuvette.Medium.....')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement for Сuvette.Large '
@@ -376,13 +372,13 @@ class MeasurementProcedure(object):
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno,
                              'Interface unlocked, Current tab = Measurement')
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement interrupted')
-        if measurement == Abort_Type.Pressure_below_required:
+        if measurement == AbortType.Pressure_below_required:
             self.fail_pressure_set.emit()
-        if measurement == Abort_Type.Could_not_balance:
+        if measurement == AbortType.Could_not_balance:
             self.fail_get_balance.emit()
-        if measurement == Abort_Type.Interrupted_by_user:
+        if measurement == AbortType.Interrupted_by_user:
             self.abort_procedure.emit()
-        if measurement == Abort_Type.Let_out_pressure_fail:
+        if measurement == AbortType.Let_out_pressure_fail:
             self.fail_let_out_pressure.emit()
 
     """Метод, подготовки образца с помощью Вакууминга"""
@@ -682,7 +678,7 @@ class MeasurementProcedure(object):
                                            'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p,
                                                                                                            self.Pmeas,
                                                                                                            duration))
-                raise Exception(Abort_Type.Pressure_below_required)
+                raise Exception(AbortType.Pressure_below_required)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                           duration))
@@ -702,7 +698,7 @@ class MeasurementProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'pressure stops changing - fail, balance = {0}/{1}, time '
                                            'has passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                raise Exception(AbortType.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure stops changing - success, balance = {0}/{1}, time '
                                        'has passed: {2}'.format(balance, 0.01, duration))
@@ -731,7 +727,7 @@ class MeasurementProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'pressure stops changing - fail, balance = {0}/{1}, time '
                                            'has passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                raise Exception(AbortType.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure stops changing - success, P = {0}/{1}, time '
                                        'has passed: {2}'.format(balance, 0.01, duration))
@@ -776,7 +772,7 @@ class MeasurementProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'pressure let_out - fail, time '
                                            'has passed: {0}'.format(duration))
-                raise Exception(Abort_Type.Let_out_pressure_fail)
+                raise Exception(AbortType.Let_out_pressure_fail)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure let_out - success, time '
                                        'has passed: {0}'.format(duration))
@@ -794,9 +790,9 @@ class MeasurementProcedure(object):
                                        'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
             # Берем нужное (в зависимости от кюветы) значение Vc
             Vc = 0
-            if self.cuvette == Сuvette.Large:
+            if self.cuvette == Cuvette.Large:
                 Vc = self.VcL
-            if self.cuvette == Сuvette.Medium:
+            if self.cuvette == Cuvette.Medium:
                 Vc = self.VcM
             # и значение Vd
             Vd = self.VdLM
@@ -938,7 +934,7 @@ class MeasurementProcedure(object):
                                            'pressure set - fail, P = {0}/{1}, time has passed: {2}'.format(p,
                                                                                                            self.Pmeas,
                                                                                                            duration))
-                raise Exception(Abort_Type.Pressure_below_required)
+                raise Exception(AbortType.Pressure_below_required)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                           duration))
@@ -958,7 +954,7 @@ class MeasurementProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'pressure stops changing - fail, balance = {0}/{1}, time '
                                            'has passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                raise Exception(AbortType.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure stops changing - success, P = {0}/{1}, time '
                                        'has passed: {2}'.format(balance, 0.01, duration))
@@ -983,7 +979,7 @@ class MeasurementProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'pressure stops changing - fail, balance = {0}/{1}, time '
                                            'has passed: {2}'.format(balance, 0.01, duration))
-                raise Exception(Abort_Type.Could_not_balance)
+                raise Exception(AbortType.Could_not_balance)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure stops changing - success, P = {0}/{1}, time '
                                        'has passed: {2}'.format(balance, 0.01, duration))
@@ -1020,7 +1016,7 @@ class MeasurementProcedure(object):
                 self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                            'pressure let_out - fail, time '
                                            'has passed: {0}'.format(duration))
-                raise Exception(Abort_Type.Let_out_pressure_fail)
+                raise Exception(AbortType.Let_out_pressure_fail)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'pressure let_out - success, time '
                                        'has passed: {0}'.format(duration))
@@ -1347,18 +1343,18 @@ class MeasurementProcedure(object):
         header_pic = os.path.join(os.getcwd(), 'attachment', 'header & footer', self.main.config.report_header)
         footer_pic = os.path.join(os.getcwd(), 'attachment', 'header & footer', self.main.config.report_footer)
 
-        right_indent = 10*mm
-        left_indent = 10*mm
-        top_indent = 10*mm
-        bottom_indent = 10*mm
+        right_indent = 10 * mm
+        left_indent = 10 * mm
+        top_indent = 10 * mm
+        bottom_indent = 10 * mm
 
         if not self.main.config.report_header == "" and os.path.isfile(header_pic):
-            top_indent = 38*mm
+            top_indent = 38 * mm
         if not self.main.config.report_footer == "" and os.path.isfile(footer_pic):
-            bottom_indent = 38*mm
-        doc = SimpleDocTemplate(report_name, pagesize = A4, encoding = 'WINDOWS-1251',
-                        rightMargin=right_indent, leftMargin=left_indent,
-                        topMargin=top_indent, bottomMargin=bottom_indent)
+            bottom_indent = 38 * mm
+        doc = SimpleDocTemplate(report_name, pagesize=A4, encoding='WINDOWS-1251',
+                                rightMargin=right_indent, leftMargin=left_indent,
+                                topMargin=top_indent, bottomMargin=bottom_indent)
 
         # # Ветка для программы в тестовом режиме.
         # if self.is_test_mode():
@@ -1392,9 +1388,7 @@ class MeasurementProcedure(object):
         # Определяем размеры страницы.
         PAGE_WIDTH = defaultPageSize[0]
         PAGE_HEIGHT = defaultPageSize[1]
-        y_default = 2*mm
-
-
+        y_default = 2 * mm
 
         # Шапка таблицы (если есть)
 
@@ -1407,16 +1401,16 @@ class MeasurementProcedure(object):
                 header_aspect = header_iw / header_ih
                 header_h = mm * 35
                 header_w = header_h * header_aspect
-                header_x = (PAGE_WIDTH - header_w)/2
+                header_x = (PAGE_WIDTH - header_w) / 2
                 header_y = PAGE_HEIGHT - header_h
-                canvas.drawImage(header_image, header_x, header_y, header_w, header_h,  preserveAspectRatio=True, mask='auto', anchor='c')
+                canvas.drawImage(header_image, header_x, header_y, header_w, header_h, preserveAspectRatio=True, mask='auto', anchor='c')
             if not self.main.config.report_footer == "" and os.path.isfile(footer_pic):
                 footer_image = ImageReader(footer_pic)
                 footer_iw, footer_ih = footer_image.getSize()
                 footer_aspect = footer_iw / footer_ih
                 footer_h = mm * 35
                 footer_w = footer_h * footer_aspect
-                footer_x = (PAGE_WIDTH - footer_w)/2
+                footer_x = (PAGE_WIDTH - footer_w) / 2
                 footer_y = mm * 7
                 canvas.drawImage(footer_image, footer_x, footer_y, footer_w, footer_h, preserveAspectRatio=True, mask='auto', anchor='c')
             canvas.restoreState()
@@ -1425,26 +1419,24 @@ class MeasurementProcedure(object):
         # и отталкиваясь от этого, считаем ширину ячейки.
         table_row1 = 13
         table_column1 = 2
-        x1 = (PAGE_WIDTH - 20*mm) / table_column1 / mm
+        x1 = (PAGE_WIDTH - 20 * mm) / table_column1 / mm
         y1 = y_default
 
-
         sample_preparation = ''
-        if self.sample_preparation == Sample_preparation.Vacuuming:
+        if self.sample_preparation == SamplePreparation.Vacuuming:
             sample_preparation = self.main.languages.t1_gSP_gRB_rb1
-        if self.sample_preparation == Sample_preparation.Blow:
+        if self.sample_preparation == SamplePreparation.Blow:
             sample_preparation = self.main.languages.t1_gSP_gRB_rb2
-        if self.sample_preparation == Sample_preparation.Impulsive_blowing:
+        if self.sample_preparation == SamplePreparation.Impulsive_blowing:
             sample_preparation = self.main.languages.t1_gSP_gRB_rb3
 
         cuvette = ''
-        if self.cuvette == Сuvette.Large:
+        if self.cuvette == Cuvette.Large:
             cuvette = self.main.languages.t1_gM_cmd1_1
-        if self.cuvette == Сuvette.Medium:
+        if self.cuvette == Cuvette.Medium:
             cuvette = self.main.languages.t1_gM_cmd1_2
-        if self.cuvette == Сuvette.Small:
+        if self.cuvette == Cuvette.Small:
             cuvette = self.main.languages.t1_gM_cmd1_3
-
 
         # Создаем массив данных для добавления в таблицу.
         data1 = [
@@ -1483,24 +1475,24 @@ class MeasurementProcedure(object):
 
         # Создаем массив данных для добавления в таблицу.
         data2 = [
-                [self.measurement_report['t2_title']],
-                [self.measurement_report['t2_p0'], self.measurement_report['t2_p1'], self.measurement_report['t2_p2'],
-                 self.measurement_report['t2_volume'], self.measurement_report['t2_density'],
-                 self.measurement_report['t2_deviation']],
+            [self.measurement_report['t2_title']],
+            [self.measurement_report['t2_p0'], self.measurement_report['t2_p1'], self.measurement_report['t2_p2'],
+             self.measurement_report['t2_volume'], self.measurement_report['t2_density'],
+             self.measurement_report['t2_deviation']],
         ]
 
         # Добавляем в массив данных наши измерения и считаем сколько в итоге будет строк.
-        from Main import toFixed
+
         for m in self.measurements:
             if m.active:
-                data2.append([toFixed(m.p0, self.round), toFixed(m.p1, self.round), toFixed(m.p2, self.round),
-                              toFixed(m.volume, self.round), toFixed(m.density, self.round),
-                              toFixed(m.deviation, self.round)])
+                data2.append([helper.to_fixed(m.p0, self.round), helper.to_fixed(m.p1, self.round), helper.to_fixed(m.p2, self.round),
+                              helper.to_fixed(m.volume, self.round), helper.to_fixed(m.density, self.round),
+                              helper.to_fixed(m.deviation, self.round)])
                 table_row2 += 1
         # print(str(data2))
 
         # и отталкиваясь от этого, считаем ширину ячейки.
-        x2 = (PAGE_WIDTH - 20*mm) / table_column2 / mm
+        x2 = (PAGE_WIDTH - 20 * mm) / table_column2 / mm
         y2 = y_default
 
         # Добавляем данные в таблицу и форматируем ее.
@@ -1514,21 +1506,20 @@ class MeasurementProcedure(object):
             ('GRID', (0, 0), (-1, -1), 0.25, colors.black)
         ]))
 
-
         # Таблица 3 "Результаты измерений", устанавливаем нужное количество строк, столбцов
         # и отталкиваясь от этого, считаем ширину ячейки.
         table_row3 = 3
         table_column3 = 4
-        x3 = (PAGE_WIDTH - 20*mm) / table_column3 / mm
+        x3 = (PAGE_WIDTH - 20 * mm) / table_column3 / mm
         y3 = y_default
 
         # Создаем массив данных для добавления в таблицу.
         data3 = [
             [self.measurement_report['t3_title']],
-            [self.measurement_report['t3_medium_volume'], toFixed(self.m_medium_volume, self.round),
-             self.measurement_report['t3_m_sd'], toFixed(self.m_SD, self.round)],
-            [self.measurement_report['t3_medium_density'], toFixed(self.m_medium_density, self.round),
-             self.measurement_report['t3_m_sd_per'], toFixed(self.m_SD_per, self.round)],
+            [self.measurement_report['t3_medium_volume'], helper.to_fixed(self.m_medium_volume, self.round),
+             self.measurement_report['t3_m_sd'], helper.to_fixed(self.m_SD, self.round)],
+            [self.measurement_report['t3_medium_density'], helper.to_fixed(self.m_medium_density, self.round),
+             self.measurement_report['t3_m_sd_per'], helper.to_fixed(self.m_SD_per, self.round)],
         ]
 
         # Добавляем данные в таблицу и форматируем ее.
@@ -1564,7 +1555,7 @@ class MeasurementProcedure(object):
         if self.main.config.report_measurement_table:
             elements.append(Table(['']))
             elements.append(t2)
-        doc.build(elements, onFirstPage =myPages, onLaterPages = myPages)
+        doc.build(elements, onFirstPage=myPages, onLaterPages=myPages)
         # else:
         #     doc.build(elements)
         if self.main.config.save_to_flash_drive:
@@ -1590,7 +1581,7 @@ class MeasurementProcedure(object):
                 shutil.copy2(report_name, r_path)
         if self.main.config.send_report_to_mail:
             send(self.main.config.email_address, "Report: {0}".format(report_name), "Привет! Этот отчет, который ты ждал",
-             report_name)
+                 report_name)
 
     """Метод получения текущей дате в формате год-месяц-день, так нужно для удобства сортировки файлов в папке"""
 
@@ -1626,7 +1617,7 @@ class MeasurementProcedure(object):
                                                  'Measurement' + ' - ' + self.data_of_measurement + ' - ' + str(
                                                      number) + '.result')
             find_name = os.path.isfile(self.measurement_file)
-        self.result_file_reader.read(self.measurement_file, encoding = 'WINDOWS-1251')
+        self.result_file_reader.read(self.measurement_file, encoding='WINDOWS-1251')
 
         # # Ветка для программы в тестовом режиме.
         # if self.is_test_mode():
@@ -1734,9 +1725,9 @@ class MeasurementProcedure(object):
         # [SamplePreparation]
         sample_preparation_type = self.try_load_int('SamplePreparation', 'sample_preparation')
         if sample_preparation_type is None:
-            self.sample_preparation = Sample_preparation.Vacuuming
+            self.sample_preparation = SamplePreparation.Vacuuming
         else:
-            self.sample_preparation = Sample_preparation(sample_preparation_type)
+            self.sample_preparation = SamplePreparation(sample_preparation_type)
         self.sample_preparation_time = self.try_load_int('SamplePreparation', 'sample_preparation_time')
         sample_preparation = {
             'sample_preparation': self.sample_preparation,
@@ -1747,9 +1738,9 @@ class MeasurementProcedure(object):
         self.sample_mass = self.try_load_float('Measurement', 'sample_mass')
         cuvette_type = self.try_load_int('Measurement', 'cuvette')
         if cuvette_type is None:
-            self.cuvette = Сuvette.Large
+            self.cuvette = Cuvette.Large
         else:
-            self.cuvette = Сuvette(cuvette_type)
+            self.cuvette = Cuvette(cuvette_type)
         self.number_of_measurements = self.try_load_int('Measurement', 'number_of_measurements')
         self.take_the_last_measurements = self.try_load_int('Measurement', 'take_the_last_measurements')
         measurement = {
@@ -1810,7 +1801,7 @@ class MeasurementProcedure(object):
 
     def check_for_interruption(self):
         if self.is_abort_procedure():
-            raise Exception(Abort_Type.Interrupted_by_user)
+            raise Exception(AbortType.Interrupted_by_user)
 
     """Метод для обработки ожидания. Для тестового режима программыожидание - опускается"""
 
@@ -1861,21 +1852,21 @@ class MeasurementProcedure(object):
 
 
 # Enum Размер кюветы
-class Сuvette(Enum):
+class Cuvette(Enum):
     Large = 0
     Medium = 1
     Small = 2
 
 
 # Enum Тип подготовки образца
-class Sample_preparation(Enum):
+class SamplePreparation(Enum):
     Vacuuming = 0
     Blow = 1
     Impulsive_blowing = 2
 
 
 # Enum тип ошибки при наборе газа
-class Abort_Type(Enum):
+class AbortType(Enum):
     No_Abort = 0
     Pressure_below_required = 1
     Could_not_balance = 2

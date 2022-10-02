@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import wifi
-from wifi import Cell, Scheme
+from wifi import Scheme
 
 
 def Search():
