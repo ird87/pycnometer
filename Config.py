@@ -277,7 +277,7 @@ class Configure(object):
         self.set_ini('Measurement', 'periodicity_of_removal_of_sensor_reading', self.periodicity_of_removal_of_sensor_reading)
         self.set_ini('Measurement', 'smq_now', self.smq_now)
         self.set_ini('Measurement', 'pulse_length', self.pulse_length)
-        self.set_ini('Measurement', 'Pmeas', self.pmeas)
+        self.set_ini('Measurement', 'Pmeas', '[{0}, {1}, {2}]'.format(self.pmeas[0], self.pmeas[1], self.pmeas[2]))
         # [ManualControl]
         self.set_ini('ManualControl', 'leak_test_when_starting', self.leak_test_when_starting)
         self.set_ini('ManualControl', 'calibrate_sensor_when_starting', self.calibrate_sensor_when_starting)
