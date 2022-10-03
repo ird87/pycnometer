@@ -141,8 +141,8 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             from ModulGPIOtest import GPIO
             from ModulSPItest import SPI
             # Получаем данные о портах из Configure.ini
-            self.ports = self.config.get_ports()
-            self.gpio = GPIO(self.ports)
+            self.valves = self.config.get_valves()
+            self.gpio = GPIO(self.config.wait_before_hold, self.valves)
             self.all_port_off()
             self.spi = SPI(self)
         else:
@@ -152,8 +152,8 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             else:
                 from ModulSPI import SPI
             # Получаем данные о портах из Configure.ini
-            self.ports = self.config.get_ports()
-            self.gpio = GPIO(self.ports)
+            self.valves = self.config.get_valves()
+            self.gpio = GPIO(self.config.wait_before_hold, self.valves)
             self.all_port_off()
             self.spi = SPI(self)
         # На будущее сохраним стандартный стиль поля для ввода, иногда нам нужно будет их выделять, но
@@ -553,37 +553,37 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
     # K1
     def on_off_port1(self):
         if self.t3_checkValve1.isChecked():
-            self.gpio.port_on(self.ports[0])
+            self.gpio.port_on(self.valves[0])
         else:
-            self.gpio.port_off(self.ports[0])
+            self.gpio.port_off(self.valves[0])
 
     # K2
     def on_off_port2(self):
         if self.t3_checkValve2.isChecked():
-            self.gpio.port_on(self.ports[1])
+            self.gpio.port_on(self.valves[1])
         else:
-            self.gpio.port_off(self.ports[1])
+            self.gpio.port_off(self.valves[1])
 
     # K3
     def on_off_port3(self):
         if self.t3_checkValve3.isChecked():
-            self.gpio.port_on(self.ports[2])
+            self.gpio.port_on(self.valves[2])
         else:
-            self.gpio.port_off(self.ports[2])
+            self.gpio.port_off(self.valves[2])
 
     # K4
     def on_off_port4(self):
         if self.t3_checkValve4.isChecked():
-            self.gpio.port_on(self.ports[3])
+            self.gpio.port_on(self.valves[3])
         else:
-            self.gpio.port_off(self.ports[3])
+            self.gpio.port_off(self.valves[3])
 
     # K5
     def on_off_port5(self):
         if self.t3_checkValve5.isChecked():
-            self.gpio.port_on(self.ports[4])
+            self.gpio.port_on(self.valves[4])
         else:
-            self.gpio.port_off(self.ports[4])
+            self.gpio.port_off(self.valves[4])
 
     def all_port_off(self):
         self.t3_checkValve1.setChecked(False)
@@ -938,6 +938,9 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         if self.config.small_cuvette:
             self.t2_gID_cmd1.addItem(self.languages.t2_gID_cmd1_3)
             self.no_small.setVisible(False)
+        else:
+            self.t3_checkValve2.setVisible(False)
+            self.t3_lblValve2.setVisible(False)
 
         self.t2_gID_button1.setText(self.languages.t2_gID_button1)
         self.t2_gID_button2.setText(self.languages.t2_gID_button2)

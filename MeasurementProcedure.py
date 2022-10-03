@@ -111,7 +111,7 @@ class MeasurementProcedure(object):
         self.round = self.table.round
         self.spi = self.main.spi
         self.gpio = self.main.gpio
-        self.ports = self.main.valves
+        self.valves = self.main.valves
         self.block_other_tabs = self.main.block_other_tabs_signal
         self.block_userinterface = self.main.block_userinterface_measurement_signal
         self.unblock_userinterface = self.main.unblock_userinterface_measurement_signal
@@ -398,57 +398,57 @@ class MeasurementProcedure(object):
         self.main.progressbar_start.emit(self.main.languages.TitlesForProgressbar_SamplePreparation,
                                          self.main.languages.t1_gSP_gRB_rb1, self.sample_preparation_time + 17)
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K3.value])
+        self.gpio.port_on(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K2.value])
+        self.gpio.port_on(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K5.value])
+        self.gpio.port_on(self.valves[Ports.K5.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K5 = {0}'.format(self.ports[Ports.K5.value]))
+                                   'Open K5 = {0}'.format(self.valves[Ports.K5.value]))
         self.check_for_interruption()
         self.time_sleep(self.sample_preparation_time)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(self.sample_preparation_time))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K5.value])
+        self.gpio.port_off(self.valves[Ports.K5.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K5 = {0}'.format(self.ports[Ports.K5.value]))
+                                   'Close K5 = {0}'.format(self.valves[Ports.K5.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K1.value])
+        self.gpio.port_on(self.valves[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                   'Open K1 = {0}'.format(self.valves[Ports.K1.value]))
         self.check_for_interruption()
         self.time_sleep(15)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(15))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K1.value])
+        self.gpio.port_off(self.valves[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                   'Close K1 = {0}'.format(self.valves[Ports.K1.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K4.value])
+        self.gpio.port_on(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Open K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
         self.time_sleep(2)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(2))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K4.value])
+        self.gpio.port_off(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Close K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K2.value])
+        self.gpio.port_off(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K3.value])
+        self.gpio.port_off(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.main.progressbar_exit.emit()
 
     """Метод, подготовки образца с помощью Продувки"""
@@ -464,45 +464,45 @@ class MeasurementProcedure(object):
         self.main.progressbar_start.emit(self.main.languages.TitlesForProgressbar_SamplePreparation,
                                          self.main.languages.t1_gSP_gRB_rb2, self.sample_preparation_time + 2)
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K1.value])
+        self.gpio.port_on(self.valves[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                   'Open K1 = {0}'.format(self.valves[Ports.K1.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K2.value])
+        self.gpio.port_on(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K3.value])
+        self.gpio.port_on(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K4.value])
+        self.gpio.port_on(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Open K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
         self.time_sleep(self.sample_preparation_time)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(self.sample_preparation_time))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K1.value])
+        self.gpio.port_off(self.valves[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                   'Close K1 = {0}'.format(self.valves[Ports.K1.value]))
         self.check_for_interruption()
         self.time_sleep(2)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(2))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K4.value])
+        self.gpio.port_off(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Close K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K2.value])
+        self.gpio.port_off(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K3.value])
+        self.gpio.port_off(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.main.progressbar_exit.emit()
 
     """Метод, подготовки образца с помощью Импульсной продувки"""
@@ -530,21 +530,21 @@ class MeasurementProcedure(object):
                                          self.main.languages.t1_gSP_gRB_rb3,
                                          self.sample_preparation_time + 3 + t * (self.pulse_length + 1))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K1.value])
+        self.gpio.port_on(self.valves[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                   'Open K1 = {0}'.format(self.valves[Ports.K1.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K2.value])
+        self.gpio.port_on(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K3.value])
+        self.gpio.port_on(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K4.value])
+        self.gpio.port_on(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Open K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
         self.time_sleep(3)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -553,37 +553,37 @@ class MeasurementProcedure(object):
         self.check_for_interruption()
         for i in range(t):
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K3.value])
+            self.gpio.port_off(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
             self.time_sleep(1)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(1))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K3.value])
+            self.gpio.port_on(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
             self.time_sleep(self.pulse_length)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(self.pulse_length))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K1.value])
+        self.gpio.port_off(self.valves[Ports.K1.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                   'Close K1 = {0}'.format(self.valves[Ports.K1.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K4.value])
+        self.gpio.port_off(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Close K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K2.value])
+        self.gpio.port_off(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K3.value])
+        self.gpio.port_off(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.main.progressbar_exit.emit()
 
     """Метод, Измерения для кюветы большой или средней"""
@@ -620,33 +620,33 @@ class MeasurementProcedure(object):
         Next i        
         """
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K2.value])
+        self.gpio.port_on(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K3.value])
+        self.gpio.port_on(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K4.value])
+        self.gpio.port_on(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Open K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
         self.time_sleep(5)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(5))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K2.value])
+        self.gpio.port_off(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K3.value])
+        self.gpio.port_off(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K4.value])
+        self.gpio.port_off(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Close K4 = {0}'.format(self.valves[Ports.K4.value]))
         # Запускаем цикл по количству измерений.
         self.check_for_interruption()
         for i in range(self.number_of_measurements):
@@ -662,13 +662,13 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p0 = {1}'.format(i, self.measurements[i].p0))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K1.value])
+            self.gpio.port_on(self.valves[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                       'Open K1 = {0}'.format(self.valves[Ports.K1.value]))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K2.value])
+            self.gpio.port_on(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We expect a set of pressure')
             self.check_for_interruption()
@@ -683,13 +683,13 @@ class MeasurementProcedure(object):
                                        'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                           duration))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K1.value])
+            self.gpio.port_off(self.valves[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                       'Close K1 = {0}'.format(self.valves[Ports.K1.value]))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K2.value])
+            self.gpio.port_off(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
@@ -712,13 +712,13 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p1 = {1}'.format(i, self.measurements[i].p1))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K2.value])
+            self.gpio.port_on(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K3.value])
+            self.gpio.port_on(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
@@ -732,13 +732,13 @@ class MeasurementProcedure(object):
                                        'pressure stops changing - success, P = {0}/{1}, time '
                                        'has passed: {2}'.format(balance, 0.01, duration))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K2.value])
+            self.gpio.port_off(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K3.value])
+            self.gpio.port_off(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -753,17 +753,17 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Wait {0} sec'.format(2))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K2.value])
+            self.gpio.port_on(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K3.value])
+            self.gpio.port_on(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K4.value])
+            self.gpio.port_on(self.valves[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                       'Open K4 = {0}'.format(self.valves[Ports.K4.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
@@ -777,17 +777,17 @@ class MeasurementProcedure(object):
                                        'pressure let_out - success, time '
                                        'has passed: {0}'.format(duration))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K2.value])
+            self.gpio.port_off(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K3.value])
+            self.gpio.port_off(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K4.value])
+            self.gpio.port_off(self.valves[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                       'Close K4 = {0}'.format(self.valves[Ports.K4.value]))
             # Берем нужное (в зависимости от кюветы) значение Vc
             Vc = 0
             if self.cuvette == Cuvette.Large:
@@ -876,33 +876,33 @@ class MeasurementProcedure(object):
         Закрыть К3, К2
         """
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K2.value])
+        self.gpio.port_on(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K3.value])
+        self.gpio.port_on(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.check_for_interruption()
-        self.gpio.port_on(self.ports[Ports.K4.value])
+        self.gpio.port_on(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Open K4 = {0}'.format(self.valves[Ports.K4.value]))
         self.check_for_interruption()
         self.time_sleep(5)
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                    'Wait {0} sec'.format(5))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K2.value])
+        self.gpio.port_off(self.valves[Ports.K2.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                   'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K3.value])
+        self.gpio.port_off(self.valves[Ports.K3.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                   'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
         self.check_for_interruption()
-        self.gpio.port_off(self.ports[Ports.K4.value])
+        self.gpio.port_off(self.valves[Ports.K4.value])
         self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                   'Close K4 = {0}'.format(self.valves[Ports.K4.value]))
         # Запускаем цикл по количству измерений.
         self.check_for_interruption()
         for i in range(self.number_of_measurements):
@@ -918,13 +918,13 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p0 = {1}'.format(i, self.measurements[i].p0))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K1.value])
+            self.gpio.port_on(self.valves[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                       'Open K1 = {0}'.format(self.valves[Ports.K1.value]))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K2.value])
+            self.gpio.port_on(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We expect a set of pressure')
             self.check_for_interruption()
@@ -939,13 +939,13 @@ class MeasurementProcedure(object):
                                        'pressure set - success, P = {0}/{1}, time has passed: {2}'.format(p, self.Pmeas,
                                                                                                           duration))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K1.value])
+            self.gpio.port_off(self.valves[Ports.K1.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K1 = {0}'.format(self.ports[Ports.K1.value]))
+                                       'Close K1 = {0}'.format(self.valves[Ports.K1.value]))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K2.value])
+            self.gpio.port_off(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
@@ -968,9 +968,9 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p1 = {1}'.format(i, self.measurements[i].p1))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K3.value])
+            self.gpio.port_on(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
@@ -984,9 +984,9 @@ class MeasurementProcedure(object):
                                        'pressure stops changing - success, P = {0}/{1}, time '
                                        'has passed: {2}'.format(balance, 0.01, duration))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K3.value])
+            self.gpio.port_off(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
             self.time_sleep(2)
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
@@ -997,17 +997,17 @@ class MeasurementProcedure(object):
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'Measured P[{0}] : p2 = {1}'.format(i, self.measurements[i].p2))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K2.value])
+            self.gpio.port_on(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Open K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K3.value])
+            self.gpio.port_on(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Open K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
-            self.gpio.port_on(self.ports[Ports.K4.value])
+            self.gpio.port_on(self.valves[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Open K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                       'Open K4 = {0}'.format(self.valves[Ports.K4.value]))
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
                                        'We wait until the pressure stops changing.')
             self.check_for_interruption()
@@ -1021,17 +1021,17 @@ class MeasurementProcedure(object):
                                        'pressure let_out - success, time '
                                        'has passed: {0}'.format(duration))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K2.value])
+            self.gpio.port_off(self.valves[Ports.K2.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K2 = {0}'.format(self.ports[Ports.K2.value]))
+                                       'Close K2 = {0}'.format(self.valves[Ports.K2.value]))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K3.value])
+            self.gpio.port_off(self.valves[Ports.K3.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K3 = {0}'.format(self.ports[Ports.K3.value]))
+                                       'Close K3 = {0}'.format(self.valves[Ports.K3.value]))
             self.check_for_interruption()
-            self.gpio.port_off(self.ports[Ports.K4.value])
+            self.gpio.port_off(self.valves[Ports.K4.value])
             self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                       'Close K4 = {0}'.format(self.ports[Ports.K4.value]))
+                                       'Close K4 = {0}'.format(self.valves[Ports.K4.value]))
             # Берем нужное значение Vc
             Vc = self.VcS
             # и Vd

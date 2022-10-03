@@ -70,6 +70,7 @@ class Configure(object):
         self.module_spi = ""
         self.data_channel = 2
         self.t_channels = []
+        self.wait_before_hold = 0.06
         self.maximum_sensor_pressure = 101
         # [Measurement]
         self.spi_max_speed_hz = 1000000
@@ -129,11 +130,11 @@ class Configure(object):
 
     def set_ports(self):
         # [Ports]
-        self.v[0] = self.try_get_device_config('Ports', 'V1', True).split("/")
-        self.v[1] = self.try_get_device_config('Ports', 'V2', True).split("/")
-        self.v[2] = self.try_get_device_config('Ports', 'V3', True).split("/")
-        self.v[3] = self.try_get_device_config('Ports', 'V4', True).split("/")
-        self.v[4] = self.try_get_device_config('Ports', 'V5', True).split("/")
+        self.v[0].set_ports(self.try_get_device_config('Ports', 'V1', True).split("/"))
+        self.v[1].set_ports(self.try_get_device_config('Ports', 'V2', True).split("/"))
+        self.v[2].set_ports(self.try_get_device_config('Ports', 'V3', True).split("/"))
+        self.v[3].set_ports(self.try_get_device_config('Ports', 'V4', True).split("/"))
+        self.v[4].set_ports(self.try_get_device_config('Ports', 'V5', True).split("/"))
 
     """Метод для назначения языка программы согласно ini файлу"""
 
@@ -174,8 +175,8 @@ class Configure(object):
         self.module_spi = self.try_get_device_config('Pycnometer', 'module_spi', self.module_spi)
         self.data_channel = self.try_getint_device_config('Pycnometer', 'data_channel', self.data_channel)
         self.t_channels.clear()
-        print(self.try_get_device_config('Pycnometer', 't_channels', self.t_channels))
         self.t_channels = json.loads(self.try_get_device_config('Pycnometer', 't_channels', self.t_channels))
+        self.wait_before_hold = self.try_getfloat_device_config('Pycnometer', 'wait_before_hold', self.wait_before_hold)
         self.maximum_sensor_pressure = self.try_getint_device_config('Pycnometer', 'maximum_sensor_pressure', self.maximum_sensor_pressure)
         # [Measurement]
         self.spi_max_speed_hz = self.try_getint_device_config('Measurement', 'spi_max_speed_hz', self.spi_max_speed_hz)
@@ -201,6 +202,7 @@ class Configure(object):
         self.set_device_ini('Pycnometer', 'data_channel', self.data_channel)
         self.set_device_ini('Pycnometer', 'model', self.model)
         self.set_device_ini('Pycnometer', 't_channels', '[{0}]'.format(", ".join(str(x) for x in self.t_channels)))
+        self.set_device_ini('Pycnometer', 'wait_before_hold', self.wait_before_hold)
         self.set_device_ini('Pycnometer', 'maximum_sensor_pressure', self.maximum_sensor_pressure)
         # [Measurement]
         self.set_device_ini('Measurement', 'spi_max_speed_hz', self.spi_max_speed_hz)
@@ -212,6 +214,7 @@ class Configure(object):
         self.set_device_ini('Measurement', 'correct_data', self.correct_data)
         self.set_device_ini('Measurement', 'let_out_pressure_duration', self.let_out_pressure_duration)
         # [Ports]
+        print(self.v)
         self.set_device_ini('Ports', 'V1', '{0}/{1}'.format(self.v[0].port_open, self.v[0].port_hold))
         self.set_device_ini('Ports', 'V2', '{0}/{1}'.format(self.v[1].port_open, self.v[1].port_hold))
         self.set_device_ini('Ports', 'V3', '{0}/{1}'.format(self.v[2].port_open, self.v[2].port_hold))
@@ -281,8 +284,8 @@ class Configure(object):
         self.set_ini_hash('SavingResult', 'wifi_name', self.wifi_name)
         self.set_ini_hash('SavingResult', 'wifi_pass', self.wifi_pass)
 
-    def get_ports(self):
-        """Метод возвращает номера портов для работы"""
+    def get_valves(self):
+        """Метод возвращает номера портов для клапанов"""
         return self.v
 
     def get_language(self):
@@ -427,38 +430,47 @@ class Configure(object):
             os.rename(self.config_device_file + ".new", self.config_device_file)
 
     def try_get_device_config(self, section, option, default):
-        print(section, self.config_device.has_section(section))
-        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
-        self.config_device.read(self.config_device_file, encoding='utf-8')
-        result = self.config_device.get(section, option)
-
+        result = default
+        if os.path.isfile(self.config_device_file):
+            self.config_device.read(self.config_device_file, encoding='utf-8')
+            if self.config_device.has_section(section) and self.config_device.has_option(section, option):
+                result = self.config_device.get(section, option)
         return result
 
     def try_getint_device_config(self, section, option, default):
-        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
-        self.config_device.read(self.config_device_file, encoding='utf-8')
-        result = self.config_device.getint(section, option)
+        result = default
+        if os.path.isfile(self.config_device_file):
+            self.config_device.read(self.config_device_file, encoding='utf-8')
+            if self.config_device.has_section(section) and self.config_device.has_option(section, option):
+                result = self.config_device.getint(section, option)
         return result
 
     def try_getfloat_device_config(self, section, option, default):
-        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
-        self.config_device.read(self.config_device_file, encoding='utf-8')
-        result = self.config_device.getfloat(section, option)
+        result = default
+        if os.path.isfile(self.config_device_file):
+            self.config_device.read(self.config_device_file, encoding='utf-8')
+            if self.config_device.has_section(section) and self.config_device.has_option(section, option):
+                result = self.config_device.getfloat(section, option)
         return result
 
     def try_getboolean_device_config(self, section, option, default):
-        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
-        self.config_device.read(self.config_device_file, encoding='utf-8')
-        result = self.config_device.getboolean(section, option)
-        print(result)
+        result = default
+        if os.path.isfile(self.config_device_file):
+            self.config_device.read(self.config_device_file, encoding='utf-8')
+            if self.config_device.has_section(section) and self.config_device.has_option(section, option):
+                result = self.config_device.getboolean(section, option)
         return result
 
     def try_get_device_config_hash(self, section, option, default):
-        if not os.path.isfile(self.config_device_file) or not self.config_device.has_section(section) or not self.config_device.has_option(section, option): return default
-        self.config_device.read(self.config_device_file, encoding='utf-8')
-        result = self.config_device.get(section, option)
-        if not result == "":
-            result = (self.cipher_suite.decrypt(bytes(result, encoding='utf-8'))).decode('utf-8')
+        result = default
+        if os.path.isfile(self.config_device_file):
+            self.config_device.read(self.config_device_file, encoding='utf-8')
+            if self.config_device.has_section(section) and self.config_device.has_option(section, option):
+                result = self.config_device.get(section, option)
+                if not result == "":
+                    result = (self.cipher_suite.decrypt(bytes(result, encoding='utf-8'))).decode('utf-8')
+                else:
+                    result = default
         return result
 
     def crypting(self, text):
@@ -472,6 +484,12 @@ class Valve(object):
     def __init__(self, port_open=0, port_hold=0):
         self.port_open = port_open
         self.port_hold = port_hold
+
+    def __str__(self):
+        return "{0}/{1}".format(self.port_open, self.port_hold)
+
+    def __repr__(self):
+        return self.__str__()
 
     def set_ports(self, ports):
         self.port_open = ports[0]

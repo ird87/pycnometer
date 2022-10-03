@@ -4,6 +4,7 @@ import os
 import sys
 import time
 from Config import Valve
+from typing import List
 
 """
     self.gpio - GPIO Module
@@ -51,27 +52,29 @@ from Config import Valve
     |             |   GROUND  |   39  |   40  |  GPIO21   |             |  
     ---------------------------------------------------------------------  
     
-    self.valves - valves setup from config.ini    
+    self.valves - valves setup from config.ini 
+    self.wait_before_hold - time delay before hold mode   
 """
 
 
 class GPIO(object):
     """GPIO for working mode"""
 
-    def __init__(self, valves: list[Valve]):
+    def __init__(self, wait_before_hold: float, valves: List[Valve]):
         import RPi.GPIO as GPIO
         self.gpio = GPIO
         self.gpio.setmode(GPIO.BOARD)
         self.valves = valves
         # установки GPIO
         self.gpio.setup(self.valves, GPIO.OUT, initial=GPIO.LOW)
+        self.wait_before_hold = wait_before_hold
 
     def port_on(self, valve: Valve):
         """Open valve and activate hold mode"""
         # проверяем, что порт указан
         if valve.is_correct():
             self.gpio.output(valve.port_open, True)
-            time.sleep(0.06)
+            time.sleep(self.wait_before_hold)
             self.gpio.output(valve.port_hold, True)
             self.gpio.output(valve.port_open, False)
 
