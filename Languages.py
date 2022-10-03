@@ -10,10 +10,12 @@ import os
     Все поля класса - это переменные для загрузки соответсвующих данных.
 """
 
+
 class Languages(object):
     """docstring"""
 
     """Конструктор класса. Поля класса"""
+
     def __init__(self):
         self.languages = configparser.ConfigParser()
         self.mainWindow = ''
@@ -142,7 +144,6 @@ class Languages(object):
         self.t4_wifi_true = ''
         self.t4_wifi_false = ''
 
-
         # [MeasurementSetting]
         self.pressure_setting = []
 
@@ -167,17 +168,15 @@ class Languages(object):
         # [MeasurementReport]
         self.measurement_report = []
 
-
-
         self.file = os.path.basename(__file__)
-
 
         # Выбираем файл с языком в зависимости от прописанного в настройках Configure.ini
 
     """Метод для назначения файла, в качестве источника данных"""
+
     def setup(self, config):
 
-        self.languages.read(os.path.join(os.getcwd(), 'Language', config.get_language() + '.ini'), encoding = 'WINDOWS-1251')
+        self.languages.read(os.path.join(os.getcwd(), 'Language', config.get_language() + '.ini'), encoding='WINDOWS-1251')
 
         # if config.is_test_mode():
         #     # для тестового режима (Windows) нужны такие команды:
@@ -187,6 +186,7 @@ class Languages(object):
         #     self.languages.read(os.getcwd() + '/Language/' + config.get_language() + '.ini', encoding='WINDOWS-1251')
 
     """Метод необходимый для загрузки СТРОКОЙ из файлов символа '%', в файлах он заменен на 'U+0025', и надстрочной "3" - 'U+00B3'"""
+
     def get_string(self, section, variable):
         retVal = self.languages.get(section, variable)
         retVal = retVal.replace('U+0025', '%')
@@ -194,6 +194,7 @@ class Languages(object):
         return retVal
 
     """Метод необходимый для загрузки СПИСКОМ из файлов символа '%', в файлах он заменен на 'U+0025', и надстрочной "3" - 'U+00B3'"""
+
     def get_item(self, section):
         items = self.languages.items(section)
         retVal = {}
@@ -205,6 +206,7 @@ class Languages(object):
         return retVal
 
     """Метод загрузки всех данных из файла. Метод разбит на разделы в соответствии с файлами, содержащими данные"""
+
     def load(self, config):
         # [MAIN]
         self.mainWindow = self.get_string('MAIN', 'MainWindow')
@@ -294,7 +296,7 @@ class Languages(object):
         self.t2_tableCalibration_Column.append(self.get_string('TAB2', 't2_tableCalibration_Column4'))
         self.t2_tableCalibration_Column.append(self.get_string('TAB2', 't2_tableCalibration_Column5'))
         self.t2_tableCalibration_Column.append(self.get_string('TAB2', 't2_tableCalibration_Column6'))
-        self.t2_groupCalibratonResult  = self.get_string('TAB2', 't2_groupCalibratonResult')
+        self.t2_groupCalibratonResult = self.get_string('TAB2', 't2_groupCalibratonResult')
         self.t2_gCR_button1 = self.get_string('TAB2', 't2_gCR_button1')
         self.t2_gCR_lbl1 = self.get_string('TAB2', 't2_gCR_lbl1')
         self.t2_gCR_lbl2 = self.get_string('TAB2', 't2_gCR_lbl2')
@@ -326,11 +328,11 @@ class Languages(object):
         self.t3_lbl_Helium = self.get_string('TAB3', 't3_lbl_Helium')
         self.t3_lbl_Atmosphere = self.get_string('TAB3', 't3_lbl_Atmosphere')
         self.t3_lbl_Vacuum = self.get_string('TAB3', 't3_lbl_Vacuum')
-        if config.pressure.value==0:
+        if config.pressure.value == 0:
             self.t3_lblPressure1 = self.get_string('TAB3', 't3_lblPressure1_kPa')
-        if config.pressure.value==1:
+        if config.pressure.value == 1:
             self.t3_lblPressure1 = self.get_string('TAB3', 't3_lblPressure1_Bar')
-        if config.pressure.value==2:
+        if config.pressure.value == 2:
             self.t3_lblPressure1 = self.get_string('TAB3', 't3_lblPressure1_Psi')
 
         # [TAB4]
@@ -389,10 +391,12 @@ class Languages(object):
         self.measurement_report = self.get_item("MeasurementReport")
 
     """Метод для получения заголовков файлового менеджера """
+
     def get_file_manager_title(self):
         result = [self.Button_FM_OK, self.Button_FM_Cancel, self.Table_Files_Column1, self.Table_Files_Column2]
         return result
 
     """Метод для получения заголовков окна подготовки образца """
+
     def get_sample_preparation_title(self):
         return self.Title_SP

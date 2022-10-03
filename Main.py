@@ -355,9 +355,9 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # [Language]
         self.config.language = self.t4_gIS_cmd1.currentText()
         # [Measurement]
-        self.config.pressure = Converter.str_to_int(self.t4_gMS_cmd1.currentIndex())
+        self.config.pressure = Pressure(self.t4_gMS_cmd1.currentIndex())
         self.config.periodicity_of_removal_of_sensor_reading = Converter.str_to_float(self.t4_gMC_Edit1.text())
-        self.config.smq_now = Converter.str_to_int(self.t4_gMS_cmd2.text())
+        self.config.smq_now = self.t4_gMS_cmd2.currentIndex()
         self.config.pulse_length = Converter.str_to_int(self.t4_MS_Edit1.text())
         pressure = Converter.str_to_float(self.t4_MS_Edit2.text())
         unit = self.t4_gMS_cmd1.currentIndex()
@@ -368,7 +368,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # If pressure is measured in kPa
         if unit == Pressure.kPa.value:
             p_kpa = helper.to_fixed(pressure, 0)
-            data = self.main.spi.getDataFromkPa(float(p_kpa))
+            data = self.spi.getDataFromkPa(float(p_kpa))
             p_bar = helper.to_fixed(self.spi.getBar(data), 2)
             p_psi = helper.to_fixed(self.spi.getPsi(data), 1)
         # If pressure is measured in Bar
@@ -478,7 +478,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.t4_MS_Edit1.setText(str(self.config.pulse_length))
 
         # Устанавливаем текущее значение давления, которое должен набрать прибор
-        self.setPressurePmeas()
+        # self.setPressurePmeas()
 
         # Устанавливаем Частота съема показания датчика (0.1 - 1.0 сек)
         self.t4_gMC_Edit1.setText(str(self.config.periodicity_of_removal_of_sensor_reading))
@@ -521,12 +521,13 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             self.t4_gSR_Edit2.setText(self.config.wifi_pass)
 
     def setPressurePmeas(self):
-
+        if self.t4_gMS_cmd1.currentIndex() == -1: return
         if self.t4_gMS_cmd1.currentIndex() == Pressure.kPa.value:
             # ограничение на ввод давления для кПа 90 - 110
             self.onlyInt = QIntValidator()
             self.t4_MS_Edit2.setValidator(self.onlyInt)
-            self.t4_MS_Edit2.setText(helper.to_fixed(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()], 0))
+            print(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()])
+            self.t4_MS_Edit2.setText(str(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()]))
             self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_kpa_min,
                                                             self.config.pmeas_kpa_max))
         if self.t4_gMS_cmd1.currentIndex() == Pressure.Bar.value:

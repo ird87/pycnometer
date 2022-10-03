@@ -44,6 +44,15 @@ from version import version
 """
 
 
+def fix_ownership(path):
+    """Change the owner of the file to SUDO_UID"""
+
+    uid = os.environ.get('SUDO_UID')
+    gid = os.environ.get('SUDO_GID')
+    if uid is not None:
+        os.chown(path, int(uid), int(gid))
+
+
 class Configure(object):
     """Конструктор класса. Поля класса"""
 
@@ -148,7 +157,7 @@ class Configure(object):
 
     def set_pmeas(self, p_kpa, p_bar, p_psi):
         """Pressure to be applied to the device"""
-        self.pmeas = '[{0}, {1}, {2}]'.format(p_kpa, p_bar, p_psi)
+        self.pmeas = [p_kpa, p_bar, p_psi]
 
     def calibration_save(self, cuvette, vc, vd):
         if cuvette == Cuvette.Large.value:
@@ -175,7 +184,6 @@ class Configure(object):
         self.module_spi = self.try_get_device_config('Pycnometer', 'module_spi', self.module_spi)
         self.data_channel = self.try_getint_device_config('Pycnometer', 'data_channel', self.data_channel)
         self.t_channels.clear()
-        print(self.try_get_device_config('Pycnometer', 't_channels', self.t_channels))
         self.t_channels = json.loads(self.try_get_device_config('Pycnometer', 't_channels', '[{0}]'.format(", ".join(str(x) for x in self.t_channels))))
         self.wait_before_hold = self.try_getfloat_device_config('Pycnometer', 'wait_before_hold', self.wait_before_hold)
         self.maximum_sensor_pressure = self.try_getint_device_config('Pycnometer', 'maximum_sensor_pressure', self.maximum_sensor_pressure)
@@ -215,7 +223,6 @@ class Configure(object):
         self.set_device_ini('Measurement', 'correct_data', self.correct_data)
         self.set_device_ini('Measurement', 'let_out_pressure_duration', self.let_out_pressure_duration)
         # [Ports]
-        print(self.v)
         self.set_device_ini('Ports', 'V1', '{0}/{1}'.format(self.v[0].port_open, self.v[0].port_hold))
         self.set_device_ini('Ports', 'V2', '{0}/{1}'.format(self.v[1].port_open, self.v[1].port_hold))
         self.set_device_ini('Ports', 'V3', '{0}/{1}'.format(self.v[2].port_open, self.v[2].port_hold))
@@ -266,7 +273,7 @@ class Configure(object):
         # [Language]
         self.set_ini('Language', 'language', self.language)
         # [Measurement]
-        self.set_ini('Measurement', 'pressure', self.pressure)
+        self.set_ini('Measurement', 'pressure', self.pressure.value)
         self.set_ini('Measurement', 'periodicity_of_removal_of_sensor_reading', self.periodicity_of_removal_of_sensor_reading)
         self.set_ini('Measurement', 'smq_now', self.smq_now)
         self.set_ini('Measurement', 'pulse_length', self.pulse_length)
@@ -315,6 +322,7 @@ class Configure(object):
             os.remove(self.config_user_file + "~")
         else:
             os.rename(self.config_user_file + ".new", self.config_user_file)
+        fix_ownership(self.config_user_file)
 
     def set_ini_hash(self, section, val, s):
         """Метод для сохранения измененных настроек в файл"""
@@ -332,6 +340,7 @@ class Configure(object):
             os.remove(self.config_user_file + "~")
         else:
             os.rename(self.config_user_file + ".new", self.config_user_file)
+        fix_ownership(self.config_user_file)
 
     """Метод для обновления списка всех доступных языков"""
 
@@ -411,6 +420,7 @@ class Configure(object):
             os.remove(self.config_device_file + "~")
         else:
             os.rename(self.config_device_file + ".new", self.config_device_file)
+        fix_ownership(self.config_device_file)
 
     """Метод для сохранения измененных настроек в файл"""
 
@@ -429,6 +439,7 @@ class Configure(object):
             os.remove(self.config_device_file + "~")
         else:
             os.rename(self.config_device_file + ".new", self.config_device_file)
+        fix_ownership(self.config_device_file)
 
     def try_get_device_config(self, section, option, default):
         result = default
