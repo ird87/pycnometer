@@ -130,11 +130,11 @@ class Configure(object):
 
     def set_ports(self):
         # [Ports]
-        self.v[0].set_ports(self.try_get_device_config('Ports', 'V1', True).split("/"))
-        self.v[1].set_ports(self.try_get_device_config('Ports', 'V2', True).split("/"))
-        self.v[2].set_ports(self.try_get_device_config('Ports', 'V3', True).split("/"))
-        self.v[3].set_ports(self.try_get_device_config('Ports', 'V4', True).split("/"))
-        self.v[4].set_ports(self.try_get_device_config('Ports', 'V5', True).split("/"))
+        self.v[0].set_ports(self.try_get_device_config('Ports', 'V1', '{0}/{1}'.format(self.v[0].port_open, self.v[0].port_hold)).split("/"))
+        self.v[1].set_ports(self.try_get_device_config('Ports', 'V2', '{0}/{1}'.format(self.v[1].port_open, self.v[1].port_hold)).split("/"))
+        self.v[2].set_ports(self.try_get_device_config('Ports', 'V3', '{0}/{1}'.format(self.v[2].port_open, self.v[2].port_hold)).split("/"))
+        self.v[3].set_ports(self.try_get_device_config('Ports', 'V4', '{0}/{1}'.format(self.v[3].port_open, self.v[3].port_hold)).split("/"))
+        self.v[4].set_ports(self.try_get_device_config('Ports', 'V5', '{0}/{1}'.format(self.v[4].port_open, self.v[4].port_hold)).split("/"))
 
     """Метод для назначения языка программы согласно ini файлу"""
 
@@ -175,7 +175,8 @@ class Configure(object):
         self.module_spi = self.try_get_device_config('Pycnometer', 'module_spi', self.module_spi)
         self.data_channel = self.try_getint_device_config('Pycnometer', 'data_channel', self.data_channel)
         self.t_channels.clear()
-        self.t_channels = json.loads(self.try_get_device_config('Pycnometer', 't_channels', self.t_channels))
+        print(self.try_get_device_config('Pycnometer', 't_channels', self.t_channels))
+        self.t_channels = json.loads(self.try_get_device_config('Pycnometer', 't_channels', '[{0}]'.format(", ".join(str(x) for x in self.t_channels))))
         self.wait_before_hold = self.try_getfloat_device_config('Pycnometer', 'wait_before_hold', self.wait_before_hold)
         self.maximum_sensor_pressure = self.try_getint_device_config('Pycnometer', 'maximum_sensor_pressure', self.maximum_sensor_pressure)
         # [Measurement]

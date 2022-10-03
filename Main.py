@@ -939,8 +939,8 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             self.t2_gID_cmd1.addItem(self.languages.t2_gID_cmd1_3)
             self.no_small.setVisible(False)
         else:
-            self.t3_checkValve2.setVisible(False)
-            self.t3_lblValve2.setVisible(False)
+            self.t3_checkValve2.setEnabled(False)
+            self.t3_lblValve2.setEnabled(False)
 
         self.t2_gID_button1.setText(self.languages.t2_gID_button1)
         self.t2_gID_button2.setText(self.languages.t2_gID_button2)
