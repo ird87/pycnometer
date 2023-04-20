@@ -648,7 +648,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         vc_small = self.config.vc_small
         vd_large_and_medium = self.config.vd_large_and_medium
         vd_small = self.config.vd_small
-        pmeas = self.config.pmeas
+        pmeas = self.config.pmeas[self.config.pressure.value]
         pulse_length = self.config.pulse_length
 
         # Устанавливаем настройки Измерений
