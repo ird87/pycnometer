@@ -614,11 +614,11 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
 
         # Определяем выбранный тип подготовки образца
         if self.t1_gSP_gRB_rb1.isChecked():
-            sample_preparation = sample_preparation.Vacuuming
+            sample_preparation = SamplePreparation.Vacuuming
         if self.t1_gSP_gRB_rb2.isChecked():
-            sample_preparation = sample_preparation.Blow
+            sample_preparation = SamplePreparation.Blow
         if self.t1_gSP_gRB_rb3.isChecked():
-            sample_preparation = sample_preparation.Impulsive_blowing
+            sample_preparation = SamplePreparation.Impulsive_blowing
 
         # Получаем значение времени, введенное пользователем в минутах
         sample_preparation_time_in_minute = int(self.t1_gSP_Edit1.text())
