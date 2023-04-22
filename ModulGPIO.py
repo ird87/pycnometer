@@ -65,8 +65,13 @@ class GPIO(object):
         self.gpio = GPIO
         self.gpio.setmode(GPIO.BOARD)
         self.valves = valves
+        
+        ports = []
+        for valve in valves:
+            ports.append(valve.port_open)
+            ports.append(valve.port_hold)
         # установки GPIO
-        self.gpio.setup(self.valves, GPIO.OUT, initial=GPIO.LOW)
+        self.gpio.setup(ports, GPIO.OUT, initial=GPIO.LOW)
         self.wait_before_hold = wait_before_hold
 
     def port_on(self, valve: Valve):

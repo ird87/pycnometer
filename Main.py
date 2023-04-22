@@ -133,19 +133,13 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
 
         # Включаем GPIO и SPI модули, в зависимости от активного/неактивного Тестового режима
         if self.config.is_test_mode():
+            print('*** *** *** ТЕСТОВЫЙ РЕЖИМ *** *** ***')
             self.setWindowTitle('*** *** *** ТЕСТОВЫЙ РЕЖИМ *** *** ***')
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in TEST mode.')
         if not self.config.is_test_mode():
             self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program works in NORMAL mode.')
-        if platform == "win32" or "linux":
-            from ModulGPIOtest import GPIO
-            from ModulSPItest import SPI
-            # Получаем данные о портах из Configure.ini
-            self.valves = self.config.get_valves()
-            self.gpio = GPIO(self.config.wait_before_hold, self.valves)
-            self.all_port_off()
-            self.spi = SPI(self)
-        else:
+
+        try:
             from ModulGPIO import GPIO
             if self.config.module_spi == "SPI2":
                 from ModulSPI_2 import SPI
@@ -156,6 +150,15 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             self.gpio = GPIO(self.config.wait_before_hold, self.valves)
             self.all_port_off()
             self.spi = SPI(self)
+        except (ImportError, RuntimeError):
+            from ModulGPIOtest import GPIO
+            from ModulSPItest import SPI
+            # Получаем данные о портах из Configure.ini
+            self.valves = self.config.get_valves()
+            self.gpio = GPIO(self.config.wait_before_hold, self.valves)
+            self.all_port_off()
+            self.spi = SPI(self)        
+            
         # На будущее сохраним стандартный стиль поля для ввода, иногда нам нужно будет их выделять, но
         # потом нужно будет вернуться к стандартному стилю.
         self.ss = self.t1_gM_Edit1.styleSheet()

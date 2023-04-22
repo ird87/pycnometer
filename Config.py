@@ -504,8 +504,8 @@ class Valve(object):
         return self.__str__()
 
     def set_ports(self, ports):
-        self.port_open = ports[0]
-        self.port_hold = ports[1]
+        self.port_open = int(ports[0])
+        self.port_hold = int(ports[1])
 
     def is_correct(self):
         return self.port_open != 0 and self.port_hold != 0
