@@ -253,8 +253,12 @@ class CalibrationProcedure(object):
     """Метод обработки прерывания калибровки из-за низкого давления"""
     def interrupt_procedure(self, calibration):
         self.set_test_on(False)
-        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
-        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
+        if isinstance(calibration, str):
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration + '.')
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration + '.')
+        else:
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calibration..... ' + calibration.name + '.')
         # выключаем все порты
         self.main.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
