@@ -1,6 +1,5 @@
 def to_fixed(num_obj, digits=0):
     """fix decimal places"""
-    print(num_obj)
     if num_obj is not None and num_obj != '':
         if is_float(num_obj):
             ret_val = '{0:.{1}f}'.format(num_obj, digits)

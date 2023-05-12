@@ -350,7 +350,9 @@ class SPI(object):
     """Метод, который возвращает из давление в Бар значение измерения"""
 
     def getDataFromBar(self, p):
-        data = p * self.const_data / self.maximum_sensor_pressure * 0.01  # кПа
+        print(p)
+        data = p * self.const_data / self.maximum_sensor_pressure / 0.01  # кПа
+        print(data)
         return data
 
     """Метод, который возвращает из давление в psi значение измерения"""

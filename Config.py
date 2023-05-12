@@ -157,6 +157,7 @@ class Configure(object):
 
     def set_pmeas(self, p_kpa, p_bar, p_psi):
         """Pressure to be applied to the device"""
+        print(p_kpa, p_bar, p_psi)
         self.pmeas = [int(p_kpa), float(p_bar), float(p_psi)]
 
     def calibration_save(self, cuvette, vc, vd):
