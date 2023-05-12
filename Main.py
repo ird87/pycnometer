@@ -273,6 +273,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.actionmenu1_command1.triggered.connect(self.closeEvent)
         self.menubar.setVisible(False)
         self.sensor_calibration = False
+        self.progressbar_form = None
         # нам надо откалибровать датчик.
         if not self.config.is_test_mode() and self.config.calibrate_sensor_when_starting:
             self.calibration_procedure.start_russian_sensor_calibration()
@@ -285,12 +286,13 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             self.progressbar_form.activate()
 
     def change_progressbar(self, t):
-        if not self.config.is_test_mode():
+        if not self.config.is_test_mode() and not self.progressbar_form is None:
             self.progressbar_form.add_progress(t)
 
     def exit_progressbar(self):
-        if not self.config.is_test_mode():
+        if not self.config.is_test_mode() and not self.progressbar_form is None:
             self.progressbar_form.exit()
+            self.progressbar_form = None
 
     def changed_languare(self):
         name = self.t4_gIS_cmd1.currentText()

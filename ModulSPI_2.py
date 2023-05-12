@@ -150,6 +150,7 @@ class SPI(object):
     """Метод для запуска отдельного потока для измерения давления"""
 
     def start_test(self):
+        p = self.get_pressure()
         # Проверяем, что измерение давления еще не запущео
         if not self.is_test_on():
             # Устанавливаем состояние в режим "запущена"
@@ -217,9 +218,9 @@ class SPI(object):
                 self.save_p_xls(raw_channels[0], self.calc_pressure(raw_channels[0])[0])
             for channel in range(len(raw_channels)):
                 data[channel] += raw_channels[channel]
-                # print("raw_channels: {0}". format(raw_channels))
+                #print("raw_channels: {0}". format(raw_channels))
                 # # voltages = [i * self.ads.v_per_digit for i in raw_channels]
-                # print("pressure PA: " + str(self.calc_pressure(raw_channels[0])[0]))
+                #print("pressure PA: " + str(self.calc_pressure(raw_channels[0])[0]))
 
         # берем среднее значение
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Calculation data.....')
@@ -314,7 +315,7 @@ class SPI(object):
         # рассчитать на их основе давление сразу во всех единицах измерения
         _p = self.calc_pressure(result)
         # передаем давление в нужной единице измерения.
-        p = _p[self.config.pressure.value]
+        p = _p[self.config.pressure.value]        
         if len(self.t_channels) > 0:
             data_t = data
             data_t.pop(0)
