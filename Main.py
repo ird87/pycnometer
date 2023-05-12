@@ -531,7 +531,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             # ограничение на ввод давления для кПа 90 - 110
             self.onlyInt = QIntValidator()
             self.t4_MS_Edit2.setValidator(self.onlyInt)
-            print(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()])
+
             self.t4_MS_Edit2.setText(str(self.config.pmeas[self.t4_gMS_cmd1.currentIndex()]))
             self.t4_gMS_lbl4.setText("{0} ({1}-{2})".format(self.languages.t4_gMS_lbl4, self.config.pmeas_kpa_min,
                                                             self.config.pmeas_kpa_max))

@@ -360,9 +360,14 @@ class MeasurementProcedure(object):
 
     def interrupt_procedure(self, measurement):
         self.set_test_on(False)
-        self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
-                                   'Measurement..... ' + measurement.name + '.')
-        self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... ' + measurement.name + '.')
+        if isinstance(measurement, str):
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                       'Measurement..... ' + measurement + '.')
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... ' + measurement + '.')
+        else:
+            self.measurement_log.debug(self.file, inspect.currentframe().f_lineno,
+                                       'Measurement..... ' + measurement.name + '.')
+            self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'Measurement..... ' + measurement.name + '.')
         # выключаем все порты
         self.main.all_port_off()
         # Разлокируем остальные вкладки для пользователя.
