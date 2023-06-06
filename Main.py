@@ -362,7 +362,7 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         # [Measurement]
         self.config.pressure = Pressure(self.t4_gMS_cmd1.currentIndex())
         self.config.periodicity_of_removal_of_sensor_reading = Converter.str_to_float(self.t4_gMC_Edit1.text())
-        self.config.smq_now = self.t4_gMS_cmd2.currentIndex()
+        self.config.smq_now = self.config.smq_list[self.t4_gMS_cmd2.currentIndex()]
         self.config.pulse_length = Converter.str_to_int(self.t4_MS_Edit1.text())
         pressure = Converter.str_to_float(self.t4_MS_Edit2.text())
         unit = self.t4_gMS_cmd1.currentIndex()
