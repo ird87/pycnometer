@@ -91,7 +91,7 @@ class Configure(object):
         self.correct_data = 0
         self.let_out_pressure_duration = 60
         # [Ports]
-        self.v = [Valve(31, 32), Valve(35, 36), Valve(37, 38), Valve(11, 12), Valve(15, 16)]
+        self.v = [Valve(31, 32), Valve(35, 36), Valve(37, 38), Valve(7, 8), Valve(21, 22)]
         # [TestMode]
         self.testMode = True
         self.output_pt_to_xls = False
