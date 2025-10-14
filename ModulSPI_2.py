@@ -3,6 +3,7 @@
 import inspect
 import threading
 import os
+import atexit
 
 import xlwt
 
@@ -84,6 +85,8 @@ class SPI(object):
         # (Note1: See ADS1256_default_config.py, see ADS1256 datasheet)
         # (Note2: Input buffer on means limited voltage range 0V...3V for 5V supply)
         self.ads = ADS1256()
+
+        atexit.register(self.ads.cleanup)
 
         ### STEP 2: Gain and offset self-calibration:
         self.ads.cal_self()
