@@ -14,7 +14,7 @@ from .ads1256_ADS1256_definitions import *
 # SPI hardware. For the Waveshare board this pin is not even connected, so this
 # code does not use hardware-controlled CS and this is a don't care value.
 # FIXME: Implement hardware chip select as an option.
-SPI_CHANNEL   = 1
+SPI_CHANNEL   = 0
 # SPI_MODE specifies clock polarity and phase; MODE=1 <=> CPOL=0, CPHA=1
 SPI_MODE      = 1
 # SPI clock rate in Hz. The ADS1256 supports a minimum of 1/10th of the output
@@ -23,7 +23,7 @@ SPI_MODE      = 1
 # the Raspberry pi only supports power-of-two fractions of the 250MHz system
 # clock, the closest value would be 1953125 Hz, which is slightly out of spec
 # for the ADS1256. Choosing 250MHz/256 = 976563 Hz is a safe choice.
-SPI_FREQUENCY = 976563
+SPI_FREQUENCY = 20000
 # Risking the slightly out-of-spec speed:
 #SPI_FREQUENCY = 1953125
 
