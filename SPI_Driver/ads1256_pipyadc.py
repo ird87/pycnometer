@@ -280,6 +280,7 @@ class ADS1256(object):
         if conf.DRDY_PIN is not None:
             self.DRDY_PIN = conf.DRDY_PIN
             wp.pinMode(conf.DRDY_PIN,  wp.INPUT)
+            wp.pullUpDnControl(conf.DRDY_PIN, wp.PUD_UP)
 
         # GPIO Outputs. Only the CS_PIN is currently actively used. ~RESET and 
         # ~PDWN must be set to static logic HIGH level if not hardwired:
@@ -752,6 +753,32 @@ class ADS1256(object):
         for i in range(0, buf_len):
             ch_buffer[i] = self.read_and_next_is(ch_sequence[(i+1)%buf_len])
         return ch_buffer
+        
+    def cleanup(self):
+        """
+        Останавливает непрерывное считывание данных, переводит чип в режим ожидания
+        и освобождает GPIO-пины для корректного выхода.
+        """
+        try:
+            print("Stopping continuous data mode...")
+            self._chip_select()
+            self._send_uint8(CMD_SDATAC) # Команда: Остановить непрерывное чтение
+            wp.delayMicroseconds(self._SYNC_TIMEOUT_US)
+            
+            print("Putting chip into standby mode...")
+            self._send_uint8(CMD_STANDBY) # Команда: Перейти в режим ожидания
+            self._chip_release()
+            print("ADC cleanup complete.")
+        except Exception as e:
+            print(f"An error occurred during ADC cleanup: {e}")
+        finally:
+            # Переводим пины в режим входа, чтобы освободить их
+            print("Releasing GPIO pins...")
+            if self.CS_PIN is not None:
+                wp.pinMode(self.CS_PIN, wp.INPUT)
+            if self.DRDY_PIN is not None:
+                wp.pinMode(self.DRDY_PIN, wp.INPUT)
+            print("GPIO pins released.")
 
 
 
