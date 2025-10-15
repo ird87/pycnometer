@@ -143,6 +143,8 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
             from ModulGPIO import GPIO
             if self.config.module_spi == "SPI2":
                 from ModulSPI_2 import SPI
+            elif self.config.module_spi == "SPI2025":
+                from ModulSPI_2025 import SPI
             else:
                 from ModulSPI import SPI
             # Получаем данные о портах из Configure.ini
