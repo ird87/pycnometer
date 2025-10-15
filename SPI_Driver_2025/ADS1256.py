@@ -203,5 +203,4 @@ class ADS1256:
         for i in range(0,8,1):
             ADC_Value[i] = self.ADS1256_GetChannalValue(i)
         return ADC_Value
-### END OF FILE ###
 
