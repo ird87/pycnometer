@@ -13,7 +13,6 @@ import time
 # Предполагается, что файлы ADS1256.py и config.py находятся в папке SPI_Driver_2025
 try:
     from SPI_Driver_2025 import ADS1256
-    from SPI_Driver_2025 import config
 except ImportError:
     print("Ошибка: Не удалось импортировать новую библиотеку SPI_Driver_2025.")
     print("Убедитесь, что папка 'SPI_Driver_2025' существует и содержит файлы 'ADS1256.py' и 'config.py'.")

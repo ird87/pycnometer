@@ -47,7 +47,7 @@ def digital_read(pin):
     return GPIO.input(DRDY_PIN)
 
 def delay_ms(delaytime):
-    time.sleep(delaytime // 1000.0)
+    time.sleep(0)
 
 def spi_writebyte(data):
     SPI.writebytes(data)
@@ -63,7 +63,7 @@ def module_init():
     GPIO.setup(CS_PIN, GPIO.OUT)
     #GPIO.setup(DRDY_PIN, GPIO.IN)
     GPIO.setup(DRDY_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    SPI.max_speed_hz = 20000
+    SPI.max_speed_hz = 1000000
     SPI.mode = 0b01
     return 0;
 
