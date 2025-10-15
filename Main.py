@@ -810,9 +810,6 @@ class Main(PyQt5.QtWidgets.QMainWindow):  # название файла с ди�
         self.measurement_procedure.close_measurements()
         # Выключаем процедуру калибровки
         self.calibration_procedure.close_calibrations()
-        # "Усыпляем" чип датчика перед освобождением пинов
-        if hasattr(self, 'spi') and hasattr(self.spi, 'ads'):
-            self.spi.ads.cleanup()
         self.debug_log.debug(self.file, inspect.currentframe().f_lineno, 'The program has completed\n' + '-' * 75)
         sys.exit()
 
